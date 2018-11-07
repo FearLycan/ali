@@ -15,17 +15,24 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>" dir="ltr">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <?php $this->beginBody() ?>
+
+<div class="page-loader">
+    <div class="loader">Loading...</div>
+</div>
 
 <div class="wrap">
     <?php
@@ -33,7 +40,7 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar navbar-custom navbar-fixed-top',
         ],
     ]);
 
@@ -44,19 +51,11 @@ AppAsset::register($this);
 
     if (Yii::$app->user->isGuest) {
         $items[] = ['label' => 'Registration', 'url' => ['/auth/registration']];
-        //$items[] = ['label' => 'Login', 'url' => ['/auth/login']];
     }
-
-
-    if (!Yii::$app->user->isGuest) {
-       // $items[] = ['label' => 'Login', 'url' => ['/auth/login']];
-    }
-
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-          //  ['label' => 'Registration', 'url' => ['/auth/registration']],
             Yii::$app->user->isGuest ? (
             ['label' => 'Login', 'url' => ['/auth/login']]
             ) : (
@@ -89,15 +88,27 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+<footer class="footer bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="copyright font-alt">© <?= date('Y') ?>&nbsp;<a href="index.html">TitaN</a>, All Rights Reserved</p>
+            </div>
+            <div class="col-sm-6">
+                <div class="footer-social-links">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-skype"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
 
 <?php $this->endBody() ?>
+<!--<div class="scroll-up" style="display: block;"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>-->
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -16,8 +16,8 @@ body {
 
 .footer {
     height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
+    /*background-color: #f5f5f5;*/
+    /*border-top: 1px solid #ddd;*/
     padding-top: 20px;
 }
 
@@ -96,9 +96,9 @@ a.desc:after {
     border: none;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
@@ -182,4 +182,8 @@ a.desc:after {
 
 .registration-form {
     width: 600px;
+}
+
+.navbar-custom .nav li.active > a {
+    color: #ffffff;
 }
