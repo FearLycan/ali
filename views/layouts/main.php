@@ -92,10 +92,10 @@ AppAsset::register($this);
 <footer class="footer bg-dark">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <p class="copyright font-alt">© <?= date('Y') ?>&nbsp;<a href="index.html">TitaN</a>, All Rights Reserved</p>
             </div>
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="footer-social-links">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>

@@ -114,11 +114,6 @@ a.desc:after {
     outline: none;
 }
 
-.login-form {
-    width: 385px;
-    margin: 30px auto;
-}
-
 .login-form form {
     margin-bottom: 15px;
     background: #f7f7f7;
@@ -178,10 +173,6 @@ a.desc:after {
     position: relative;
     top: -11px;
     z-index: 1;
-}
-
-.registration-form {
-    width: 600px;
 }
 
 .navbar-custom .nav li.active > a {

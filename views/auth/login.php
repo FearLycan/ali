@@ -1,9 +1,6 @@
 <?php
 
-
-use yii\helpers\Url;
-
-$this->title = 'Zaloguj się';
+$this->title = 'Login';
 
 ?>
 

@@ -1,8 +1,6 @@
 <?php
 
-use yii\helpers\Url;
-
-$this->title = 'Rejestracja';
+$this->title = 'Registration';
 ?>
 
 <?php if ($status == true): ?>
