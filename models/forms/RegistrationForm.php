@@ -17,14 +17,14 @@ class RegistrationForm extends User
     public function rules()
     {
         return [
-            ['name', 'unique', 'message' => 'Ta nazwa jest już zajęta'],
-            [['name'], 'required', 'message' => 'Musisz podać swoją nazwę'],
-            ['email', 'unique', 'message' => 'Ten adres jest już w użyciu'],
-            [['email'], 'required', 'message' => 'Adres e-mail jest wymagany'],
-            ['email', 'email', 'message' => 'Błędny adres e-mail'],
-            [['password_first'], 'required', 'message' => 'Hasło jest wymagane'],
-            [['password_second'], 'required', 'message' => 'Wpisz hasło jeszcze raz'],
-            [['password_first', 'password_second'], 'string', 'length' => [4, 30]],
+            ['name', 'unique'],
+            [['name'], 'required'],
+            ['email', 'unique'],
+            [['email'], 'required'],
+            ['email', 'email'],
+            [['password_first'], 'required'],
+            [['password_second'], 'required'],
+            [['password_first', 'password_second'], 'string', 'length' => [6, 30]],
             ['password_second', 'confirmPassword'],
         ];
     }
@@ -33,10 +33,10 @@ class RegistrationForm extends User
     public function attributeLabels()
     {
         return [
-            'name' => 'Nazwa',
-            'email' => 'Adres e-mail',
-            'password_first' => 'Hasło',
-            'password_second' => 'Powtórz hasło',
+            'name' => 'Name',
+            'email' => 'E-mail',
+            'password_first' => 'Password',
+            'password_second' => 'Confirm password',
         ];
     }
 
@@ -44,7 +44,7 @@ class RegistrationForm extends User
     public function confirmPassword($attribute)
     {
         if ($this->password_first != $this->password_second) {
-            $this->addError($attribute, 'Podane hasła są różne');
+            $this->addError($attribute, 'The Password and Confirm Password that you enter must be identical.');
         }
     }
 }

@@ -93,7 +93,7 @@ AppAsset::register($this);
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6">
-                <p class="copyright font-alt">© <?= date('Y') ?>&nbsp;<a href="index.html">TitaN</a>, All Rights Reserved</p>
+                <p class="copyright font-alt">© <?= date('Y') ?>&nbsp;<a href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name ?></a>, All Rights Reserved</p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="footer-social-links">
@@ -108,7 +108,6 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
-<!--<div class="scroll-up" style="display: block;"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>-->
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -1,16 +1,18 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
+use app\assets\AdminAsset;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
 
-AppAsset::register($this);
+AdminAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,8 +31,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => Yii::$app->name . ' <small>Admin</small>',
+        'brandUrl' => Url::to(['default/index']),
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -40,7 +42,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Admin', 'url' => ['index']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/auth/login']]
+            ['label' => 'Login', 'url' => ['/auth/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/auth/logout'], 'post')
@@ -58,8 +60,14 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => 'Admin',
+                'url' => Url::to(['default/index'])
+            ],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+        ]);
+
+        ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
@@ -67,9 +75,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->name ?> <?= date('Y') ?></p>
     </div>
 </footer>
 

@@ -19,13 +19,13 @@ use kartik\form\ActiveForm;
         <div class="col-md-6">
             <?= $form->field($model, 'name', [
                 'addon' => ['prepend' => ['content' => '<i class="fa fa-user" aria-hidden="true"></i>']]
-            ])->textInput(['placeholder' => 'Nazwa'])->label(false); ?>
+            ])->textInput(['placeholder' => 'Name'])->label(false); ?>
         </div>
 
         <div class="col-md-6">
             <?= $form->field($model, 'email', [
                 'addon' => ['prepend' => ['content' => '<i class="fa fa-envelope" aria-hidden="true"></i>']]
-            ])->textInput(['placeholder' => 'Adres e-mail'])->label(false); ?>
+            ])->textInput(['placeholder' => 'E-mail address'])->label(false); ?>
         </div>
     </div>
 
@@ -38,7 +38,7 @@ use kartik\form\ActiveForm;
         <div class="col-md-6">
             <?= $form->field($model, 'password_second', [
                 'addon' => ['prepend' => ['content' => '<i class="fa fa-repeat"></i></span>']],
-            ])->passwordInput(['placeholder' => 'Powtórz hasło'])->label(false); ?>
+            ])->passwordInput(['placeholder' => 'Confirm Password'])->label(false); ?>
         </div>
     </div>
 
