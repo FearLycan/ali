@@ -109,4 +109,41 @@ class Product extends ActiveRecord
 
         return $product->id;
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusNames()
+    {
+        return [
+            static::STATUS_ACTIVE => 'Active',
+            static::STATUS_PENDING => 'Pending',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::getStatusNames()[$this->status];
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getTypesNames()
+    {
+        return [
+            static::TYPE_PRODUCT => 'Product',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeName()
+    {
+        return self::getTypesNames()[$this->type];
+    }
 }

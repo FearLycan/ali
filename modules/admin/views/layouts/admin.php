@@ -114,10 +114,13 @@ $system = [
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="<?= Url::to(['/']) ?>" target="_blank"><i class="fa fa-home"></i> Strona główna</a>
+                    <a href="<?= Url::to(['/']) ?>" target="_blank"><i class="fa fa-home"></i> Home Page</a>
                 </li>
                 <li class="<?= Yii::$app->controller->id == 'default' ? 'active' : 'no' ?>">
                     <a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                </li>
+                <li class="<?= Yii::$app->controller->id == 'product' ? 'active' : 'no' ?>">
+                    <a href="<?= Url::to(['product/index']) ?>"><i class="fa fa-list"></i> Products</a>
                 </li>
             </ul>
         </div>
