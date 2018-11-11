@@ -213,4 +213,25 @@ class Image extends ActiveRecord
             $product->save();
         }
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusNames()
+    {
+        return [
+            self::STATUS_NEW => 'New',
+            self::STATUS_PENDING => 'Pending to download',
+            self::STATUS_ACCEPTED => 'Accepted',
+            self::STATUS_TO_DELETE => 'To delete',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::getStatusNames()[$this->status];
+    }
 }

@@ -113,3 +113,25 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.side-nav > li > ul > li.active > a {
+    color: #fff;
+    background-color: #080808;
+}
+
+.panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 75%;
+    padding-top: 8px;
+}
+
+table.detail-view th {
+    width: 15%;
+}
+
+.valuation-image {
+    width: 100px;
+}

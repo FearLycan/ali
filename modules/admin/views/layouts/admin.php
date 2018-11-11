@@ -21,6 +21,10 @@ $nails = [
 $system = [
     'visitor'
 ];
+
+$image = [
+    'image', 'valuation'
+]
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -122,6 +126,24 @@ $system = [
                 <li class="<?= Yii::$app->controller->id == 'product' ? 'active' : 'no' ?>">
                     <a href="<?= Url::to(['product/index']) ?>"><i class="fa fa-list"></i> Products</a>
                 </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#image">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i> Images <i
+                                class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="image"
+                        class="<?= in_array(Yii::$app->controller->id, $image) ? 'collapse in' : 'collapse' ?>">
+                        <li class="<?= Yii::$app->controller->action->id == 'index' ? 'active' : 'no' ?>">
+                            <a href="<?= Url::to(['/admin/image']) ?>">
+                                <i class="fa fa-list" aria-hidden="true"></i> Images List
+                            </a>
+                        </li>
+                        <li class="<?= Yii::$app->controller->action->id == 'pending' ? 'active' : 'no' ?>">
+                            <a href="<?= Url::to(['image/valuation']) ?>">
+                                <i class="fa fa-check-square-o" aria-hidden="true"></i> Valuation
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -166,6 +188,7 @@ $system = [
 </footer>
 
 <?php $this->endBody() ?>
+<?= $this->blocks['script'] ?>
 </body>
 </html>
 <?php $this->endPage() ?>
