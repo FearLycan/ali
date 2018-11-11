@@ -144,6 +144,9 @@ $image = [
                         </li>
                     </ul>
                 </li>
+                <li class="<?= Yii::$app->controller->id == 'product-url' ? 'active' : 'no' ?>">
+                    <a href="<?= Url::to(['product-url/index']) ?>"><i class="fa fa-link"></i> URLs</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

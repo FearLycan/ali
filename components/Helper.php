@@ -14,4 +14,25 @@ class Helper
         }
         return trim($str);
     }
+
+    public static function getBetween($content, $start, $end)
+    {
+
+        if (!empty($start)) {
+            $r = explode($start, $content);
+        } else {
+            $r[1] = $content;
+        }
+
+        if (isset($r[1])) {
+
+            if (!empty($end)) {
+                $r = explode($end, $r[1]);
+                return $r[0];
+            } else {
+                return $r[1];
+            }
+        }
+        return '';
+    }
 }

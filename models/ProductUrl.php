@@ -52,4 +52,24 @@ class ProductUrl extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusNames()
+    {
+        return [
+            self::STATUS_NEW => 'New',
+            self::STATUS_TO_DELETE => 'To delete',
+            self::STATUS_ERROR => 'Error',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::getStatusNames()[$this->status];
+    }
 }
