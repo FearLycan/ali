@@ -2,15 +2,12 @@
 
 namespace app\controllers;
 
+use app\components\Controller;
 use app\models\forms\ProductUrlForm;
 use app\models\ProductUrl;
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -80,7 +77,7 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $success = true;
-            $model->refresh();
+            $model->url = null;
         }
 
         return $this->render('..\..\widgets\views\addNewURLForm', [

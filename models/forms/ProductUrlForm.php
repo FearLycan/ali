@@ -26,7 +26,11 @@ class ProductUrlForm extends ProductUrl
     public function checkAliURL($attribute, $params)
     {
         if (strpos($this->url, 'aliexpress.com') === false) {
-            $this->addError($attribute, 'Are you sure this is aliexpress link?');
+            $this->addError($attribute, 'Are you sure this is Aliexpress link?');
+        } else {
+            if (strpos($this->url, 'aliexpress.com/item/') === false) {
+                $this->addError($attribute, 'Invalid Aliexpress link.');
+            }
         }
     }
 

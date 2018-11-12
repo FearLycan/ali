@@ -60,25 +60,18 @@ AppAsset::register($this);
 
     if (Yii::$app->user->isGuest) {
         $items[] = ['label' => 'Registration', 'url' => ['/auth/registration']];
+        $items[] = ['label' => 'Login', 'url' => ['/auth/login']];
+    } else {
+        $items[] = [
+            'label' => Yii::$app->user->identity->name,
+            'items' => [
+                ['label' => 'Logout',
+                    'url' => ['/auth/logout'],
+                    'linkOptions' => ['data-method' => 'post'],
+                ],
+            ],
+        ];
     }
-
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            Yii::$app->user->isGuest ? (
-            ['label' => 'Login', 'url' => ['/auth/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/auth/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->name . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

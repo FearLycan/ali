@@ -178,3 +178,9 @@ a.desc:after {
 .navbar-custom .nav li.active > a {
     color: #ffffff;
 }
+
+@media (min-width: 1200px) {
+    .navbar-nav .caret {
+        display: none;
+    }
+}

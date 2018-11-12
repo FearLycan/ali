@@ -25,9 +25,11 @@ use yii\widgets\Pjax;
                 <div class="row">
 
                     <?php if ($success): ?>
-                        <p>
-                            success!
-                        </p>
+                        <div class="col-md-12">
+                            <p class="text-success">
+                                <strong>URL was added.</strong>
+                            </p>
+                        </div>
                     <?php endif; ?>
 
 
