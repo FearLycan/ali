@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'raw',
                                 'value' => function ($data) {
                                     /* @var ProductUrl $data */
-                                    return Html::a(Helper::cutThis($data->url, 200) . ' <small style="color: #777;">(' . $data->id . ')</small>', ['view', 'id' => $data->id]);
+                                    return Html::a(Helper::cutURL($data->url, 155) . ' <small style="color: #777;">(' . $data->id . ')</small>', ['view', 'id' => $data->id]);
                                 },
                             ],
                             [

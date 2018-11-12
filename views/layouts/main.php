@@ -44,6 +44,15 @@ AppAsset::register($this);
         ],
     ]);
 
+    $items[] = [
+        'label' => 'Add URL',
+        'url' => '#newURL',
+        'options' => ['id' => 'modalButton', 'data-toggle' => 'modal', 'data-target' => '#newURL'],
+    ];
+
+    //<a href="#bannerformmodal" data-toggle="modal" data-target="#bannerformmodal">Load me</a>
+
+    //data-toggle="modal" data-target="#myModal"
 
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
         $items[] = ['label' => 'Admin', 'url' => ['/admin']];
@@ -88,12 +97,14 @@ AppAsset::register($this);
     </div>
 </div>
 
+<?= \app\widgets\AddNewURL::widget() ?>
 
 <footer class="footer bg-dark">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6">
-                <p class="copyright font-alt">© <?= date('Y') ?>&nbsp;<a href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name ?></a>, All Rights Reserved</p>
+                <p class="copyright font-alt">© <?= date('Y') ?>&nbsp;<a
+                            href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name ?></a>, All Rights Reserved</p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="footer-social-links">

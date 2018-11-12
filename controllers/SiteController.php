@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\forms\ProductUrlForm;
+use app\models\ProductUrl;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -18,21 +20,11 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    'new-url' => ['post'],
                 ],
             ],
         ];
@@ -47,10 +39,6 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
     }
 
@@ -64,39 +52,6 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
 
     /**
      * Displays contact page.
@@ -116,13 +71,21 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
+
+    public function actionNewUrl()
     {
-        return $this->render('about');
+        $model = new ProductUrlForm();
+        $model->status = ProductUrl::STATUS_NEW;
+        $success = false;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $success = true;
+            $model->refresh();
+        }
+
+        return $this->render('..\..\widgets\views\addNewURLForm', [
+            'model' => $model,
+            'success' => $success
+        ]);
     }
 }

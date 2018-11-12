@@ -15,6 +15,16 @@ class Helper
         return trim($str);
     }
 
+    public static function cutURL($url, $limit = 100)
+    {
+
+        if (strlen($url) < $limit) {
+            return $url;
+        }
+
+        return substr($url, 0, $limit) . '...';
+    }
+
     public static function getBetween($content, $start, $end)
     {
 
