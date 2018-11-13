@@ -35,16 +35,19 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'lib/wow/dist/wow.js',
-        'lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js',
+        //'lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js',
         'lib/isotope/dist/isotope.pkgd.js',
         'lib/imagesloaded/imagesloaded.pkgd.js',
-        'lib/flexslider/jquery.flexslider.js',
-        'lib/owl.carousel/dist/owl.carousel.min.js',
+        //'lib/flexslider/jquery.flexslider.js',
+        //'lib/owl.carousel/dist/owl.carousel.min.js',
         'lib/smoothscroll.js',
-        'lib/magnific-popup/dist/jquery.magnific-popup.js',
-        'lib/simple-text-rotator/jquery.simple-text-rotator.min.js',
-        'lib/simple-text-rotator/jquery.simple-text-rotator.min.js',
+        //'lib/magnific-popup/dist/jquery.magnific-popup.js',
+        //'lib/simple-text-rotator/jquery.simple-text-rotator.min.js',
         'js/plugins.js',
+
+        //'js/masonry-docs.min.js',
+        //'js/imagesloaded.pkgd.min.js',
+
         'js/main.js',
     ];
     public $depends = [

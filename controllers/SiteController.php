@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\components\Controller;
 use app\models\forms\ProductUrlForm;
 use app\models\ProductUrl;
+use app\models\searches\ImageSearch;
 use Yii;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -46,7 +47,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new ImageSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
 
