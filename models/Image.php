@@ -4,6 +4,10 @@ namespace app\models;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Yii;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\imagine\Image as Img;
+use Imagine\Image\Box;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\VarDumper;
@@ -20,6 +24,8 @@ use yii\httpclient\Exception;
  * @property int $status
  * @property string $created_at
  * @property string $updated_at
+ * @property string $slug
+ * @property string $file
  *
  * @property Member $member
  * @property Product $product
@@ -31,6 +37,15 @@ class Image extends ActiveRecord
     const STATUS_ACCEPTED = 3;
     const STATUS_TO_DELETE = 4;
 
+    const THUMBNAIL_MAX_WIDTH = 200;
+    const THUMBNAIL_MAX_HEIGHT = 200;
+
+    const NORMAL_IMAGE_MAX_WIDTH = 500;
+    const NORMAL_IMAGE_MAX_HEIGHT = 500;
+
+    const URL_ORIGINAL = '/images/original/';
+    const URL_NORMAL = '/images/normal/';
+    const URL_THUMBNAIL = '/images/thumbnail/';
 
     /**
      * @param bool $insert
@@ -67,7 +82,7 @@ class Image extends ActiveRecord
             [['product_id', 'member_id', 'status'], 'required'],
             [['product_id', 'member_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['url'], 'string', 'max' => 255],
+            [['url', 'slug', 'file'], 'string', 'max' => 255],
             [['member_id'], 'exist', 'skipOnError' => true, 'targetClass' => Member::className(), 'targetAttribute' => ['member_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
@@ -84,6 +99,8 @@ class Image extends ActiveRecord
             'product_id' => 'Product ID',
             'member_id' => 'Member ID',
             'status' => 'Status',
+            'slug' => 'Slug',
+            'file' => 'file',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -234,4 +251,59 @@ class Image extends ActiveRecord
     {
         return self::getStatusNames()[$this->status];
     }
+
+    /**
+     * @return string
+     */
+    public function getOriginalSizeImage()
+    {
+        return Yii::getAlias('@web') . self::URL_ORIGINAL . $this->file;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNormalSizeImage()
+    {
+        return Yii::getAlias('@web') . self::URL_NORMAL . $this->file;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbnailSizeImage()
+    {
+        return Yii::getAlias('@web') . self::URL_THUMBNAIL . $this->file;
+    }
+
+    public function createThumbnail()
+    {
+        Img::getImagine()->open($this->getOriginalSizeImage())->thumbnail(new Box(self::THUMBNAIL_MAX_WIDTH, self::THUMBNAIL_MAX_HEIGHT))
+            ->save($this->getThumbnailSizeImage(), ['quality' => 90]);
+    }
+
+    public function createNormal()
+    {
+        //TODO error holding
+        Img::getImagine()->open($this->getOriginalSizeImage())->thumbnail(new Box(self::NORMAL_IMAGE_MAX_WIDTH, self::NORMAL_IMAGE_MAX_HEIGHT))
+            ->save($this->getNormalSizeImage(), ['quality' => 99]);
+    }
+
+    public function download()
+    {
+        $file = basename($this->url);
+        $slug = (explode(".", $file));
+        $slug = $slug[0];
+
+        if (file_put_contents('web' . Image::URL_ORIGINAL . $file, file_get_contents($this->url))) {
+            $this->slug = $slug;
+            $this->file = $file;
+            $this->save();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

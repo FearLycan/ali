@@ -11,6 +11,6 @@
 ?>
 
 <a href="#">
-    <img src="<?= $model->url ?>"/>
+    <img src="<?= $model->getNormalSizeImage() ?>"/>
 </a>
 
