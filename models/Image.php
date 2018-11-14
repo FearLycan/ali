@@ -171,8 +171,6 @@ class Image extends ActiveRecord
                         $n = $n[1];
                     }
 
-                    echo "n: " . $n . "\n";
-
                     $results = $crawler
                         ->filterXpath("//div[contains(@class, 'feedback-item')]");
 

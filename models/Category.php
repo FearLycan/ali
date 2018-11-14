@@ -72,6 +72,10 @@ class Category extends ActiveRecord
         ];
     }
 
+    /**
+     * @param $categories
+     * @return bool|int
+     */
     public static function create($categories)
     {
 
@@ -115,5 +119,62 @@ class Category extends ActiveRecord
 
         return $parent_id;
 
+    }
+
+    /**
+     * @return array
+     */
+    public function getFamilyPath()
+    {
+        $n = true;
+        $parents = [];
+
+        $parent_id = $this->parent_id;
+
+        while ($n) {
+            $category = self::find()->where(['id' => $parent_id])->one();
+
+            if (!empty($category)) {
+                $parents[] = [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                ];
+
+                if ($category->parent_id == static::BASE_CATEGORY) {
+                    $n = false;
+                } else {
+                    $parent_id = $category->parent_id;
+                }
+
+            } else {
+                $n = false;
+            }
+        }
+
+        return array_reverse($parents);
+    }
+
+    /**
+     * @return bool|null|static
+     */
+    public function getParent()
+    {
+        if ($this->parent_id != self::BASE_CATEGORY) {
+            return self::findOne($this->parent_id);
+        }
+
+        return false;
+    }
+
+    /**
+     * @return $this|bool
+     */
+    public function getChildrens()
+    {
+        if ($this->parent_id != self::BASE_CATEGORY) {
+            return self::find()->where(['parent_id' => $this->id])->all();
+        }
+
+        return false;
     }
 }
