@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'images', [
         'template' => '<div class="class"> {label}{input} </div>',
     ])
-        ->checkboxList($model->imageList(), [
+        ->checkboxList($imageList, [
             'encode' => false,
             'itemOptions' => [
                 'labelOptions' => [

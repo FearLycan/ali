@@ -121,12 +121,12 @@ class ImageController extends Controller
 
             Image::updateAll(['status' => Image::STATUS_PENDING], ['in', 'id', $model->images]);
             Image::deleteAll(['in', 'id', explode(",", $model->unchecked)]);
-        }
 
+            return $this->redirect(['valuation']);
+        }
 
         return $this->render('valuation', [
             'model' => $model,
-            // 'images' => $images,
         ]);
     }
 

@@ -2,6 +2,9 @@
 
 $this->title = 'Valuation images';
 
+$this->params['breadcrumbs'][] = ['label' => 'Images', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+
 $this->registerCss(".green-border{border-color: green;}");
 
 ?>
@@ -9,15 +12,25 @@ $this->registerCss(".green-border{border-color: green;}");
 <div class="row">
 
     <div class="col-md-12">
-        <div class="alert alert-warning" role="alert">
-            <strong>Warning!</strong> Select only good images.
-        </div>
-    </div>
 
-    <div class="col-md-12">
-        <?= $this->render('_image-valuation-form', [
-            'model' => $model,
-        ]) ?>
+        <?php if (!empty($imageList = $model->imageList())): ?>
+
+            <div class="alert alert-warning" role="alert">
+                <strong>Warning!</strong> Select only good images.
+            </div>
+
+            <hr>
+
+            <?= $this->render('_image-valuation-form', [
+                'model' => $model,
+                'imageList' => $imageList,
+            ]) ?>
+
+        <?php else: ?>
+            <div class="alert alert-success" role="alert">
+                <strong>Well done!</strong> There is no more photos do valuate.
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
