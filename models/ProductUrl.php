@@ -17,6 +17,7 @@ class ProductUrl extends \yii\db\ActiveRecord
     const STATUS_NEW = 1;
     const STATUS_TO_DELETE = 2;
     const STATUS_ERROR = 3;
+    const STATUS_DONE = 4;
 
 
     /**
@@ -62,6 +63,7 @@ class ProductUrl extends \yii\db\ActiveRecord
             self::STATUS_NEW => 'New',
             self::STATUS_TO_DELETE => 'To delete',
             self::STATUS_ERROR => 'Error',
+            self::STATUS_DONE => 'Done',
         ];
     }
 

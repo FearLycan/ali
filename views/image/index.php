@@ -2,7 +2,9 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
 use yii\widgets\ListView;
+use yii\bootstrap\Modal;
 
 $this->title = Yii::$app->name;
 ?>
@@ -28,3 +30,41 @@ $this->title = Yii::$app->name;
     </div>
 
 </div>
+
+<?php
+Modal::begin([
+    'header' => '<h3 class="modal-title"></h3>',
+    'id' => 'modal',
+    'size' => 'modal-xl',
+]);
+
+echo '<div id="modalContent">' .
+    Html::img(['/images/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])
+    . '</div>';
+
+Modal::end();
+?>
+
+<?php $this->beginBlock('script') ?>
+<script>
+
+
+    $(document).on('click', 'button.show-modal', function () {
+        $('#modal')
+            .modal('show')
+            .find('#modalContent')
+            .load($(this).attr('data-value'));
+        $('.modal-header h3').html(
+            '<a href="' + $(this).attr('data-member-url') + '">' + $(this).attr('data-title') + '</a>'
+        )
+    });
+
+    $('#modal').on('hidden.bs.modal', function (e) {
+        var $modalContent = $('#modal').find('#modalContent');
+        $modalContent.find('div').html('');
+        $modalContent.append('<?= Html::img(['/images/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])?>');
+    })
+
+
+</script>
+<?php $this->endBlock(); ?>

@@ -103,7 +103,7 @@ class Product extends ActiveRecord
         $product->ali_product_id = $crawler->filterXpath("//input[contains(@name, 'objectId')]")->extract(['value'])[0];
         $product->image = $crawler->filterXpath("//a[contains(@class, 'ui-image-viewer-thumb-frame')]//img")->extract(['src'])[0];
         $product->type = self::TYPE_PRODUCT;
-        $product->status = self::STATUS_PENDING;
+        $product->status = self::STATUS_ACTIVE;
 
         $product->save();
 

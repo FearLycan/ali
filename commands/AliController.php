@@ -61,7 +61,10 @@ class AliController extends Controller
 
             $offset = $offset + $limit;
 
+            $product->status = ProductUrl::STATUS_DONE;
+
         } while (!empty($urls));
+
 
     }
 

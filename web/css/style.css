@@ -1,18 +1,18 @@
 /*--------------------------------------------------------------
 	Common
 --------------------------------------------------------------*/
-html {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  -ms-overflow-style: scrollbar;
-}
+/*html {*/
+  /*overflow-y: scroll;*/
+  /*overflow-x: hidden;*/
+  /*-ms-overflow-style: scrollbar;*/
+/*}*/
 
 body {
   background: #fff;
   font: 400 12px/1.8 "Open Sans", sans-serif;
   /*color: #666;*/
   -webkit-font-smoothing: antialiased;
-  padding-right: 0 !important
+  /*padding-right: 0 !important*/
 }
 
 img {
@@ -1514,11 +1514,11 @@ General Styles - Owlcarousel
   margin: 0;
 }
 
-.footer .footer-social-links {
+.footer-social-links {
   text-align: right;
 }
 
-.footer .footer-social-links a {
+.footer-social-links a {
   display: inline-block;
   padding: 0 6px;
 }

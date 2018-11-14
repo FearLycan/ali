@@ -44,11 +44,13 @@ AppAsset::register($this);
         ],
     ]);
 
-    $items[] = [
-        'label' => 'Add URL',
-        'url' => '#newURL',
-        'options' => ['id' => 'modalButton', 'data-toggle' => 'modal', 'data-target' => '#newURL'],
-    ];
+//    $items[] = [
+//        'label' => 'Add URL',
+//        'url' => '#newURL',
+//        'options' => ['id' => 'modalButton', 'data-toggle' => 'modal', 'data-target' => '#newURL'],
+//    ];
+
+    $items[] = '<li><button type="button" class="button-clear button-nav" data-toggle="modal" data-target="#newURL">Add URL</button></li>';
 
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
         $items[] = ['label' => 'Admin', 'url' => ['/admin']];
