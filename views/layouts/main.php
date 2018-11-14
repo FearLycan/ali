@@ -50,10 +50,6 @@ AppAsset::register($this);
         'options' => ['id' => 'modalButton', 'data-toggle' => 'modal', 'data-target' => '#newURL'],
     ];
 
-    //<a href="#bannerformmodal" data-toggle="modal" data-target="#bannerformmodal">Load me</a>
-
-    //data-toggle="modal" data-target="#myModal"
-
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
         $items[] = ['label' => 'Admin', 'url' => ['/admin']];
     }

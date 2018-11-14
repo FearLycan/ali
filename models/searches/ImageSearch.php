@@ -12,6 +12,10 @@ use app\models\Image;
  */
 class ImageSearch extends Image
 {
+    const PER_PAGE_PARAM = 'per-page';
+    const DEFAULT_ITEMS_PER_PAGE = 20;
+    const PAGE_SIZE_LIMIT = 100;
+
     /**
      * {@inheritdoc}
      */
@@ -41,15 +45,19 @@ class ImageSearch extends Image
      */
     public function search($params)
     {
-        $query = Image::find()->where(['status' => Image::STATUS_ACCEPTED]);
+        $query = Image::find();
+            //->where(['status' => Image::STATUS_ACCEPTED]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-//            'pagination' => [
-//                'pageSize' => 1000,
-//            ],
+            'pagination' => [
+                'pageSizeParam' => static::PER_PAGE_PARAM,
+                'defaultPageSize' => static::DEFAULT_ITEMS_PER_PAGE,
+                'pageSizeLimit' => [1, static::PAGE_SIZE_LIMIT],
+                'validatePage' => false,
+            ],
         ]);
 
         $this->load($params);
@@ -73,5 +81,30 @@ class ImageSearch extends Image
         $query->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getPageSizesArray()
+    {
+        return [
+            static::DEFAULT_ITEMS_PER_PAGE => static::DEFAULT_ITEMS_PER_PAGE,
+            50 => 50,
+            static::PAGE_SIZE_LIMIT => static::PAGE_SIZE_LIMIT,
+        ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageSize()
+    {
+        $size = Yii::$app->request->get(static::PER_PAGE_PARAM, static::DEFAULT_ITEMS_PER_PAGE);
+        if (!isset(static::getPageSizesArray()[$size])) {
+            $size = static::DEFAULT_ITEMS_PER_PAGE;
+        }
+
+        return (int)$size;
     }
 }
