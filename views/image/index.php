@@ -39,7 +39,7 @@ Modal::begin([
 ]);
 
 echo '<div id="modalContent">' .
-    Html::img(['/images/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])
+    Html::img(['/images/site/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])
     . '</div>';
 
 Modal::end();
@@ -62,7 +62,7 @@ Modal::end();
     $('#modal').on('hidden.bs.modal', function (e) {
         var $modalContent = $('#modal').find('#modalContent');
         $modalContent.find('div').html('');
-        $modalContent.append('<?= Html::img(['/images/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])?>');
+        $modalContent.append('<?= Html::img(['/images//site/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])?>');
     })
 
 

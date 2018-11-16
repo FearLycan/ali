@@ -15,7 +15,7 @@ $this->registerCss(".wrap{padding: 0;}");
 
 
 <section class="home-section home-parallax home-fade home-full-height bg-dark bg-dark-30" id="home"
-         data-background="<?= \yii\helpers\Url::to('@web/images/section-4.jpg') ?>">
+         data-background="<?= \yii\helpers\Url::to('@web/images/site/section-4.jpg') ?>">
     <div class="titan-caption">
         <div class="caption-content">
             <div class="font-alt mb-30 titan-title-size-4"><?= $this->title ?></div>

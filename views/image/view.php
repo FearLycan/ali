@@ -29,10 +29,17 @@ $this->title = 'Image View'
             <div class="media">
                 <div class="media-left">
                     <a href="<?= Url::to(['member/view', 'id' => $model->member->ali_member_id]) ?>">
-                        <div class="media-img"
-                             style="background: url('<?= Url::to(['/images/thumbnail/UTB8JO5wEiDEXKJk43Oqq6Az3XXa5.jpg']) ?>') center center no-repeat;">
 
-                        </div>
+                        <?php if (empty($model->member->avatar)): ?>
+                            <div class="media-img"
+                                 style="background: url('<?= Url::to(['/images/site/user.png']) ?>') center center no-repeat;">
+                            </div>
+                        <?php else: ?>
+                            <div class="media-img"
+                                 style="background: url('<?= Url::to(['/images/thumbnail/' . $model->member->avatar]) ?>') center center no-repeat;">
+                            </div>
+                        <?php endif; ?>
+
                     </a>
                 </div>
                 <div class="media-body">
