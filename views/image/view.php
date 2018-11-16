@@ -41,7 +41,10 @@ $this->title = 'Image View'
                         <h4 class="media-heading"><?= Html::encode($model->member->name) ?></h4>
                     </a>
 
-                    <?= Html::img(['/images/flags/' . strtolower($model->member->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->member->country_code, 'title' => $model->member->country_code]) ?>
+                    <?php if ($model->member_id != \app\models\Member::MEMBER_ANONYMOUS): ?>
+                        <?= Html::img(['/images/flags/' . strtolower($model->member->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->member->country_code, 'title' => $model->member->country_code]) ?>
+                    <?php endif; ?>
+
                 </div>
             </div>
 

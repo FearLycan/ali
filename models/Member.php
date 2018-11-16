@@ -13,6 +13,7 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string $ali_member_id
  * @property string $country_code
+ * @property string $avatar
  * @property int $status
  * @property int $type
  * @property string $created_at
@@ -63,7 +64,7 @@ class Member extends ActiveRecord
             [['ali_member_id', 'country_code', 'name'], 'required'],
             [['status', 'type'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['ali_member_id', 'name'], 'string', 'max' => 255],
+            [['ali_member_id', 'name', 'avatar'], 'string', 'max' => 255],
             [['country_code'], 'string', 'max' => 10],
         ];
     }
@@ -86,12 +87,7 @@ class Member extends ActiveRecord
 
     public static function create($crawler)
     {
-
-
-        //$profil_url = $crawler->filterXpath("//span[contains(@name, 'user-name')]//a");
         $profil_url = $crawler->filterXPath("//span[contains(@class, 'user-name')]//a")->extract(['href'])[0];
-
-        // die(var_dump($profil_url));
 
         $parts = parse_url($profil_url);
         parse_str($parts['query'], $query);
@@ -113,5 +109,43 @@ class Member extends ActiveRecord
         }
 
         return $member->id;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getStatusNames()
+    {
+        return [
+            static::STATUS_ACTIVE => 'Active',
+            static::STATUS_INACTIVE => 'None',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::getStatusNames()[$this->status];
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getTypesNames()
+    {
+        return [
+            static::TYPE_NORMAL => 'Normal',
+            static::TYPE_USER => 'User',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeName()
+    {
+        return self::getTypesNames()[$this->type];
     }
 }
