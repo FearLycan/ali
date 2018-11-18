@@ -3,6 +3,8 @@
 namespace app\components;
 
 
+use yii\helpers\Inflector;
+
 class Helper
 {
     public static function cutThis($str, $limit = 100, $strip = false)
@@ -44,5 +46,14 @@ class Helper
             }
         }
         return '';
+    }
+
+    public static function varietyOfWord($word, $number)
+    {
+        if ($number == 1) {
+            return Inflector::singularize($word);
+        } else {
+            return Inflector::pluralize($word);
+        }
     }
 }

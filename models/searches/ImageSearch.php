@@ -43,10 +43,13 @@ class ImageSearch extends Image
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $query = null)
     {
-        $query = Image::find()
-            ->where(['status' => Image::STATUS_ACCEPTED]);
+        if ($query == null) {
+            $query = Image::find()
+                ->where(['status' => Image::STATUS_ACCEPTED]);
+        }
+
 
         // add conditions that should always apply here
 

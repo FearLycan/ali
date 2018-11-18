@@ -55,8 +55,6 @@ $this->title = 'Image View'
                 </div>
             </div>
 
-            <p>Direct link</p>
-
             <hr>
 
             <div class="widget">
