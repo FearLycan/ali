@@ -4,20 +4,21 @@ namespace app\controllers;
 
 use app\components\Controller;
 use app\models\Image;
-use app\models\Member;
+use app\models\Product;
 use app\models\searches\ImageSearch;
 use Yii;
 use yii\web\NotFoundHttpException;
 
-class MemberController extends Controller
+
+class ProductController extends Controller
 {
     public function actionView($id)
     {
-        $model = $this->findMemberID($id);
+        $model = $this->findModel($id);
 
         $searchModel = new ImageSearch();
         $query = Image::find()
-            ->where(['member_id' => $model->id, 'status' => Image::STATUS_ACCEPTED]);
+            ->where(['product_id' => $model->id, 'status' => Image::STATUS_ACCEPTED]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('view', [
@@ -31,13 +32,13 @@ class MemberController extends Controller
      * Finds the Image model based on its slug value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $slug
-     * @return Member the loaded model
+     * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findMemberID($id)
+    protected function findModel($id)
     {
-        $model = Member::find()
-            ->where(['ali_member_id' => $id, 'status' => Member::STATUS_ACTIVE])
+        $model = Product::find()
+            ->where(['ali_product_id' => $id, 'status' => Product::STATUS_ACTIVE])
             ->one();
 
         if ($model !== null) {

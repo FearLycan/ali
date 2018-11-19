@@ -67,10 +67,12 @@ $this->title = 'Image View'
                         <a href="#">Go to <strong><?= Html::encode($model->member->name) ?></strong> Ali profile</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">Go to product</a>
+                        <a href="#">Go to product page on Ali</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">See more photos of this product</a>
+                        <a href="<?= Url::to(['product/view', 'id' => $model->product->ali_product_id]) ?>">
+                            See more photos of this product
+                        </a>
                     </li>
                 </ul>
             </div>
