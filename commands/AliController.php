@@ -7,13 +7,20 @@ use app\models\Image;
 use app\models\Product;
 use app\models\ProductCategory;
 use app\models\ProductUrl;
+use Exception;
 use yii\console\Controller;
+use yii\helpers\VarDumper;
 use yii\httpclient\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
 class AliController extends Controller
 {
 
+    /**
+     * @throws Exception
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\httpclient\Exception
+     */
     public function actionProduct()
     {
         $limit = 10;
@@ -54,15 +61,24 @@ class AliController extends Controller
                         Image::extractImages($product_id);
                     }
 
+                    $product->status = ProductUrl::STATUS_DONE;
+                    $product->save();
+
                 } else {
-                    die(var_dump($data));
+
+                    $product->status = ProductUrl::STATUS_ERROR;
+                    $product->save();
+
+                    throw new Exception(
+                        "Request to $request->url failed with response: \n"
+                        . VarDumper::dumpAsString($data->content)
+                    );
                 }
+
+
             }
 
             $offset = $offset + $limit;
-
-            $product->status = ProductUrl::STATUS_DONE;
-            $product->save();
 
 
         } while (!empty($urls));

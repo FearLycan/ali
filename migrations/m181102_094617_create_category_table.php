@@ -22,6 +22,7 @@ class m181102_094617_create_category_table extends Migration
 
         $this->createIndex('{{%product_created_at_index}}', '{{%category}}', 'created_at');
         $this->createIndex('{{%product_updated_at_index}}', '{{%category}}', 'updated_at');
+        $this->createIndex('{{%product_name_index}}', '{{%category}}', 'name');
 
         $this->insert('{{%category}}', ['name' => 'Women\'s Clothing & Accessories', 'parent_id' => \app\models\Category::BASE_CATEGORY]);
     }
