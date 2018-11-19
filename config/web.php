@@ -5,7 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'name'=>'Ali',
+    'name' => 'Ali',
     'defaultRoute' => 'image/index',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -51,7 +51,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'image/index',
                 '<alias:admin>' => 'admin/default/index',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
             ],
         ],
     ],

@@ -13,11 +13,11 @@ class MemberController extends Controller
 {
     public function actionView($id)
     {
-        $model = $this->findMemberID($id);
+        $model = $this->findModel($id);
 
         $searchModel = new ImageSearch();
         $query = Image::find()
-            ->where(['member_id' => $model->id, 'status' => Image::STATUS_ACCEPTED]);
+            ->where(['member_id' => $id, 'status' => Image::STATUS_ACCEPTED]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('view', [
@@ -34,10 +34,10 @@ class MemberController extends Controller
      * @return Member the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findMemberID($id)
+    protected function findModel($id)
     {
         $model = Member::find()
-            ->where(['ali_member_id' => $id, 'status' => Member::STATUS_ACTIVE])
+            ->where(['id' => $id, 'status' => Member::STATUS_ACTIVE])
             ->one();
 
         if ($model !== null) {

@@ -60,14 +60,19 @@ $this->title = 'Image View'
             <div class="widget">
                 <ul class="list-group font-alt">
                     <li class="list-group-item">
-                        <a href="<?= Url::to(['member/view', 'id' => $model->member->ali_member_id]) ?>">Go to
-                            <strong><?= Html::encode($model->member->name) ?></strong> profile</a>
+                        <a href="<?= Url::to(['member/view', 'id' => $model->member->id]) ?>">
+                            Go to <strong><?= Html::encode($model->member->name) ?></strong> profile
+                        </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">Go to <strong><?= Html::encode($model->member->name) ?></strong> Ali profile</a>
+                        <a href="#">
+                            Go to <strong><?= Html::encode($model->member->name) ?></strong> Ali profile
+                        </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">Go to product page on Ali</a>
+                        <a href="#">
+                            Go to product page on Ali
+                        </a>
                     </li>
                     <li class="list-group-item">
                         <a href="<?= Url::to(['product/view', 'id' => $model->product->ali_product_id]) ?>">
