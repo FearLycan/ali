@@ -27,7 +27,9 @@ $this->title = 'Product ' . $model->name;
                     <div class="widget">
                         <ul class="list-group font-alt">
                             <li class="list-group-item">
-                                <a href="#">Go to product page on Ali</a>
+                                <a href="<?= Url::to(['redirect/product', 'id' => $model->ali_product_id]) ?>">
+                                    Go to product page on Ali
+                                </a>
                             </li>
                         </ul>
                     </div>

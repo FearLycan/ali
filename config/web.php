@@ -54,6 +54,8 @@ $config = [
                 '' => 'image/index',
                 '<alias:admin>' => 'admin/default/index',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                'redirect/product/<id>' => 'redirect/product',
+                'redirect/member/<slug>' => 'redirect/member',
             ],
         ],
     ],

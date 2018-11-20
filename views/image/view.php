@@ -65,12 +65,12 @@ $this->title = 'Image View'
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">
+                        <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
                             Go to <strong><?= Html::encode($model->member->name) ?></strong> Ali profile
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#">
+                        <a href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>">
                             Go to product page on Ali
                         </a>
                     </li>
