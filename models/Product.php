@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -16,10 +15,13 @@ use yii\db\ActiveRecord;
  * @property string $ali_product_id
  * @property string $image
  * @property int $status
+ * @property int $category_id
  * @property int $type
  * @property string $created_at
  * @property string $updated_at
  * @property string $synchronized_at
+ *
+ * @property Category $category
  */
 class Product extends ActiveRecord
 {
@@ -60,8 +62,8 @@ class Product extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'image'], 'required'],
-            [['status', 'type'], 'integer'],
+            [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'image', 'category_id'], 'required'],
+            [['status', 'type', 'category_id'], 'integer'],
             [['created_at', 'updated_at', 'synchronized_at'], 'safe'],
             [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'image'], 'string', 'max' => 255],
         ];
@@ -86,7 +88,15 @@ class Product extends ActiveRecord
         ];
     }
 
-    public static function create($crawler, $url)
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public static function create($crawler, $url, $category_id)
     {
 
         $ali_product_id = $crawler->filterXpath("//input[contains(@name, 'objectId')]")->extract(['value'])[0];
@@ -104,6 +114,7 @@ class Product extends ActiveRecord
         $product->image = $crawler->filterXpath("//a[contains(@class, 'ui-image-viewer-thumb-frame')]//img")->extract(['src'])[0];
         $product->type = self::TYPE_PRODUCT;
         $product->status = self::STATUS_ACTIVE;
+        $product->category_id = $category_id;
 
         $product->save();
 

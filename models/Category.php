@@ -149,6 +149,7 @@ class Category extends ActiveRecord
                 $parents[] = [
                     'id' => $category->id,
                     'name' => $category->name,
+                    'slug' => $category->slug,
                 ];
 
                 if ($category->parent_id == static::BASE_CATEGORY) {

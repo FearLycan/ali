@@ -172,6 +172,16 @@
         $('nav li.dropdown-submenu ul').addClass('dropdown-menu');
 
         $('ul#w3 li a').addClass('more-padding');
+
+        var category = $("#category").text();
+
+        if (category.trim()) {
+            var $item = $("#w2 li a:contains('" + category + "')");
+            $item.parent('li').addClass('active');
+            var text = $item.text();
+            var href = $item.attr('href');
+            $("li#category_nav a").first().attr("href", href).text(text).parent('li').addClass('active');
+        }
     });
 })(jQuery);
 

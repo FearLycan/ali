@@ -22,8 +22,8 @@ class ImageSearch extends Image
     public function rules()
     {
         return [
-            [['id', 'product_id', 'member_id', 'status'], 'integer'],
-            [['url', 'created_at', 'updated_at'], 'safe'],
+//            [['id', 'product_id', 'member_id', 'status'], 'integer'],
+//            [['url', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -43,11 +43,28 @@ class ImageSearch extends Image
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $query = null)
+    public function search($params, $query = null, $category = null)
     {
         if ($query == null) {
             $query = Image::find()
-                ->where(['status' => Image::STATUS_ACCEPTED]);
+                ->where(['image.status' => Image::STATUS_ACCEPTED]);
+        }
+
+        if (!empty($category)) {
+
+            if ($childrens = $category->getChildrens()) {
+                $id = [];
+                foreach ($childrens as $children) {
+                    $id[] = $children->id;
+                }
+
+                $id[] = $category->id;
+            } else {
+                $id = $category->id;
+            }
+
+            $query->joinWith(['product product']);
+            $query->andFilterWhere(['=', 'product.category_id', $id]);
         }
 
 
@@ -74,15 +91,15 @@ class ImageSearch extends Image
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
-            'member_id' => $this->member_id,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+//            'id' => $this->id,
+//            'product_id' => $this->product_id,
+//            'member_id' => $this->member_id,
+//            'status' => $this->status,
+//            'created_at' => $this->created_at,
+//            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'url', $this->url]);
+        //$query->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

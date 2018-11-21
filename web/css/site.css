@@ -284,20 +284,13 @@ ul.pagination {
     border: 1px solid #ddd;
 }
 
-/*.more-padding {*/
-    /*padding: 11px 30px !important;*/
-/*}*/
-
-/*@media (max-width: 1050px) {*/
-    /*.more-padding {*/
-        /*padding: 11px 15px !important;*/
-        /*font-size: 11px !important;*/
-    /*}*/
-/*}*/
-
 @media (max-width: 768px) {
     .footer {
         height: 85px;
     }
 }
 
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}

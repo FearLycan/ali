@@ -26,6 +26,9 @@ class m181031_082512_create_member_table extends Migration
 
         $this->createIndex('{{%member_created_at_index}}', '{{%member}}', 'created_at');
         $this->createIndex('{{%member_updated_at_index}}', '{{%member}}', 'updated_at');
+        $this->createIndex('{{%member_ali_member_id_index}}', '{{%member}}', 'ali_member_id');
+        $this->createIndex('{{%member_status_index}}', '{{%member}}', 'status');
+        $this->createIndex('{{%member_type_index}}', '{{%member}}', 'type');
 
         $this->insert('{{%member}}', [
             'id' => 0,

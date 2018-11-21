@@ -11,13 +11,13 @@ use yii\web\NotFoundHttpException;
 
 class MemberController extends Controller
 {
-    public function actionView($id)
+    public function actionView($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug);
 
         $searchModel = new ImageSearch();
         $query = Image::find()
-            ->where(['member_id' => $id, 'status' => Image::STATUS_ACCEPTED]);
+            ->where(['member_id' => $model->id, 'status' => Image::STATUS_ACCEPTED]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('view', [
@@ -34,10 +34,10 @@ class MemberController extends Controller
      * @return Member the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($slug)
     {
         $model = Member::find()
-            ->where(['id' => $id, 'status' => Member::STATUS_ACTIVE])
+            ->where(['slug' => $slug, 'status' => Member::STATUS_ACTIVE])
             ->one();
 
         if ($model !== null) {

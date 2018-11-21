@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\Controller;
+use app\models\Category;
 use app\models\Image;
 use app\models\searches\ImageSearch;
 use Yii;
@@ -15,14 +16,20 @@ class ImageController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($category = null)
     {
+        $cat = null;
+        if ($category != null) {
+            $cat = Category::find()->where(['slug' => $category])->one();
+        }
+
         $searchModel = new ImageSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, null, $cat);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'category' => $cat,
         ]);
     }
 

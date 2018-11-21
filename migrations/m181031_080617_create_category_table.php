@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `category`.
  */
-class m181102_094617_create_category_table extends Migration
+class m181031_080617_create_category_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -20,9 +20,9 @@ class m181102_094617_create_category_table extends Migration
             'updated_at' => $this->timestamp()->null()
         ]);
 
-        $this->createIndex('{{%product_created_at_index}}', '{{%category}}', 'created_at');
-        $this->createIndex('{{%product_updated_at_index}}', '{{%category}}', 'updated_at');
-        $this->createIndex('{{%product_name_index}}', '{{%category}}', 'name');
+        $this->createIndex('{{%category_created_at_index}}', '{{%category}}', 'created_at');
+        $this->createIndex('{{%category_updated_at_index}}', '{{%category}}', 'updated_at');
+        $this->createIndex('{{%category_name_index}}', '{{%category}}', 'name');
 
         $this->insert('{{%category}}', ['name' => 'Women\'s Clothing & Accessories', 'parent_id' => \app\models\Category::BASE_CATEGORY]);
     }

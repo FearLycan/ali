@@ -16,9 +16,24 @@ $this->title = 'Image View'
 
         <div class="col-md-12">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
-                <li class="active">Data</li>
+
+                <?php foreach ($model->product->category->getFamilyPath() as $category): ?>
+
+                    <?php if ($category['id'] == 1): ?>
+                        <li>
+                            <a href="<?= Yii::$app->homeUrl ?>"><?= $category['name'] ?></a>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="<?= Url::to(['image/index', 'category' => $category['slug']]) ?>"><?= $category['name'] ?></a>
+                        </li>
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+
+                <li>
+                    <a href="<?= Url::to(['image/index', 'category' => $model->product->category->slug]) ?>"><?= $model->product->category->name ?></a>
+                </li>
             </ol>
         </div>
 
@@ -28,7 +43,7 @@ $this->title = 'Image View'
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="media">
                 <div class="media-left">
-                    <a href="<?= Url::to(['member/view', 'id' => $model->member->ali_member_id]) ?>">
+                    <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>">
 
                         <?php if (empty($model->member->avatar)): ?>
                             <div class="media-img"
@@ -43,7 +58,7 @@ $this->title = 'Image View'
                     </a>
                 </div>
                 <div class="media-body">
-                    <a href="<?= Url::to(['member/view', 'id' => $model->member->ali_member_id]) ?>"
+                    <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>"
                        style="float: left; margin-right: 10px;">
                         <h4 class="media-heading"><?= Html::encode($model->member->name) ?></h4>
                     </a>
@@ -60,7 +75,7 @@ $this->title = 'Image View'
             <div class="widget">
                 <ul class="list-group font-alt">
                     <li class="list-group-item">
-                        <a href="<?= Url::to(['member/view', 'id' => $model->member->id]) ?>">
+                        <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>">
                             Go to <strong><?= Html::encode($model->member->name) ?></strong> profile
                         </a>
                     </li>

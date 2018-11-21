@@ -50,6 +50,7 @@ AppAsset::register($this);
     $items[] = [
         'label' => Category::FIRAT_ITEM_NAME,
         'url' => Yii::$app->homeUrl,
+        'options' => ['id' => 'category_nav'],
         'items' => Category::getCategoryItems()
     ];
 

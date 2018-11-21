@@ -26,9 +26,11 @@ $grid.imagesLoaded(function () {
 //-------------------------------------//
 // init Infinte Scroll
 
-$grid.infiniteScroll({
-    path: 'ul.pagination li.next a',
-    append: '.grid__item',
-    outlayer: msnry,
-    status: '.page-load-status',
-});
+if ($('ul.pagination').length) {
+    $grid.infiniteScroll({
+        path: 'ul.pagination li.next a',
+        append: '.grid__item',
+        outlayer: msnry,
+        status: '.page-load-status',
+    });
+}

@@ -22,8 +22,8 @@ use yii\bootstrap\Modal;
         <span class="loader-ellips__dot"></span>
         <span class="loader-ellips__dot"></span>
     </div>
-    <p class="infinite-scroll-last">End of content</p>
-    <p class="infinite-scroll-error">No more pages to load</p>
+    <p class="infinite-scroll-last font-alt">End of content</p>
+    <p class="infinite-scroll-error font-alt">No more pages to load</p>
 </div>
 
 
@@ -43,7 +43,8 @@ Modal::end();
 
 <?php $this->beginBlock('script') ?>
 <script>
-
+    var oldURL;
+    var newURL;
 
     $(document).on('click', 'button.show-modal', function () {
         $('#modal')
@@ -52,15 +53,20 @@ Modal::end();
             .load($(this).attr('data-value'));
         $('.modal-header h3').html(
             '<a href="' + $(this).attr('data-member-url') + '">' + $(this).attr('data-title') + '</a>'
-        )
+        );
+
+        oldURL = $(location).attr("href");
+        newURL = window.location.origin + $(this).attr('data-value');
+
+        window.history.pushState("object or string", "Title", newURL);
     });
 
     $('#modal').on('hidden.bs.modal', function (e) {
         var $modalContent = $('#modal').find('#modalContent');
         $modalContent.find('div').html('');
         $modalContent.append('<?= Html::img(['/images//site/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])?>');
-    })
-
+        window.history.pushState("object or string", "Title", oldURL);
+    });
 
 </script>
 <?php $this->endBlock(); ?>

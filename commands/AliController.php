@@ -52,11 +52,7 @@ class AliController extends Controller
                     $category_id = Category::create($breadcrumb);
 
                     if ($category_id) {
-                        $product_id = Product::create($crawler, $product->url);
-
-                        if ($product_id) {
-                            ProductCategory::connect($product_id, $category_id);
-                        }
+                        $product_id = Product::create($crawler, $product->url, $category_id);
 
                         Image::extractImages($product_id);
                     }
