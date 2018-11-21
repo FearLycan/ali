@@ -4,6 +4,7 @@
 
 /* @var $content string */
 
+use app\models\Category;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -44,13 +45,13 @@ AppAsset::register($this);
         ],
     ]);
 
-//    $items[] = [
-//        'label' => 'Add URL',
-//        'url' => '#newURL',
-//        'options' => ['id' => 'modalButton', 'data-toggle' => 'modal', 'data-target' => '#newURL'],
-//    ];
-
     $items[] = '<li><button type="button" class="button-clear button-nav" data-toggle="modal" data-target="#newURL">Add URL</button></li>';
+
+    $items[] = [
+        'label' => Category::FIRAT_ITEM_NAME,
+        'url' => Yii::$app->homeUrl,
+        'items' => Category::getCategoryItems()
+    ];
 
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
         $items[] = ['label' => 'Admin', 'url' => ['/admin']];

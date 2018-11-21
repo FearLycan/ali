@@ -21,6 +21,10 @@ class Category extends ActiveRecord
 {
     const BASE_CATEGORY = 0;
 
+    const FIRAT_ITEM_NAME = 'Women\'s Clothing & Accessories';
+    const FIRAT_ITEM_SLUG = 'womens-clothing-and-accessories';
+    const FIRAT_ITEM_ID = 1;
+
     /**
      * @param bool $insert
      * @return array
@@ -183,5 +187,45 @@ class Category extends ActiveRecord
         }
 
         return false;
+    }
+
+    public static function getCategoryItems()
+    {
+        $categories = Category::find()
+            ->where(['parent_id' => 1])
+            ->orderBy(['name' => SORT_ASC])
+            ->all();
+
+        $categoryItem = [];
+        /* @var $category \app\models\Category */
+        foreach ($categories as $key => $category) {
+            $categoryItem[$key] = [
+                'label' => $category->name,
+                'url' => \yii\helpers\Url::to(['image/index', 'category' => $category->slug])
+            ];
+
+            if ($childrens = $category->getChildrens()) {
+                $childrenItem = [];
+                foreach ($childrens as $c => $children) {
+                    $childrenItem[$c] = [
+                        'label' => $children->name,
+                        'url' => \yii\helpers\Url::to(['image/index', 'category' => $children->slug])
+                    ];
+                }
+
+                $categoryItem[$key]['options'] = ['class' => 'dropdown'];
+                $categoryItem[$key]['linkOptions'] = ['class' => 'dropdown-toggle'];
+                $categoryItem[$key]['items'] = $childrenItem;
+            }
+        }
+
+        $first = [
+            'label' => self::FIRAT_ITEM_NAME,
+            'url' => \yii\helpers\Url::to(['/'])
+        ];
+
+        array_unshift($categoryItem, $first);
+
+        return $categoryItem;
     }
 }

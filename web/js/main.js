@@ -168,6 +168,10 @@
             }
         });
 
+
+        $('nav li.dropdown-submenu ul').addClass('dropdown-menu');
+
+        $('ul#w3 li a').addClass('more-padding');
     });
 })(jQuery);
 
