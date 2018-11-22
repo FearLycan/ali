@@ -50,9 +50,9 @@ $this->title = 'Product ' . $model->name;
             </h3>
         </div>
         <div class="col-md-12">
-            <?= $this->render('..\common\_image-view', [
+            <?= $this->render('../common/_image-view', [
                 'dataProvider' => $dataProvider,
-                'itemView' => '..\image\_image',
+                'itemView' => '../image/_image',
             ]) ?>
         </div>
     </div>

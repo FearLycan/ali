@@ -11,11 +11,6 @@ if (!empty($category)) {
     $this->title = Yii::$app->name;
 }
 
-//$this->registerMetaTag([
-//    'name' => 'twitter:image',
-//    'content' => \yii\helpers\Url::to(['images/site/og-image.png'], true),
-//]);
-
 ?>
 <div class="site-index">
 
@@ -32,7 +27,7 @@ if (!empty($category)) {
 
     <?= $this->render('..\common\_image-view', [
         'dataProvider' => $dataProvider,
-        'itemView' => '..\image\_image',
+        'itemView' => '../image/_image',
     ]) ?>
 
 </div>
