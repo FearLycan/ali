@@ -14,9 +14,9 @@ $this->title = 'Member ' . $model->name;
     <div class="row">
         <div class="col-md-4">
             <?php if (empty($model->avatar)): ?>
-                <?= Html::img(['/images/site/user.png'], ['class' => 'img-responsive img-center img-thumbnail']) ?>
+                <?= Html::img(['/images/site/user.png'], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
             <?php else: ?>
-                <?= Html::img(['/images/normal/' . $model->avatar], ['class' => 'img-responsive img-center img-thumbnail']) ?>
+                <?= Html::img(['/images/normal/' . $model->avatar], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
             <?php endif; ?>
         </div>
         <div class="col-md-4">

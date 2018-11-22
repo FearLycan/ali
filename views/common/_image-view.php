@@ -59,6 +59,10 @@ Modal::end();
         newURL = window.location.origin + $(this).attr('data-value');
 
         window.history.pushState("object or string", "Title", newURL);
+
+        $('#w1-collapse').addClass('w1-collapse-margin');
+        $('.navbar-brand').addClass('navbar-brand-margin');
+
     });
 
     $('#modal').on('hidden.bs.modal', function (e) {
@@ -66,6 +70,8 @@ Modal::end();
         $modalContent.find('div').html('');
         $modalContent.append('<?= Html::img(['/images//site/wait.gif'], ['class' => 'img-center', 'alt' => 'Wait for it'])?>');
         window.history.pushState("object or string", "Title", oldURL);
+        $('#w1-collapse').removeClass('w1-collapse-margin');
+        $('.navbar-brand').removeClass('navbar-brand-margin');
     });
 
 </script>

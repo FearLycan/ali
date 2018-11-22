@@ -5,8 +5,6 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'name' => 'Ali',
-    'defaultRoute' => 'image/index',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -14,58 +12,7 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
-        'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'KP9dvJU_-IHKFRIZgckDsnYBE-HzVpiR',
-        ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'class' => 'app\components\WebUser',
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-            'loginUrl' => ['auth/login'],
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
         'db' => $db,
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                '<alias:admin>' => 'admin/default/index',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                'redirect/product/<id>' => 'redirect/product',
-                'redirect/member/<slug>' => 'redirect/member',
-                '<category>' => 'image/index',
-                'member/<slug>' => 'member/view',
-                'view/<slug>' => 'image/view',
-                //'image/<slug>' => 'image/view',
-            ],
-        ],
-    ],
-    'modules' => [
-        'admin' => [
-            'class' => 'app\modules\admin\Admin',
-        ],
     ],
     'params' => $params,
 ];

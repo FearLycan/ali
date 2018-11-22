@@ -4,10 +4,18 @@
 
 use app\components\Helper;
 use yii\helpers\Html;
-use yii\widgets\ListView;
-use yii\bootstrap\Modal;
 
-$this->title = Yii::$app->name;
+if (!empty($category)) {
+    $this->title = $category->name . ' - ' . Yii::$app->name;
+} else {
+    $this->title = Yii::$app->name;
+}
+
+//$this->registerMetaTag([
+//    'name' => 'twitter:image',
+//    'content' => \yii\helpers\Url::to(['images/site/og-image.png'], true),
+//]);
+
 ?>
 <div class="site-index">
 

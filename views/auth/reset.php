@@ -1,3 +1,3 @@
 <?php
-$this->title = 'Przypomnij hasło';
+$this->title = 'Reset Password' . ' - ' . Yii::$app->name;
 ?>

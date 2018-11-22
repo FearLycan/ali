@@ -15,7 +15,7 @@ use yii\helpers\Url;
         data-member-url="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>"
         class="show-modal button-clear"
 >
-    <img src="<?= $model->getNormalSizeImage() ?>"/>
+    <img src="<?= $model->getNormalSizeImage() ?>" alt="Image"/>
 </button>
 
 

@@ -1,6 +1,6 @@
 <?php
 
-$this->title = 'Login';
+$this->title = 'Login' . ' - ' . Yii::$app->name;
 
 ?>
 

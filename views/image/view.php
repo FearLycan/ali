@@ -6,7 +6,10 @@ use yii\helpers\Url;
 
 /* @var $model Image */
 
-$this->title = 'Image View'
+$this->title = $model->member->name . ' pic' . ' - ' . Yii::$app->name;
+
+Yii::$app->params['og_image']['content'] = Url::to(['images/thumbnail/' . $model->file], true);
+Yii::$app->params['og_type']['content'] = 'article';
 
 ?>
 
@@ -38,7 +41,7 @@ $this->title = 'Image View'
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-8">
-            <?= Html::img($model->getOriginalSizeImage(), ['class' => 'img-responsive img-center']) ?>
+            <?= Html::img($model->getOriginalSizeImage(), ['class' => 'img-responsive img-center'], ['alt' => 'Product Image']) ?>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="media">

@@ -294,3 +294,21 @@ ul.pagination {
 .dropdown-menu > .active > a:hover {
     background: rgba(255, 255, 255, 0.1) !important;
 }
+
+.w1-collapse-margin {
+    margin-right: 8px !important;
+}
+
+.navbar-brand-margin {
+    margin-left: -23px !important;
+}
+
+@media (max-width: 429px) {
+    .w1-collapse-margin {
+        margin-right: auto !important;
+    }
+
+    .navbar-brand-margin {
+        margin-left: auto !important;
+    }
+}
