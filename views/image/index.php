@@ -25,7 +25,7 @@ if (!empty($category)) {
         </div>
     <?php endif; ?>
 
-    <?= $this->render('..\common\_image-view', [
+    <?= $this->render('../common/_image-view', [
         'dataProvider' => $dataProvider,
         'itemView' => '../image/_image',
     ]) ?>
