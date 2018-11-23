@@ -20,7 +20,7 @@ class ImageController extends Controller
     {
         $cat = null;
         if ($category != null) {
-            $cat = Category::find()->where(['slug' => $category])->one();
+            $cat = $this->findCategoryModel($category);
         }
 
         $searchModel = new ImageSearch();
@@ -56,6 +56,26 @@ class ImageController extends Controller
     protected function findSlugModel($slug)
     {
         $model = Image::find()
+            ->where(['slug' => $slug])
+            ->one();
+
+        if ($model !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Finds the Category model based on its slug value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $slug
+     * @return Image the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findCategoryModel($slug)
+    {
+        $model = Category::find()
             ->where(['slug' => $slug])
             ->one();
 
