@@ -68,6 +68,17 @@ AppAsset::register($this);
     <?= $this->registerMetaTag(Yii::$app->params['og_type'], 'og_type'); ?>
     <?= $this->registerMetaTag(Yii::$app->params['og_image'], 'og_image'); ?>
     <?php $this->head() ?>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84680217-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-84680217-4');
+    </script>
+
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <?php $this->beginBody() ?>
