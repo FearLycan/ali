@@ -69,7 +69,7 @@ class SiteController extends Controller
             $model->url = null;
         }
 
-        return $this->render('..\..\widgets\views\addNewURLForm', [
+        return $this->render('../../widgets/views/addNewURLForm', [
             'model' => $model,
             'success' => $success
         ]);
