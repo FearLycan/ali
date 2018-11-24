@@ -5,6 +5,8 @@
 /* @var $content string */
 
 use app\models\Category;
+use app\widgets\AddNewURL;
+use app\widgets\AgeVerify;
 use app\widgets\Alert;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -12,6 +14,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 ?>
@@ -23,7 +26,7 @@ AppAsset::register($this);
     <meta name="robots" content="index, follow"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="google-site-verification" content="a_Ab___KznXBwMsE78rOjtTk2kMSZpW19GaRZtJtIQg" />
+    <meta name="google-site-verification" content="a_Ab___KznXBwMsE78rOjtTk2kMSZpW19GaRZtJtIQg"/>
     <link rel="manifest" href="<?= Url::to(['/manifest.json']) ?>">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -62,7 +65,6 @@ AppAsset::register($this);
     <?= $this->registerMetaTag(Yii::$app->params['twitter_image'], 'twitter_image'); ?>
 
     <meta property="og:title" content="<?= Html::encode($this->title) ?>"/>
-    <meta property="og:image" content="<?= Html::encode($this->title) ?>"/>
     <meta property="og:description" content="<?= Yii::$app->params['meta-description']; ?>"/>
     <meta property="og:url" content="<?= Yii::$app->request->absoluteUrl ?>"/>
     <?= $this->registerMetaTag(Yii::$app->params['og_type'], 'og_type'); ?>
@@ -73,7 +75,11 @@ AppAsset::register($this);
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84680217-4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-84680217-4');
@@ -142,7 +148,9 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?= \app\widgets\AddNewURL::widget() ?>
+<?php echo AgeVerify::widget() ?>
+<?php echo AddNewURL::widget() ?>
+
 
 <footer class="footer bg-dark">
     <div class="container">

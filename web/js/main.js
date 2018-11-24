@@ -182,6 +182,17 @@
             var href = $item.attr('href');
             $("li#category_nav a").first().attr("href", href).text(text).parent('li').addClass('active');
         }
+
+        var $verify = $('#ageVerify');
+
+        if($verify.length){
+            $verify.modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            $verify.data('bs.modal').$backdrop.addClass('dark-modal');
+        }
     });
 })(jQuery);
 

@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\components\Controller;
 use app\models\forms\ProductUrlForm;
 use app\models\ProductUrl;
+use app\models\forms\AgeVerifyForm;
+use app\widgets\AgeVerify;
 use Yii;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -20,8 +22,8 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
                     'new-url' => ['post'],
+                    'age-verify' => ['post'],
                 ],
             ],
         ];
@@ -69,9 +71,32 @@ class SiteController extends Controller
             $model->url = null;
         }
 
-        return $this->render('../../widgets/views/addNewURLForm', [
+        return $this->renderAjax('../../widgets/views/addNewURLForm', [
             'model' => $model,
             'success' => $success
+        ]);
+    }
+
+    public function actionAgeVerify()
+    {
+        /* @var $model AgeVerifyForm */
+        $model = new AgeVerifyForm();
+        $view = true;
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $cookies = Yii::$app->response->cookies;
+
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'age',
+                'value' => AgeVerify::AGE_CONFIRMED,
+            ]));
+
+            return $this->redirect(Yii::$app->homeUrl);
+        }
+
+        return $this->render('../../widgets/views/ageVerify', [
+            'model' => $model,
+            'view' => $view,
         ]);
     }
 }
