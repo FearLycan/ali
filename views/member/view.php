@@ -31,8 +31,8 @@ $this->title = 'Member ' . $model->name;
             <div class="widget">
                 <ul class="list-group font-alt">
                     <li class="list-group-item">
-                        <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
-                            Go to <strong><?= Html::encode($model->member->name) ?></strong> Ali profile
+                        <a href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>">
+                            Go to <strong><?= Html::encode($model->name) ?></strong> Ali profile
                         </a>
                     </li>
                 </ul>
