@@ -89,6 +89,7 @@ class SiteController extends Controller
             $cookies->add(new \yii\web\Cookie([
                 'name' => 'age',
                 'value' => AgeVerify::AGE_CONFIRMED,
+                'expire' => time() + 86400 * 31,
             ]));
 
             return $this->redirect(Yii::$app->homeUrl);

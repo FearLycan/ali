@@ -176,7 +176,15 @@
         var category = $("#category").text();
 
         if (category.trim()) {
-            var $item = $("#w2 li a:contains('" + category + "')");
+           // var $item = $("#w2 li a:contains('" + category + "')");
+
+            var $item =  $("#w2 li a").filter(function () {
+                if ($(this).text() === category) {
+                    return $(this);
+                }
+                return null;
+            });
+
             $item.parent('li').addClass('active');
             var text = $item.text();
             var href = $item.attr('href');
@@ -185,7 +193,7 @@
 
         var $verify = $('#ageVerify');
 
-        if($verify.length){
+        if ($verify.length) {
             $verify.modal({
                 backdrop: 'static',
                 keyboard: false

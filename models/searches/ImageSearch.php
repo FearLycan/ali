@@ -59,12 +59,13 @@ class ImageSearch extends Image
                 }
 
                 $id[] = $category->id;
+                $query->joinWith(['product product']);
+                $query->andFilterWhere(['in', 'product.category_id', $id]);
             } else {
                 $id = $category->id;
+                $query->joinWith(['product product']);
+                $query->andFilterWhere(['=', 'product.category_id', $id]);
             }
-
-            $query->joinWith(['product product']);
-            $query->andFilterWhere(['=', 'product.category_id', $id]);
         }
 
 

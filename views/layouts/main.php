@@ -89,9 +89,9 @@ AppAsset::register($this);
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <?php $this->beginBody() ?>
 
-<div class="page-loader">
-    <div class="loader">Loading...</div>
-</div>
+<!--<div class="page-loader">-->
+<!--    <div class="loader">Loading...</div>-->
+<!--</div>-->
 
 <div class="wrap">
     <?php
