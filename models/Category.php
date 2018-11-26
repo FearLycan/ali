@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string $slug
  * @property int $parent_id
+ * @property int $main_category
  * @property string $created_at
  * @property string $updated_at
  */
@@ -63,7 +64,7 @@ class Category extends ActiveRecord
     {
         return [
             [['name', 'parent_id'], 'required'],
-            [['parent_id'], 'integer'],
+            [['parent_id', 'main_category'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -212,6 +213,20 @@ class Category extends ActiveRecord
                         'label' => $children->name,
                         'url' => \yii\helpers\Url::to(['image/index', 'category' => $children->slug])
                     ];
+
+                    if ($cc = $children->getChildrens()) {
+                        $a = [];
+                        foreach ($cc as $n => $cu) {
+                            $a[$n] = [
+                                'label' => $cu->name,
+                                'url' => \yii\helpers\Url::to(['image/index', 'category' => $cu->slug])
+                            ];
+                        }
+
+                        $childrenItem[$n]['options'] = ['class' => 'dropdown'];
+                        $childrenItem[$n]['linkOptions'] = ['class' => 'dropdown-toggle'];
+                        $childrenItem[$n]['items'] = $a;
+                    }
                 }
 
                 $categoryItem[$key]['options'] = ['class' => 'dropdown'];

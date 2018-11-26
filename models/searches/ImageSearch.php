@@ -2,6 +2,7 @@
 
 namespace app\models\searches;
 
+use app\models\Category;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -50,27 +51,13 @@ class ImageSearch extends Image
                 ->where(['image.status' => Image::STATUS_ACCEPTED]);
         }
 
+        /* @var $category Category */
         if (!empty($category)) {
-
-            if ($childrens = $category->getChildrens()) {
-                $id = [];
-                foreach ($childrens as $children) {
-                    $id[] = $children->id;
-                }
-
-                $id[] = $category->id;
-                $query->joinWith(['product product']);
-                $query->andFilterWhere(['in', 'product.category_id', $id]);
-            } else {
-                $id = $category->id;
-                $query->joinWith(['product product']);
-                $query->andFilterWhere(['=', 'product.category_id', $id]);
-            }
+            $query->joinWith(['product product']);
+            $query->andFilterWhere(['in', 'product.category_id', json_decode($category->main_category)]);
         }
 
-
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
