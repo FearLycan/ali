@@ -69,6 +69,10 @@ AppAsset::register($this);
     <meta property="og:url" content="<?= Yii::$app->request->absoluteUrl ?>"/>
     <?= $this->registerMetaTag(Yii::$app->params['og_type'], 'og_type'); ?>
     <?= $this->registerMetaTag(Yii::$app->params['og_image'], 'og_image'); ?>
+
+    <meta property="fb:pages" content="766392393719178"/>
+    <meta property="fb:app_id" content="2009025835858112"/>
+
     <?php $this->head() ?>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
