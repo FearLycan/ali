@@ -4,6 +4,7 @@ namespace app\models;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\imagine\Image as Img;
@@ -61,6 +62,13 @@ class Image extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
                 'value' => date("Y-m-d H:i:s"),
+            ],
+            'sluggable' => [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'file',
+                'slugAttribute' => 'slug',
+                'immutable' => false,
+                'ensureUnique' => true
             ],
         ];
     }
@@ -290,11 +298,8 @@ class Image extends ActiveRecord
     public function download()
     {
         $file = basename($this->url);
-        $slug = (explode(".", $file));
-        $slug = $slug[0];
 
         if (file_put_contents('web' . Image::URL_ORIGINAL . $file, file_get_contents($this->url))) {
-            $this->slug = $slug;
             $this->file = $file;
             $this->save();
 
