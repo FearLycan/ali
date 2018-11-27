@@ -8,8 +8,8 @@ use yii\helpers\Url;
 
 $this->title = 'Member ' . $model->name;
 if (empty($model->avatar)){
-    Yii::$app->params['og_image']['content'] = Url::to(['images/thumbnail/' . $model->avatar], true);
-    Yii::$app->params['twitter_image']['content'] = Url::to(['images/thumbnail/' . $model->avatar], true);
+    Yii::$app->params['og_image']['content'] = Url::to(['images/normal/' . $model->avatar], true);
+    Yii::$app->params['twitter_image']['content'] = Url::to(['images/normal/' . $model->avatar], true);
 }
 
 Yii::$app->params['og_type']['content'] = 'article';
