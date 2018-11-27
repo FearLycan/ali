@@ -217,15 +217,15 @@ class Category extends ActiveRecord
                     if ($cc = $children->getChildrens()) {
                         $a = [];
                         foreach ($cc as $n => $cu) {
-                            $a[$n] = [
+                            $a[] = [
                                 'label' => $cu->name,
                                 'url' => \yii\helpers\Url::to(['image/index', 'category' => $cu->slug])
                             ];
                         }
 
-                        $childrenItem[$n]['options'] = ['class' => 'dropdown'];
-                        $childrenItem[$n]['linkOptions'] = ['class' => 'dropdown-toggle'];
-                        $childrenItem[$n]['items'] = $a;
+                        $childrenItem[$c]['options'] = ['class' => 'dropdown'];
+                        $childrenItem[$c]['linkOptions'] = ['class' => 'dropdown-toggle'];
+                        $childrenItem[$c]['items'] = $a;
                     }
                 }
 

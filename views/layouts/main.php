@@ -163,14 +163,11 @@ AppAsset::register($this);
                 <p class="copyright font-alt">© <?= date('Y') ?>&nbsp;<a
                             href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name ?></a>, All Rights Reserved</p>
             </div>
-            <!--            <div class="col-xs-12 col-sm-6 col-md-6">-->
-            <!--                <div class="footer-social-links">-->
-            <!--                    <a href="#"><i class="fa fa-facebook"></i></a>-->
-            <!--                    <a href="#"><i class="fa fa-twitter"></i></a>-->
-            <!--                    <a href="#"><i class="fa fa-dribbble"></i></a>-->
-            <!--                    <a href="#"><i class="fa fa-skype"></i></a>-->
-            <!--                </div>-->
-            <!--            </div>-->
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="footer-social-links">
+                                <a href="https://www.facebook.com/AliGoneWild69" target="_blank"><i class="fa fa-facebook"></i></a>
+                            </div>
+                        </div>
         </div>
     </div>
 </footer>

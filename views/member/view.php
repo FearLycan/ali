@@ -12,14 +12,14 @@ $this->title = 'Member ' . $model->name;
 
 <div class="member-view">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-xs-6 col-sm-6">
             <?php if (empty($model->avatar)): ?>
                 <?= Html::img(['/images/site/user.png'], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
             <?php else: ?>
                 <?= Html::img(['/images/normal/' . $model->avatar], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
             <?php endif; ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-xs-6 col-sm-6">
             <h2 style="margin-top: 0;">
                 <?= Html::encode($model->name) ?>
 
@@ -40,12 +40,12 @@ $this->title = 'Member ' . $model->name;
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
             <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
             <h3 style="margin-top: 0;"><strong><?= Html::encode($model->name) ?></strong>
                 have <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('photo', $dataProvider->getTotalCount()) ?>
             </h3>

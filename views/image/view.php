@@ -17,7 +17,7 @@ Yii::$app->params['og_type']['content'] = 'article';
 <div class="view-image">
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
             <ol class="breadcrumb">
 
                 <?php foreach ($model->product->category->getFamilyPath() as $category): ?>
@@ -43,6 +43,9 @@ Yii::$app->params['og_type']['content'] = 'article';
         <div class="col-xs-12 col-sm-6 col-md-8">
             <?= Html::img($model->getOriginalSizeImage(), ['class' => 'img-responsive img-center'], ['alt' => 'Product Image']) ?>
         </div>
+
+        <div class="visible-xs col-xs-12 col-sm-12"><hr></div>
+
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="media">
                 <div class="media-left">
