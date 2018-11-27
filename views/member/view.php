@@ -8,6 +8,9 @@ use yii\helpers\Url;
 
 $this->title = 'Member ' . $model->name;
 
+Yii::$app->params['og_image']['content'] = Url::to(['images/thumbnail/' . $model->avatar], true);
+Yii::$app->params['og_type']['content'] = 'article';
+
 ?>
 
 <div class="member-view">
@@ -16,7 +19,7 @@ $this->title = 'Member ' . $model->name;
             <?php if (empty($model->avatar)): ?>
                 <?= Html::img(['/images/site/user.png'], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
             <?php else: ?>
-                <?= Html::img(['/images/normal/' . $model->avatar], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
+                <?= Html::img(['/images/thumbnail/' . $model->avatar], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
             <?php endif; ?>
         </div>
         <div class="col-md-4 col-xs-6 col-sm-6">
