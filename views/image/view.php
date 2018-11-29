@@ -44,7 +44,9 @@ Yii::$app->params['og_type']['content'] = 'article';
             <?= Html::img($model->getOriginalSizeImage(), ['class' => 'img-responsive img-center'], ['alt' => 'Product Image']) ?>
         </div>
 
-        <div class="visible-xs col-xs-12 col-sm-12"><hr></div>
+        <div class="visible-xs col-xs-12 col-sm-12">
+            <hr>
+        </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="media">
@@ -98,6 +100,16 @@ Yii::$app->params['og_type']['content'] = 'article';
                     <li class="list-group-item">
                         <a href="<?= Url::to(['product/view', 'id' => $model->product->ali_product_id]) ?>">
                             See more photos of this product
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a style="color: #a94442;" href="<?= Url::to(['ticket/create'],
+                            [
+                                'data-method' => 'POST',
+                                'data-params' => [
+                                    'type' => \app\models\Ticket::TYPE_IMAGE,
+                                ]]) ?>">
+                            Report this pic
                         </a>
                     </li>
                 </ul>
