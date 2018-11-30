@@ -2,6 +2,7 @@
 
 
 use app\models\Product;
+use app\models\Ticket;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -30,6 +31,12 @@ $this->title = 'Product ' . $model->name;
                                 <a href="<?= Url::to(['redirect/product', 'id' => $model->ali_product_id]) ?>">
                                     Go to product page on Ali
                                 </a>
+                            </li>
+                            <li class="list-group-item">
+                                <?= Html::a('Report this product', ['ticket/create',
+                                    'type' => Ticket::TYPE_PRODUCT,
+                                    'object_id' => $model->ali_product_id
+                                ], ['class' => 'report-link']) ?>
                             </li>
                         </ul>
                     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Member;
+use app\models\Ticket;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -41,6 +42,12 @@ Yii::$app->params['og_type']['content'] = 'article';
                         <a href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>">
                             Go to <strong><?= Html::encode($model->name) ?></strong> Ali profile
                         </a>
+                    </li>
+                    <li class="list-group-item">
+                        <?= Html::a('Report this member', ['ticket/create',
+                            'type' => Ticket::TYPE_MEMBER,
+                            'object_id' => $model->slug
+                        ], ['class' => 'report-link']) ?>
                     </li>
                 </ul>
             </div>

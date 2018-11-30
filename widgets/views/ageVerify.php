@@ -24,7 +24,7 @@ use yii\widgets\Pjax;
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-4 col-lg-offset-4">
-                            <img src="<?= Url::to(['favicon/ms-icon-310x310.png']) ?>" class="img-responsive">
+                            <img src="<?= Url::to(['favicon/ms-icon-310x310.png']) ?>" class="img-responsive" style="margin: 0 auto;">
                         </div>
                     </div>
 

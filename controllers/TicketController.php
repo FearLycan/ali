@@ -3,26 +3,43 @@
 namespace app\controllers;
 
 use app\components\Controller;
-use app\models\forms\ContactForm;
-use app\models\forms\ProductUrlForm;
 use app\models\forms\TicketForm;
-use app\models\ProductUrl;
-use app\models\forms\AgeVerifyForm;
-use app\widgets\AgeVerify;
+use app\models\Ticket;
 use Yii;
-use yii\web\Response;
-use yii\filters\VerbFilter;
 
 class TicketController extends Controller
 {
-    public function actionCreate($type)
+    public function actionCreate($type = null, $object_id = null)
     {
+        $object = null;
+
+        if ($type != null && $object_id != null) {
+            if (!in_array($type, Ticket::getTicketTypes())) {
+                $this->notFound();
+            }
+
+            if (!($object = Ticket::getObject($type, $object_id))) {
+                $this->notFound();
+            }
+        }
+
         $model = new TicketForm();
 
-        if (Yii::$app->request->isAjax) {
-            return $this->renderAjax('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            $model->model_id = $object_id;
+            $model->type = $type;
+
+            $model->save();
+
+            Yii::$app->session->setFlash('success', true);
+            return $this->redirect(Yii::$app->request->absoluteUrl);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+            'object' => $object,
+            'type' => $type
+        ]);
     }
 }

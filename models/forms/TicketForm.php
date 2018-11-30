@@ -7,6 +7,7 @@ use app\models\Ticket;
 
 class TicketForm extends Ticket
 {
+    //public $reason;
     /**
      * {@inheritdoc}
      */
@@ -14,6 +15,8 @@ class TicketForm extends Ticket
     {
         return [
             [['reason', 'description'], 'required'],
+            [['description'], 'string', 'min' => 15],
+            [['reason'], 'in', 'range' => self::getTicketReasons()],
         ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Image;
+use app\models\Ticket;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -103,18 +104,13 @@ Yii::$app->params['og_type']['content'] = 'article';
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a style="color: #a94442;" href="<?= Url::to(['ticket/create'],
-                            [
-                                'data-method' => 'POST',
-                                'data-params' => [
-                                    'type' => \app\models\Ticket::TYPE_IMAGE,
-                                ]]) ?>">
-                            Report this pic
-                        </a>
+                        <?= Html::a('Report this pic', ['ticket/create',
+                            'type' => Ticket::TYPE_IMAGE,
+                            'object_id' => $model->slug
+                        ], ['class' => 'report-link']) ?>
                     </li>
                 </ul>
             </div>
-
 
         </div>
     </div>

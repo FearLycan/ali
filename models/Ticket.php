@@ -18,9 +18,10 @@ use Yii;
  */
 class Ticket extends \yii\db\ActiveRecord
 {
-    const TYPE_USER = 1;
+    const TYPE_MEMBER = 1;
     const TYPE_IMAGE = 2;
     const TYPE_OTHER = 3;
+    const TYPE_PRODUCT = 4;
 
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
@@ -97,8 +98,9 @@ class Ticket extends \yii\db\ActiveRecord
     public static function getTypeNames()
     {
         return [
-            static::TYPE_USER => 'User',
+            static::TYPE_MEMBER => 'User',
             static::TYPE_IMAGE => 'Image',
+            static::TYPE_PRODUCT => 'Product',
             static::TYPE_OTHER => 'Other',
         ];
     }
@@ -131,5 +133,56 @@ class Ticket extends \yii\db\ActiveRecord
     public function getReasonName()
     {
         return self::getReasonNames()[$this->reason];
+    }
+
+    /**
+     * @return array
+     */
+    public function getTicketReasons()
+    {
+        return [
+            self::REASON_FAKE,
+            self::REASON_ERROR,
+            self::REASON_DUPLICATE,
+            self::REASON_UNSUITABLE,
+            self::REASON_OTHER
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTicketTypes()
+    {
+        return [
+            self::TYPE_PRODUCT,
+            self::TYPE_OTHER,
+            self::TYPE_MEMBER,
+            self::TYPE_IMAGE
+        ];
+    }
+
+    public static function getObject($type, $id)
+    {
+        $object = false;
+
+        switch ($type) {
+            case self::TYPE_MEMBER:
+                $object = Member::find()->where(['slug' => $id])->one();
+                break;
+
+            case self::TYPE_IMAGE:
+                $object = Image::find()->where(['slug' => $id])->one();
+                break;
+
+            case self::TYPE_PRODUCT:
+                $object = Product::find()->where(['ali_product_id' => $id])->one();
+                break;
+
+            case self::TYPE_OTHER:
+                break;
+        }
+
+        return $object;
     }
 }

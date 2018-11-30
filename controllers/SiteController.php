@@ -74,7 +74,7 @@ class SiteController extends Controller
                 'expire' => time() + 86400 * 31,
             ]));
 
-            return $this->redirect(Yii::$app->homeUrl);
+            return $this->redirect(Yii::$app->request->referrer);
         }
 
         return $this->render('../../widgets/views/ageVerify', [

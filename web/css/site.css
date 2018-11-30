@@ -323,3 +323,11 @@ ul.pagination {
     list-style-position: inside;
     padding: 0;
 }
+
+.report-link {
+    color: #a94442;
+}
+
+.report-link:hover {
+    color: #c77270;
+}

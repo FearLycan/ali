@@ -45,6 +45,9 @@ class AgeVerifyForm extends ActiveRecord
 
     public function checkDateValidator($attribute, $params)
     {
+        $this->month = intval(trim($this->month));
+        $this->year = intval(trim($this->year));
+        $this->day = intval(trim($this->dirtyAttributes));
 
         if (!checkdate($this->month, $this->day, $this->year)) {
             $this->addError($attribute, 'Data is invalid.');
@@ -56,7 +59,7 @@ class AgeVerifyForm extends ActiveRecord
             if ($result->format('%y') < $this->age) {
                 $this->addError($attribute, 'Sorry, but you are under ' . $this->age);
             }
-
         }
+
     }
 }

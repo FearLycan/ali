@@ -37,22 +37,22 @@ AppAsset::register($this);
 
     <link rel="canonical" href="<?= Yii::$app->request->absoluteUrl ?>"/>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="<?= Url::to(['favicon/apple-icon-57x57.png']) ?>">
-    <link rel="apple-touch-icon" sizes="60x60" href="<?= Url::to(['favicon/apple-icon-60x60.png']) ?>">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?= Url::to(['favicon/apple-icon-72x72.png']) ?>">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?= Url::to(['favicon/apple-icon-76x76.png']) ?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?= Url::to(['favicon/apple-icon-114x114.png']) ?>">
-    <link rel="apple-touch-icon" sizes="120x120" href="<?= Url::to(['favicon/apple-icon-120x120.png']) ?>">
-    <link rel="apple-touch-icon" sizes="144x144" href="<?= Url::to(['favicon/apple-icon-144x144.png']) ?>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<?= Url::to(['favicon/apple-icon-152x152.png']) ?>">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= Url::to(['favicon/apple-icon-180x180.png']) ?>">
-    <link rel="icon" type="image/png" sizes="192x192" href="<?= Url::to(['favicon/android-icon-192x192.png']) ?>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to(['favicon/favicon-32x32.png']) ?>">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?= Url::to(['favicon/favicon-96x96.png']) ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= Url::to(['favicon/favicon-16x16.png']) ?>">
+    <link rel="apple-touch-icon" sizes="57x57" href="<?= Url::to(['favicon/apple-icon-57x57.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<?= Url::to(['favicon/apple-icon-60x60.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?= Url::to(['favicon/apple-icon-72x72.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?= Url::to(['favicon/apple-icon-76x76.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?= Url::to(['favicon/apple-icon-114x114.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<?= Url::to(['favicon/apple-icon-120x120.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<?= Url::to(['favicon/apple-icon-144x144.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<?= Url::to(['favicon/apple-icon-152x152.png'],true) ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= Url::to(['favicon/apple-icon-180x180.png'],true) ?>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<?= Url::to(['favicon/android-icon-192x192.png'],true) ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to(['favicon/favicon-32x32.png'],true) ?>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?= Url::to(['favicon/favicon-96x96.png'],true) ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= Url::to(['favicon/favicon-16x16.png'],true) ?>">
 
     <meta name="msapplication-TileColor" content="#0A0A0A">
-    <meta name="msapplication-TileImage" content="<?= Url::to(['favicon/ms-icon-144x144.png']) ?>">
+    <meta name="msapplication-TileImage" content="<?= Url::to(['favicon/ms-icon-144x144.png'],true) ?>">
     <meta name="theme-color" content="#0A0A0A">
 
     <?= Html::csrfMetaTags() ?>
@@ -147,7 +147,6 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>
