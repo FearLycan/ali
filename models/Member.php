@@ -18,6 +18,7 @@ use yii\db\ActiveRecord;
  * @property string $avatar
  * @property int $status
  * @property int $type
+ * @property int $click
  * @property string $created_at
  * @property string $updated_at
  */
@@ -69,7 +70,7 @@ class Member extends ActiveRecord
     {
         return [
             [['ali_member_id', 'country_code', 'name'], 'required'],
-            [['status', 'type'], 'integer'],
+            [['status', 'type','click'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['ali_member_id', 'name', 'avatar'], 'string', 'max' => 255],
             [['country_code'], 'string', 'max' => 10],
@@ -87,6 +88,7 @@ class Member extends ActiveRecord
             'country_code' => 'Country Code',
             'status' => 'Status',
             'type' => 'Type',
+            'click' => 'Click',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -154,5 +156,11 @@ class Member extends ActiveRecord
     public function getTypeName()
     {
         return self::getTypesNames()[$this->type];
+    }
+
+    public function increaseClick()
+    {
+        $this->click++;
+        $this->save(false, ['click']);
     }
 }

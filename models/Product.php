@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property int $status
  * @property int $category_id
  * @property int $type
+ * @property int $click
  * @property string $created_at
  * @property string $updated_at
  * @property string $synchronized_at
@@ -63,7 +64,7 @@ class Product extends ActiveRecord
     {
         return [
             [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'image', 'category_id'], 'required'],
-            [['status', 'type', 'category_id'], 'integer'],
+            [['status', 'type', 'category_id', 'click'], 'integer'],
             [['created_at', 'updated_at', 'synchronized_at'], 'safe'],
             [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'image'], 'string', 'max' => 255],
         ];
@@ -83,6 +84,7 @@ class Product extends ActiveRecord
             'image' => 'Image',
             'status' => 'Status',
             'type' => 'Type',
+            'click' => 'Click',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -156,5 +158,11 @@ class Product extends ActiveRecord
     public function getTypeName()
     {
         return self::getTypesNames()[$this->type];
+    }
+
+    public function increaseClick()
+    {
+        $this->click++;
+        $this->save(false, ['click']);
     }
 }

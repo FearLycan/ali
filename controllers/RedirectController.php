@@ -22,11 +22,13 @@ class RedirectController extends Controller
      */
     public function actionProduct($id)
     {
+        /* @var $model Product */
         $model = Product::find()
             ->where(['ali_product_id' => $id, 'status' => Product::STATUS_ACTIVE])
             ->one();
 
         if ($model !== null) {
+            $model->increaseClick();
             $this->go($model->url);
         }
 
@@ -46,11 +48,11 @@ class RedirectController extends Controller
             ->where(['slug' => $slug, 'status' => Member::STATUS_ACTIVE])
             ->one();
 
-        $ali_member_id = str_replace(" ", "+", $model->ali_member_id);
-
-        $url = 'https://feedback.aliexpress.com/display/detail.htm?ownerMemberId=' . $ali_member_id . '&memberType=buyer';
-
         if ($model !== null) {
+            $ali_member_id = str_replace(" ", "+", $model->ali_member_id);
+            $url = 'https://feedback.aliexpress.com/display/detail.htm?ownerMemberId=' . $ali_member_id . '&memberType=buyer';
+
+            $model->increaseClick();
             $this->go($url);
         }
 
