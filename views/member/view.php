@@ -64,7 +64,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                 have <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('photo', $dataProvider->getTotalCount()) ?>
             </h3>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
             <?= $this->render('../common/_image-view', [
                 'dataProvider' => $dataProvider,
                 'itemView' => '../image/_image',
