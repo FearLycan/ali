@@ -12,7 +12,6 @@ use yii\widgets\Pjax;
 
 <div class="row">
 
-    <div class="row">
         <?php Pjax::begin(['enablePushState' => false]); ?>
         <?php $form = ActiveForm::begin([
             'options' => ['data' => ['pjax' => true]],
@@ -38,6 +37,5 @@ use yii\widgets\Pjax;
 
         <?php ActiveForm::end() ?>
         <?php Pjax::end(); ?>
-    </div>
 
 </div>

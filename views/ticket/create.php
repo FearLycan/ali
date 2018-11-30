@@ -116,6 +116,10 @@ $this->title = 'Create new ticket' . ' - ' . Yii::$app->name;
 
         </div>
 
+        <div class="col-md-6 col-xs-12 col-sm-12">
+            <hr>
+        </div>
+
         <div class="col-md-6">
             <?= $this->render('_form', [
                 'model' => $model,
