@@ -331,3 +331,8 @@ ul.pagination {
 .report-link:hover {
     color: #c77270;
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}

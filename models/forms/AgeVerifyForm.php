@@ -20,7 +20,6 @@ class AgeVerifyForm extends ActiveRecord
     {
         return [
             [['day', 'month', 'year'], 'required'],
-            //[['day', 'month', 'year'], 'integer'],
             [
                 'day', 'integer',
                 'integerOnly' => true,
@@ -36,7 +35,7 @@ class AgeVerifyForm extends ActiveRecord
             [
                 'year', 'integer',
                 'integerOnly' => true,
-                'min' => 1900,
+                'min' => 1920,
                 'max' => date('Y'),
             ],
             ['year', 'checkDateValidator', 'skipOnEmpty' => false, 'skipOnError' => false],
@@ -45,10 +44,6 @@ class AgeVerifyForm extends ActiveRecord
 
     public function checkDateValidator($attribute, $params)
     {
-        $this->month = intval(trim($this->month));
-        $this->year = intval(trim($this->year));
-        $this->day = intval(trim($this->day));
-
         if (!checkdate($this->month, $this->day, $this->year)) {
             $this->addError($attribute, 'Data is invalid.');
         } else {
@@ -60,6 +55,5 @@ class AgeVerifyForm extends ActiveRecord
                 $this->addError($attribute, 'Sorry, but you are under ' . $this->age);
             }
         }
-
     }
 }

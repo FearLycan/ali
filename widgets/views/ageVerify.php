@@ -23,8 +23,9 @@ use yii\widgets\Pjax;
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-4 col-lg-offset-4">
-                            <img src="<?= Url::to(['favicon/ms-icon-310x310.png']) ?>" class="img-responsive" style="margin: 0 auto;">
+                        <div class="col-xs-6 col-sm-4 col-md-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-3">
+                            <img src="<?= Url::to(['favicon/ms-icon-310x310.png']) ?>" class="img-responsive"
+                                 style="margin: 0 auto;">
                         </div>
                     </div>
 
@@ -43,24 +44,47 @@ use yii\widgets\Pjax;
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-10 col-sm-offset-1">
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
                             <?= $form->errorSummary($model, ['header' => false]); ?>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2 col-lg-offset-3">
-                            <?= $form->field($model, 'day', ['errorOptions' => ['style' => 'display: none;', 'encode' => false]])->textInput(['placeholder' => 'day', 'style' => 'text-align: center;'])->label(false); ?>
-                        </div>
-                        <div class="col-md-2">
-                            <?= $form->field($model, 'month', ['errorOptions' => ['style' => 'display: none;', 'encode' => false]])->textInput(['placeholder' => 'month', 'style' => 'text-align: center;'])->label(false); ?>
-                        </div>
-                        <div class="col-md-2">
-                            <?= $form->field($model, 'year', ['errorOptions' => ['style' => 'display: none;', 'encode' => false]])
-                                ->textInput(['placeholder' => 'year', 'style' => 'text-align: center;'])->label(false); ?>
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <?= $form->field($model, 'day', ['errorOptions' => ['style' => 'display: none;', 'encode' => false]])
+                                        ->dropDownList(array_combine(range(1, 31), range(1, 31)), [
+                                            'style' => 'text-align-last:center;',
+                                            'prompt' => 'day', [
+                                                'disabled' => true,
+                                            ]
+                                        ])->label(false); ?>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <?= $form->field($model, 'month', ['errorOptions' => ['style' => 'display: none;', 'encode' => false]])
+                                        ->dropDownList(array_combine(range(1, 12), range(1, 12)), [
+                                            'style' => 'text-align-last:center;',
+                                            'prompt' => 'month', [
+                                                'disabled' => true,
+                                            ]
+                                        ])->label(false); ?>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <?= $form->field($model, 'year', ['errorOptions' => ['style' => 'display: none;', 'encode' => false]])
+                                        ->dropDownList(array_combine(range(1920, date('Y')), range(1920, date('Y'))), [
+                                            'style' => 'text-align-last:center;',
+                                            'prompt' => 'year', [
+                                                'disabled' => true,
+                                            ]
+                                        ])->label(false); ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> <!--, ['errorOptions' => ['style' => 'display: none;', 'encode' => false]] -->
+
+
+                </div>
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
