@@ -47,8 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return Html::a($data->name . ' <small style="color: #777;">('.$data->id.')</small>', ['view', 'id' => $data->id]);
                                 },
                             ],
-                            'ali_member_id',
+                            //'ali_member_id',
                             'country_code',
+                            'click',
                             [
                                 'attribute' => 'status',
                                 'format' => 'raw',

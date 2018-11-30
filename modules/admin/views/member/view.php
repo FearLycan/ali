@@ -36,9 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id',
                             'name',
                             'ali_member_id',
+                            'slug',
                             'country_code',
                             'status',
                             'type',
+                            'click',
                             [
                                 'attribute' => 'avatar',
                                 'format' => 'raw',

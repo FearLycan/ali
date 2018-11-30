@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Product;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -19,11 +20,28 @@ use yii\widgets\ActiveForm;
             ],
         ]); ?>
 
-        <div class="col-md-3 col-lg-offset-9">
+        <div class="col-md-4 col-lg-offset-6">
             <?= $form->field($model, 'name')->label(false)->textInput(['placeholder' => 'Name']) ?>
+        </div>
+
+        <div class="col-md-2">
+            <?= $form->field($model, 'status')
+                ->dropDownList(Product::getStatusNames(),[
+                    'prompt' => 'Status', [
+                        'disabled' => true,
+                    ]
+                ])->label(false); ?>
         </div>
 
         <?php ActiveForm::end(); ?>
 
     </div>
 </div>
+
+<?php $this->beginBlock('script') ?>
+<script>
+    $(document).on('change', '#productsearch-status', function () {
+        $(this).closest('form').submit();
+    })
+</script>
+<?php $this->endBlock(); ?>

@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'raw',
                                 'value' => function ($data) {
                                     /* @var Product $data */
-                                    return Html::a(Helper::cutThis($data->name), ['view', 'id' => $data->id]);
+                                    return Html::a(Helper::cutThis($data->name, 60), ['view', 'id' => $data->id]);
                                 },
                             ],
                             [

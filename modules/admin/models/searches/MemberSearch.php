@@ -18,7 +18,7 @@ class MemberSearch extends Member
     public function rules()
     {
         return [
-            [['id', 'status', 'type'], 'integer'],
+            [['id', 'status', 'type', 'click'], 'integer'],
             [['name', 'ali_member_id', 'country_code', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class MemberSearch extends Member
             'id' => $this->id,
             'status' => $this->status,
             'type' => $this->type,
+            'click' => $this->click,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
@@ -69,7 +70,7 @@ class MemberSearch extends Member
         $query->andFilterWhere([
             'or',
             ['like', 'name', $this->name],
-            ['like', 'ali_member_id', $this->name],
+            ['like', 'slug', $this->name],
         ])
             ->andFilterWhere(['like', 'country_code', $this->country_code]);
 

@@ -59,12 +59,13 @@ class ProductUrlSearch extends ProductUrl
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+           // 'id' => $this->id,
             'status' => $this->status,
             'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'url', $this->url]);
+        $query->andFilterWhere(['=', 'id', $this->id]);
 
         return $dataProvider;
     }

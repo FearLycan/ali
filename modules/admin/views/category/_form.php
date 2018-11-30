@@ -31,6 +31,10 @@ use yii\widgets\ActiveForm;
             ])->label('Parent category'); ?>
         </div>
 
+        <div class="col-md-3">
+            <?= $form->field($model, 'main_category')->textInput(['maxlength' => true]) ?>
+        </div>
+
 
         <div class="col-md-12">
             <div class="form-group">

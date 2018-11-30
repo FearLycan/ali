@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Name od Ali Member ID']) ?>
+            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Name od Slug']) ?>
         </div>
 
         <div class="col-md-2">
