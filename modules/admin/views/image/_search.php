@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use app\modules\admin\models\Image;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -9,34 +9,51 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="image-search">
+    <div class="row">
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); ?>
+        <?php $form = ActiveForm::begin([
+            'action' => ['index'],
+            'method' => 'get',
+            'options' => [
+                'data-pjax' => 1
+            ],
+        ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'id')->textInput(['placeholder' => 'ID'])->label(false) ?>
+        </div>
 
-    <?= $form->field($model, 'url') ?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'url')->textInput(['placeholder' => 'URL'])->label(false) ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'product_id')->textInput(['placeholder' => 'Product ID'])->label(false) ?>
+        </div>
 
-    <?= $form->field($model, 'product_id') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'member_id')->textInput(['placeholder' => 'Member ID'])->label(false) ?>
+        </div>
 
-    <?= $form->field($model, 'member_id') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'status')
+                ->dropDownList(Image::getStatusNames(),[
+                    'prompt' => 'Status', [
+                        'disabled' => true,
+                    ]
+                ])->label(false); ?>
+        </div>
 
-    <?= $form->field($model, 'status') ?>
+        <input type="submit" style="position: absolute; left: -9999px"/>
 
-    <?php // echo $form->field($model, 'created_at') ?>
+        <?php ActiveForm::end(); ?>
 
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
+
+<?php $this->beginBlock('script') ?>
+<script>
+    $(document).on('change', '#imagesearch-status', function () {
+        $(this).closest('form').submit();
+    })
+</script>
+<?php $this->endBlock(); ?>

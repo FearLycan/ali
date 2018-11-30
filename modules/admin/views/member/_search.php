@@ -21,21 +21,29 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Name od Slug']) ?>
+            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Name od Slug'])->label(false) ?>
         </div>
 
         <div class="col-md-2">
-            <?= $form->field($model, 'country_code') ?>
+            <?= $form->field($model, 'country_code')->textInput(['placeholder' => 'Country Code'])->label(false) ?>
         </div>
 
         <div class="col-md-2">
             <?= $form->field($model, 'status')
-                ->dropDownList(Member::getStatusNames()); ?>
+                ->dropDownList(Member::getStatusNames(),[
+                    'prompt' => 'Status', [
+                        'disabled' => true,
+                    ]
+                ])->label(false); ?>
         </div>
 
         <div class="col-md-2">
             <?= $form->field($model, 'type')
-                ->dropDownList(Member::getTypesNames()); ?>
+                ->dropDownList(Member::getTypesNames(),[
+                    'prompt' => 'Type', [
+                        'disabled' => true,
+                    ]
+                ])->label(false); ?>
         </div>
 
         <input type="submit" style="position: absolute; left: -9999px"/>

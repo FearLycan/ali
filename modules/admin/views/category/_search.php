@@ -9,30 +9,35 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="category-search">
+    <div class="row">
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); ?>
+        <?php $form = ActiveForm::begin([
+            'action' => ['index'],
+            'method' => 'get',
+            'options' => [
+                'data-pjax' => 1
+            ],
+        ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'id') ?>
+        </div>
 
-    <?= $form->field($model, 'name') ?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'name') ?>
+        </div>
 
-    <?= $form->field($model, 'parent_id') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'parent_id') ?>
+        </div>
 
-    <?= $form->field($model, 'created_at') ?>
+        <di4 class="col-md-4">
+            <?= $form->field($model, 'created_at') ?>
+        </di4>
 
-    <?= $form->field($model, 'updated_at') ?>
+        <input type="submit" style="position: absolute; left: -9999px"/>
 
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?php ActiveForm::end(); ?>
+
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

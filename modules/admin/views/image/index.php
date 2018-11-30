@@ -17,8 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="image-index">
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
 
     <div class="row">
         <div class="col-lg-12">
@@ -34,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <div class="panel-body">
+
+                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         //'filterModel' => $searchModel,

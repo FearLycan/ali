@@ -158,7 +158,7 @@ class Member extends ActiveRecord
         return self::getTypesNames()[$this->type];
     }
 
-    public function increasClick()
+    public function increaseClick()
     {
         $this->click++;
         $this->save(false, ['click']);
