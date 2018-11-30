@@ -20,19 +20,23 @@ use yii\widgets\ActiveForm;
         ]); ?>
 
         <div class="col-md-2">
-            <?= $form->field($model, 'id') ?>
+            <?= $form->field($model, 'id')->textInput(['placeholder' => 'ID'])->label(false) ?>
         </div>
 
         <div class="col-md-4">
-            <?= $form->field($model, 'name') ?>
+            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Name'])->label(false) ?>
         </div>
 
         <div class="col-md-2">
-            <?= $form->field($model, 'parent_id') ?>
+            <?= $form->field($model, 'parent_id')->textInput(['placeholder' => 'Parent ID'])->label(false) ?>
         </div>
 
-        <di4 class="col-md-4">
-            <?= $form->field($model, 'created_at') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'main_category')->textInput(['placeholder' => 'Main Category'])->label(false) ?>
+        </div>
+
+        <di4 class="col-md-2">
+            <?= $form->field($model, 'created_at')->textInput(['placeholder' => 'Created At'])->label(false) ?>
         </di4>
 
         <input type="submit" style="position: absolute; left: -9999px"/>

@@ -61,12 +61,13 @@ class CategorySearch extends Category
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
         $query->andFilterWhere(['like', 'main_category', $this->main_category]);
+        $query->andFilterWhere(['like', 'created_at', $this->created_at]);
+        $query->andFilterWhere(['=', 'id', $this->id]);
 
         return $dataProvider;
     }

@@ -62,9 +62,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'raw',
                                 'value' => function ($data) {
                                     /* @var Product $data */
-                                    return '<a href=' . $data->url . '>Ali URL</a>';
+                                    return '<a href=' . $data->url . '>Ali</a>';
                                 },
                             ],
+                            'click',
                             'created_at',
                             'synchronized_at',
                             [
