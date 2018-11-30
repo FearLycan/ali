@@ -47,7 +47,7 @@ class AgeVerifyForm extends ActiveRecord
     {
         $this->month = intval(trim($this->month));
         $this->year = intval(trim($this->year));
-        $this->day = intval(trim($this->dirtyAttributes));
+        $this->day = intval(trim($this->day));
 
         if (!checkdate($this->month, $this->day, $this->year)) {
             $this->addError($attribute, 'Data is invalid.');
