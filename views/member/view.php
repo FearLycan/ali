@@ -40,7 +40,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                 <ul class="list-group font-alt">
                     <li class="list-group-item">
                         <a href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>">
-                            Go to <strong><?= Html::encode($model->name) ?></strong> Ali profile
+                            Go to <strong><?= Html::encode($model->name) ?></strong> Aliexpress profile
                         </a>
                     </li>
                     <li class="list-group-item">
@@ -61,7 +61,7 @@ Yii::$app->params['og_type']['content'] = 'article';
     <div class="row">
         <div class="col-md-12 col-xs-12 col-sm-12">
             <h3 style="margin-top: 0;"><strong><?= Html::encode($model->name) ?></strong>
-                have <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('photo', $dataProvider->getTotalCount()) ?>
+                has <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
             </h3>
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12">

@@ -85,24 +85,24 @@ Yii::$app->params['og_type']['content'] = 'article';
                 <ul class="list-group font-alt">
                     <li class="list-group-item">
                         <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>">
-                            Go to <strong><?= Html::encode($model->member->name) ?></strong> profile
+                            See more pics of <strong><?= Html::encode($model->member->name) ?></strong> member
                         </a>
                     </li>
                     <?php if ($model->member_id != \app\models\Member::MEMBER_ANONYMOUS): ?>
                     <li class="list-group-item">
                         <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
-                            Go to <strong><?= Html::encode($model->member->name) ?></strong> Ali profile
+                            Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
                         </a>
                     </li>
                     <?php endif; ?>
                     <li class="list-group-item">
                         <a href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>">
-                            Go to product page on Ali
+                            Go to product page on Aliexpress
                         </a>
                     </li>
                     <li class="list-group-item">
                         <a href="<?= Url::to(['product/view', 'id' => $model->product->ali_product_id]) ?>">
-                            See more photos of this product
+                            See more pics of this product
                         </a>
                     </li>
                     <li class="list-group-item">

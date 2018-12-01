@@ -24,12 +24,12 @@ $this->title = 'Product ' . $model->name;
             </h2>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="widget">
                         <ul class="list-group font-alt">
                             <li class="list-group-item">
                                 <a href="<?= Url::to(['redirect/product', 'id' => $model->ali_product_id]) ?>">
-                                    Go to product page on Ali
+                                    Go to product page on Aliexpress
                                 </a>
                             </li>
                             <li class="list-group-item">
@@ -53,7 +53,7 @@ $this->title = 'Product ' . $model->name;
     <div class="row">
         <div class="col-md-12">
             <h3 style="margin-top: 0;"><strong><?= Html::encode($model->name) ?></strong>
-                have <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('photo', $dataProvider->getTotalCount()) ?>
+                has <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
             </h3>
         </div>
         <div class="col-md-12">

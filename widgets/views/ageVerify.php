@@ -19,7 +19,7 @@ use yii\widgets\Pjax;
                 ]) ?>
 
                 <div class="modal-header">
-                    <h4 class="modal-title font-alt" id="myModalLabel12">Age Verification</h4>
+                    <h4 class="modal-title font-alt text-center" id="myModalLabel12">Age Verification</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
