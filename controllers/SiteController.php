@@ -14,6 +14,15 @@ use yii\filters\VerbFilter;
 
 class SiteController extends Controller
 {
+    // added for test purposes, random csrf error
+    public function beforeAction($action)
+    {
+        if (in_array($action->id, ['age-verify'])) {
+            $this->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    }
+
     /**
      * {@inheritdoc}
      */
