@@ -35,7 +35,10 @@ class m181202_142914_create_system_config_table extends Migration
                 'name' => 'google-analytics',
                 'value' => '<!-- config google-analytics -->',
                 'status' => SystemConfig::STATUS_ACTIVE
-            ],
+            ]
+        );
+
+        $this->insert('{{%system_config}}',
             [
                 'name' => 'google-adsense',
                 'value' => '<!-- config google-adsense -->',
