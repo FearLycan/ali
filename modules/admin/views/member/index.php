@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     /* @var Member $data */
                                     return $data->getStatusName();
                                 },
-                                'contentOptions' => ['style' => 'width: 120px;'],
+                                'contentOptions' => ['style' => 'width: 90px;'],
                             ],
                             [
                                 'attribute' => 'type',
@@ -68,15 +68,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                     /* @var Member $data */
                                     return $data->getTypeName();
                                 },
-                                'contentOptions' => ['style' => 'width: 120px;'],
+                                'contentOptions' => ['style' => 'width: 90px;'],
                             ],
                             [
                                 'attribute' => 'created_at',
-                                'contentOptions' => ['style' => 'width: 150px;'],
+                                'contentOptions' => ['style' => 'width: 155px;'],
                             ],
                             [
                                 'attribute' => 'updated_at',
-                                'contentOptions' => ['style' => 'width: 150px;'],
+                                'contentOptions' => ['style' => 'width: 155px;'],
                             ],
                             [
                                 'class' => 'yii\grid\ActionColumn',

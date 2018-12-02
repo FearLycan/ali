@@ -66,8 +66,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                             ],
                             'click',
-                            'created_at',
-                            'synchronized_at',
+                            [
+                                'attribute' => 'created_at',
+                                'contentOptions' => ['style' => 'width: 155px;'],
+                            ],
+                            [
+                                'attribute' => 'synchronized_at',
+                                'contentOptions' => ['style' => 'width: 155px;'],
+                            ],
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'contentOptions' => ['style' => 'width: 110px'],

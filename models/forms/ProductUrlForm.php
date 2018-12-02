@@ -36,7 +36,7 @@ class ProductUrlForm extends ProductUrl
 
     public function uniqueURL($attribute, $params)
     {
-        $this->url = Helper::getBetween($this->url, '', '?spm');
+        $this->url = Helper::getBetween($this->url, '', '?');
 
         $n = explode('/', $this->url);
 

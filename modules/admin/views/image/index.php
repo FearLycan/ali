@@ -71,7 +71,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'contentOptions' => ['style' => 'width: 120px;'],
                             ],
                             //'created_at',
-                            'updated_at',
+                            [
+                                'attribute' => 'updated_at',
+                                'contentOptions' => ['style' => 'width: 155px;'],
+                            ],
 
                             [
                                 'class' => 'yii\grid\ActionColumn',

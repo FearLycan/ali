@@ -51,8 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                             'parent_id',
                             'main_category',
-                            'created_at',
-
+                            [
+                                'attribute' => 'created_at',
+                                'contentOptions' => ['style' => 'width: 155px;'],
+                            ],
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'contentOptions' => ['style' => 'width: 110px'],
