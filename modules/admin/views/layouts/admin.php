@@ -153,6 +153,9 @@ $image = [
                 <li class="<?= Yii::$app->controller->id == 'product-url' ? 'active' : 'no' ?>">
                     <a href="<?= Url::to(['product-url/index']) ?>"><i class="fa fa-link"></i> URLs</a>
                 </li>
+                <li class="<?= Yii::$app->controller->id == 'system-config' ? 'active' : 'no' ?>">
+                    <a href="<?= Url::to(['system-config/index']) ?>"><i class="fa fa-cogs"></i> System Config</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -192,7 +195,7 @@ $image = [
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->name ?> <?= date('Y') ?></p>
+        <p class="text-center">&copy; <?= Yii::$app->name ?> <?= date('Y') ?></p>
     </div>
 </footer>
 

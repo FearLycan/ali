@@ -4,17 +4,16 @@
 
 /* @var $content string */
 
+use app\components\Helper;
 use app\models\Category;
 use app\widgets\AddNewURL;
 use app\widgets\AgeVerify;
-use app\widgets\Alert;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use yii\widgets\Pjax;
 
 AppAsset::register($this);
 ?>
@@ -75,27 +74,16 @@ AppAsset::register($this);
 
     <?php $this->head() ?>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-84680217-4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-84680217-4');
-    </script>
+    <?= Helper::systemConfig('google-analytics') ?>
+    <?= Helper::systemConfig('google-adsense') ?>
 
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <?php $this->beginBody() ?>
 
-<!--<div class="page-loader">-->
-<!--    <div class="loader">Loading...</div>-->
-<!--</div>-->
+<div class="page-loader">
+    <div class="loader">Loading...</div>
+</div>
 
 <div class="wrap">
     <?php

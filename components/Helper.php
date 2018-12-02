@@ -3,6 +3,7 @@
 namespace app\components;
 
 
+use app\models\SystemConfig;
 use yii\helpers\Inflector;
 
 class Helper
@@ -54,6 +55,20 @@ class Helper
             return Inflector::singularize($word);
         } else {
             return Inflector::pluralize($word);
+        }
+    }
+
+    public static function systemConfig($name)
+    {
+        /* @var $system SystemConfig */
+        $system = SystemConfig::find()
+            ->where(['name' => $name, 'status' => SystemConfig::STATUS_ACTIVE])
+            ->one();
+
+        if ($system == null) {
+            return '<!-- Config: ' . $name . ' was not found  -->';
+        } else {
+            return $system->value;
         }
     }
 }
