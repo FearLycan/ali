@@ -203,11 +203,7 @@ class Category extends ActiveRecord
      */
     public function getChildrens()
     {
-        if ($this->parent_id != self::BASE_CATEGORY) {
-            return self::find()->where(['parent_id' => $this->id])->all();
-        }
-
-        return false;
+        return self::find()->where(['parent_id' => $this->id])->all();
     }
 
     public static function getCategoryItems($type)
@@ -223,7 +219,7 @@ class Category extends ActiveRecord
         foreach ($categories as $key => $category) {
             $categoryItem[$key] = [
                 'label' => $category->name,
-                'url' => \yii\helpers\Url::to(['image/index', 'category' => $category->slug])
+                'url' => Url::to(['image/index', 'category' => $category->slug])
             ];
 
             if ($childrens = $category->getChildrens()) {
@@ -231,7 +227,7 @@ class Category extends ActiveRecord
                 foreach ($childrens as $c => $children) {
                     $childrenItem[$c] = [
                         'label' => $children->name,
-                        'url' => \yii\helpers\Url::to(['image/index', 'category' => $children->slug])
+                        'url' => Url::to(['image/index', 'category' => $children->slug])
                     ];
 
                     if ($cc = $children->getChildrens()) {
@@ -239,7 +235,7 @@ class Category extends ActiveRecord
                         foreach ($cc as $n => $cu) {
                             $a[] = [
                                 'label' => $cu->name,
-                                'url' => \yii\helpers\Url::to(['image/index', 'category' => $cu->slug])
+                                'url' => Url::to(['image/index', 'category' => $cu->slug])
                             ];
                         }
 

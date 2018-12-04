@@ -17,6 +17,15 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'urlManager' => [
+            'baseUrl' => '/ali/web',
+            'scriptUrl' => '',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<category>' => 'image/index',
+            ],
+        ],
         'log' => [
             'targets' => [
                 [

@@ -71,4 +71,23 @@ class Helper
             return $system->value;
         }
     }
+
+    public static function setSystemConfig($name, $value)
+    {
+        /* @var $system SystemConfig */
+        $system = SystemConfig::find()
+            ->where(['name' => $name])
+            ->one();
+
+        if (empty($system)) {
+            $system = new SystemConfig();
+            $system->name = $name;
+            $system->author_id = 1;
+        }
+
+        $system->value = $value;
+        $system->save();
+
+        return $system;
+    }
 }

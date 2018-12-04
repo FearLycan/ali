@@ -174,10 +174,10 @@
 
         var $c = $("#category");
 
-        var category = $c.text();
+        var category = $c.text().trim();
         var type = $c.attr("data-type");
-
-        if (category.trim()) {
+        console.log(category);
+        if (category) {
 
             var $item = $("#w2 li a").filter(function () {
                 if ($(this).text() === category) {

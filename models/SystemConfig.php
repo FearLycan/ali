@@ -34,7 +34,7 @@ class SystemConfig extends \yii\db\ActiveRecord
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
                 'value' => date("Y-m-d H:i:s"),
             ],
@@ -58,7 +58,7 @@ class SystemConfig extends \yii\db\ActiveRecord
             [['name', 'value', 'author_id'], 'required'],
             [['author_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'value'], 'string', 'max' => 255],
+            [['name', 'value'], 'string'],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }

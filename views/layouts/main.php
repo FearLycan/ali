@@ -101,14 +101,14 @@ AppAsset::register($this);
         'label' => Category::FIRST_ITEM_NAME,
         'url' => ['image/index', 'category' => Category::FIRST_ITEM_SLUG],
         'options' => ['id' => 'category_nav'],
-        'items' => Category::getCategoryItems(Category::TYPE_WOMEN_CLOTHING)
+        'items' => json_decode(Helper::systemConfig('menu-clothing'), true)
     ];
 
     $items[] = [
         'label' => Category::SPORT_ITEM_NAME,
         'url' => ['image/index', 'category' => Category::SPORT_ITEM_SLUG],
         'options' => ['id' => 'sport_nav'],
-        'items' => Category::getCategoryItems(Category::TYPE_SPORT)
+        'items' => json_decode(Helper::systemConfig('menu-sport'), true)
     ];
 
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
