@@ -17,7 +17,7 @@ if (!empty($category)) {
     <?php if (!empty($category)): ?>
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
-                <h2 class="module-title font-alt" id="category"><?= Html::encode($category->name) ?></h2>
+                <h2 class="module-title font-alt" id="category" data-type="<?= $category->type ?>"><?= Html::encode($category->name) ?></h2>
                 <div class="module-subtitle font-serif">
                     <?= $dataProvider->getTotalCount() ?> <?= Helper::varietyOfWord('photo', $dataProvider->getTotalCount()) ?>
                 </div>

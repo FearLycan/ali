@@ -168,17 +168,18 @@
             }
         });
 
-
         $('nav li.dropdown-submenu ul').addClass('dropdown-menu');
 
         $('ul#w3 li a').addClass('more-padding');
 
-        var category = $("#category").text();
+        var $c = $("#category");
+
+        var category = $c.text();
+        var type = $c.attr("data-type");
 
         if (category.trim()) {
-           // var $item = $("#w2 li a:contains('" + category + "')");
 
-            var $item =  $("#w2 li a").filter(function () {
+            var $item = $("#w2 li a").filter(function () {
                 if ($(this).text() === category) {
                     return $(this);
                 }
@@ -188,7 +189,15 @@
             $item.parent('li').addClass('active');
             var text = $item.text();
             var href = $item.attr('href');
-            $("li#category_nav a").first().attr("href", href).text(text).parent('li').addClass('active');
+
+            if (type == 0) {
+                $("li#category_nav a").first().attr("href", href).text(text).parent('li').addClass('active');
+            }
+
+            if (type == 1) {
+                $("li#sport_nav a").first().attr("href", href).text(text).parent('li').addClass('active');
+            }
+
         }
 
         var $verify = $('#ageVerify');

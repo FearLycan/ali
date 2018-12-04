@@ -23,15 +23,11 @@ Yii::$app->params['og_type']['content'] = 'article';
 
                 <?php foreach ($model->product->category->getFamilyPath() as $category): ?>
 
-                    <?php if ($category['id'] == 1): ?>
-                        <li>
-                            <a href="<?= Yii::$app->homeUrl ?>"><?= $category['name'] ?></a>
-                        </li>
-                    <?php else: ?>
+
                         <li>
                             <a href="<?= Url::to(['image/index', 'category' => $category['slug']]) ?>"><?= $category['name'] ?></a>
                         </li>
-                    <?php endif; ?>
+
 
                 <?php endforeach; ?>
 

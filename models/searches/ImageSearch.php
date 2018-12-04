@@ -52,7 +52,13 @@ class ImageSearch extends Image
         }
 
         /* @var $category Category */
-        if (!empty($category)) {
+        if (!empty($category) && $category->slug == Category::FIRST_ITEM_SLUG) {
+            $query->joinWith(['product.category pc']);
+            $query->andFilterWhere(['in', 'pc.type', Category::TYPE_WOMEN_CLOTHING]);
+        } elseif (!empty($category) && $category->slug == Category::SPORT_ITEM_SLUG) {
+            $query->joinWith(['product.category pc']);
+            $query->andFilterWhere(['in', 'pc.type', Category::TYPE_SPORT]);
+        } elseif (!empty($category)) {
             $query->joinWith(['product product']);
             $query->andFilterWhere(['in', 'product.category_id', json_decode($category->main_category)]);
         }

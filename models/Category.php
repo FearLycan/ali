@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%category}}".
@@ -14,6 +15,7 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string $slug
  * @property int $parent_id
+ * @property int $type
  * @property int $main_category
  * @property string $created_at
  * @property string $updated_at
@@ -21,10 +23,20 @@ use yii\db\ActiveRecord;
 class Category extends ActiveRecord
 {
     const BASE_CATEGORY = 0;
+    const BASE_CATEGORY_SPORT = -1;
 
-    const FIRAT_ITEM_NAME = 'Women\'s Clothing & Accessories';
-    const FIRAT_ITEM_SLUG = 'womens-clothing-and-accessories';
-    const FIRAT_ITEM_ID = 1;
+    const FIRST_ITEM_NAME = 'Women\'s Clothing & Accessories';
+    const FIRST_ITEM_SLUG = 'womens-clothing-and-accessories';
+    const FIRST_ITEM_ID = 1;
+
+    const TYPE_WOMEN_CLOTHING = 0;
+    const TYPE_SPORT = 1;
+
+    const SPORT_ITEM_NAME = 'Sports & Entertainment';
+    const SPORT_ITEM_SLUG = 'sports-and-entertainment';
+    const SPORT_ITEM_ID = 41;
+
+    // Sports & Entertainment
 
     /**
      * @param bool $insert
@@ -63,8 +75,8 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'parent_id'], 'required'],
-            [['parent_id', 'main_category'], 'integer'],
+            [['name', 'parent_id', 'type'], 'required'],
+            [['parent_id', 'main_category', 'type'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -90,7 +102,6 @@ class Category extends ActiveRecord
      */
     public static function create($categories)
     {
-
         foreach ($categories as $key => $category) {
 
             if ($key == 0 && $category->textContent != 'Home') {
@@ -101,23 +112,31 @@ class Category extends ActiveRecord
                 return false;
             }
 
-            if ($key == 2 && $category->textContent != 'Women\'s Clothing & Accessories') {
-                return false;
+            if ($key == 2) {
+                if ($category->textContent == 'Women\'s Clothing & Accessories') {
+                    $type = self::TYPE_WOMEN_CLOTHING;
+                } elseif ($category->textContent == 'Sports & Entertainment') {
+                    $type = self::TYPE_SPORT;
+                } else {
+                    return false;
+                }
             }
 
             if ($key > 2) {
-
                 $cat = Category::find()->where(['name' => $category->textContent])->one();
 
                 if (empty($cat)) {
                     $cat = new Category();
                     $cat->name = $category->textContent;
 
-                    if ($key == 3) {
-                        $parent_id = 1;
+                    if ($key == 3 && $type == self::TYPE_WOMEN_CLOTHING) {
+                        $parent_id = self::FIRST_ITEM_ID;
+                    } elseif ($key == 3 && $type == self::TYPE_SPORT) {
+                        $parent_id = self::BASE_CATEGORY_SPORT;
                     }
 
                     $cat->parent_id = $parent_id;
+                    $cat->type = $type;
                     $cat->save();
 
                 }
@@ -153,7 +172,7 @@ class Category extends ActiveRecord
                     'slug' => $category->slug,
                 ];
 
-                if ($category->parent_id == static::BASE_CATEGORY) {
+                if ($category->parent_id == self::BASE_CATEGORY || $category->parent_id == self::BASE_CATEGORY_SPORT) {
                     $n = false;
                 } else {
                     $parent_id = $category->parent_id;
@@ -191,10 +210,11 @@ class Category extends ActiveRecord
         return false;
     }
 
-    public static function getCategoryItems()
+    public static function getCategoryItems($type)
     {
         $categories = Category::find()
-            ->where(['parent_id' => 1])
+            ->where(['parent_id' => self::getFirstParentID($type)])
+            ->andWhere(['type' => $type])
             ->orderBy(['name' => SORT_ASC])
             ->all();
 
@@ -235,13 +255,30 @@ class Category extends ActiveRecord
             }
         }
 
-        $first = [
-            'label' => self::FIRAT_ITEM_NAME,
-            'url' => \yii\helpers\Url::to(['/'])
-        ];
+        if ($type == self::TYPE_WOMEN_CLOTHING) {
+            $first = [
+                'label' => self::FIRST_ITEM_NAME,
+                'url' => Url::to(['image/index', 'category' => self::FIRST_ITEM_SLUG])
+            ];
+        } elseif ($type == self::TYPE_SPORT) {
+            $first = [
+                'label' => self::SPORT_ITEM_NAME,
+                'url' => Url::to(['image/index', 'category' => self::SPORT_ITEM_SLUG])
+            ];
+        }
 
         array_unshift($categoryItem, $first);
 
         return $categoryItem;
+    }
+
+    public static function getFirstParentID($type)
+    {
+        if ($type == self::TYPE_WOMEN_CLOTHING) {
+            return self::FIRST_ITEM_ID;
+
+        } elseif ($type == self::TYPE_SPORT) {
+            return self::SPORT_ITEM_ID;
+        }
     }
 }
