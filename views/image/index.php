@@ -5,6 +5,7 @@
 use app\components\Helper;
 use app\models\Category;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 if (!empty($category)) {
     $this->title = $category->name . ' - ' . Yii::$app->name;
@@ -32,7 +33,7 @@ if (!empty($category)) {
                 <div class="col-sm-12">
                     <ul class="filter font-alt" id="filters">
                         <?php foreach ($children as $child): ?>
-                            <li><a class="" href="#">
+                            <li><a class="" href="<?= Url::to(['image/index', 'category' => $child->slug]) ?>">
                                     <?= Html::encode($child->name) ?>
                                 </a>
                             </li>
