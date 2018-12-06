@@ -28,7 +28,7 @@ if (!empty($category)) {
             </div>
         </div>
 
-        <?php if (($children = $category->getChildrens()) && ($category->id != Category::FIRST_ITEM_ID && $category->id != Category::SPORT_ITEM_ID )): ?>
+        <?php if (($children = $category->getChildrens()) && ($category->id != Category::FIRST_ITEM_ID && $category->id != Category::SPORT_ITEM_ID)): ?>
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="filter font-alt" id="filters">
@@ -45,9 +45,29 @@ if (!empty($category)) {
 
     <?php endif; ?>
 
+    <?php if ($long = Helper::systemConfig('long-ad-top')): ?>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-sm-12">
+                <div class="long long-top">
+                    <?= $long ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <?= $this->render('../common/_image-view', [
         'dataProvider' => $dataProvider,
         'itemView' => '../image/_image',
     ]) ?>
+
+    <?php if ($long = Helper::systemConfig('long-ad-bottom')): ?>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-sm-12">
+                <div class="long long-bottom">
+                    <?= $long ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 
 </div>

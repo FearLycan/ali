@@ -35,14 +35,20 @@ class ImageController extends Controller
 
     public function actionView($slug)
     {
+        $ajaxView = false;
+
         if (Yii::$app->request->isAjax) {
+            $ajaxView = true;
+
             return $this->renderAjax('view', [
                 'model' => $this->findSlugModel($slug),
+                'ajaxView' => $ajaxView,
             ]);
         }
 
         return $this->render('view', [
             'model' => $this->findSlugModel($slug),
+            'ajaxView' => $ajaxView,
         ]);
     }
 

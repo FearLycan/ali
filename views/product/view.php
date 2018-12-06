@@ -1,6 +1,7 @@
 <?php
 
 
+use app\components\Helper;
 use app\models\Product;
 use app\models\Ticket;
 use yii\helpers\Html;
@@ -63,4 +64,15 @@ $this->title = 'Product ' . $model->name;
             ]) ?>
         </div>
     </div>
+
+    <?php if ($long = Helper::systemConfig('long-ad-bottom')): ?>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-sm-12">
+                <div class="long long-bottom">
+                    <?= $long ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
 </div>

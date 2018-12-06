@@ -303,6 +303,10 @@ ul.pagination {
     margin-left: -23px !important;
 }
 
+.ad-margin-bottom {
+    margin-bottom: 10px;
+}
+
 @media (max-width: 429px) {
     .w1-collapse-margin {
         margin-right: auto !important;
@@ -310,6 +314,18 @@ ul.pagination {
 
     .navbar-brand-margin {
         margin-left: auto !important;
+    }
+
+    .ad-margin-bottom {
+        margin-bottom: 5px;
+    }
+
+    div.long div.cont {
+        width: 50% !important;
+    }
+
+    div.long-top div.cont:nth-child(3), div.long-top div.cont:nth-child(4) {
+        display: none !important;
     }
 }
 
@@ -332,7 +348,7 @@ ul.pagination {
     color: #c77270;
 }
 
-.col-centered{
+.col-centered {
     float: none;
     margin: 0 auto;
 }
