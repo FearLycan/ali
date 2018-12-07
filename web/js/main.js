@@ -176,7 +176,7 @@
 
         var category = $c.text().trim();
         var type = $c.attr("data-type");
-        console.log(category);
+
         if (category) {
 
             var $item = $("#w2 li a").filter(function () {
