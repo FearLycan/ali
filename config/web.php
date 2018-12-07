@@ -13,6 +13,9 @@ $config = [
     ],
     'components' => [
         'db' => $db,
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
     ],
     'params' => $params,
 ];

@@ -15,6 +15,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+$home = Yii::$app->controller->id == 'image' && Yii::$app->controller->action->id == 'index' && count(Yii::$app->request->get()) == 0;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -91,7 +93,7 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-custom navbar-fixed-top navbar-transparent',
+            'class' => $home ? 'navbar navbar-custom navbar-fixed-top navbar-transparent' : 'navbar navbar-custom navbar-fixed-top',
         ],
     ]);
 
@@ -138,17 +140,19 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <section class="home-section bg-dark bg-gradient" id="home"
-             data-background="<?= Url::to('@web/images/home/home-' . rand(1, 10) . '.jpeg') ?>">
-        <div class="titan-caption">
-            <div class="caption-content">
-                <div class="font-alt mb-10 titan-title-size-1">Welcome to</div>
-                <div class="font-alt mb-30 titan-title-size-4"><?= Yii::$app->name ?></div>
-                <div class="font-alt mb-10 titan-title-size-1">The biggest customer pics collection from Aliexpress
-                    feedback.
+    <?php if ($home): ?>
+        <section class="home-section bg-dark bg-gradient" id="home"
+                 data-background="<?= Url::to('@web/images/home/home-' . rand(1, 10) . '.jpeg') ?>">
+            <div class="titan-caption">
+                <div class="caption-content">
+                    <div class="font-alt mb-10 titan-title-size-1">Welcome to</div>
+                    <div class="font-alt mb-30 titan-title-size-4"><?= Yii::$app->name ?></div>
+                    <div class="font-alt mb-10 titan-title-size-1">The biggest customer pics collection from Aliexpress
+                        feedback.
+                    </div>
                 </div>
-            </div>
-    </section>
+        </section>
+    <?php endif; ?>
 
     <div class="container">
         <?= $content ?>
