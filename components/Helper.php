@@ -66,7 +66,7 @@ class Helper
             ->one();
 
         if ($system == null) {
-            return '<!-- Config: ' . $name . ' was not found  -->';
+            return false;
         } else {
             return $system->value;
         }
