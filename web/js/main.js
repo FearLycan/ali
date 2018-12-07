@@ -178,6 +178,9 @@
         var type = $c.attr("data-type");
 
         if (category) {
+            navbar.removeClass('navbar-transparent');
+            $("section.home-section").remove();
+            homeSection = [];
 
             var $item = $("#w2 li a").filter(function () {
                 if ($(this).text() === category) {

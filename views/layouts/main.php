@@ -91,7 +91,7 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-custom navbar-fixed-top',
+            'class' => 'navbar navbar-custom navbar-fixed-top navbar-transparent',
         ],
     ]);
 
@@ -138,10 +138,19 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
+    <section class="home-section bg-dark bg-gradient" id="home"
+             data-background="<?= Url::to('@web/images/home/home-' . rand(1, 10) . '.jpeg') ?>">
+        <div class="titan-caption">
+            <div class="caption-content">
+                <div class="font-alt mb-10 titan-title-size-1">Welcome to</div>
+                <div class="font-alt mb-30 titan-title-size-4"><?= Yii::$app->name ?></div>
+                <div class="font-alt mb-10 titan-title-size-1">The biggest customer pics collection from Aliexpress
+                    feedback.
+                </div>
+            </div>
+    </section>
+
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <?= $content ?>
     </div>
 </div>
