@@ -36,6 +36,8 @@ class Category extends ActiveRecord
     const SPORT_ITEM_SLUG = 'sports-and-entertainment';
     const SPORT_ITEM_ID = 41;
 
+    const NONE_CATEGORY_ID = 100;
+
     // Sports & Entertainment
 
     /**
@@ -102,6 +104,10 @@ class Category extends ActiveRecord
      */
     public static function create($categories)
     {
+        if (count($categories) == 1) {
+            return self::NONE_CATEGORY_ID;
+        }
+
         foreach ($categories as $key => $category) {
 
             if ($key == 0 && $category->textContent != 'Home') {
