@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\Controller;
+use app\models\Category;
 use app\models\forms\ContactForm;
 use app\models\forms\ProductUrlForm;
 use app\models\ProductUrl;
@@ -116,6 +117,19 @@ class SiteController extends Controller
         return $this->render('contact', [
             'model' => $model,
             'success' => $success,
+        ]);
+    }
+
+    public function actionCategories()
+    {
+        $categories = Category::find()
+            ->select(['id', 'name', 'slug'])
+            ->orderBy(['name' => SORT_ASC])
+            ->asArray()
+            ->all();
+
+        return $this->render('categories', [
+            'categories' => $categories
         ]);
     }
 }

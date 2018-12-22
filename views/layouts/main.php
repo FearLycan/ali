@@ -113,6 +113,14 @@ AppAsset::register($this);
         'items' => json_decode(Helper::systemConfig('menu-sport'), true)
     ];
 
+    $items[] = [
+        'label' => 'More',
+        'items' => [
+            ['label' => 'All Categories', 'url' => ['/categories']],
+            ['label' => 'Contact', 'url' => ['/contact']],
+        ],
+    ];
+
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
         $items[] = ['label' => 'Admin', 'url' => ['/admin']];
     }
