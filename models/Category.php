@@ -25,7 +25,7 @@ class Category extends ActiveRecord
     const BASE_CATEGORY = 0;
     const BASE_CATEGORY_SPORT = -1;
 
-    const FIRST_ITEM_NAME = 'Women\'s Clothing & Accessories';
+    const FIRST_ITEM_NAME = 'Women\'s Clothing';
     const FIRST_ITEM_SLUG = 'womens-clothing-and-accessories';
     const FIRST_ITEM_ID = 1;
 
@@ -119,7 +119,7 @@ class Category extends ActiveRecord
             }
 
             if ($key == 2) {
-                if ($category->textContent == 'Women\'s Clothing & Accessories') {
+                if ($category->textContent == self::FIRST_ITEM_NAME) {
                     $type = self::TYPE_WOMEN_CLOTHING;
                 } elseif ($category->textContent == 'Sports & Entertainment') {
                     $type = self::TYPE_SPORT;
