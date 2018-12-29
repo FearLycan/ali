@@ -14,7 +14,7 @@ use app\models\Image;
 class ImageSearch extends Image
 {
     const PER_PAGE_PARAM = 'per-page';
-    const DEFAULT_ITEMS_PER_PAGE = 20;
+    const DEFAULT_ITEMS_PER_PAGE = 15;
     const PAGE_SIZE_LIMIT = 100;
 
     /**
