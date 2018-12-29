@@ -21,6 +21,8 @@ use yii\db\ActiveRecord;
  * @property int $click
  * @property string $created_at
  * @property string $updated_at
+ *
+ * @property Image $images
  */
 class Member extends ActiveRecord
 {
@@ -70,7 +72,7 @@ class Member extends ActiveRecord
     {
         return [
             [['ali_member_id', 'country_code', 'name'], 'required'],
-            [['status', 'type','click'], 'integer'],
+            [['status', 'type', 'click'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['ali_member_id', 'name', 'avatar'], 'string', 'max' => 255],
             [['country_code'], 'string', 'max' => 10],
@@ -163,4 +165,14 @@ class Member extends ActiveRecord
         $this->click++;
         $this->save(false, ['click']);
     }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['member_id' => 'id']);
+    }
+
 }
