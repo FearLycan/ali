@@ -31,14 +31,18 @@ class Category extends ActiveRecord
 
     const TYPE_WOMEN_CLOTHING = 0;
     const TYPE_SPORT = 1;
+    const TYPE_UNDERWEAR = 2;
 
     const SPORT_ITEM_NAME = 'Sports & Entertainment';
     const SPORT_ITEM_SLUG = 'sports-and-entertainment';
     const SPORT_ITEM_ID = 41;
 
-    const NONE_CATEGORY_ID = 100;
+    const UNDERWEAR_ITEM_NAME = 'Underwear & Sleepwears';
+    const UNDERWEAR_ITEM_SLUG = 'underwear-and-sleepwears';
+    const UNDERWEAR_ITEM_ID = 150;
 
-    // Sports & Entertainment
+
+    const NONE_CATEGORY_ID = 100;
 
     /**
      * @param bool $insert
@@ -123,6 +127,8 @@ class Category extends ActiveRecord
                     $type = self::TYPE_WOMEN_CLOTHING;
                 } elseif ($category->textContent == 'Sports & Entertainment') {
                     $type = self::TYPE_SPORT;
+                } elseif ($category->textContent == self::UNDERWEAR_ITEM_NAME) {
+                    $type = self::TYPE_UNDERWEAR;
                 } else {
                     return false;
                 }
@@ -139,6 +145,8 @@ class Category extends ActiveRecord
                         $parent_id = self::FIRST_ITEM_ID;
                     } elseif ($key == 3 && $type == self::TYPE_SPORT) {
                         $parent_id = self::BASE_CATEGORY_SPORT;
+                    }elseif ($key == 3 && $type == self::TYPE_UNDERWEAR) {
+                        $parent_id = self::UNDERWEAR_ITEM_ID;
                     }
 
                     $cat->parent_id = $parent_id;
