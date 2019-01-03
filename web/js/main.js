@@ -213,7 +213,7 @@
 
         var options = {
             url: function (phrase) {
-                return "/ali/web/site/json?phrase=" + encodeURIComponent(phrase);
+                return "/site/json?phrase=" + encodeURIComponent(phrase);
             },
             getValue: function (element) {
                 return element.name;
