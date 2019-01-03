@@ -209,6 +209,44 @@
 
             $verify.data('bs.modal').$backdrop.addClass('dark-modal');
         }
+
+
+        var options = {
+            url: function (phrase) {
+                return "/ali/web/site/json?phrase=" + encodeURIComponent(phrase);
+            },
+            getValue: function (element) {
+                return element.name;
+            },
+            list: {
+                onClickEvent: function () {
+                    var value = $("input#search").getSelectedItemData().link;
+
+                    window.location = value;
+                }
+            },
+            template: {
+                type: "custom",
+                method: function (title, item) {
+
+                    if(item.type == 'country'){
+                        return '<strong>'+item.name+'</strong>' + ' <small><i>('+item.count+') pics</i></small>';
+                    }else {
+                        return item.name;
+                    }
+                }
+            },
+            highlightPhrase: true,
+            requestDelay: 300
+        };
+
+        $("input#search").easyAutocomplete(options);
+
+
+
+
+
+
     });
 })(jQuery);
 

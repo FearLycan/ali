@@ -145,7 +145,7 @@ class Category extends ActiveRecord
                         $parent_id = self::FIRST_ITEM_ID;
                     } elseif ($key == 3 && $type == self::TYPE_SPORT) {
                         $parent_id = self::BASE_CATEGORY_SPORT;
-                    }elseif ($key == 3 && $type == self::TYPE_UNDERWEAR) {
+                    } elseif ($key == 3 && $type == self::TYPE_UNDERWEAR) {
                         $parent_id = self::UNDERWEAR_ITEM_ID;
                     }
 

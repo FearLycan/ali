@@ -21,12 +21,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/style.css',
+        'lib/easy-autocomplete/easy-autocomplete.min.css',
         'css/font-awesome.min.css',
         'css/site.css',
     ];
     public $js = [
         'js/masonry-docs.min.js',
         'js/infinite-scroll.pkgd.min.js',
+        'lib/easy-autocomplete/jquery.easy-autocomplete.min.js',
         'js/main.js',
         'js/grid.js',
     ];

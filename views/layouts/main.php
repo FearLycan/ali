@@ -8,10 +8,12 @@ use app\components\Helper;
 use app\models\Category;
 use app\widgets\AddNewURL;
 use app\widgets\AgeVerify;
+use kartik\select2\Select2;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\web\JsExpression;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -121,6 +123,8 @@ AppAsset::register($this);
         ],
     ];
 
+    $items[] = '<li><button type="button" class="button-clear button-nav" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search" aria-hidden="true"></i></button></li>';
+
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
         $items[] = ['label' => 'Admin', 'url' => ['/admin']];
     }
@@ -143,6 +147,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $items,
+        'encodeLabels' => false,
     ]);
 
     NavBar::end();
@@ -186,6 +191,33 @@ AppAsset::register($this);
         </div>
     </div>
 </footer>
+
+<div id="searchModal" class="modal fade bs-example-modal-lg" aria-labelledby="searchModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title font-alt">Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="search">Search category, product, country</label>
+                            <input type="text" class="form-control" id="search"
+                                   placeholder="category, product, country...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php $this->endBody() ?>
 <?= $this->blocks['script'] ?>

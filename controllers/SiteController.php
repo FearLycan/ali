@@ -3,13 +3,17 @@
 namespace app\controllers;
 
 use app\components\Controller;
+use app\components\Helper;
 use app\models\Category;
+use app\models\Country;
 use app\models\forms\ContactForm;
 use app\models\forms\ProductUrlForm;
+use app\models\Product;
 use app\models\ProductUrl;
 use app\models\forms\AgeVerifyForm;
 use app\widgets\AgeVerify;
 use Yii;
+use yii\helpers\Url;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 
@@ -131,5 +135,70 @@ class SiteController extends Controller
         return $this->render('categories', [
             'categories' => $categories
         ]);
+    }
+
+    public function actionJson($phrase)
+    {
+        $results = [];
+
+        if (strlen($phrase) >= 3) {
+
+            $countries = Country::find()
+                ->where(['like', 'name', $phrase])
+                ->orderBy(['name' => SORT_DESC])
+                ->limit(5)
+                ->all();
+
+            $categories = Category::find()
+                ->where(['like', 'name', $phrase])
+                ->orderBy(['name' => SORT_DESC])
+                ->limit(5)
+                ->all();
+
+            $products = Product::find()
+                ->where(['like', 'name', $phrase])
+                ->andWhere(['status' => Product::STATUS_ACTIVE])
+                ->orderBy(['name' => SORT_DESC])
+                ->limit(5)
+                ->all();
+
+
+            /* @var $country Country */
+            foreach ($countries as $country) {
+                $results[] = [
+                    'id' => $country->id,
+                    'name' => $country->name,
+                    'link' => Url::to(['country/view', 'slug' => $country->slug], true),
+                    'type' => 'country',
+                    'count' => $country->countPics()
+                ];
+            }
+
+            /* @var $category Category */
+            foreach ($categories as $category) {
+                $results[] = [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'link' => Url::to(['image/index', 'category' => $category->slug], true),
+                    'type' => 'category',
+                ];
+            }
+
+            /* @var $product Product */
+            foreach ($products as $product) {
+                $results[] = [
+                    'id' => $product->id,
+                    'name' => Helper::cutThis($product->name),
+                    'link' => Url::to(['product/view', 'id' => $product->ali_product_id], true),
+                    'type' => 'product',
+                ];
+            }
+
+        }
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $results;
+
+
     }
 }

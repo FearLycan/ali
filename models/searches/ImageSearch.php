@@ -14,7 +14,7 @@ use app\models\Image;
 class ImageSearch extends Image
 {
     const PER_PAGE_PARAM = 'per-page';
-    const DEFAULT_ITEMS_PER_PAGE = 15;
+    const DEFAULT_ITEMS_PER_PAGE = 20;
     const PAGE_SIZE_LIMIT = 100;
 
     /**
@@ -44,7 +44,7 @@ class ImageSearch extends Image
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $query = null, $category = null)
+    public function search($params, $query = null, $category = null, $country = null)
     {
         if ($query == null) {
             $query = Image::find()
@@ -61,6 +61,9 @@ class ImageSearch extends Image
         } elseif (!empty($category)) {
             $query->joinWith(['product product']);
             $query->andFilterWhere(['in', 'product.category_id', json_decode($category->main_category)]);
+        } elseif ((!empty($country))){
+            $query->joinWith(['member m']);
+            $query->andFilterWhere(['in', 'm.country_code', $country->code]);
         }
 
         // add conditions that should always apply here

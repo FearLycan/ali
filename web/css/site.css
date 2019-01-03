@@ -352,3 +352,7 @@ ul.pagination {
     float: none;
     margin: 0 auto;
 }
+
+div.eac-item{
+    text-transform: uppercase;
+}
