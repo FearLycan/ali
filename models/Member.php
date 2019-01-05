@@ -23,6 +23,7 @@ use yii\db\ActiveRecord;
  * @property string $updated_at
  *
  * @property Image $images
+ * @property Country $country
  */
 class Member extends ActiveRecord
 {
@@ -173,6 +174,14 @@ class Member extends ActiveRecord
     public function getImages()
     {
         return $this->hasMany(Image::className(), ['member_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCountry()
+    {
+        return $this->hasOne(Country::className(), ['code' => 'country_code']);
     }
 
 }

@@ -2,6 +2,7 @@
 
 use app\components\Helper;
 use app\models\Image;
+use app\models\Member;
 use app\models\Ticket;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -24,11 +25,9 @@ Yii::$app->params['og_type']['content'] = 'article';
 
                 <?php foreach ($model->product->category->getFamilyPath() as $category): ?>
 
-
-                        <li>
-                            <a href="<?= Url::to(['image/index', 'category' => $category['slug']]) ?>"><?= $category['name'] ?></a>
-                        </li>
-
+                    <li>
+                        <a href="<?= Url::to(['image/index', 'category' => $category['slug']]) ?>"><?= $category['name'] ?></a>
+                    </li>
 
                 <?php endforeach; ?>
 
@@ -69,8 +68,10 @@ Yii::$app->params['og_type']['content'] = 'article';
                         <h4 class="media-heading"><?= Html::encode($model->member->name) ?></h4>
                     </a>
 
-                    <?php if ($model->member_id != \app\models\Member::MEMBER_ANONYMOUS): ?>
-                        <?= Html::img(['/images/flags/' . strtolower($model->member->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->member->country_code, 'title' => $model->member->country_code]) ?>
+                    <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
+                        <a href="<?= Url::to(['country/view', 'slug' => $model->member->country->slug]) ?>">
+                            <?= Html::img(['/images/flags/' . strtolower($model->member->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->member->country->name, 'title' => $model->member->country->name]) ?>
+                        </a>
                     <?php endif; ?>
 
                 </div>
@@ -85,12 +86,12 @@ Yii::$app->params['og_type']['content'] = 'article';
                             See more pics of <strong><?= Html::encode($model->member->name) ?></strong> member
                         </a>
                     </li>
-                    <?php if ($model->member_id != \app\models\Member::MEMBER_ANONYMOUS): ?>
-                    <li class="list-group-item">
-                        <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
-                            Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
-                        </a>
-                    </li>
+                    <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
+                        <li class="list-group-item">
+                            <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
+                                Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
+                            </a>
+                        </li>
                     <?php endif; ?>
                     <li class="list-group-item">
                         <a href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>">
@@ -102,6 +103,13 @@ Yii::$app->params['og_type']['content'] = 'article';
                             See more pics of this product
                         </a>
                     </li>
+                    <?php if ($model->member_id != Member::MEMBER_ANONYMOUS && $model->member->country->countPics() > 0): ?>
+                        <li class="list-group-item">
+                            <a href="<?= Url::to(['country/view', 'slug' => $model->member->country->slug]) ?>">
+                                See more pics from <strong><?= $model->member->country->name ?> (<?= $model->member->country->countPics() ?>) </strong>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li class="list-group-item">
                         <?= Html::a('Report this pic', ['ticket/create',
                             'type' => Ticket::TYPE_IMAGE,
