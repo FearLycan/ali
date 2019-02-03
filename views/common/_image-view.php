@@ -13,6 +13,11 @@ use yii\bootstrap\Modal;
     'summary' => false,
     'itemOptions' => ['class' => 'grid__item'],
     'itemView' => $itemView,
+    'pager' => [
+        'class' => \app\components\LinkPager::className(),
+        'prevOptions' => ['rel' => 'prev'],
+        'nextOptions' => ['rel' => 'next']
+    ],
 ]); ?>
 
 <div class="page-load-status">
