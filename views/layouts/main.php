@@ -164,6 +164,7 @@ AppAsset::register($this);
                         feedback.
                     </div>
                 </div>
+            </div>
         </section>
     <?php endif; ?>
 
