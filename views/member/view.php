@@ -33,7 +33,9 @@ Yii::$app->params['og_type']['content'] = 'article';
                 <?= Html::encode($model->name) ?>
 
                 <?php if ($model->id != Member::MEMBER_ANONYMOUS): ?>
-                    <?= Html::img(['/images/flags/' . strtolower($model->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->country_code, 'title' => $model->country_code]) ?>
+                    <a href="<?= Url::to(['country/view', 'slug' => $model->country->slug]) ?>">
+                        <?= Html::img(['/images/flags/' . strtolower($model->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->country->name, 'title' => $model->country->name]) ?>
+                    </a>
                 <?php endif; ?>
             </h2>
 
