@@ -2,7 +2,7 @@
 use app\components\Helper;
 use yii\helpers\Html;
 
-$this->title = 'Members from ' . $country->name . ' - ' . Yii::$app->name;
+$this->title = 'Pics collection from ' . $country->name . ' - ' . Yii::$app->name;
 ?>
 
 <div class="view-image">
@@ -12,7 +12,8 @@ $this->title = 'Members from ' . $country->name . ' - ' . Yii::$app->name;
                 <?= Html::encode($country->name) ?>
             </h2>
             <div class="module-subtitle font-serif">
-                <?= $dataProvider->getTotalCount() ?> <?= Helper::varietyOfWord('photo', $dataProvider->getTotalCount()) ?>
+                Pics collection from <?= Html::encode($country->name) ?> <br>
+                <?= $dataProvider->getTotalCount() ?> <?= Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
             </div>
         </div>
 
