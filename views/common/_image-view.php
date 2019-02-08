@@ -14,6 +14,7 @@ use yii\bootstrap\Modal;
     'itemOptions' => ['class' => 'grid__item'],
     'itemView' => $itemView,
     'pager' => [
+        'maxButtonCount' => 0,
         'class' => \app\components\LinkPager::className(),
         'prevOptions' => ['rel' => 'prev'],
         'nextOptions' => ['rel' => 'next']
