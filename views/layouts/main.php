@@ -169,6 +169,10 @@ AppAsset::register($this);
     <?php endif; ?>
 
     <div class="container">
+        <div id="nMOFPOKuop">
+            Our website is made possible by displaying online advertisements to our visitors.<br>
+            Please consider supporting us by disabling your ad blocker.
+        </div>
         <?= $content ?>
     </div>
 </div>
@@ -238,6 +242,12 @@ AppAsset::register($this);
             },
             "theme": "classic"
         })
+    });
+    $.ajax({
+        url: "<?=Url::to('@web/js/ads.js') ?> ",
+        dataType: "script"
+    }).fail(function () {
+        $('#nMOFPOKuop').css({'display': 'block'})
     });
 </script>
 </body>
