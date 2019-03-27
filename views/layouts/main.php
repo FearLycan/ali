@@ -244,10 +244,10 @@ AppAsset::register($this);
         })
     });
     $.ajax({
-        url: "<?=Url::to('@web/js/ads.js') ?> ",
+        url: "<?=Url::to('@web/js/ads.js', true) ?>",
         dataType: "script"
     }).fail(function () {
-        /*$('#nMOFPOKuop').css({'display': 'block'})*/
+        $('#nMOFPOKuop').css({'display': 'block'})
     });
 </script>
 </body>
