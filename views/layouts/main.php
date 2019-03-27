@@ -247,7 +247,7 @@ AppAsset::register($this);
         url: "<?=Url::to('@web/js/ads.js') ?> ",
         dataType: "script"
     }).fail(function () {
-        $('#nMOFPOKuop').css({'display': 'block'})
+        /*$('#nMOFPOKuop').css({'display': 'block'})*/
     });
 </script>
 </body>
