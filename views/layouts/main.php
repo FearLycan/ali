@@ -169,10 +169,14 @@ AppAsset::register($this);
     <?php endif; ?>
 
     <div class="container">
-        <div id="nMOFPOKuop">
-            Our website is made possible by displaying online advertisements to our visitors.<br>
-            Please consider supporting us by disabling your ad blocker.
-        </div>
+
+        <?php if(Yii::$app->user->isGuest): ?>
+            <div id="nMOFPOKuop">
+                Our website is made possible by displaying online advertisements to our visitors.<br>
+                Please consider supporting us by disabling your ad blocker.
+            </div>
+        <?php endif; ?>
+
         <?= $content ?>
     </div>
 </div>
