@@ -51,7 +51,7 @@ $image = [
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?= Url::to(['aadmin']) ?>"><?= Yii::$app->name ?> Admin Panel</a>
+            <a class="navbar-brand" href="<?= Url::to(['/admin']) ?>"><?= Yii::$app->name ?> Admin Panel</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">

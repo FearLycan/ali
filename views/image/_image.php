@@ -12,7 +12,7 @@ $style = '';
 
 <?php if ($index != 0 && ($index % 15) == 0): ?>
     <?php if ($small = Helper::systemConfig('small-ad-' . ($index / 15))): ?>
-        <div class="ad-margin-bottom">
+        <div class="ad-margin-bottom" id="<?= rand(1,1000) ?>">
             <?php $style = 'style="margin-top: 10px;"'; ?>
             <?= $small ?>
         </div>
