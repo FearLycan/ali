@@ -6,12 +6,24 @@ use app\components\Controller;
 use app\models\Image;
 use app\models\Product;
 use app\models\searches\ImageSearch;
+use app\models\searches\ProductSearch;
 use Yii;
 use yii\web\NotFoundHttpException;
 
 
 class ProductController extends Controller
 {
+    public function actionIndex()
+    {
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionView($id)
     {
         $model = $this->findModel($id);

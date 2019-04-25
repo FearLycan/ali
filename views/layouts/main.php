@@ -119,6 +119,7 @@ AppAsset::register($this);
         'label' => 'More',
         'items' => [
             ['label' => 'All Categories', 'url' => ['/categories']],
+            ['label' => 'Products', 'url' => ['/products']],
             ['label' => 'Contact', 'url' => ['/contact']],
         ],
     ];
@@ -171,10 +172,10 @@ AppAsset::register($this);
     <div class="container">
 
         <?php if(Yii::$app->user->isGuest): ?>
-            <div id="nMOFPOKuop">
+            <!--<div id="nMOFPOKuop">
                 Our website is made possible by displaying online advertisements to our visitors.<br>
                 Please consider supporting us by disabling your ad blocker.
-            </div>
+            </div>-->
         <?php endif; ?>
 
         <?= $content ?>
@@ -222,7 +223,7 @@ AppAsset::register($this);
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>

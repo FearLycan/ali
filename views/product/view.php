@@ -16,7 +16,7 @@ $this->title = 'Product ' . $model->name;
 <div class="member-view">
     <div class="row">
         <div class="col-md-4">
-            <img src="<?= $model->image ?>" class="img-responsive img-center img-thumbnail" alt="Product">
+            <img src="<?= $model->image ?>" class="img-responsive img-center img-thumbnail" alt="<?= $model->name ?>">
         </div>
         <div class="col-md-8">
 

@@ -353,7 +353,7 @@ ul.pagination {
     margin: 0 auto;
 }
 
-div.eac-item{
+div.eac-item {
     text-transform: uppercase;
 }
 
@@ -366,4 +366,111 @@ div.eac-item{
     font-weight: bold;
     color: #fff;
     border-radius: 5px;
+}
+
+ul.pagination > li > a:hover {
+    color: #111;
+}
+
+ul.pagination > li > a, ul.pagination > li > span {
+    color: #aaa;
+}
+
+ul.pagination > .active > a {
+    background-color: #111;
+    border-color: #111;
+}
+
+.select2-container--krajee .select2-selection {
+    border-radius: 2px;
+    font-size: 11px;
+    border: 1px solid #EAEAEA;
+    transition: all 0.4s ease-in-out 0s;
+    font-family: "Roboto Condensed", sans-serif;
+    text-transform: uppercase;
+}
+
+.select2-container--krajee .select2-selection--single {
+    line-height: 2;
+}
+
+.select2-selection__clear {
+    display: none;
+}
+
+.select2-container--krajee .select2-dropdown {
+    border-color: #CACACA;
+}
+
+.select2-dropdown {
+    border-radius: 2px;
+}
+
+.select2-results__option {
+    font-weight: normal;
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0 2px 1px 10px;
+    font-size: 11px;
+}
+
+.select2-container--krajee .select2-selection {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.select2-container--krajee .select2-selection--single .select2-selection__arrow {
+    border-left: none;
+}
+
+.select2-container--krajee .select2-selection--single .select2-selection__arrow b {
+    border-color: #555 transparent transparent transparent;
+}
+
+.select2-container--krajee.select2-container--open .select2-selection, .select2-container--krajee .select2-selection:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    border-color: #CACACA;
+}
+
+.select2-container--krajee .select2-results__option--highlighted[aria-selected] {
+    background-color: #1e90ff;
+    color: #fff;
+}
+
+.select2-container--krajee .select2-results__option[aria-selected=true] {
+    color: #fff;
+    background-color: #1e90ff;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+    .shop-item-image {
+        height: 324px;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+    .shop-item-image {
+        height: 330px;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+    .shop-item-image {
+        height: 205px;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+    .shop-item-image {
+        height: 255px;
+    }
 }
