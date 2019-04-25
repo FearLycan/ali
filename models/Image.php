@@ -145,7 +145,7 @@ class Image extends ActiveRecord
                 $date = null;
             } else {
                 //old product - download only new photos younger than last update
-                $date = date('Y-m-d H:i:s');
+                $date = $product->synchronized_at;
             }
 
             $client = new Client();
@@ -171,52 +171,56 @@ class Image extends ActiveRecord
                 if ($response->isOk) {
                     $crawler = new Crawler($response->content);
 
-                    if ($n == 1) {
-                        $pagination = $crawler
-                            ->filterXpath("//div[@id='simple-pager']//label")->text();
+                    $feedback = $crawler->filter('div.feedback-container')->count();
 
-                        $n = explode("/", $pagination);
-                        $n = $n[1];
-                    }
+                    if ($feedback) {
+                        if ($n == 1) {
+                            $pagination = $crawler
+                                ->filterXpath("//div[@id='simple-pager']//label")->text();
 
-                    $results = $crawler
-                        ->filterXpath("//div[contains(@class, 'feedback-item')]");
+                            $n = explode("/", $pagination);
+                            $n = $n[1];
+                        }
 
-                    foreach ($results as $result) {
+                        $results = $crawler
+                            ->filterXpath("//div[contains(@class, 'feedback-item')]");
 
-                        $itemCrawler = new Crawler($result);
+                        foreach ($results as $result) {
 
-                        $time = $itemCrawler->filterXpath("//dd[contains(@class, 'r-time')]");
+                            $itemCrawler = new Crawler($result);
 
-                        $creation_date = strtotime($time->text());
-                        $creation_date = date('Y-m-d H:i:s', $creation_date);
+                            $time = $itemCrawler->filterXpath("//dd[contains(@class, 'r-time')]");
 
-                        if ($creation_date > $date) {
-                            $member = $itemCrawler->filterXpath("//span[contains(@class, 'user-name')]");
+                            $creation_date = strtotime($time->text());
+                            $creation_date = date('Y-m-d H:i:s', $creation_date);
 
-                            if ($member->text() == 'AliExpress Shopper') {
-                                $member_id = Member::MEMBER_ANONYMOUS;
-                            } else {
-                                // cerate member
-                                $member_id = Member::create($itemCrawler);
-                            }
+                            if ($creation_date > $date) {
+                                $member = $itemCrawler->filterXpath("//span[contains(@class, 'user-name')]");
 
-                            $images = $itemCrawler->filterXpath("//li[contains(@class, 'pic-view-item')]//img")
-                                ->extract(['src']);
+                                if ($member->text() == 'AliExpress Shopper') {
+                                    $member_id = Member::MEMBER_ANONYMOUS;
+                                } else {
+                                    // cerate member
+                                    $member_id = Member::create($itemCrawler);
+                                }
 
-                            foreach ($images as $url) {
-                                $image = new Image();
-                                $image->url = $url;
-                                $image->member_id = $member_id;
-                                $image->product_id = $product_id;
-                                $image->status = Image::STATUS_NEW;
-                                $image->save();
+                                $images = $itemCrawler->filterXpath("//li[contains(@class, 'pic-view-item')]//img")
+                                    ->extract(['src']);
 
-                                unset($image);
+                                foreach ($images as $url) {
+                                    $image = new Image();
+                                    $image->url = $url;
+                                    $image->member_id = $member_id;
+                                    $image->product_id = $product_id;
+                                    $image->status = Image::STATUS_NEW;
+                                    $image->save();
+
+                                    unset($image);
+                                }
                             }
                         }
-                    }
 
+                    }
                 } else {
                     throw new Exception(
                         "Request to $request->url failed with response: \n"

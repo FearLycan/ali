@@ -16,6 +16,18 @@ use Symfony\Component\DomCrawler\Crawler;
 class AliController extends Controller
 {
 
+    public $limit;
+
+    public function options($actionID)
+    {
+        return ['limit'];
+    }
+
+    public function optionAliases()
+    {
+        return ['limit' => 'limit'];
+    }
+
     /**
      * @throws Exception
      * @throws \yii\base\InvalidConfigException
@@ -80,6 +92,21 @@ class AliController extends Controller
         } while (!empty($urls));
 
 
+    }
+
+    public function actionSynchronization()
+    {
+        $today = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 31, date("Y")));
+
+        $products = Product::find()
+            ->where(['status' => Product::STATUS_ACTIVE])
+            ->andWhere(['<=', 'synchronized_at', $today])
+            ->limit($this->limit)
+            ->all();
+
+        foreach ($products as $product) {
+            Image::extractImages($product->id);
+        }
     }
 
 }
