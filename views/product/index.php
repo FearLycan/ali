@@ -1,10 +1,9 @@
 <?php
 
-use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
 
-$this->title = 'List of products';
+$this->title = 'List of all products' . ' - ' . Yii::$app->name;;
 
 ?>
 
@@ -15,14 +14,14 @@ $this->title = 'List of products';
 </style>
 
 <div class="row">
-<div class="col-sm-8 col-sm-offset-2">
-    <h2 class="module-title font-alt">
-        <?= Html::encode($this->title) ?>
-    </h2>
-    <div class="module-subtitle font-serif" style="margin-bottom: 0;">
-        We have <?= $dataProvider->getTotalCount() ?> products
+    <div class="col-sm-8 col-sm-offset-2">
+        <h2 class="module-title font-alt">
+            List of products
+        </h2>
+        <div class="module-subtitle font-serif" style="margin-bottom: 0;">
+            We have <?= $dataProvider->getTotalCount() ?> products
+        </div>
     </div>
-</div>
 </div>
 
 <?php Pjax::begin(); ?>

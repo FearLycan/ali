@@ -9,7 +9,7 @@ use yii\helpers\Url;
 
 /* @var $model Product */
 
-$this->title = 'Product ' . $model->name;
+$this->title = 'Product ' . $model->name . ' - ' . Yii::$app->name;;
 
 ?>
 
