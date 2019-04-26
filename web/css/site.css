@@ -381,6 +381,11 @@ ul.pagination > .active > a {
     border-color: #111;
 }
 
+ul.pagination > .active > a:hover, ul.pagination > .active > a:focus {
+    background-color: #111;
+    border-color: #111;
+}
+
 .select2-container--krajee .select2-selection {
     border-radius: 2px;
     font-size: 11px;

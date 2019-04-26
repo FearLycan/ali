@@ -24,7 +24,9 @@ $this->title = 'List of all products' . ' - ' . Yii::$app->name;;
     </div>
 </div>
 
-<?php Pjax::begin(); ?>
+<?php Pjax::begin([
+    'scrollTo' => true
+]); ?>
 <section class="module-small">
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 </section>
@@ -42,5 +44,9 @@ $this->title = 'List of all products' . ' - ' . Yii::$app->name;;
 <?php $this->beginBlock('script') ?>
 <script>
     $('ul.pagination').addClass('col-sm-12 col-md-12 col-lg-12 font-alt');
+
+    $(document).on('pjax:success', function () {
+        $('ul.pagination').addClass('col-sm-12 col-md-12 col-lg-12 font-alt');
+    });
 </script>
 <?php $this->endBlock(); ?>
