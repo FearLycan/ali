@@ -21,18 +21,24 @@ Yii::$app->params['og_type']['content'] = 'article';
     <div class="row">
 
         <div class="col-md-12 col-xs-12 col-sm-12">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb" vocab="https://schema.org/" typeof="BreadcrumbList">
 
-                <?php foreach ($model->product->category->getFamilyPath() as $category): ?>
+                <?php foreach ($model->product->category->getFamilyPath() as $key => $category): ?>
 
-                    <li>
-                        <a href="<?= Url::to(['image/index', 'category' => $category['slug']]) ?>"><?= $category['name'] ?></a>
+                    <li property="itemListElement" typeof="ListItem">
+                        <a property="item" typeof="WebPage" href="<?= Url::to(['image/index', 'category' => $category['slug']], true) ?>">
+                          <span property="name"><?= $category['name'] ?></span>
+                        </a>
+                        <meta property="position" content="<?= $key+1 ?>">
                     </li>
 
                 <?php endforeach; ?>
 
-                <li>
-                    <a href="<?= Url::to(['image/index', 'category' => $model->product->category->slug]) ?>"><?= $model->product->category->name ?></a>
+                <li property="itemListElement" typeof="ListItem">
+                    <a property="item" typeof="WebPage" href="<?= Url::to(['image/index', 'category' => $model->product->category->slug], true) ?>">
+                        <span property="name"><?= $model->product->category->name ?></span>
+                    </a>
+                    <meta property="position" content="<?= count($model->product->category->getFamilyPath()) + 1 ?>">
                 </li>
             </ol>
         </div>

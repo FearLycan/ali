@@ -81,6 +81,17 @@ AppAsset::register($this);
     <?= Helper::systemConfig('google-analytics') ?>
     <?= Helper::systemConfig('google-adsense') ?>
 
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Ali Gone Wild",
+        "description": "<?= Yii::$app->params['meta-description']; ?>",
+        "url": "https://aligonewild.com",
+        "logo": "https://aligonewild.com/images/site/og-image.png"
+    }
+    </script>
+
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <?php $this->beginBody() ?>

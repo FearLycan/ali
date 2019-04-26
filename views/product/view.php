@@ -14,13 +14,14 @@ $this->title = 'Product ' . $model->name . ' - ' . Yii::$app->name;;
 ?>
 
 <div class="member-view">
-    <div class="row">
+    <div class="row" itemtype="http://schema.org/Product" itemscope>
         <div class="col-md-4">
-            <img src="<?= $model->image ?>" class="img-responsive img-center img-thumbnail" alt="<?= $model->name ?>">
+            <img itemprop="image" src="<?= $model->image ?>" class="img-responsive img-center img-thumbnail" alt="<?= $model->name ?>">
         </div>
         <div class="col-md-8">
-
-            <h2 style="margin-top: 0;">
+            <meta itemprop="sku" content="<?= $model->ali_product_id ?>" />
+            <link itemprop="url" href="<?= Url::to(['product/view', 'id' => $model->ali_product_id], true) ?>" />
+            <h2 style="margin-top: 0;" itemprop="name">
                 <?= Html::encode($model->name) ?>
             </h2>
 

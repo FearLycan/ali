@@ -9,18 +9,20 @@ use yii\helpers\Url;
 
 ?>
 
-<div class="shop-item">
+<div class="shop-item" itemtype="http://schema.org/Product" itemscope>
     <div class="shop-item-image">
-        <img src="<?= $model->image ?>" alt="<?= $model->name ?>">
+        <meta itemprop="name" content="<?= $model->name ?>" />
+        <meta itemprop="sku" content="<?= $model->ali_product_id ?>" />
+        <img itemprop="image" src="<?= $model->image ?>" alt="<?= $model->name ?>">
         <div class="shop-item-detail">
-            <a class="btn btn-round btn-b" href="<?= Url::to(['image/index', 'category' => $model->category->slug]) ?>"
+            <a class="btn btn-round btn-b" href="<?= Url::to(['image/index', 'category' => $model->category->slug], true) ?>"
                data-pjax="0">
                 <?= Html::encode($model->category->name) ?>
             </a>
         </div>
     </div>
     <h4 class="shop-item-title font-alt">
-        <a href="<?= Url::to(['product/view', 'id' => $model->ali_product_id]) ?>" data-pjax="0">
+        <a itemprop="url" href="<?= Url::to(['product/view', 'id' => $model->ali_product_id], true) ?>" data-pjax="0">
             <?= Helper::cutThis($model->name, 45) ?>
         </a>
     </h4>
