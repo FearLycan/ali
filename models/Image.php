@@ -213,6 +213,7 @@ class Image extends ActiveRecord
                                     $image->member_id = $member_id;
                                     $image->product_id = $product_id;
                                     $image->status = Image::STATUS_NEW;
+                                    $image->file = basename($url);
                                     $image->save();
 
                                     unset($image);
