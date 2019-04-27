@@ -20,13 +20,13 @@ class ImageSearch extends Image
     /**
      * {@inheritdoc}
      */
-    public function rules()
+   /* public function rules()
     {
         return [
 //            [['id', 'product_id', 'member_id', 'status'], 'integer'],
 //            [['url', 'created_at', 'updated_at'], 'safe'],
         ];
-    }
+    }*/
 
     /**
      * {@inheritdoc}
@@ -87,14 +87,14 @@ class ImageSearch extends Image
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
+        //    $query->andFilterWhere([
 //            'id' => $this->id,
 //            'product_id' => $this->product_id,
 //            'member_id' => $this->member_id,
 //            'status' => $this->status,
 //            'created_at' => $this->created_at,
 //            'updated_at' => $this->updated_at,
-        ]);
+        //    ]);
 
         //$query->andFilterWhere(['like', 'url', $this->url]);
 

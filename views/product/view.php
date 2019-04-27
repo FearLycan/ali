@@ -87,7 +87,7 @@ $this->title = 'Product ' . $model->name . ' - ' . Yii::$app->name;;
             </div>
             <div class="row multi-columns-row">
 
-                <?php foreach ($products as $product): ?>
+                <?php foreach ($products as $model): ?>
                     <div class="col-sm-6 col-md-3 col-lg-3" itemtype="http://schema.org/Product" itemscope>
                         <div class="shop-item">
                             <div class="shop-item-image">
