@@ -173,7 +173,7 @@ class Product extends ActiveRecord
     {
         $products = self::find()
             ->where(['category_id' => $this->category_id])
-            ->andWhere(['not in', 'id', [$this->id]])
+            ->andWhere(['!=', 'id', $this->id])
             ->orderBy(new Expression('rand()'))
             ->limit($limit)
             ->all();
