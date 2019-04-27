@@ -99,6 +99,14 @@ class Product extends ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['product_id' => 'id']);
+    }
+
     public static function create($crawler, $url, $category_id)
     {
 

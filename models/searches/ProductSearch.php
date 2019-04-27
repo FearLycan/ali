@@ -2,6 +2,7 @@
 
 namespace app\models\searches;
 
+use app\models\Image;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -58,8 +59,10 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find()->where(['status' => self::STATUS_ACTIVE]);
-        $query->joinWith('category');
+        $query = Product::find()->where(['product.status' => self::STATUS_ACTIVE]);
+        $query->joinWith(['category category', 'images images']);
+        $query->andWhere(['images.status' => Image::STATUS_ACCEPTED]);
+        $query->groupBy(['product.id']);
 
         // add conditions that should always apply here
 
