@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%product}}".
@@ -118,6 +119,8 @@ class Product extends ActiveRecord
         $product->status = self::STATUS_ACTIVE;
         $product->category_id = $category_id;
 
+        //$brand = $crawler->filter('li#product-prop-2')->extract(['data-title'])[0];
+
         $product->save();
 
         return $product->id;
@@ -164,5 +167,17 @@ class Product extends ActiveRecord
     {
         $this->click++;
         $this->save(false, ['click']);
+    }
+
+    public function getSimilar($limit = 4)
+    {
+        $products = self::find()
+            ->where(['category_id' => $this->category_id])
+            ->andWhere(['not in', 'id', [$this->id]])
+            ->orderBy(new Expression('rand()'))
+            ->limit($limit)
+            ->all();
+
+        return $products;
     }
 }
