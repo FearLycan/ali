@@ -46,15 +46,16 @@ class MemberController extends Controller
                 if (!$member->images) {
                     $member->delete();
                 } else {
+                    if (empty($member->avatar)) {
+                        $img = $member->images;
 
-                    $img = $member->images;
+                        $n = array_rand($img, 1);
 
-                    $n = array_rand($img, 1);
+                        $member->avatar = $img[$n]->file;
+                        $member->save();
 
-                    $member->avatar = $img[$n]->file;
-                    $member->save();
-
-                    unset($img);
+                        unset($img);
+                    }
                 }
             }
 
