@@ -126,6 +126,13 @@ Yii::$app->params['og_type']['content'] = 'article';
                                 'object_id' => $model->slug
                             ], ['class' => 'report-link']) ?>
                         </li>
+
+                        <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
+                            <li class="list-group-item">
+                                <?= Html::a('Edit', ['/admin/member/update', 'id' => $model->id]) ?>
+                            </li>
+                        <?php endif; ?>
+
                     </ul>
                 </div>
 
