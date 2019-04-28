@@ -5,6 +5,7 @@ namespace app\commands;
 use app\models\Image;
 use app\models\Member;
 use yii\console\Controller;
+use yii\db\Expression;
 
 class MemberController extends Controller
 {
@@ -44,9 +45,20 @@ class MemberController extends Controller
             foreach ($members as $member) {
                 if (!$member->images) {
                     $member->delete();
+                } else {
+
+                    $img = $member->images;
+
+                    $n = array_rand($img, 1);
+
+                    $member->avatar = $img[$n]->file;
+                    $member->save();
+
+                    unset($img);
                 }
             }
 
+            unset($members);
         } else {
             echo "First of all, please rate all photos";
         }
