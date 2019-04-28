@@ -5,6 +5,7 @@ namespace app\models;
 use Symfony\Component\DomCrawler\Crawler;
 use Yii;
 use yii\behaviors\SluggableBehavior;
+use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\imagine\Image as Img;
@@ -312,6 +313,31 @@ class Image extends ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public function getSimilarFromCategory($limit = 4)
+    {
+        $images = self::find()
+            ->where(['product_id' => $this->product_id, 'status' => self::STATUS_ACCEPTED])
+            ->andWhere(['!=', 'member_id', $this->member_id])
+            ->andWhere(['!=', 'id', 'id'])
+            ->orderBy(new Expression('rand()'))
+            ->limit($limit)
+            ->all();
+
+        return $images;
+    }
+
+    public function getMoreUserImages($limit = 6)
+    {
+        $images = self::find()
+            ->where(['member_id' => $this->member_id, 'status' => self::STATUS_ACCEPTED])
+            ->andWhere(['!=', 'id', $this->id])
+            //->orderBy(new Expression('rand()'))
+            ->limit($limit)
+            ->all();
+
+        return $images;
     }
 
 }

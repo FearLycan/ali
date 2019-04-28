@@ -452,30 +452,86 @@ ul.pagination > .active > a:hover, ul.pagination > .active > a:focus {
     background-color: #1e90ff;
 }
 
-/* Extra Small Devices, Phones */
-@media only screen and (min-width: 480px) {
+li.li-gallery {
+    overflow: hidden;
+    height: 80px;
+}
+
+ul.product-gallery {
+    overflow: hidden;
+    height: 80px;
+}
+
+@media only screen and (min-width: 320px) {
     .shop-item-image {
-        height: 324px;
+        height: 175px;
+    }
+
+    li.li-gallery {
+        height: 40px;
+    }
+
+    ul.product-gallery {
+        height: 40px;
     }
 }
 
-/* Small Devices, Tablets */
+/* Extra Small Devices, Phones - xs */
+@media only screen and (min-width: 480px) {
+    .shop-item-image {
+        height: 260px;
+    }
+
+    li.li-gallery {
+        height: 55px;
+    }
+
+    ul.product-gallery {
+        height: 55px;
+    }
+}
+
+/* Small Devices, Tablets -sm */
 @media only screen and (min-width: 768px) {
     .shop-item-image {
         height: 330px;
     }
+
+    li.li-gallery {
+        height: 80px;
+    }
+
+    ul.product-gallery {
+        height: 80px;
+    }
 }
 
-/* Medium Devices, Desktops */
+/* Medium Devices, Desktops - md */
 @media only screen and (min-width: 992px) {
     .shop-item-image {
         height: 205px;
     }
+
+    li.li-gallery {
+        height: 80px;
+    }
+
+    ul.product-gallery {
+        height: 80px;
+    }
 }
 
-/* Large Devices, Wide Screens */
+/* Large Devices, Wide Screens - lg */
 @media only screen and (min-width: 1200px) {
     .shop-item-image {
         height: 255px;
+    }
+
+    li.li-gallery {
+        height: 80px;
+    }
+
+    ul.product-gallery {
+        height: 80px;
     }
 }

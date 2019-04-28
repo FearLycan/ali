@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%member}}".
@@ -182,6 +183,18 @@ class Member extends ActiveRecord
     public function getCountry()
     {
         return $this->hasOne(Country::className(), ['code' => 'country_code']);
+    }
+
+    public function getSimilarByCountry($limit = 4)
+    {
+        $members = self::find()
+            ->where(['country_code' => $this->country_code, 'status' => self::STATUS_ACTIVE])
+            ->andWhere(['!=', 'id', $this->id])
+            ->orderBy(new Expression('rand()'))
+            ->limit($limit)
+            ->all();
+
+        return $members;
     }
 
 }

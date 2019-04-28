@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 $this->title = 'Member ' . $model->name;
 
-if ($model->avatar){
+if ($model->avatar) {
     Yii::$app->params['og_image']['content'] = Url::to(['images/normal/' . $model->avatar], true);
     Yii::$app->params['twitter_image']['content'] = Url::to(['images/normal/' . $model->avatar], true);
 }
@@ -85,3 +85,53 @@ Yii::$app->params['og_type']['content'] = 'article';
         </div>
     <?php endif; ?>
 </div>
+
+<?php if ($members = $model->getSimilarByCountry(4)): ?>
+    <section class="module-small">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h2 class="module-title font-alt">
+                        Related members from
+
+                        <a href="<?= Url::to(['country/view', 'slug' => $model->country->slug], true) ?>" data-pjax="0">
+                            <?= Html::encode($model->country->name) ?>
+                        </a>
+
+                    </h2>
+                </div>
+            </div>
+            <div class="row multi-columns-row">
+
+                <?php foreach ($members as $model): ?>
+                    <div class="col-sm-6 col-md-3 col-lg-3">
+                        <div class="shop-item">
+                            <div class="shop-item-image">
+
+                                <?php if (empty($model->avatar)): ?>
+                                    <?= Html::img(['/images/site/user.png'], ['alt' => 'Avatar']) ?>
+                                <?php else: ?>
+                                    <?= Html::img(['/images/normal/' . $model->avatar], ['alt' => 'Avatar']) ?>
+                                <?php endif; ?>
+
+                                <div class="shop-item-detail">
+                                    <a class="btn btn-round btn-b"
+                                       href="<?= Url::to(['country/view', 'slug' => $model->country->slug], true) ?>"
+                                       data-pjax="0">
+                                        <?= Html::encode($model->country->name) ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <h4 class="shop-item-title font-alt">
+                                <a href="<?= Url::to(['member/view', 'slug' => $model->slug], true) ?>" data-pjax="0">
+                                    <?= Helper::cutThis($model->name, 45) ?>
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+            </div>
+        </div>
+    </section>
+<?php endif; ?>

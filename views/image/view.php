@@ -17,125 +17,188 @@ Yii::$app->params['og_type']['content'] = 'article';
 ?>
 
 
-<div class="view-image">
-    <div class="row">
+    <div class="view-image">
+        <div class="row">
 
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <ol class="breadcrumb" vocab="https://schema.org/" typeof="BreadcrumbList">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <ol class="breadcrumb" vocab="https://schema.org/" typeof="BreadcrumbList">
 
-                <?php foreach ($model->product->category->getFamilyPath() as $key => $category): ?>
+                    <?php foreach ($model->product->category->getFamilyPath() as $key => $category): ?>
+
+                        <li property="itemListElement" typeof="ListItem">
+                            <a property="item" typeof="WebPage"
+                               href="<?= Url::to(['image/index', 'category' => $category['slug']], true) ?>">
+                                <span property="name"><?= $category['name'] ?></span>
+                            </a>
+                            <meta property="position" content="<?= $key + 1 ?>">
+                        </li>
+
+                    <?php endforeach; ?>
 
                     <li property="itemListElement" typeof="ListItem">
-                        <a property="item" typeof="WebPage" href="<?= Url::to(['image/index', 'category' => $category['slug']], true) ?>">
-                          <span property="name"><?= $category['name'] ?></span>
+                        <a property="item" typeof="WebPage"
+                           href="<?= Url::to(['image/index', 'category' => $model->product->category->slug], true) ?>">
+                            <span property="name"><?= $model->product->category->name ?></span>
                         </a>
-                        <meta property="position" content="<?= $key+1 ?>">
+                        <meta property="position"
+                              content="<?= count($model->product->category->getFamilyPath()) + 1 ?>">
                     </li>
+                </ol>
+            </div>
 
-                <?php endforeach; ?>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <?= Html::img($model->getOriginalSizeImage(), ['class' => 'img-responsive img-center', 'alt' => 'Product Image']) ?>
+            </div>
 
-                <li property="itemListElement" typeof="ListItem">
-                    <a property="item" typeof="WebPage" href="<?= Url::to(['image/index', 'category' => $model->product->category->slug], true) ?>">
-                        <span property="name"><?= $model->product->category->name ?></span>
-                    </a>
-                    <meta property="position" content="<?= count($model->product->category->getFamilyPath()) + 1 ?>">
-                </li>
-            </ol>
-        </div>
+            <div class="visible-xs col-xs-12 col-sm-12">
+                <hr>
+            </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-8">
-            <?= Html::img($model->getOriginalSizeImage(), ['class' => 'img-responsive img-center'], ['alt' => 'Product Image']) ?>
-        </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>">
 
-        <div class="visible-xs col-xs-12 col-sm-12">
-            <hr>
-        </div>
+                            <?php if (empty($model->member->avatar)): ?>
+                                <div class="media-img"
+                                     style="background: url('<?= Url::to(['/images/site/user.png']) ?>') center center no-repeat;">
+                                </div>
+                            <?php else: ?>
+                                <div class="media-img"
+                                     style="background: url('<?= Url::to(['/images/thumbnail/' . $model->member->avatar]) ?>') center center no-repeat;">
+                                </div>
+                            <?php endif; ?>
 
-        <div class="col-xs-12 col-sm-6 col-md-4">
-            <div class="media">
-                <div class="media-left">
-                    <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>"
+                           style="float: left; margin-right: 10px;">
+                            <h4 class="media-heading"><?= Html::encode($model->member->name) ?></h4>
+                        </a>
 
-                        <?php if (empty($model->member->avatar)): ?>
-                            <div class="media-img"
-                                 style="background: url('<?= Url::to(['/images/site/user.png']) ?>') center center no-repeat;">
-                            </div>
-                        <?php else: ?>
-                            <div class="media-img"
-                                 style="background: url('<?= Url::to(['/images/thumbnail/' . $model->member->avatar]) ?>') center center no-repeat;">
-                            </div>
+                        <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
+                            <a href="<?= Url::to(['country/view', 'slug' => $model->member->country->slug]) ?>">
+                                <?= Html::img(['/images/flags/' . strtolower($model->member->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->member->country->name, 'title' => $model->member->country->name]) ?>
+                            </a>
                         <?php endif; ?>
 
-                    </a>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>"
-                       style="float: left; margin-right: 10px;">
-                        <h4 class="media-heading"><?= Html::encode($model->member->name) ?></h4>
-                    </a>
 
-                    <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
-                        <a href="<?= Url::to(['country/view', 'slug' => $model->member->country->slug]) ?>">
-                            <?= Html::img(['/images/flags/' . strtolower($model->member->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->member->country->name, 'title' => $model->member->country->name]) ?>
-                        </a>
-                    <?php endif; ?>
+                <hr>
 
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="widget">
-                <ul class="list-group font-alt">
-                    <li class="list-group-item">
-                        <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>">
-                            See more pics of <strong><?= Html::encode($model->member->name) ?></strong> member
-                        </a>
-                    </li>
-                    <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
+                <div class="widget">
+                    <ul class="list-group font-alt">
                         <li class="list-group-item">
-                            <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
-                                Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
+                            <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>">
+                                See more pics of <strong><?= Html::encode($model->member->name) ?></strong> member
                             </a>
                         </li>
-                    <?php endif; ?>
-                    <li class="list-group-item">
-                        <a href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>">
-                            Go to product page on Aliexpress
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="<?= Url::to(['product/view', 'id' => $model->product->ali_product_id]) ?>">
-                            See more pics of this product
-                        </a>
-                    </li>
-                    <?php if ($model->member_id != Member::MEMBER_ANONYMOUS && $model->member->country->countPics() > 0): ?>
+                        <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
+                            <li class="list-group-item">
+                                <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
+                                    Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
+                                </a>
+                            </li>
+                        <?php endif; ?>
                         <li class="list-group-item">
-                            <a href="<?= Url::to(['country/view', 'slug' => $model->member->country->slug]) ?>">
-                                See more pics from <strong><?= $model->member->country->name ?> (<?= $model->member->country->countPics() ?>) </strong>
+                            <a href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>">
+                                Go to product page on Aliexpress
                             </a>
                         </li>
-                    <?php endif; ?>
-                    <li class="list-group-item">
-                        <?= Html::a('Report this pic', ['ticket/create',
-                            'type' => Ticket::TYPE_IMAGE,
-                            'object_id' => $model->slug
-                        ], ['class' => 'report-link']) ?>
-                    </li>
-                </ul>
-            </div>
+                        <li class="list-group-item">
+                            <a href="<?= Url::to(['product/view', 'id' => $model->product->ali_product_id]) ?>">
+                                See more pics of this product
+                            </a>
+                        </li>
+                        <?php if ($model->member_id != Member::MEMBER_ANONYMOUS && $model->member->country->countPics() > 0): ?>
+                            <li class="list-group-item">
+                                <a href="<?= Url::to(['country/view', 'slug' => $model->member->country->slug]) ?>">
+                                    See more pics from <strong><?= $model->member->country->name ?>
+                                        (<?= $model->member->country->countPics() ?>) </strong>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <li class="list-group-item">
+                            <?= Html::a('Report this pic', ['ticket/create',
+                                'type' => Ticket::TYPE_IMAGE,
+                                'object_id' => $model->slug
+                            ], ['class' => 'report-link']) ?>
+                        </li>
+                    </ul>
+                </div>
 
+            </div>
         </div>
+
+        <?php if ($images = $model->getMoreUserImages()): ?>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <ul class="product-gallery">
+                        <?php foreach ($images as $key => $model): ?>
+                            <li class="li-gallery">
+                                <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $model->slug]) ?>">
+                                    <?= Html::img($model->getNormalSizeImage(), ['alt' => 'Product Image ' . $key]) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php if (($long = Helper::systemConfig('long-ad-bottom')) && !$ajaxView): ?>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-sm-12">
+                    <div class="long long-bottom">
+                        <?= $long ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
     </div>
 
-    <?php if (($long = Helper::systemConfig('long-ad-bottom')) && !$ajaxView): ?>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-12">
-                <div class="long long-bottom">
-                    <?= $long ?>
+
+<?php if ($images = $model->getSimilarFromCategory(4)): ?>
+    <section class="module-small">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h2 class="module-title font-alt">
+                        Related pics of this product
+                    </h2>
                 </div>
             </div>
-        </div>
-    <?php endif; ?>
+            <div class="row multi-columns-row">
 
-</div>
+                <?php foreach ($images as $model): ?>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="shop-item">
+                            <div class="shop-item-image">
+
+                                <?= Html::img(['/images/normal/' . $model->file], ['alt' => $model->member->name]) ?>
+
+                                <div class="shop-item-detail">
+                                    <a class="btn btn-round btn-b"
+                                       href="<?= Url::to(['member/view', 'slug' => $model->member->slug], true) ?>"
+                                       data-pjax="0">
+                                        <?= Html::encode($model->member->name) ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <h4 class="shop-item-title font-alt">
+                                <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug], true) ?>"
+                                   data-pjax="0">
+                                    <?= Helper::cutThis($model->member->name, 45) ?>
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+            </div>
+        </div>
+    </section>
+<?php endif; ?>
