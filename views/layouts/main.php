@@ -90,6 +90,8 @@ AppAsset::register($this);
         "url": "https://aligonewild.com",
         "logo": "https://aligonewild.com/images/site/og-image.png"
     }
+
+
     </script>
 
 </head>
@@ -129,8 +131,9 @@ AppAsset::register($this);
     $items[] = [
         'label' => 'More',
         'items' => [
-            ['label' => 'All Categories', 'url' => ['/categories']],
+            ['label' => 'Categories', 'url' => ['/categories']],
             ['label' => 'Products', 'url' => ['/products']],
+            ['label' => 'Members', 'url' => ['/members']],
             ['label' => 'Contact', 'url' => ['/contact']],
         ],
     ];
@@ -182,7 +185,7 @@ AppAsset::register($this);
 
     <div class="container">
 
-        <?php if(Yii::$app->user->isGuest): ?>
+        <?php if (Yii::$app->user->isGuest): ?>
             <!--<div id="nMOFPOKuop">
                 Our website is made possible by displaying online advertisements to our visitors.<br>
                 Please consider supporting us by disabling your ad blocker.
@@ -205,8 +208,14 @@ AppAsset::register($this);
                             href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name ?></a>, All Rights Reserved</p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="footer-social-links">
+                <!--<div class="footer-social-links">
                     <a href="https://www.facebook.com/AliGoneWild69" target="_blank"><i class="fa fa-facebook"></i></a>
+                </div>-->
+                <div class="footer-social-links">
+                    <a href="<?= Url::to(['/categories'], true) ?>">Categories</a>
+                    <a href="<?= Url::to(['/members'], true) ?>">Members</a>
+                    <a href="<?= Url::to(['/products'], true) ?>">Products</a>
+                    <a href="<?= Url::to(['/contact'], true) ?>">Contact</a>
                 </div>
             </div>
         </div>

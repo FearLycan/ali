@@ -6,11 +6,23 @@ use app\components\Controller;
 use app\models\Image;
 use app\models\Member;
 use app\models\searches\ImageSearch;
+use app\models\searches\MemberSearch;
 use Yii;
 use yii\web\NotFoundHttpException;
 
 class MemberController extends Controller
 {
+    public function actionIndex()
+    {
+        $searchModel = new MemberSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionView($slug)
     {
         $model = $this->findModel($slug);

@@ -399,10 +399,6 @@ ul.pagination > .active > a:hover, ul.pagination > .active > a:focus {
     line-height: 2;
 }
 
-.select2-selection__clear {
-    display: none;
-}
-
 .select2-container--krajee .select2-dropdown {
     border-color: #CACACA;
 }
@@ -460,6 +456,10 @@ li.li-gallery {
 ul.product-gallery {
     overflow: hidden;
     height: 80px;
+}
+
+.select2-container--krajee .select2-selection__clear{
+    top: -3px;
 }
 
 @media only screen and (min-width: 320px) {
