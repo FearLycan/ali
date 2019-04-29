@@ -15,7 +15,7 @@ use yii\helpers\Url;
         <?php if (empty($model->avatar)): ?>
             <?= Html::img(['/images/site/user.png'], ['alt' => $model->name]) ?>
         <?php else: ?>
-            <?= Html::img(['/images/thumbnail/' . $model->avatar], ['alt' => $model->name]) ?>
+            <?= Html::img(['/images/normal/' . $model->avatar], ['alt' => $model->name]) ?>
         <?php endif; ?>
         <div class="shop-item-detail">
 
