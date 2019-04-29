@@ -69,7 +69,8 @@ class ProductUrlController extends Controller
         $model = new ProductUrlForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', "URL was added");
+            return $this->redirect(['create']);
         }
 
         return $this->render('create', [

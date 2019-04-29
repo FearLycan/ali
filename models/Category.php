@@ -24,6 +24,8 @@ class Category extends ActiveRecord
 {
     const BASE_CATEGORY = 0;
     const BASE_CATEGORY_SPORT = -1;
+    const BASE_CATEGORY_UNDERWEAR = -3;
+    const BASE_CATEGORY_JEWELRY = -4;
 
     const FIRST_ITEM_NAME = 'Women\'s Clothing';
     const FIRST_ITEM_SLUG = 'womens-clothing-and-accessories';
@@ -32,6 +34,7 @@ class Category extends ActiveRecord
     const TYPE_WOMEN_CLOTHING = 0;
     const TYPE_SPORT = 1;
     const TYPE_UNDERWEAR = 2;
+    const TYPE_JEWELRY = 3;
 
     const SPORT_ITEM_NAME = 'Sports & Entertainment';
     const SPORT_ITEM_SLUG = 'sports-and-entertainment';
@@ -40,6 +43,11 @@ class Category extends ActiveRecord
     const UNDERWEAR_ITEM_NAME = 'Underwear & Sleepwears';
     const UNDERWEAR_ITEM_SLUG = 'underwear-and-sleepwears';
     const UNDERWEAR_ITEM_ID = 150;
+
+
+    const JEWELRY_ITEM_NAME = 'Jewelry & Accessories';
+    const JEWELRY_ITEM_SLUG = 'jewelry-and-accessories';
+    const JEWELRY_ITEM_ID = 170;
 
 
     const NONE_CATEGORY_ID = 100;
@@ -129,6 +137,8 @@ class Category extends ActiveRecord
                     $type = self::TYPE_SPORT;
                 } elseif ($category->textContent == self::UNDERWEAR_ITEM_NAME) {
                     $type = self::TYPE_UNDERWEAR;
+                } elseif ($category->textContent == self::JEWELRY_ITEM_NAME) {
+                    $type = self::TYPE_JEWELRY;
                 } else {
                     return false;
                 }
@@ -147,6 +157,8 @@ class Category extends ActiveRecord
                         $parent_id = self::BASE_CATEGORY_SPORT;
                     } elseif ($key == 3 && $type == self::TYPE_UNDERWEAR) {
                         $parent_id = self::UNDERWEAR_ITEM_ID;
+                    } elseif ($key == 3 && $type == self::TYPE_JEWELRY) {
+                        $parent_id = self::JEWELRY_ITEM_ID;
                     }
 
                     $cat->parent_id = $parent_id;
@@ -186,7 +198,11 @@ class Category extends ActiveRecord
                     'slug' => $category->slug,
                 ];
 
-                if ($category->parent_id == self::BASE_CATEGORY || $category->parent_id == self::BASE_CATEGORY_SPORT) {
+                if ($category->parent_id == self::BASE_CATEGORY ||
+                    $category->parent_id == self::BASE_CATEGORY_SPORT ||
+                    $category->parent_id == self::BASE_CATEGORY_UNDERWEAR ||
+                    $category->parent_id == self::BASE_CATEGORY_JEWELRY
+                ) {
                     $n = false;
                 } else {
                     $parent_id = $category->parent_id;
