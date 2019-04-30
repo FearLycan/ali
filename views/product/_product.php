@@ -23,7 +23,7 @@ use yii\helpers\Url;
     </div>
     <h4 class="shop-item-title font-alt">
         <a itemprop="url" href="<?= Url::to(['product/view', 'id' => $model->ali_product_id], true) ?>" data-pjax="0">
-            <?= Helper::cutThis($model->name, 45) ?>
+            <?= Helper::cutThis($model->name, 40) ?>
         </a>
     </h4>
 </div>
