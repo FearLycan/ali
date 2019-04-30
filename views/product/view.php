@@ -103,7 +103,7 @@ $this->title = 'Product ' . $model->name . ' - ' . Yii::$app->name;;
                             </div>
                             <h4 class="shop-item-title font-alt">
                                 <a itemprop="url" href="<?= Url::to(['product/view', 'id' => $model->ali_product_id], true) ?>" data-pjax="0">
-                                    <?= Helper::cutThis($model->name, 45) ?>
+                                    <?= Helper::cutThis($model->name, 35) ?>
                                 </a>
                             </h4>
                         </div>

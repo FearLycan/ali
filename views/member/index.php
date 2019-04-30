@@ -43,10 +43,10 @@ $this->title = 'List of all members' . ' - ' . Yii::$app->name;;
 
 <?php $this->beginBlock('script') ?>
 <script>
-    $('ul.pagination').addClass('col-sm-12 col-md-12 col-lg-12 font-alt');
+    $('ul.pagination').addClass('col-xs-12 col-sm-12 col-md-12 col-lg-12 font-alt');
 
     $(document).on('pjax:success', function () {
-        $('ul.pagination').addClass('col-sm-12 col-md-12 col-lg-12 font-alt');
+        $('ul.pagination').addClass('col-xs-12 col-sm-12 col-md-12 col-lg-12 font-alt');
     });
 </script>
 <?php $this->endBlock(); ?>
