@@ -36,7 +36,7 @@ $this->title = 'List of all products' . ' - ' . Yii::$app->name;;
         'dataProvider' => $dataProvider,
         'itemView' => '_product',
         'summary' => false,
-        'itemOptions' => ['class' => 'col-sm-6 col-md-3 col-lg-3'],
+        'itemOptions' => ['class' => 'col-xs-6 col-sm-6 col-md-3 col-lg-3'],
     ]); ?>
 </section>
 <?php Pjax::end(); ?>

@@ -110,7 +110,7 @@ Yii::$app->params['og_type']['content'] = 'article';
             <div class="row multi-columns-row">
 
                 <?php foreach ($members as $model): ?>
-                    <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                         <div class="shop-item">
                             <div class="shop-item-image">
 
