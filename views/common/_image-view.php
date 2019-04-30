@@ -56,7 +56,9 @@ Modal::end();
         $('#modal')
             .modal('show')
             .find('#modalContent')
-            .load($(this).attr('data-value'));
+            .load($(this).attr('data-value'), function (result) {
+                $('.lazy').Lazy();
+            });
         $('.modal-header h3').html(
             '<a href="' + $(this).attr('data-member-url') + '">' + $(this).attr('data-title') + '</a>'
         );

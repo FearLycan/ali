@@ -4,10 +4,19 @@
 (function () {
     $(window).on('load', function () {
         $('.loader').fadeOut();
-        $('.page-loader').delay(350).fadeOut('slow');
+        $('.page-loader').delay(300).fadeOut('slow');
     });
 
     $(document).ready(function () {
+
+        $(function() {
+            $('.lazy').Lazy({
+                scrollDirection: 'vertical',
+                effect: 'fadeIn',
+                enableThrottle: true,
+                throttle: 250
+            });
+        });
 
         /* ---------------------------------------------- /*
          * Initialization General Scripts for all pages
@@ -229,9 +238,9 @@
                 type: "custom",
                 method: function (title, item) {
 
-                    if(item.type == 'country'){
-                        return '<strong>'+item.name+'</strong>' + ' <small><i>('+item.count+') pics</i></small>';
-                    }else {
+                    if (item.type == 'country') {
+                        return '<strong>' + item.name + '</strong>' + ' <small><i>(' + item.count + ') pics</i></small>';
+                    } else {
                         return item.name;
                     }
                 }
@@ -241,10 +250,6 @@
         };
 
         $("input#search").easyAutocomplete(options);
-
-
-
-
 
 
     });

@@ -185,7 +185,9 @@ Yii::$app->params['og_type']['content'] = 'article';
                         <div class="shop-item">
                             <div class="shop-item-image">
 
-                                <?= Html::img(['/images/normal/' . $model->file], ['alt' => $model->member->name]) ?>
+                                <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
+                                     data-src="<?= Url::to(['/images/normal/' . $model->file]) ?>"
+                                     alt="<?= $model->member->name ?>">
 
                                 <div class="shop-item-detail">
                                     <a class="btn btn-round btn-b"

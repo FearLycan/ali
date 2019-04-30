@@ -15,7 +15,8 @@ use yii\helpers\Url;
         <?php if (empty($model->avatar)): ?>
             <?= Html::img(['/images/site/user.png'], ['alt' => $model->name]) ?>
         <?php else: ?>
-            <?= Html::img(['/images/normal/' . $model->avatar], ['alt' => $model->name]) ?>
+            <img data-src="<?= Url::to(['/images/normal/' . $model->avatar]) ?>"
+                 src="<?= Url::to(['/images/site/wait.gif']) ?>" alt="<?= $model->name ?>" class="lazy">
         <?php endif; ?>
         <div class="shop-item-detail">
 

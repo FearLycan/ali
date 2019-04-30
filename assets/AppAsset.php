@@ -26,6 +26,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'lib/jquery.lazy/jquery.lazy.min.js',
         'js/masonry-docs.min.js',
         'js/infinite-scroll.pkgd.min.js',
         'lib/easy-autocomplete/jquery.easy-autocomplete.min.js',
