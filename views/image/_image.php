@@ -26,5 +26,5 @@ $style = '';
         data-member-url="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>"
         class="show-modal button-clear"
 >
-    <img src="<?= $model->getNormalSizeImage() ?>" <?= $style ?> alt="Image"/>
+    <img src="<?= $model->getNormalSizeImage() ?>" <?= $style ?> alt="Image <?= $model->id ?>"/>
 </button>

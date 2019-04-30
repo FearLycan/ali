@@ -47,7 +47,11 @@ Yii::$app->params['og_type']['content'] = 'article';
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <?= Html::img($model->getOriginalSizeImage(), ['class' => 'img-responsive img-center', 'alt' => 'Product Image']) ?>
+                <img class="img-responsive img-center lazy"
+                     src="<?= Url::to(['/images/site/wait.gif']) ?>"
+                     data-src="<?= $model->getOriginalSizeImage() ?>"
+                    alt="<?= $model->member->name ?>">
+
             </div>
 
             <div class="visible-xs col-xs-12 col-sm-12">
@@ -146,7 +150,10 @@ Yii::$app->params['og_type']['content'] = 'article';
                         <?php foreach ($images as $key => $model): ?>
                             <li class="li-gallery">
                                 <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $model->slug]) ?>">
-                                    <?= Html::img($model->getNormalSizeImage(), ['alt' => 'Product Image ' . $key]) ?>
+                                    <img src="<?= Url::to(['/images/site/wait.gif']) ?>"
+                                         data-src="<?= $model->getNormalSizeImage() ?>"
+                                         alt="Product Image <?= $key ?>"
+                                         class="lazy">
                                 </a>
                             </li>
                         <?php endforeach; ?>
