@@ -48,7 +48,13 @@ $this->title = 'List of all members' . ' - ' . Yii::$app->name;;
     $(document).on('pjax:success', function () {
         $('ul.pagination').addClass('col-xs-12 col-sm-12 col-md-12 col-lg-12 font-alt');
 
-        initLazy();
+        $('.lazy').Lazy({
+            scrollDirection: 'vertical',
+            effect: 'fadeIn',
+            effectTime: 1000,
+            enableThrottle: true,
+            throttle: 250
+        });
     });
 </script>
 <?php $this->endBlock(); ?>
