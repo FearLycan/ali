@@ -117,7 +117,10 @@ Yii::$app->params['og_type']['content'] = 'article';
                                 <?php if (empty($model->avatar)): ?>
                                     <?= Html::img(['/images/site/user.png'], ['alt' => 'Avatar']) ?>
                                 <?php else: ?>
-                                    <?= Html::img(['/images/normal/' . $model->avatar], ['alt' => 'Avatar']) ?>
+
+                                    <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
+                                    data-src="<?= Url::to(['/images/normal/' . $model->avatar]) ?>"
+                                         alt="<?= $model->name ?>">
                                 <?php endif; ?>
 
                                 <div class="shop-item-detail">

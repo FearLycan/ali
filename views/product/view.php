@@ -94,7 +94,10 @@ $this->title = 'Product ' . $model->name . ' - ' . Yii::$app->name;;
                             <div class="shop-item-image">
                                 <meta itemprop="name" content="<?= $model->name ?>" />
                                 <meta itemprop="sku" content="<?= $model->ali_product_id ?>" />
-                                <img itemprop="image" src="<?= $model->image ?>" alt="<?= $model->name ?>">
+                                <img class="lazy" itemprop="image"
+                                     src="<?= Url::to(['/images/site/wait.gif']) ?>"
+                                     data-src="<?= $model->image ?>"
+                                     alt="<?= $model->name ?>">
                                 <div class="shop-item-detail">
                                     <a class="btn btn-round btn-b" href="<?= Url::to(['image/index', 'category' => $model->category->slug], true) ?>"
                                        data-pjax="0">
