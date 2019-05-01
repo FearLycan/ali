@@ -29,7 +29,7 @@ Yii::$app->params['og_type']['content'] = 'article';
             <?php endif; ?>
         </div>
         <div class="col-md-4 col-xs-6 col-sm-6">
-            <h2 style="margin-top: 0;">
+            <h1 class="product-title font-alt" style="margin-top: 0;">
                 <?= Html::encode($model->name) ?>
 
                 <?php if ($model->id != Member::MEMBER_ANONYMOUS): ?>
@@ -37,7 +37,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                         <?= Html::img(['/images/flags/' . strtolower($model->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->country->name, 'title' => $model->country->name]) ?>
                     </a>
                 <?php endif; ?>
-            </h2>
+            </h1>
 
             <div class="widget">
                 <ul class="list-group font-alt">
