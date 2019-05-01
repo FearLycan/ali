@@ -88,7 +88,7 @@ class ProductSearch extends Product
         ]);*/
 
         $query->andFilterWhere(['like', 'product.name', $this->name]);
-        $query->andFilterWhere(['=', 'category.slug', $this->category]);
+        $query->andFilterWhere(['in', 'category.id', json_decode($this->category)]);
 
         return $dataProvider;
     }

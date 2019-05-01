@@ -40,7 +40,10 @@ use yii\widgets\ActiveForm;
 
 <div class="col-sm-3 mb-sm-20">
     <?= $form->field($model, 'category')->widget(Select2::classname(), [
-        'data' => ArrayHelper::map(Category::find()->orderBy(['name' => SORT_ASC])->all(), 'slug', 'name'),
+        'data' => ArrayHelper::map(Category::find()
+            ->where(['IS NOT', 'main_category', null])
+            ->orderBy(['name' => SORT_ASC])
+            ->all(), 'main_category', 'name'),
         //'hideSearch' => true,
         'options' => ['placeholder' => 'Category'],
         'pluginOptions' => [
