@@ -2,6 +2,7 @@
 
 namespace app\models\searches;
 
+use app\models\Image;
 use app\models\Member;
 use Yii;
 use yii\base\Model;
@@ -16,7 +17,7 @@ class MemberSearch extends Member
     const SORT_PARAM = 'sort';
 
     public $sort;
-  //  public $name;
+    //  public $name;
     //public $;
 
 
@@ -28,7 +29,7 @@ class MemberSearch extends Member
     public function rules()
     {
         return [
-           [['name', 'country_code'], 'string'],
+            [['name', 'country_code'], 'string'],
         ];
     }
 
@@ -59,9 +60,9 @@ class MemberSearch extends Member
     public function search($params)
     {
         $query = self::find()->where(['member.status' => self::STATUS_ACTIVE]);
-      // $query->joinWith(['country country']);
-        //$query->andWhere(['images.status' => Image::STATUS_ACCEPTED]);
-        //$query->groupBy(['product.id']);
+        $query->joinWith(['images images']);
+        $query->andWhere(['images.status' => Image::STATUS_ACCEPTED]);
+        $query->groupBy(['member.id']);
 
         // add conditions that should always apply here
 
@@ -86,8 +87,8 @@ class MemberSearch extends Member
             'id' => $this->id,
         ]);*/
 
-      //  $query->andFilterWhere(['like', 'member.name', $this->name]);
-      $query->andFilterWhere(['=', 'member.country_code', $this->country_code]);
+        //  $query->andFilterWhere(['like', 'member.name', $this->name]);
+        $query->andFilterWhere(['=', 'member.country_code', $this->country_code]);
 
         return $dataProvider;
     }
