@@ -9,15 +9,19 @@
 
     $(document).ready(function () {
 
-        $(function() {
-            $('.lazy').Lazy({
-                scrollDirection: 'vertical',
-                effect: 'fadeIn',
-                effectTime: 1000,
-                enableThrottle: true,
-                throttle: 250
+        function initLazy() {
+            $(function() {
+                $('.lazy').Lazy({
+                    scrollDirection: 'vertical',
+                    effect: 'fadeIn',
+                    effectTime: 1000,
+                    enableThrottle: true,
+                    throttle: 250
+                });
             });
-        });
+        }
+
+        initLazy();
 
         /* ---------------------------------------------- /*
          * Initialization General Scripts for all pages

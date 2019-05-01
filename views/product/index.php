@@ -48,7 +48,7 @@ $this->title = 'List of all products' . ' - ' . Yii::$app->name;;
     $(document).on('pjax:success', function () {
         $('ul.pagination').addClass('col-xs-12 col-sm-12 col-md-12 col-lg-12 font-alt');
 
-        $('.lazy').Lazy();
+        initLazy();
     });
 </script>
 <?php $this->endBlock(); ?>
