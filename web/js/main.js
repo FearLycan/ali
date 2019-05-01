@@ -13,6 +13,7 @@
             $('.lazy').Lazy({
                 scrollDirection: 'vertical',
                 effect: 'fadeIn',
+                effectTime: 1000,
                 enableThrottle: true,
                 throttle: 250
             });
