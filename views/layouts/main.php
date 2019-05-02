@@ -80,6 +80,7 @@ AppAsset::register($this);
 
     <?= Helper::systemConfig('google-analytics') ?>
     <?= Helper::systemConfig('google-adsense') ?>
+    <?= Helper::systemConfig('google-tag-manager') ?>
 
     <script type="application/ld+json">
     {
@@ -90,12 +91,11 @@ AppAsset::register($this);
         "url": "https://aligonewild.com",
         "logo": "https://aligonewild.com/images/site/og-image.png"
     }
-
-
     </script>
 
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+<?= Helper::systemConfig('google-tag-manager-noscript') ?>
 <?php $this->beginBody() ?>
 
 <div class="page-loader">
