@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $url
+ * @property string $short_url
  * @property int $status
  * @property string $created_at
  */
@@ -37,7 +38,7 @@ class ProductUrl extends \yii\db\ActiveRecord
             [['url'], 'required'],
             [['status'], 'integer'],
             [['created_at'], 'safe'],
-            [['url'], 'string', 'max' => 255],
+            [['url','short_url'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,6 +50,7 @@ class ProductUrl extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'url' => 'Url',
+            'short_url' => 'Short Url',
             'status' => 'Status',
             'created_at' => 'Created At',
         ];

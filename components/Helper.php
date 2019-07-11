@@ -4,6 +4,7 @@ namespace app\components;
 
 
 use app\models\SystemConfig;
+use Yii;
 use yii\helpers\Inflector;
 
 class Helper
@@ -82,12 +83,23 @@ class Helper
         if (empty($system)) {
             $system = new SystemConfig();
             $system->name = $name;
-            $system->author_id = 1;
+            $system->author_id = Yii::$app->user->identity->id;
         }
 
         $system->value = $value;
         $system->save();
 
         return $system;
+    }
+
+    public static function getAliProductID($url)
+    {
+        self::getBetween($url, '', '?');
+
+        $n = explode('/', $url);
+
+        $phrase = end($n);
+
+        return $phrase;
     }
 }
