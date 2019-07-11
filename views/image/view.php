@@ -162,16 +162,6 @@ Yii::$app->params['og_type']['content'] = 'article';
             </div>
         <?php endif; ?>
 
-        <?php if (($long = Helper::systemConfig('long-ad-bottom')) && !$ajaxView): ?>
-            <div class="row" style="margin-top: 10px;">
-                <div class="col-sm-12">
-                    <div class="long long-bottom">
-                        <?= $long ?>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
-
     </div>
 
 

@@ -57,7 +57,7 @@ $this->title = 'Product ' . $model->name . ' - ' . Yii::$app->name;;
     <div class="row">
         <div class="col-md-12">
             <h3 style="margin-top: 0;"><strong><?= Html::encode($model->name) ?></strong>
-                has <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
+                has <?= $dataProvider->getTotalCount() ?> <?= Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
             </h3>
         </div>
         <div class="col-md-12">
@@ -67,16 +67,6 @@ $this->title = 'Product ' . $model->name . ' - ' . Yii::$app->name;;
             ]) ?>
         </div>
     </div>
-
-    <?php if ($long = Helper::systemConfig('long-ad-bottom')): ?>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-12">
-                <div class="long long-bottom">
-                    <?= $long ?>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
 
 </div>
 

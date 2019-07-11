@@ -81,15 +81,6 @@ Yii::$app->params['og_type']['content'] = 'article';
         </div>
     </div>
 
-    <?php if ($long = Helper::systemConfig('long-ad-bottom')): ?>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-12">
-                <div class="long long-bottom">
-                    <?= $long ?>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
 </div>
 
 <?php if ($members = $model->getSimilarByCountry(4)): ?>

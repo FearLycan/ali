@@ -45,29 +45,13 @@ if (!empty($category)) {
 
     <?php endif; ?>
 
-    <?php if ($long = Helper::systemConfig('long-ad-top')): ?>
-        <div class="row" style="margin-bottom: 10px;">
-            <div class="col-sm-12">
-                <div class="long long-top">
-                    <?= $long ?>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-
     <?= $this->render('../common/_image-view', [
         'dataProvider' => $dataProvider,
         'itemView' => '../image/_image',
     ]) ?>
 
-    <?php if ($long = Helper::systemConfig('long-ad-bottom')): ?>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-12">
-                <div class="long long-bottom">
-                    <?= $long ?>
-                </div>
-            </div>
-        </div>
+    <?php if ($g2a = Helper::systemConfig('g2a-reflink-uqmJT7b2DP')): ?>
+        <?= $g2a ?>
     <?php endif; ?>
 
 </div>
