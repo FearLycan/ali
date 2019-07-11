@@ -50,7 +50,7 @@ if (!empty($category)) {
         'itemView' => '../image/_image',
     ]) ?>
 
-    <?php if ($g2a = Helper::systemConfig('g2a-reflink-uqmJT7b2DP')): ?>
+    <?php if ($g2a = Helper::systemConfig('g2a-reflink-uqmJT7b2DP') && Yii::$app->user->isGuest): ?>
         <?= $g2a ?>
     <?php endif; ?>
 

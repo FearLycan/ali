@@ -32,4 +32,8 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 
-/config/web-local.php
+/config/*-local.php
+
+/web/images/normal
+/web/images/original
+/web/images/thumbnail
