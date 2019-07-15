@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -11,7 +12,6 @@ use yii\db\Expression;
  *
  * @property int $id
  * @property string $name
- * @property string $url
  * @property string $ali_owner_member_id
  * @property string $ali_product_id
  * @property string $image
@@ -24,6 +24,7 @@ use yii\db\Expression;
  * @property string $synchronized_at
  *
  * @property Category $category
+ * @property ProductUrl $url
  */
 class Product extends ActiveRecord
 {
@@ -33,7 +34,6 @@ class Product extends ActiveRecord
     const TYPE_PRODUCT = 1;
 
     /**
-     * @param bool $insert
      * @return array
      */
     public function behaviors()
@@ -92,7 +92,7 @@ class Product extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getCategory()
     {
@@ -100,7 +100,15 @@ class Product extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
+     */
+    public function getURL()
+    {
+        return $this->hasOne(ProductUrl::className(), ['id' => 'url_id']);
+    }
+
+    /**
+     * @return ActiveQuery
      */
     public function getImages()
     {
@@ -119,7 +127,7 @@ class Product extends ActiveRecord
         }
 
         $product->name = $crawler->filterXpath("//h1[contains(@class, 'product-name')]")->text();
-        $product->url = $url;
+        //$product->url = $url;
         $product->ali_owner_member_id = $crawler->filterXpath("//a[contains(@class, 'send-mail-btn')]")->extract(['data-id1'])[0];
         $product->ali_product_id = $crawler->filterXpath("//input[contains(@name, 'objectId')]")->extract(['value'])[0];
         $product->image = $crawler->filterXpath("//a[contains(@class, 'ui-image-viewer-thumb-frame')]//img")->extract(['src'])[0];

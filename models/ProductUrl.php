@@ -2,18 +2,18 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%product_url}}".
  *
  * @property int $id
  * @property string $url
- * @property string $short_url
+ * @property string $mobile_url
  * @property int $status
  * @property string $created_at
  */
-class ProductUrl extends \yii\db\ActiveRecord
+class ProductUrl extends ActiveRecord
 {
     const STATUS_NEW = 1;
     const STATUS_TO_DELETE = 2;
@@ -38,7 +38,7 @@ class ProductUrl extends \yii\db\ActiveRecord
             [['url'], 'required'],
             [['status'], 'integer'],
             [['created_at'], 'safe'],
-            [['url','short_url'], 'string', 'max' => 255],
+            [['url', 'mobile_url'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,7 +50,7 @@ class ProductUrl extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'url' => 'Url',
-            'short_url' => 'Short Url',
+            'mobile_url' => 'Mobile Url',
             'status' => 'Status',
             'created_at' => 'Created At',
         ];

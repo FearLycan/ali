@@ -5,9 +5,9 @@ namespace app\commands;
 use app\models\Category;
 use app\models\Image;
 use app\models\Product;
-use app\models\ProductCategory;
 use app\models\ProductUrl;
 use Exception;
+use yii\base\InvalidConfigException;
 use yii\console\Controller;
 use yii\helpers\VarDumper;
 use yii\httpclient\Client;
@@ -30,7 +30,7 @@ class AliController extends Controller
 
     /**
      * @throws Exception
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @throws \yii\httpclient\Exception
      */
     public function actionProduct()
@@ -47,6 +47,7 @@ class AliController extends Controller
                 ->offset($offset)
                 ->all();
 
+            /* @var $product ProductUrl */
             foreach ($products as $product) {
                 $request = $client->createRequest()
                     ->setMethod('get')
@@ -56,6 +57,24 @@ class AliController extends Controller
                 if ($data->isOk) {
                     $crawler = new Crawler($data->content);
 
+                    //eq 0 -> do kary produktu
+                    //eq 46 -> productId
+                    //eq 43 -> pierwsza recenzja?
+
+                    $scripts = $crawler->filterXPath("//script");
+                    die(var_dump($scripts->eq(12)->text()));
+
+                    foreach ($scripts as $key => $script){
+                        die(var_dump($script->textContent));
+                        if (strpos($script->textContent, 'runParams') !== false) {
+                            echo $key . "\n";
+                        }
+                    }
+
+                    die();
+
+                    //die(var_dump($crawler->filterXPath("//script[contains(@text, 'window.runParams')]")->extract(['_text'])));
+                    ///html/body/script[16]
                     $breadcrumb = $crawler
                         ->filterXpath("//div[contains(@class, 'ui-breadcrumb')]");
 
