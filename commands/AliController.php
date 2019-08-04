@@ -113,9 +113,9 @@ class AliController extends Controller
 
         foreach ($products as $product) {
 
-            $link = str_replace(['[',']'],"",$product->image);
+            $link = str_replace(['[',']','"'],'',$product->image);
 
-            $product->image = '["' . $link . '""]';
+            $product->image = '["' . $link . '"]';
             $product->save();
         }
     }
