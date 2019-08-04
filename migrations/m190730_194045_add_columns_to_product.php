@@ -19,7 +19,7 @@ class m190730_194045_add_columns_to_product extends Migration
         $this->addColumn('{{%product}}', 'rating_value', $this->decimal(4,2)->null()->defaultValue(0)->after('review_count'));
         $this->addColumn('{{%product}}', 'price', $this->decimal(4,2)->null()->defaultValue(0)->after('rating_value'));
         $this->addColumn('{{%product}}', 'description', $this->text()->null()->after('price'));
-        $this->addColumn('{{%product}}', 'stars', $this->text()->defaultValue('[]')->null()->after('description'));
+        $this->addColumn('{{%product}}', 'stars', $this->text()->null()->defaultValue('[]')->after('description'));
 
         $this->createIndex('{{%product_brand_index}}', '{{%product}}', 'brand');
         $this->createIndex('{{%product_review_count_index}}', '{{%product}}', 'review_count');
