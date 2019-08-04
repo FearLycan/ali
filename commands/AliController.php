@@ -112,7 +112,10 @@ class AliController extends Controller
         $products = Product::find()->all();
 
         foreach ($products as $product) {
-            $product->image = '[' . $product->image . ']';
+
+            $link = str_replace(['[',']'],"",$product->image);
+
+            $product->image = '["' . $link . '""]';
             $product->save();
         }
     }
