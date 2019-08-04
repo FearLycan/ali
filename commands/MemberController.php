@@ -29,8 +29,7 @@ class MemberController extends Controller
     public function actionRemoveEmpty()
     {
         $images = Image::find()
-            ->where(['status' => Image::STATUS_NEW])
-            ->all();
+            ->where(['status' => Image::STATUS_NEW])->one();
 
         if (empty($images)) {
 
@@ -38,7 +37,7 @@ class MemberController extends Controller
                 $members = Member::find()->all();
             } else {
                 $members = Member::find()
-                    ->where([['>=', 'created_at', date("Y-m-j H:i:s", strtotime('-7 days'))]])
+                    ->where(['>=', 'created_at', date("Y-m-j H:i:s", strtotime('-7 days'))])
                     ->all();
             }
 

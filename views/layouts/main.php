@@ -170,7 +170,7 @@ AppAsset::register($this);
 
     <?php if ($home): ?>
         <section class="home-section bg-dark bg-gradient lazy" id="home"
-                 data-src="<?= Url::to('@web/images/home/home-' . rand(1, 10) . '.jpeg') ?>">
+                 data-src="<?= Url::to('@web/images/home/home-' . rand(1, 25) . '.jpeg') ?>">
             <div class="titan-caption">
                 <div class="caption-content">
                     <div class="font-alt mb-10 titan-title-size-1">Welcome to</div>

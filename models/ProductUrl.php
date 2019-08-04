@@ -9,7 +9,6 @@ use yii\db\ActiveRecord;
  *
  * @property int $id
  * @property string $url
- * @property string $mobile_url
  * @property int $status
  * @property string $created_at
  */
@@ -38,7 +37,7 @@ class ProductUrl extends ActiveRecord
             [['url'], 'required'],
             [['status'], 'integer'],
             [['created_at'], 'safe'],
-            [['url', 'mobile_url'], 'string', 'max' => 255],
+            [['url'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,7 +49,6 @@ class ProductUrl extends ActiveRecord
         return [
             'id' => 'ID',
             'url' => 'Url',
-            'mobile_url' => 'Mobile Url',
             'status' => 'Status',
             'created_at' => 'Created At',
         ];

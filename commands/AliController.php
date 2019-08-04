@@ -41,7 +41,6 @@ class AliController extends Controller
         $client = new Client();
 
         do {
-
             $products = ProductUrl::find()
                 ->where(['status' => ProductUrl::STATUS_NEW])
                 ->offset($offset)
@@ -57,33 +56,15 @@ class AliController extends Controller
                 if ($data->isOk) {
                     $crawler = new Crawler($data->content);
 
-                    //eq 0 -> do kary produktu
-                    //eq 46 -> productId
-                    //eq 43 -> pierwsza recenzja?
-
-                    $scripts = $crawler->filterXPath("//script");
-                    die(var_dump($scripts->eq(12)->text()));
-
-                    foreach ($scripts as $key => $script){
-                        die(var_dump($script->textContent));
-                        if (strpos($script->textContent, 'runParams') !== false) {
-                            echo $key . "\n";
-                        }
-                    }
-
-                    die();
-
-                    //die(var_dump($crawler->filterXPath("//script[contains(@text, 'window.runParams')]")->extract(['_text'])));
-                    ///html/body/script[16]
                     $breadcrumb = $crawler
-                        ->filterXpath("//div[contains(@class, 'ui-breadcrumb')]");
+                        ->filterXpath("//div[contains(@class, 'breadcrumb')]");
 
                     $breadcrumb = $breadcrumb->filterXPath("//a");
 
                     $category_id = Category::create($breadcrumb);
 
                     if ($category_id) {
-                        $product_id = Product::create($crawler, $product->url, $category_id);
+                        $product_id = Product::create($crawler, $category_id);
 
                         Image::extractImages($product_id);
                     }
@@ -101,8 +82,6 @@ class AliController extends Controller
                         . VarDumper::dumpAsString($data->content)
                     );
                 }
-
-
             }
 
             $offset = $offset + $limit;
@@ -125,6 +104,16 @@ class AliController extends Controller
 
         foreach ($products as $product) {
             Image::extractImages($product->id);
+        }
+    }
+
+    public function actionChangeProductImage()
+    {
+        $products = Product::find()->all();
+
+        foreach ($products as $product) {
+            $product->image = '[' . $product->image . ']';
+            $product->save();
         }
     }
 

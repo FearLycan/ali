@@ -43,7 +43,8 @@ class ProductUrlForm extends ProductUrl
         $phrase = end($n);
 
         $model = ProductUrl::find()->where(['like', 'url', $phrase])->one();
-
+        
+        /* @var $model ProductUrl */
         if (!empty($model) && $model->status == ProductUrl::STATUS_NEW) {
             $this->addError($attribute, 'This link is waiting for processing.');
         } elseif (!empty($model) && ($model->status == ProductUrl::STATUS_ERROR || $model->status == ProductUrl::STATUS_TO_DELETE)) {
