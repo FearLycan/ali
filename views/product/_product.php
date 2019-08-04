@@ -13,8 +13,25 @@ use yii\helpers\Url;
     <div class="shop-item-image">
         <meta itemprop="name" content="<?= $model->name ?>"/>
         <meta itemprop="sku" content="<?= $model->ali_product_id ?>"/>
-        <meta itemprop="image" content="<?= $model->image ?>"/>
-        <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>" data-src="<?= $model->image ?>"
+        <meta itemprop="brand" content="<?= $model->brand ?>"/>
+        <meta itemprop="description" content="<?= $model->description ?>"/>
+        <?php foreach ($model->getProductsImages() as $image): ?>
+            <meta itemprop="image" content="<?= $image ?>"/>
+        <?php endforeach; ?>
+
+        <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            <meta itemprop="ratingValue" content="<?= $model->rating_value ?>"/>
+            <meta itemprop="ratingCount" content="<?= $model->review_count ?>"/>
+        </span>
+
+        <span itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+            <meta itemprop="lowPrice" content="<?= $model->price ?>"/>
+            <meta itemprop="highPrice" content="<?= $model->price ?>"/>
+            <meta itemprop="priceCurrency" content="USD"/>
+        </span>
+
+        <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
+             data-src="<?= $model->getProductsImages()[0] ?>"
              alt="<?= $model->name ?>">
         <div class="shop-item-detail">
             <a class="btn btn-round btn-b"

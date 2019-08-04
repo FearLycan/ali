@@ -62,9 +62,12 @@ class SiteController extends Controller
         $model->status = ProductUrl::STATUS_NEW;
         $success = false;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            //$model->mobile_url = 'https://m.aliexpress.com/item/item/' . Helper::getAliProductID($model->url) . '.html';
+            $model->save();
             $success = true;
             $model->url = null;
+            //$model->mobile_url = null;
         }
 
         return $this->renderAjax('../../widgets/views/addNewURLForm', [

@@ -22,7 +22,8 @@
         "yiisoft/yii2-httpclient": "^2.0",
         "symfony/dom-crawler": "^4.1",
         "yiisoft/yii2-imagine": "^2.1",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "ext-json": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

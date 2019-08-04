@@ -5,9 +5,9 @@ namespace app\commands;
 use app\models\Category;
 use app\models\Image;
 use app\models\Product;
-use app\models\ProductCategory;
 use app\models\ProductUrl;
 use Exception;
+use yii\base\InvalidConfigException;
 use yii\console\Controller;
 use yii\helpers\VarDumper;
 use yii\httpclient\Client;
@@ -30,7 +30,7 @@ class AliController extends Controller
 
     /**
      * @throws Exception
-     * @throws \yii\base\InvalidConfigException
+     * @throws InvalidConfigException
      * @throws \yii\httpclient\Exception
      */
     public function actionProduct()
@@ -41,12 +41,12 @@ class AliController extends Controller
         $client = new Client();
 
         do {
-
             $products = ProductUrl::find()
                 ->where(['status' => ProductUrl::STATUS_NEW])
                 ->offset($offset)
                 ->all();
 
+            /* @var $product ProductUrl */
             foreach ($products as $product) {
                 $request = $client->createRequest()
                     ->setMethod('get')
@@ -57,14 +57,14 @@ class AliController extends Controller
                     $crawler = new Crawler($data->content);
 
                     $breadcrumb = $crawler
-                        ->filterXpath("//div[contains(@class, 'ui-breadcrumb')]");
+                        ->filterXpath("//div[contains(@class, 'breadcrumb')]");
 
                     $breadcrumb = $breadcrumb->filterXPath("//a");
 
                     $category_id = Category::create($breadcrumb);
 
                     if ($category_id) {
-                        $product_id = Product::create($crawler, $product->url, $category_id);
+                        $product_id = Product::create($crawler, $category_id);
 
                         Image::extractImages($product_id);
                     }
@@ -82,8 +82,6 @@ class AliController extends Controller
                         . VarDumper::dumpAsString($data->content)
                     );
                 }
-
-
             }
 
             $offset = $offset + $limit;
@@ -106,6 +104,19 @@ class AliController extends Controller
 
         foreach ($products as $product) {
             Image::extractImages($product->id);
+        }
+    }
+
+    public function actionChangeProductImage()
+    {
+        $products = Product::find()->all();
+
+        foreach ($products as $product) {
+
+            $link = str_replace(['[',']','"'],'',$product->image);
+
+            $product->image = '["' . $link . '"]';
+            $product->save();
         }
     }
 

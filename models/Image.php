@@ -160,6 +160,9 @@ class Image extends ActiveRecord
 
                 $request = $client->createRequest()
                     ->setMethod('get')
+                    ->setOptions([
+                        'timeout' => 60, // set timeout to 5 seconds for the case server is not responding
+                    ])
                     ->setData([
                         'productId' => $product->ali_product_id,
                         'ownerMemberId' => $product->ali_owner_member_id,
@@ -236,6 +239,7 @@ class Image extends ActiveRecord
                 unset($images);
 
                 $page++;
+                sleep(2);
             }
 
             $product->synchronized_at = date('Y-m-d H:i:s');

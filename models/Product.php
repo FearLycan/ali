@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use app\components\Helper;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -11,11 +13,16 @@ use yii\db\Expression;
  *
  * @property int $id
  * @property string $name
- * @property string $url
  * @property string $ali_owner_member_id
  * @property string $ali_product_id
  * @property string $image
+ * @property string $brand
+ * @property string $description
+ * @property string $stars
  * @property int $status
+ * @property int $price
+ * @property int $review_count
+ * @property int $rating_value
  * @property int $category_id
  * @property int $type
  * @property int $click
@@ -24,6 +31,7 @@ use yii\db\Expression;
  * @property string $synchronized_at
  *
  * @property Category $category
+ * @property ProductUrl $url
  */
 class Product extends ActiveRecord
 {
@@ -33,7 +41,6 @@ class Product extends ActiveRecord
     const TYPE_PRODUCT = 1;
 
     /**
-     * @param bool $insert
      * @return array
      */
     public function behaviors()
@@ -65,9 +72,10 @@ class Product extends ActiveRecord
     {
         return [
             [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'image', 'category_id'], 'required'],
-            [['status', 'type', 'category_id', 'click'], 'integer'],
-            [['created_at', 'updated_at', 'synchronized_at'], 'safe'],
-            [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'image'], 'string', 'max' => 255],
+            [['status', 'type', 'category_id', 'click', 'review_count'], 'integer'],
+            [['created_at', 'updated_at', 'synchronized_at', 'rating_value', 'price'], 'safe'],
+            [['name', 'url', 'ali_owner_member_id', 'ali_product_id', 'brand'], 'string', 'max' => 255],
+            [['image', 'description', 'stars'], 'string'],
         ];
     }
 
@@ -92,7 +100,7 @@ class Product extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getCategory()
     {
@@ -100,17 +108,26 @@ class Product extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
+     */
+    public function getURL()
+    {
+        return $this->hasOne(ProductUrl::className(), ['id' => 'url_id']);
+    }
+
+    /**
+     * @return ActiveQuery
      */
     public function getImages()
     {
         return $this->hasMany(Image::className(), ['product_id' => 'id']);
     }
 
-    public static function create($crawler, $url, $category_id)
+    public static function create($crawler, $category_id)
     {
+        $content = $crawler->filter('script:contains("window.runParams")')->text();
 
-        $ali_product_id = $crawler->filterXpath("//input[contains(@name, 'objectId')]")->extract(['value'])[0];
+        $ali_product_id = Helper::getBetween($content, '"productId":', ',');
 
         $product = Product::find()->where(['ali_product_id' => $ali_product_id])->one();
 
@@ -118,16 +135,43 @@ class Product extends ActiveRecord
             $product = new Product();
         }
 
-        $product->name = $crawler->filterXpath("//h1[contains(@class, 'product-name')]")->text();
-        $product->url = $url;
-        $product->ali_owner_member_id = $crawler->filterXpath("//a[contains(@class, 'send-mail-btn')]")->extract(['data-id1'])[0];
-        $product->ali_product_id = $crawler->filterXpath("//input[contains(@name, 'objectId')]")->extract(['value'])[0];
-        $product->image = $crawler->filterXpath("//a[contains(@class, 'ui-image-viewer-thumb-frame')]//img")->extract(['src'])[0];
+        $product->name = Helper::getBetween($content, '"subject":"', '",');
+        $product->ali_owner_member_id = Helper::getBetween($content, '"sellerAdminSeq":', ',');
+        $product->ali_product_id = Helper::getBetween($content, '"productId":', ',');
+        $product->image = '[' . Helper::getBetween($content, '"imagePathList":[', '],') . ']';
         $product->type = self::TYPE_PRODUCT;
         $product->status = self::STATUS_ACTIVE;
         $product->category_id = $category_id;
 
-        //$brand = $crawler->filter('li#product-prop-2')->extract(['data-title'])[0];
+        $brand = Helper::getBetween($content, '"attrName":"Brand Name","attrNameId":2,"attrValue":"', '",');
+        $price = Helper::getBetween($content, '"actSkuMultiCurrencyCalPrice":"', '",');
+        $description = Helper::getBetween($content, '"description":"', '",');
+        $rating_value = Helper::getBetween($content, '"averageStar":"', '",');
+
+        $product->brand = $brand;
+        $product->price = $price;
+        $product->description = $description;
+        $product->rating_value = $rating_value;
+        $product->url = 'https://www.aliexpress.com/item/' . $ali_product_id . '.html';
+
+        $fiveStarNum = Helper::getBetween($content, '"fiveStarNum":', ',');
+        $fourStarNum = Helper::getBetween($content, '"fourStarNum":', ',');
+        $threeStarNum = Helper::getBetween($content, '"threeStarNum":', ',');
+        $twoStarNum = Helper::getBetween($content, '"twoStarNum":', ',');
+        $oneStarNum = Helper::getBetween($content, '"oneStarNum":', ',');
+
+        $review_count = $oneStarNum + $twoStarNum + $threeStarNum + $fourStarNum + $fiveStarNum;
+        $product->review_count = $review_count;
+
+        $stars = [
+            'one' => $oneStarNum,
+            'two' => $twoStarNum,
+            'three' => $threeStarNum,
+            'four' => $fourStarNum,
+            'five' => $fiveStarNum,
+        ];
+
+        $product->stars = json_encode($stars);
 
         $product->save();
 
@@ -187,5 +231,13 @@ class Product extends ActiveRecord
             ->all();
 
         return $products;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductsImages()
+    {
+        return json_decode($this->image);
     }
 }

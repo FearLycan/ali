@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%product_url}}".
@@ -12,7 +12,7 @@ use Yii;
  * @property int $status
  * @property string $created_at
  */
-class ProductUrl extends \yii\db\ActiveRecord
+class ProductUrl extends ActiveRecord
 {
     const STATUS_NEW = 1;
     const STATUS_TO_DELETE = 2;
