@@ -105,16 +105,16 @@ class ProductSearch extends Product
                 ],
                 'attributes' => [
                     'rating' => [
-                        'asc' => ['product.click' => SORT_ASC],
-                        'desc' => ['product.click' => SORT_DESC],
+                        'asc' => ['product.click' => SORT_ASC, 'product.id' => SORT_ASC],
+                        'desc' => ['product.click' => SORT_DESC, 'product.id' => SORT_ASC],
                     ],
                     'created_at' => [
-                        'asc' => ['product.created_at' => SORT_ASC],
-                        'desc' => ['product.created_at' => SORT_DESC],
+                        'asc' => ['product.created_at' => SORT_ASC, 'product.id' => SORT_ASC],
+                        'desc' => ['product.created_at' => SORT_DESC, 'product.id' => SORT_ASC],
                     ],
                     'name' => [
-                        'asc' => ['product.name' => SORT_ASC],
-                        'desc' => ['product.name' => SORT_DESC],
+                        'asc' => ['product.name' => SORT_ASC, 'product.id' => SORT_ASC],
+                        'desc' => ['product.name' => SORT_DESC, 'product.id' => SORT_ASC],
                     ],
                 ],
             ]);

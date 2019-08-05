@@ -105,16 +105,16 @@ class MemberSearch extends Member
                 ],
                 'attributes' => [
                     'rating' => [
-                        'asc' => ['member.click' => SORT_ASC],
-                        'desc' => ['member.click' => SORT_DESC],
+                        'asc' => ['member.click' => SORT_ASC, 'member.id' => SORT_ASC],
+                        'desc' => ['member.click' => SORT_DESC, 'member.id' => SORT_ASC],
                     ],
                     'created_at' => [
-                        'asc' => ['member.created_at' => SORT_ASC],
-                        'desc' => ['member.created_at' => SORT_DESC],
+                        'asc' => ['member.created_at' => SORT_ASC, 'member.id' => SORT_ASC],
+                        'desc' => ['member.created_at' => SORT_DESC, 'member.id' => SORT_ASC],
                     ],
                     'name' => [
-                        'asc' => ['member.name' => SORT_ASC],
-                        'desc' => ['member.name' => SORT_DESC],
+                        'asc' => ['member.name' => SORT_ASC, 'member.id' => SORT_ASC],
+                        'desc' => ['member.name' => SORT_DESC, 'member.id' => SORT_ASC],
                     ],
                 ],
             ]);
