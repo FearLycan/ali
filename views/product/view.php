@@ -128,7 +128,7 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
                                     <meta itemprop="priceCurrency" content="USD"/>
                                 </span>
 
-                                <img class="lazy" itemprop="image"
+                                <img class="lazy"
                                      src="<?= Url::to(['/images/site/wait.gif']) ?>"
                                      data-src="<?= $model->getProductsImages()[0] ?>"
                                      alt="<?= $model->name ?>">

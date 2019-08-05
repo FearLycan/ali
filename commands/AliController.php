@@ -113,9 +113,21 @@ class AliController extends Controller
 
         foreach ($products as $product) {
 
-            $link = str_replace(['[',']','"'],'',$product->image);
+            $link = str_replace(['[', ']', '"'], '', $product->image);
 
             $product->image = '["' . $link . '"]';
+            $product->save();
+        }
+    }
+
+    public function actionChangeProductReviewCount()
+    {
+        $products = Product::find()->where(['review_count' => NULL])->all();
+
+        /* @var $product Product */
+        foreach ($products as $product) {
+
+            $product->review_count = 0;
             $product->save();
         }
     }
