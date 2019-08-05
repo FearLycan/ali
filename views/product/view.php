@@ -30,7 +30,7 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
 
                 <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                      <meta itemprop="ratingValue" content="<?= $model->rating_value ?>"/>
-                     <meta itemprop="ratingCount" content="<?= $model->review_count ?>"/>
+                     <meta itemprop="reviewCount" content="<?= $model->review_count ?>"/>
                 </span>
 
                 <span itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
@@ -119,7 +119,7 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
 
                                 <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                                     <meta itemprop="ratingValue" content="<?= $model->rating_value ?>"/>
-                                    <meta itemprop="ratingCount" content="<?= $model->review_count ?>"/>
+                                    <meta itemprop="reviewCount" content="<?= $model->review_count ?>"/>
                                 </span>
 
                                 <span itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
