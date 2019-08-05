@@ -122,12 +122,13 @@ class AliController extends Controller
 
     public function actionChangeProductReviewCount()
     {
-        $products = Product::find()->where(['review_count' => NULL])->all();
+        $products = Product::find()->where(['review_count' => 0])->all();
 
         /* @var $product Product */
         foreach ($products as $product) {
 
-            $product->review_count = 0;
+            $product->review_count = 1;
+            $product->rating_value = 5;
             $product->save();
         }
     }
