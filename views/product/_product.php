@@ -28,6 +28,7 @@ use yii\helpers\Url;
             <meta itemprop="lowPrice" content="<?= $model->price ?>"/>
             <meta itemprop="highPrice" content="<?= $model->price ?>"/>
             <meta itemprop="priceCurrency" content="USD"/>
+            <meta itemprop="offerCount" content="100"/>
         </span>
 
         <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"

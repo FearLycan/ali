@@ -37,6 +37,7 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
                     <meta itemprop="lowPrice" content="<?= $model->price ?>"/>
                     <meta itemprop="highPrice" content="<?= $model->price ?>"/>
                     <meta itemprop="priceCurrency" content="USD"/>
+                    <meta itemprop="offerCount" content="100"/>
                 </span>
 
                 <link itemprop="url" href="<?= Url::to(['product/view', 'id' => $model->ali_product_id], true) ?>"/>
@@ -126,6 +127,7 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
                                     <meta itemprop="lowPrice" content="<?= $model->price ?>"/>
                                     <meta itemprop="highPrice" content="<?= $model->price ?>"/>
                                     <meta itemprop="priceCurrency" content="USD"/>
+                                    <meta itemprop="offerCount" content="100"/>
                                 </span>
 
                                 <img class="lazy"
