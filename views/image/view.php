@@ -127,7 +127,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                         <li class="list-group-item">
                             <?= Html::a('Report this pic', ['ticket/create',
                                 'type' => Ticket::TYPE_IMAGE,
-                                'object_id' => $model->slug
+                                'object_id' => $model->id
                             ], ['class' => 'report-link']) ?>
                         </li>
 

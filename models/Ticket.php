@@ -168,15 +168,15 @@ class Ticket extends \yii\db\ActiveRecord
 
         switch ($type) {
             case self::TYPE_MEMBER:
-                $object = Member::find()->where(['slug' => $id])->one();
+                $object = Member::find()->where(['id' => $id])->one();
                 break;
 
             case self::TYPE_IMAGE:
-                $object = Image::find()->where(['slug' => $id])->one();
+                $object = Image::find()->where(['id' => $id])->one();
                 break;
 
             case self::TYPE_PRODUCT:
-                $object = Product::find()->where(['ali_product_id' => $id])->one();
+                $object = Product::find()->where(['id' => $id])->one();
                 break;
 
             case self::TYPE_OTHER:

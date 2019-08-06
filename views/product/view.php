@@ -57,7 +57,7 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
                                 <li class="list-group-item">
                                     <?= Html::a('Report this product', ['ticket/create',
                                         'type' => Ticket::TYPE_PRODUCT,
-                                        'object_id' => $model->ali_product_id
+                                        'object_id' => $model->id
                                     ], ['class' => 'report-link']) ?>
                                 </li>
                             </ul>
