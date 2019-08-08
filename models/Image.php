@@ -295,14 +295,14 @@ class Image extends ActiveRecord
     public function createThumbnail()
     {
         Img::getImagine()->open($this->getOriginalSizeImage())->thumbnail(new Box(self::THUMBNAIL_MAX_WIDTH, self::THUMBNAIL_MAX_HEIGHT))
-            ->save($this->getThumbnailSizeImage(), ['quality' => 90]);
+            ->save($this->getThumbnailSizeImage(), ['quality' => 85]);
     }
 
     public function createNormal()
     {
         //TODO error holding
         Img::getImagine()->open($this->getOriginalSizeImage())->thumbnail(new Box(self::NORMAL_IMAGE_MAX_WIDTH, self::NORMAL_IMAGE_MAX_HEIGHT))
-            ->save($this->getNormalSizeImage(), ['quality' => 99]);
+            ->save($this->getNormalSizeImage(), ['quality' => 85]);
     }
 
     public function download()

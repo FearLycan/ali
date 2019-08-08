@@ -46,11 +46,36 @@ Yii::$app->params['og_type']['content'] = 'article';
                 </ol>
             </div>
 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <h1 class="product-title font-alt" style="margin-top: 0;">
+                    <?= Html::encode($model->product->name) ?>
+                </h1>
+            </div>
+
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <img class="img-responsive img-center lazy"
                      src="<?= Url::to(['/images/site/wait.gif']) ?>"
                      data-src="<?= $model->getOriginalSizeImage() ?>"
                     alt="<?= $model->member->name ?>">
+
+                <?php if ($images = $model->getMoreUserImages()): ?>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <ul class="product-gallery">
+                                <?php foreach ($images as $key => $model): ?>
+                                    <li class="li-gallery">
+                                        <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $model->slug]) ?>">
+                                            <img src="<?= Url::to(['/images/site/wait.gif']) ?>"
+                                                 data-src="<?= $model->getNormalSizeImage() ?>"
+                                                 alt="Product Image <?= $key ?>"
+                                                 class="lazy">
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
             </div>
 
@@ -140,27 +165,15 @@ Yii::$app->params['og_type']['content'] = 'article';
                     </ul>
                 </div>
 
+                <?php if($block = Helper::systemConfig('live-cam-01')): ?>
+                <hr>
+                <div class="widget">
+                    <?= $block ?>
+                </div>
+                <?php endif; ?>
+
             </div>
         </div>
-
-        <?php if ($images = $model->getMoreUserImages()): ?>
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-8">
-                    <ul class="product-gallery">
-                        <?php foreach ($images as $key => $model): ?>
-                            <li class="li-gallery">
-                                <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $model->slug]) ?>">
-                                    <img src="<?= Url::to(['/images/site/wait.gif']) ?>"
-                                         data-src="<?= $model->getNormalSizeImage() ?>"
-                                         alt="Product Image <?= $key ?>"
-                                         class="lazy">
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            </div>
-        <?php endif; ?>
 
     </div>
 

@@ -1,15 +1,13 @@
 <?php
 
-/* @var $model \app\models\Image */
+/* @var $model Image */
 /* @var $index int */
 
 use app\components\Helper;
+use app\models\Image;
 use yii\helpers\Url;
-
 $style = '';
-
 ?>
-
 <button
         data-value="<?= Url::to(['image/view', 'slug' => $model->slug]) ?>"
         type="button"

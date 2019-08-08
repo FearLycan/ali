@@ -157,3 +157,15 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
         </div>
     </section>
 <?php endif; ?>
+
+<?php if($block = Helper::systemConfig('native-ads-01')): ?>
+    <div class="row">
+        <div class="col-xs-12">
+            <hr>
+            <h2 class="module-title font-alt text-center">
+                You May Also Like
+            </h2>
+            <?= $block ?>
+        </div>
+    </div>
+<?php endif; ?>

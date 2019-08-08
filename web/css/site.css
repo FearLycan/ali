@@ -458,7 +458,7 @@ ul.product-gallery {
     height: 80px;
 }
 
-.select2-container--krajee .select2-selection__clear{
+.select2-container--krajee .select2-selection__clear {
     top: -3px;
 }
 
@@ -473,6 +473,10 @@ ul.product-gallery {
 
     ul.product-gallery {
         height: 40px;
+    }
+
+    h1.product-title {
+        font-size: 18px !important;
     }
 }
 
@@ -489,6 +493,10 @@ ul.product-gallery {
     ul.product-gallery {
         height: 55px;
     }
+
+    h1.product-title {
+        font-size: 18px !important;
+    }
 }
 
 /* Small Devices, Tablets -sm */
@@ -503,6 +511,10 @@ ul.product-gallery {
 
     ul.product-gallery {
         height: 80px;
+    }
+
+    h1.product-title {
+        font-size: 20px !important;
     }
 }
 
@@ -519,6 +531,10 @@ ul.product-gallery {
     ul.product-gallery {
         height: 80px;
     }
+
+    h1.product-title {
+        font-size: 33px !important;
+    }
 }
 
 /* Large Devices, Wide Screens - lg */
@@ -533,5 +549,9 @@ ul.product-gallery {
 
     ul.product-gallery {
         height: 80px;
+    }
+
+    h1.product-title {
+        font-size: 36px !important;
     }
 }

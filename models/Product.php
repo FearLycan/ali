@@ -133,15 +133,15 @@ class Product extends ActiveRecord
 
         if (empty($product)) {
             $product = new Product();
+            $product->type = self::TYPE_PRODUCT;
+            $product->status = self::STATUS_ACTIVE;
+            $product->category_id = $category_id;
         }
 
         $product->name = Helper::getBetween($content, '"subject":"', '",');
         $product->ali_owner_member_id = Helper::getBetween($content, '"sellerAdminSeq":', ',');
         $product->ali_product_id = Helper::getBetween($content, '"productId":', ',');
         $product->image = '[' . Helper::getBetween($content, '"imagePathList":[', '],') . ']';
-        $product->type = self::TYPE_PRODUCT;
-        $product->status = self::STATUS_ACTIVE;
-        $product->category_id = $category_id;
 
         $brand = Helper::getBetween($content, '"attrName":"Brand Name","attrNameId":2,"attrValue":"', '",');
         $price = Helper::getBetween($content, '"actSkuMultiCurrencyCalPrice":"', '",');

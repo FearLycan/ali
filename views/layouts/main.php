@@ -266,12 +266,6 @@ AppAsset::register($this);
             "theme": "classic"
         })
     });
-    $.ajax({
-        url: "<?=Url::to('@web/js/ads.js', true) ?>",
-        dataType: "script"
-    }).fail(function () {
-        $('#nMOFPOKuop').css({'display': 'block'})
-    });
 </script>
 </body>
 </html>
