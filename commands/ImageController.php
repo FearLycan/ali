@@ -27,4 +27,22 @@ class ImageController extends Controller
 
         } while (!empty($images));
     }
+
+    public function actionDownloadCron()
+    {
+        $images = Image::find()
+            ->where(['status' => Image::STATUS_PENDING])
+            ->limit(100)
+            ->all();
+
+        /* @var $image Image */
+        foreach ($images as $image) {
+            if ($image->download()) {
+                $image->createNormal();
+                $image->createThumbnail();
+                $image->status = Image::STATUS_ACCEPTED;
+                $image->save();
+            }
+        }
+    }
 }
