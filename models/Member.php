@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -170,7 +171,7 @@ class Member extends ActiveRecord
 
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getImages()
     {
@@ -178,7 +179,7 @@ class Member extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getCountry()
     {
@@ -188,8 +189,11 @@ class Member extends ActiveRecord
     public function getSimilarByCountry($limit = 4)
     {
         $members = self::find()
-            ->where(['country_code' => $this->country_code, 'status' => self::STATUS_ACTIVE])
-            ->andWhere(['!=', 'id', $this->id])
+            ->where(['country_code' => $this->country_code, 'member.status' => self::STATUS_ACTIVE])
+            ->andWhere(['!=', 'member.id', $this->id])
+            ->joinWith(['images images'])
+            ->andWhere(['images.status' => Image::STATUS_ACCEPTED])
+            ->groupBy(['member.id'])
             ->orderBy(new Expression('rand()'))
             ->limit($limit)
             ->all();

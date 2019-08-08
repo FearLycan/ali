@@ -18,7 +18,9 @@ class TicketController extends Controller
                 $this->notFound();
             }
 
-            if (!($object = Ticket::getObject($type, $object_id))) {
+            $object = Ticket::getObject($type, $object_id);
+
+            if (empty($object)) {
                 $this->notFound();
             }
         }
