@@ -74,7 +74,7 @@ $this->title = 'Create new ticket' . ' - ' . Yii::$app->name;
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <img src="<?= $object->image ?>" class="img-responsive img-center img-thumbnail" alt="Product">
+                        <img src="<?= $object->getProductsImages()[0] ?>" class="img-responsive img-center img-thumbnail" alt="Product">
                     </div>
 
                 </div>
