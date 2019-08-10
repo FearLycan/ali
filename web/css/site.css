@@ -476,7 +476,11 @@ ul.product-gallery {
     }
 
     h1.product-title {
-        font-size: 18px !important;
+        font-size: 18px;
+    }
+
+    #product {
+        max-height: 350px;
     }
 }
 
@@ -497,6 +501,10 @@ ul.product-gallery {
     h1.product-title {
         font-size: 18px !important;
     }
+
+    #product {
+        max-height: 350px;
+    }
 }
 
 /* Small Devices, Tablets -sm */
@@ -515,6 +523,10 @@ ul.product-gallery {
 
     h1.product-title {
         font-size: 20px !important;
+    }
+
+    #product {
+        max-height: 400px;
     }
 }
 
@@ -535,6 +547,10 @@ ul.product-gallery {
     h1.product-title {
         font-size: 33px !important;
     }
+
+    #product {
+        max-height: 450px
+    }
 }
 
 /* Large Devices, Wide Screens - lg */
@@ -554,12 +570,16 @@ ul.product-gallery {
     h1.product-title {
         font-size: 36px !important;
     }
+
+    #product {
+        max-height: 500px;
+    }
 }
 
-li.li-gallery:hover{
+li.li-gallery:hover {
     cursor: pointer;
 }
 
-li.li-gallery-border{
+li.li-gallery-border {
     border: 1px solid #111111;
 }
