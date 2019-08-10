@@ -53,7 +53,7 @@ Yii::$app->params['og_type']['content'] = 'article';
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <img class="img-responsive img-center lazy"
+                <img class="img-responsive img-center lazy" id="product"
                      src="<?= Url::to(['/images/site/wait.gif']) ?>"
                      data-src="<?= $model->getOriginalSizeImage() ?>"
                     alt="<?= $model->member->name ?>">
@@ -62,14 +62,16 @@ Yii::$app->params['og_type']['content'] = 'article';
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <ul class="product-gallery">
-                                <?php foreach ($images as $key => $model): ?>
-                                    <li class="li-gallery">
-                                        <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $model->slug]) ?>">
+                                <?php foreach ($images as $key => $image): ?>
+                                    <li class="li-gallery <?= $key != 0 ?: 'li-gallery-border' ?>" data-key="<?= $key ?>">
+                                       <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $image->slug]) ?>">
                                             <img src="<?= Url::to(['/images/site/wait.gif']) ?>"
-                                                 data-src="<?= $model->getNormalSizeImage() ?>"
+                                                 data-src="<?= $image->getNormalSizeImage() ?>"
+                                                 data-original-size="<?= $image->getOriginalSizeImage() ?>"
+                                                 data-url="<?= Url::to(['image/view', 'slug' => $image->slug]) ?>"
                                                  alt="Product Image <?= $key ?>"
                                                  class="lazy">
-                                        </a>
+                                       </a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>

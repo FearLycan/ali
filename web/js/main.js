@@ -10,7 +10,7 @@
     $(document).ready(function () {
 
         function initLazy() {
-            $(function() {
+            $(function () {
                 $('.lazy').Lazy({
                     scrollDirection: 'vertical',
                     effect: 'fadeIn',
@@ -259,4 +259,22 @@
 
     });
 })(jQuery);
+$(document).on("click", "ul.product-gallery li a", function (e) {
+    e.preventDefault();
+    var scr = $(this).find('img').data('original-size');
+    $('img#product').attr('src', scr);
+
+    $('ul.product-gallery li').removeClass('li-gallery-border');
+    $(this).parent().addClass('li-gallery-border');
+
+    var url = $(this).find('img').data('url');
+    if (url) {
+        if (typeof (history.pushState) != "undefined") {
+            window.history.pushState("object or string", "Title", url);
+        }
+    }
+
+
+    return false;
+});
 

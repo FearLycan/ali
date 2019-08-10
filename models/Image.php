@@ -336,7 +336,7 @@ class Image extends ActiveRecord
     {
         $images = self::find()
             ->where(['member_id' => $this->member_id, 'status' => self::STATUS_ACCEPTED])
-            ->andWhere(['!=', 'id', $this->id])
+            //->andWhere(['!=', 'id', $this->id])
             //->orderBy(new Expression('rand()'))
             ->limit($limit)
             ->all();
