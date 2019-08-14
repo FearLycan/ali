@@ -136,7 +136,7 @@ AppAsset::register($this);
         ],
     ];
 
-    $items[] = '<li><button type="button" class="button-clear button-nav" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search" aria-hidden="true"></i></button></li>';
+    $items[] = '<li><button type="button" class="button-clear button-nav" data-toggle="modal" data-target="#searchModal">Search<i class="fa fa-search" aria-hidden="true" style="margin-left: 5px;"></i></button></li>';
 
     if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()) {
         $items[] = ['label' => 'Admin', 'url' => ['/admin']];

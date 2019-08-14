@@ -2533,6 +2533,7 @@ Google map
   font-size: 14px;
   color: #111;
   margin: 15px 0 5px;
+  min-height: 40px;
 }
 
 /* Shop item hover */
