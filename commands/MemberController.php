@@ -34,14 +34,13 @@ class MemberController extends Controller
         if (empty($images)) {
 
             if ($this->all) {
-                $members = Member::find()->all();
+                $members = Member::find();
             } else {
                 $members = Member::find()
-                    ->where(['>=', 'created_at', date("Y-m-j H:i:s", strtotime('-7 days'))])
-                    ->all();
+                    ->where(['>=', 'created_at', date("Y-m-j H:i:s", strtotime('-7 days'))]);
             }
 
-            foreach ($members as $member) {
+            foreach ($members->each(100) as $member) {
                 if (!$member->images) {
                     $member->delete();
                 } else {
