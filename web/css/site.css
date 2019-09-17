@@ -583,3 +583,22 @@ li.li-gallery:hover {
 li.li-gallery-border {
     border: 1px solid #111111;
 }
+
+.btn-facebook {
+    background: #4267b2;
+}
+
+.btn-facebook:hover {
+    background: #3B5998;
+}
+
+.btn-twitter {
+    background: #38A1F3;
+    border-color: #38A1F3;
+}
+
+.btn-twitter:hover {
+    background-color: #005fd1;
+    border-color: #005fd1;
+}
+

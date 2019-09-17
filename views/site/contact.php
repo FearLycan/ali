@@ -26,6 +26,15 @@ $this->title = 'Contact' . ' - ' . Yii::$app->name;
                 </div>
             <?php endif; ?>
 
+            <div class="row" style="margin-bottom: 30px;">
+                <div class="col-sm-2 col-lg-offset-4">
+                        <a href="https://www.facebook.com/aligonewild69" target="_blank" class="btn btn-primary btn-round btn-facebook" type="button"><i class="fa fa-facebook"></i> Facebook</a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="https://twitter.com/AliGoneWild69" class="btn btn-primary btn-round btn-twitter" target="_blank" type="button"><i class="fa fa-twitter"></i> Twitter</a>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <h2 class="module-title font-alt">Get in touch</h2>

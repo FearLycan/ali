@@ -214,6 +214,8 @@ AppAsset::register($this);
                     <a href="<?= Url::to(['/members'], true) ?>">Members</a>
                     <a href="<?= Url::to(['/products'], true) ?>">Products</a>
                     <a href="<?= Url::to(['/contact'], true) ?>">Contact</a>
+                    <a href="https://www.facebook.com/aligonewild69" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://twitter.com/AliGoneWild69" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
