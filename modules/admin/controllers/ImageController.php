@@ -6,10 +6,8 @@ namespace app\modules\admin\controllers;
 use app\modules\admin\models\forms\ValuationImageForm;
 use Yii;
 use app\modules\admin\models\Image;
-use app\modules\admin\models\forms;
 use app\modules\admin\models\searches\ImageSearch;
 use app\modules\admin\components\Controller;
-use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -23,14 +21,14 @@ class ImageController extends Controller
      */
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -105,6 +103,8 @@ class ImageController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

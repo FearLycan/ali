@@ -19,15 +19,16 @@ class CategoryController extends Controller
      */
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-        ];
+        ]);
     }
+
 
     /**
      * Lists all Category models.
