@@ -78,6 +78,7 @@ AppAsset::register($this);
 
     <?php $this->head() ?>
 
+    <?= Helper::systemConfig('facebook-pixel') ?>
     <?= Helper::systemConfig('google-analytics') ?>
     <?= Helper::systemConfig('google-adsense') ?>
 
