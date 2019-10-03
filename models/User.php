@@ -228,18 +228,6 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->getSecurity()->generatePasswordHash($password);
     }
 
-    public function sendEmail()
-    {
-        Yii::$app->mailer
-            ->compose("welcome-message", [
-                'user' => $this,
-            ])
-            ->setFrom([Yii::$app->params['site-email'] => Yii::$app->name])
-            ->setTo([$this->email => $this->name])
-            ->setSubject('Your account has been created')
-            ->send();
-    }
-
     public static function generateUniqueRandomString()
     {
         $code = Yii::$app->getSecurity()->generateRandomString(32);

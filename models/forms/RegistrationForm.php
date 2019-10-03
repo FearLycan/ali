@@ -47,4 +47,17 @@ class RegistrationForm extends User
             $this->addError($attribute, 'The Password and Confirm Password that you enter must be identical.');
         }
     }
+
+
+    public function sendEmail()
+    {
+        Yii::$app->mailer
+            ->compose("account-confirm", [
+                'user' => $this,
+            ])
+            ->setFrom([Yii::$app->params['admin-email'] => Yii::$app->name])
+            ->setTo([$this->email => $this->name])
+            ->setSubject('Your account has been created')
+            ->send();
+    }
 }

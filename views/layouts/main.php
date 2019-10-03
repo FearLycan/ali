@@ -78,6 +78,7 @@ AppAsset::register($this);
 
     <?php $this->head() ?>
 
+    <?= Helper::systemConfig('google-tag-manager') ?>
     <?= Helper::systemConfig('facebook-pixel') ?>
     <?= Helper::systemConfig('google-analytics') ?>
     <?= Helper::systemConfig('google-adsense') ?>
@@ -95,6 +96,7 @@ AppAsset::register($this);
 
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+<?= Helper::systemConfig('google-tag-manager-noscript') ?>
 <?php $this->beginBody() ?>
 
 <div class="page-loader">

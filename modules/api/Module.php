@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\admin;
+namespace app\modules\api;
 
 /**
  * admin module definition class
  */
-class Admin extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\admin\controllers';
+    public $controllerNamespace = 'app\modules\api\controllers';
 
     /**
      * {@inheritdoc}
