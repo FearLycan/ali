@@ -100,6 +100,8 @@ class Helper
 
         $phrase = end($n);
 
+        $phrase = str_replace(".html", "", $phrase);
+
         return $phrase;
     }
 }

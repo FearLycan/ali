@@ -43,7 +43,7 @@ class ProductUrlForm extends ProductUrl
         $phrase = end($n);
 
         $model = ProductUrl::find()->where(['like', 'url', $phrase])->one();
-        
+
         /* @var $model ProductUrl */
         if (!empty($model) && $model->status == ProductUrl::STATUS_NEW) {
             $this->addError($attribute, 'This link is waiting for processing.');
@@ -53,5 +53,14 @@ class ProductUrlForm extends ProductUrl
             $id = str_replace(".html", "", $phrase);
             $this->addError($attribute, 'We already have this link. ' . Html::a('Check it', ['product/view', 'id' => $id], ['data-pjax' => 0, 'id' => 'product_link']));
         }
+    }
+
+    public function beforeSave($insert)
+    {
+        $product_id = Helper::getAliProductID($this->url);
+
+        $this->url = 'https://www.aliexpress.com/item/' . $product_id . '.html';
+
+        return parent::beforeSave($insert);
     }
 }
