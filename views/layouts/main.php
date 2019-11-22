@@ -175,10 +175,10 @@ AppAsset::register($this);
             <div class="titan-caption">
                 <div class="caption-content">
                     <div class="font-alt mb-10 titan-title-size-1">Welcome to</div>
-                    <div class="font-alt mb-30 titan-title-size-4"><?= Yii::$app->name ?></div>
-                    <div class="font-alt mb-10 titan-title-size-1">The biggest customer pics collection from Aliexpress
+                    <h1 class="font-alt mb-30 titan-title-size-4"><?= Yii::$app->name ?></h1>
+                    <h2 class="font-alt mb-10 titan-title-size-1">The biggest customer pics collection from Aliexpress
                         feedback.
-                    </div>
+                    </h2>
                 </div>
             </div>
         </section>
