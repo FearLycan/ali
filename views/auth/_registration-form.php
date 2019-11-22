@@ -10,10 +10,11 @@ use kartik\form\ActiveForm;
 <div class="col-sm-6 col-sm-offset-3">
     <?php $form = ActiveForm::begin([
         'enableAjaxValidation' => true,
+        'id' => 'registrationForm',
         'options' => ['class' => 'form-default'],
     ]) ?>
 
-    <h2 class="text-center font-alt">Registration</h2>
+    <h1 class="text-center font-alt">Registration</h1>
 
     <div class="row" style="margin-bottom: 10px;">
         <div class="col-md-6">

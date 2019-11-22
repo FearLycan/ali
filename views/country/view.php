@@ -8,13 +8,13 @@ $this->title = 'Pics collection from ' . $country->name . ' - ' . Yii::$app->nam
 <div class="view-image">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-            <h2 class="module-title font-alt" data-type="<?= $country->id ?>">
+            <h1 class="module-title font-alt" data-type="<?= $country->id ?>">
                 <?= Html::encode($country->name) ?>
-            </h2>
-            <div class="module-subtitle font-serif">
+            </h1>
+            <h2 class="module-subtitle font-serif">
                 Pics collection from <?= Html::encode($country->name) ?> <br>
                 <?= $dataProvider->getTotalCount() ?> <?= Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
-            </div>
+            </h2>
         </div>
 
         <div class="col-md-12">

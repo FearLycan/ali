@@ -12,12 +12,12 @@ $this->title = 'Create new ticket' . ' - ' . Yii::$app->name;
     <div class="row">
 
         <div class="col-sm-6 col-sm-offset-3">
-            <h2 class="module-title font-alt">
+            <h1 class="module-title font-alt">
                 Create new ticket
-            </h2>
-            <div class="module-subtitle font-serif">
+            </h1>
+            <h2 class="module-subtitle font-serif">
 
-            </div>
+            </h2>
         </div>
 
         <?php if (Yii::$app->session->hasFlash('success')): ?>

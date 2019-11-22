@@ -37,7 +37,7 @@ $this->title = 'Contact' . ' - ' . Yii::$app->name;
 
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
-                    <h2 class="module-title font-alt">Get in touch</h2>
+                    <h1 class="module-title font-alt">Get in touch</h1>
                     <div class="module-subtitle font-serif"></div>
                 </div>
             </div>

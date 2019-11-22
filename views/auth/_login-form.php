@@ -9,9 +9,10 @@ use kartik\form\ActiveForm;
 <div class="col-sm-4 col-sm-offset-4">
     <?php $form = ActiveForm::begin([
         'options' => ['class' => 'form-default'],
+        'id' => 'loginForm'
     ]) ?>
 
-    <h2 class="text-center font-alt">LOGIN</h2>
+    <h1 class="text-center font-alt">LOGIN</h1>
 
     <?= $form->field($model, 'email', [
         'addon' => ['prepend' => ['content' => '<i class="fa fa-user" aria-hidden="true"></i>']]

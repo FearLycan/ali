@@ -9,12 +9,12 @@ $this->title = 'All Categories' . ' - ' . Yii::$app->name;
 
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-            <h2 class="module-title font-alt" data-type="0">
+            <h1 class="module-title font-alt" data-type="0">
                 All Categories
-            </h2>
-            <div class="module-subtitle font-serif">
+            </h1>
+            <h2 class="module-subtitle font-serif">
                 We have <?= count($categories) ?> categories
-            </div>
+            </h2>
         </div>
     </div>
 

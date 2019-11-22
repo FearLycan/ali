@@ -16,12 +16,12 @@ $this->title = 'List of all members' . ' - ' . Yii::$app->name;;
 
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-        <h2 class="module-title font-alt">
+        <h1 class="module-title font-alt">
             List of members
-        </h2>
-        <div class="module-subtitle font-serif" style="margin-bottom: 0;">
+        </h1>
+        <h2 class="module-subtitle font-serif" style="margin-bottom: 0;">
             We have <?= $dataProvider->getTotalCount() ?> members
-        </div>
+        </h2>
     </div>
 </div>
 
