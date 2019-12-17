@@ -128,15 +128,26 @@ Yii::$app->params['og_type']['content'] = 'article';
                         </li>
                         <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
                             <li class="list-group-item">
-                                <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>" target="_blank" data-href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>">
+                                <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>" target="_blank">
                                     Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
                                 </a>
+                                <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+                                    <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" style="display: none;" target="_blank">
+                                        Go to Aliexpress
+                                    </a>
+                                <?php endif; ?>
                             </li>
                         <?php endif; ?>
                         <li class="list-group-item">
-                            <a id="product" href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>" target="_blank" data-href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>">
+                            <a id="product" href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>" target="_blank">
                                 Go to product page on Aliexpress
                             </a>
+
+                            <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+                                <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" style="display: none;" target="_blank">
+                                    Go to Aliexpress
+                                </a>
+                            <?php endif; ?>
                         </li>
                         <li class="list-group-item">
                             <a href="<?= Url::to(['product/view', 'id' => $model->product->ali_product_id]) ?>">
@@ -149,6 +160,11 @@ Yii::$app->params['og_type']['content'] = 'article';
                                     See more pics from <strong><?= $model->member->country->name ?>
                                         (<?= $model->member->country->countPics() ?>) </strong>
                                 </a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if(isset(Yii::$app->params['smartlink']['aliexpress'] )): ?>
+                            <li class="list-group-item">
+                                <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">Go to Aliexpress</a>
                             </li>
                         <?php endif; ?>
                         <li class="list-group-item">
@@ -166,6 +182,14 @@ Yii::$app->params['og_type']['content'] = 'article';
 
                     </ul>
                 </div>
+
+                <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+                    <div class="widget">
+                        <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">
+                            <img src="<?= Url::to('@web/images/site/aliexpress.webp') ?>" class="img-responsive">
+                        </a>
+                    </div>
+                <?php endif; ?>
 
                 <?php if($block = Helper::systemConfig('live-cam-01')): ?>
                 <hr>

@@ -42,10 +42,17 @@ Yii::$app->params['og_type']['content'] = 'article';
             <div class="widget">
                 <ul class="list-group font-alt">
                     <li class="list-group-item">
-                        <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>" target="_blank" data-href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>">
+                        <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>" target="_blank">
                             Go to <strong><?= Html::encode($model->name) ?></strong> Aliexpress profile
                         </a>
                     </li>
+
+                    <?php if(isset(Yii::$app->params['smartlink']['aliexpress'] )): ?>
+                        <li class="list-group-item">
+                            <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">Go to Aliexpress</a>
+                        </li>
+                    <?php endif; ?>
+
                     <li class="list-group-item">
                         <?= Html::a('Report this member', ['ticket/create',
                             'type' => Ticket::TYPE_MEMBER,
@@ -60,6 +67,11 @@ Yii::$app->params['og_type']['content'] = 'article';
                     <?php endif; ?>
                 </ul>
             </div>
+
+        </div>
+
+        <div  class="col-md-4 col-xs-12 col-sm-6">
+
         </div>
     </div>
     <div class="row">
