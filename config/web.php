@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\ArrayHelper;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -17,7 +19,10 @@ $config = [
             'appendTimestamp' => true,
         ],
     ],
-    'params' => $params,
+    'params' => ArrayHelper::merge(
+        require __DIR__ . '/params.php',
+        require __DIR__ . '/params-local.php'
+    ),
 ];
 
 if (YII_ENV_DEV) {

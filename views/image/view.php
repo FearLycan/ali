@@ -128,13 +128,13 @@ Yii::$app->params['og_type']['content'] = 'article';
                         </li>
                         <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
                             <li class="list-group-item">
-                                <a href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>">
+                                <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>" target="_blank" data-href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>">
                                     Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
                                 </a>
                             </li>
                         <?php endif; ?>
                         <li class="list-group-item">
-                            <a href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>">
+                            <a id="product" href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>" target="_blank" data-href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>">
                                 Go to product page on Aliexpress
                             </a>
                         </li>

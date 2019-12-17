@@ -278,3 +278,19 @@ $(document).on("click", "ul.product-gallery li a", function (e) {
     return false;
 });
 
+function openLink(url, target = '_blank') {
+    window.open(url, target);
+}
+
+$(document).on('click', 'a#member, a#product', function(e){
+    e.preventDefault();
+
+    let url = $(this).attr('href');
+    let smart = $(this).data('href');
+
+    if(smart){
+        openLink(smart);
+    }
+
+    openLink(url);
+});

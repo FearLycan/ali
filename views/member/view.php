@@ -42,7 +42,7 @@ Yii::$app->params['og_type']['content'] = 'article';
             <div class="widget">
                 <ul class="list-group font-alt">
                     <li class="list-group-item">
-                        <a href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>">
+                        <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>" target="_blank" data-href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>">
                             Go to <strong><?= Html::encode($model->name) ?></strong> Aliexpress profile
                         </a>
                     </li>
