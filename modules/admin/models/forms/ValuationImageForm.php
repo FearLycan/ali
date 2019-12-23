@@ -23,7 +23,7 @@ class ValuationImageForm extends \app\modules\admin\models\Image
     {
         $images = self::find()
             ->where(['status' => self::STATUS_NEW])
-            ->select(['id', 'url']);
+            ->select(['id', 'url'])->limit(20);
 
         if ($this->product_id) {
             $images->andWhere(['product_id' => $this->product_id]);
