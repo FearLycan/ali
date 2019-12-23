@@ -28,11 +28,11 @@ class ProductController extends Controller
     public function actionDownload($id = null)
     {
         if ($id == null) {
-            echo "ID can not be null";
+            echo "ID can not be null \n";
             return;
         }
 
-        $images = Image::findOne(['id' => $id, 'status' => Image::STATUS_PENDING]);
+        $images = Image::findOne(['product_id' => $id, 'status' => Image::STATUS_PENDING]);
 
         if (!empty($images)) {
             /* @var $image Image */
@@ -45,7 +45,7 @@ class ProductController extends Controller
                 }
             }
         } else {
-            echo "No product with ID: " . $id;
+            echo "No product with ID: " . $id ."\n";
             return;
         }
     }
