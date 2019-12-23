@@ -113,9 +113,10 @@ class ImageController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionValuation()
+    public function actionValuation($product_id = null)
     {
         $model = new ValuationImageForm();
+        $model->product_id = $product_id;
 
         if ($model->load(Yii::$app->request->post())) {
 

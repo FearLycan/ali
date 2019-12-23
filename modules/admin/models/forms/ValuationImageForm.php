@@ -23,12 +23,14 @@ class ValuationImageForm extends \app\modules\admin\models\Image
     {
         $images = self::find()
             ->where(['status' => self::STATUS_NEW])
-            ->select(['id', 'url'])
-            ->limit(20)
-            ->all();
+            ->select(['id', 'url']);
+
+        if ($this->product_id) {
+            $images->andWhere(['product_id' => $this->product_id]);
+        }
 
         $imageList = [];
-        foreach ($images as $image) {
+        foreach ($images->each(20) as $image) {
             $imageList[$image->id] = Html::img($image->url, ['class' => 'img-responsive img-thumbnail']);
         }
 
