@@ -32,7 +32,7 @@ class ProductController extends Controller
             return;
         }
 
-        $images = Image::findOne(['product_id' => $id, 'status' => Image::STATUS_PENDING]);
+        $images = Image::findAll(['product_id' => $id, 'status' => Image::STATUS_PENDING]);
 
         if (!empty($images)) {
             /* @var $image Image */
