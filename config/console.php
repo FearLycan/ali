@@ -1,6 +1,7 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
+use yii\helpers\ArrayHelper;
+
 $db = require __DIR__ . '/db.php';
 
 $config = [
@@ -36,7 +37,10 @@ $config = [
         ],
         'db' => $db,
     ],
-    'params' => $params,
+    'params' => ArrayHelper::merge(
+        require __DIR__ . '/params.php',
+        require __DIR__ . '/params-local.php'
+    ),
     /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.

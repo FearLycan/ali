@@ -16,6 +16,7 @@ class m191230_082109_create_visitors_table extends Migration
             'id' => $this->primaryKey(),
             'ip' => $this->string(15)->notNull(),
             'country' => $this->string()->null(),
+            'count' => $this->integer()->defaultValue(0),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null()
         ]);
