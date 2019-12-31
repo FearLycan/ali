@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * @property string $ip
  * @property integer $count
  * @property string $country
+ * @property string $comment
  * @property string $created_at
  * @property string $updated_at
  */
@@ -53,7 +54,7 @@ class Visitor extends ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['ip'], 'string', 'max' => 15],
             [['count'], 'integer'],
-            [['country'], 'string', 'max' => 255],
+            [['country', 'comment'], 'string', 'max' => 255],
         ];
     }
 
@@ -66,6 +67,7 @@ class Visitor extends ActiveRecord
             'id' => 'ID',
             'ip' => 'Ip',
             'country' => 'Country',
+            'comment' => 'Comment',
             'count' => 'Count',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

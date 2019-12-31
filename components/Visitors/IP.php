@@ -33,7 +33,7 @@ class IP
 
         if (!$visitor) {
             $visitor = new Visitor();
-            $visitor->count = 0;
+            $visitor->count = 1;
             $visitor->ip = $ip;
             $visitor->save();
         } else {
