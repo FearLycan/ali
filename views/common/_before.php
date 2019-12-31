@@ -1,0 +1,1 @@
+<img src="<?= \yii\helpers\Url::to('@web/images/site/aliexpress.webp') ?>">

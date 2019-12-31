@@ -42,6 +42,9 @@ class ImageSearch extends Image
      *
      * @param array $params
      *
+     * @param null $query
+     * @param null $category
+     * @param null $country
      * @return ActiveDataProvider
      */
     public function search($params, $query = null, $category = null, $country = null)

@@ -2,9 +2,10 @@
 
 /* @var $this yii\web\View */
 
+use app\components\LinkPager;
 use yii\helpers\Html;
-use yii\widgets\ListView;
 use yii\bootstrap\Modal;
+use yii\widgets\ListView;
 
 ?>
 <?= ListView::widget([
@@ -13,9 +14,12 @@ use yii\bootstrap\Modal;
     'summary' => false,
     'itemOptions' => ['class' => 'grid__item'],
     'itemView' => $itemView,
+    'afterItem' => function ($model, $key, $index, $widget) {
+        return '<div class="grid__item"><img src="'.\yii\helpers\Url::to('@web/images/site/aliexpress.webp').'"></div>';
+    },
     'pager' => [
         'maxButtonCount' => 0,
-        'class' => \app\components\LinkPager::className(),
+        'class' => LinkPager::className(),
         'prevOptions' => ['rel' => 'prev'],
         'nextOptions' => ['rel' => 'next']
     ],
