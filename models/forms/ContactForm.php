@@ -10,6 +10,7 @@ class ContactForm extends ActiveRecord
     public $name;
     public $email;
     public $message;
+    public $web;
 
     /**
      * {@inheritdoc}
@@ -19,8 +20,9 @@ class ContactForm extends ActiveRecord
         return [
             [['email', 'name', 'message'], 'required'],
             [['email'], 'email'],
-            [['message'], 'string', 'min' => 15],
-            [['name'], 'string', 'min' => 5],
+            [['message'], 'string', 'min' => 15, 'max' => 500],
+            [['web'], 'string', 'min' => 5, 'max' => 100],
+            [['name'], 'string', 'min' => 5, 'max' => 100],
         ];
     }
 
@@ -29,7 +31,7 @@ class ContactForm extends ActiveRecord
      */
     public function send()
     {
-        if ($this->validate()) {
+        if ($this->validate() && empty($this->web)) {
 
             Yii::$app->mailer->compose('contact', [
                 'name' => $this->name,
