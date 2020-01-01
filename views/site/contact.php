@@ -54,7 +54,7 @@ $this->title = 'Contact' . ' - ' . Yii::$app->name;
 
                     <?= $form->field($model, 'message')->textarea(['rows' => '7', 'placeholder' => 'Message'])->label(false); ?>
 
-                    <?= $form->field($model, 'web')->textInput(['placeholder' => 'Web'])->label(false)->hiddenInput(); ?>
+                    <?= $form->field($model, 'website')->textInput(['placeholder' => 'Website'])->label(false); ?>
 
                     <div class="text-center">
                         <button class="btn btn-block btn-round btn-d" id="cfsubmit" type="submit">Submit</button>

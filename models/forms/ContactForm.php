@@ -10,7 +10,7 @@ class ContactForm extends ActiveRecord
     public $name;
     public $email;
     public $message;
-    public $web;
+    public $website;
 
     /**
      * {@inheritdoc}
@@ -21,9 +21,17 @@ class ContactForm extends ActiveRecord
             [['email', 'name', 'message'], 'required'],
             [['email'], 'email'],
             [['message'], 'string', 'min' => 15, 'max' => 500],
-            [['web'], 'string', 'min' => 5, 'max' => 100],
+            [['website'], 'string', 'min' => 5, 'max' => 100],
             [['name'], 'string', 'min' => 5, 'max' => 100],
+            [['name','message'], 'antiSpam', 'skipOnEmpty' => false, 'skipOnError' => false],
         ];
+    }
+
+    public function antiSpam($attribute)
+    {
+        if (preg_match('/http|www/i', $this->{$attribute})) {
+            $this->addError($attribute, 'We do not allow to send url.');
+        }
     }
 
     /**
@@ -31,7 +39,7 @@ class ContactForm extends ActiveRecord
      */
     public function send()
     {
-        if ($this->validate() && empty($this->web)) {
+        if ($this->validate() && empty($this->website)) {
 
             Yii::$app->mailer->compose('contact', [
                 'name' => $this->name,
