@@ -26,6 +26,7 @@ use yii\httpclient\Exception;
  * @property int $status
  * @property string $created_at
  * @property string $updated_at
+ * @property string $downloaded_at
  * @property string $slug
  * @property string $file
  *
@@ -90,7 +91,7 @@ class Image extends ActiveRecord
         return [
             [['product_id', 'member_id', 'status'], 'required'],
             [['product_id', 'member_id', 'status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'downloaded_at'], 'safe'],
             [['url', 'slug', 'file'], 'string', 'max' => 255],
             [['member_id'], 'exist', 'skipOnError' => true, 'targetClass' => Member::className(), 'targetAttribute' => ['member_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
@@ -112,6 +113,7 @@ class Image extends ActiveRecord
             'file' => 'file',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'downloaded_at' => 'Downloaded At',
         ];
     }
 
@@ -311,6 +313,7 @@ class Image extends ActiveRecord
 
         if (file_put_contents('web' . Image::URL_ORIGINAL . $file, file_get_contents($this->url))) {
             $this->file = $file;
+            $this->downloaded_at = date("Y-m-d H:i:s");
             $this->save();
 
             return true;

@@ -69,7 +69,8 @@ class ImageSearch extends Image
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
+            //'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
+            'sort' => ['defaultOrder' => ['downloaded_at' => SORT_DESC, 'id' => SORT_ASC]],
             'pagination' => [
                 'pageSizeParam' => static::PER_PAGE_PARAM,
                 'defaultPageSize' => static::DEFAULT_ITEMS_PER_PAGE,
