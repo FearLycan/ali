@@ -24,6 +24,8 @@ use yii\httpclient\Exception;
  * @property int $product_id
  * @property int $member_id
  * @property int $status
+ * @property int $view
+ * @property int $fap_time
  * @property string $created_at
  * @property string $updated_at
  * @property string $downloaded_at
@@ -90,7 +92,7 @@ class Image extends ActiveRecord
     {
         return [
             [['product_id', 'member_id', 'status'], 'required'],
-            [['product_id', 'member_id', 'status'], 'integer'],
+            [['product_id', 'member_id', 'status', 'view', 'fap_time'], 'integer'],
             [['created_at', 'updated_at', 'downloaded_at'], 'safe'],
             [['url', 'slug', 'file'], 'string', 'max' => 255],
             [['member_id'], 'exist', 'skipOnError' => true, 'targetClass' => Member::className(), 'targetAttribute' => ['member_id' => 'id']],
@@ -345,6 +347,12 @@ class Image extends ActiveRecord
             ->all();
 
         return $images;
+    }
+
+    public function addView()
+    {
+        $this->view++;
+        $this->save(false);
     }
 
 }

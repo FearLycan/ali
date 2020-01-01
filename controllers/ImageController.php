@@ -22,9 +22,9 @@ class ImageController extends Controller
      */
     public function actionIndex($category = null)
     {
-       /* $reg = new RegistrationForm();
-        $reg->email = 'damianek2326@gmail.com';
-        $reg->sendEmail();*/
+        /* $reg = new RegistrationForm();
+         $reg->email = 'damianek2326@gmail.com';
+         $reg->sendEmail();*/
         $cat = null;
         if ($category != null) {
             $cat = $this->findCategoryModel($category);
@@ -43,18 +43,19 @@ class ImageController extends Controller
     public function actionView($slug)
     {
         $ajaxView = false;
-
+        $model = $this->findSlugModel($slug);
+        $model->addView();
         if (Yii::$app->request->isAjax) {
             $ajaxView = true;
 
             return $this->renderAjax('view', [
-                'model' => $this->findSlugModel($slug),
+                'model' => $model,
                 'ajaxView' => $ajaxView,
             ]);
         }
 
         return $this->render('view', [
-            'model' => $this->findSlugModel($slug),
+            'model' => $model,
             'ajaxView' => $ajaxView,
         ]);
     }
