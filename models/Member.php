@@ -19,6 +19,7 @@ use yii\db\Expression;
  * @property string $country_code
  * @property string $avatar
  * @property int $status
+ * @property int $view
  * @property int $type
  * @property int $click
  * @property string $created_at
@@ -75,7 +76,7 @@ class Member extends ActiveRecord
     {
         return [
             [['ali_member_id', 'country_code', 'name'], 'required'],
-            [['status', 'type', 'click'], 'integer'],
+            [['status', 'type', 'click', 'view'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['ali_member_id', 'name', 'avatar'], 'string', 'max' => 255],
             [['country_code'], 'string', 'max' => 10],
@@ -201,4 +202,9 @@ class Member extends ActiveRecord
         return $members;
     }
 
+    public function addView()
+    {
+        $this->view++;
+        $this->save(false);
+    }
 }

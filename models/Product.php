@@ -224,7 +224,10 @@ class Product extends ActiveRecord
     public function getSimilar($limit = 4)
     {
         $products = self::find()
-            ->where(['category_id' => $this->category_id])
+            ->where([
+                'category_id' => $this->category_id,
+                'status' => Product::STATUS_ACTIVE
+            ])
             ->andWhere(['!=', 'id', $this->id])
             ->orderBy(new Expression('rand()'))
             ->limit($limit)

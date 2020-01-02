@@ -26,6 +26,7 @@ class MemberController extends Controller
     public function actionView($slug)
     {
         $model = $this->findModel($slug);
+        $model->addView();
 
         $searchModel = new ImageSearch();
         $query = Image::find()
