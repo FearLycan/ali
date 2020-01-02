@@ -17,9 +17,6 @@ class MemberSearch extends Member
     const SORT_PARAM = 'sort';
 
     public $sort;
-    //  public $name;
-    //public $;
-
 
     private $_sort;
 
@@ -105,8 +102,8 @@ class MemberSearch extends Member
                 ],
                 'attributes' => [
                     'rating' => [
-                        'asc' => ['member.click' => SORT_ASC, 'member.id' => SORT_ASC],
-                        'desc' => ['member.click' => SORT_DESC, 'member.id' => SORT_ASC],
+                        'asc' => ['member.view' => SORT_ASC, 'member.id' => SORT_ASC],
+                        'desc' => ['member.view' => SORT_DESC, 'member.id' => SORT_ASC],
                     ],
                     'created_at' => [
                         'asc' => ['member.created_at' => SORT_ASC, 'member.id' => SORT_ASC],

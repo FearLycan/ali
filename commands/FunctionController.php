@@ -26,4 +26,14 @@ class FunctionController extends Controller
             $image->save(false);
         }
     }
+
+    public function actionMember()
+    {
+        $members = Member::find()->where(['status' => Member::STATUS_ACTIVE]);
+
+        foreach ($members->each(100) as $member) {
+            $member->view = $member->click;
+            $member->save(false);
+        }
+    }
 }
