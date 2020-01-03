@@ -107,9 +107,9 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getStatusNames()
     {
         return [
-            static::STATUS_ACTIVE => 'Aktywny',
-            static::STATUS_INACTIVE => 'Nieaktywny',
-            static::STATUS_BAN => 'BAN',
+            self::STATUS_ACTIVE => 'Aktywny',
+            self::STATUS_INACTIVE => 'Nieaktywny',
+            self::STATUS_BAN => 'BAN',
         ];
     }
 
@@ -127,9 +127,9 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getRolesNames()
     {
         return [
-            static::ROLE_USER => 'Użytkownik',
-            static::ROLE_MODERSTOR => 'Moderator',
-            static::ROLE_ADMIN => 'Administrator',
+            self::ROLE_USER => 'Użytkownik',
+            self::ROLE_MODERSTOR => 'Moderator',
+            self::ROLE_ADMIN => 'Administrator',
         ];
     }
 
@@ -138,7 +138,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getRoleName()
     {
-        return static::getRolesNames()[$this->role];
+        return self::getRolesNames()[$this->role];
     }
 
     /**
@@ -147,7 +147,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getAdministratorRoles()
     {
         return [
-            static::ROLE_ADMIN,
+            self::ROLE_ADMIN,
         ];
     }
 
@@ -156,7 +156,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function isAdministrator()
     {
-        return in_array($this->role, static::getAdministratorRoles()) && $this->isActive();
+        return in_array($this->role, self::getAdministratorRoles()) && $this->isActive();
     }
 
     /**
@@ -164,7 +164,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function isActive()
     {
-        return $this->status == static::STATUS_ACTIVE;
+        return $this->status == self::STATUS_ACTIVE;
     }
 
     /**
@@ -175,7 +175,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne($id);
+        return self::findOne($id);
     }
 
     /**
@@ -186,7 +186,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token]);
+        return self::findOne(['access_token' => $token]);
     }
 
     /**
@@ -232,7 +232,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $code = Yii::$app->getSecurity()->generateRandomString(32);
 
-        $verification_code = static::find()
+        $verification_code = self::find()
             ->where(['verification_code' => $code])
             ->orWhere(['auth_key' => $code])
             ->one();
@@ -240,7 +240,7 @@ class User extends ActiveRecord implements IdentityInterface
         if (empty($verification_code)) {
             return $code;
         } else {
-            return static::generateUniqueRandomString();
+            return self::generateUniqueRandomString();
         }
     }
 }

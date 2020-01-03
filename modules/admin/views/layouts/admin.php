@@ -153,6 +153,9 @@ $image = [
                 <li class="<?= Yii::$app->controller->id == 'product-url' ? 'active' : 'no' ?>">
                     <a href="<?= Url::to(['product-url/index']) ?>"><i class="fa fa-link"></i> URLs</a>
                 </li>
+                <li class="<?= Yii::$app->controller->id == 'visitor' ? 'active' : 'no' ?>">
+                    <a href="<?= Url::to(['visitor/index']) ?>"><i class="fa fa-user-secret"></i> Visitors</a>
+                </li>
                 <li class="<?= Yii::$app->controller->id == 'system-config' ? 'active' : 'no' ?>">
                     <a href="<?= Url::to(['system-config/index']) ?>"><i class="fa fa-cogs"></i> System Config</a>
                 </li>

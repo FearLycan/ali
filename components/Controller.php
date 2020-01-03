@@ -3,6 +3,8 @@
 namespace app\components;
 
 use app\components\Visitors\Visitors;
+use Yii;
+use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
@@ -49,7 +51,7 @@ class Controller extends \yii\web\Controller
     /**
      * @param $action
      * @return bool
-     * @throws \yii\web\BadRequestHttpException
+     * @throws BadRequestHttpException
      */
     public function beforeAction($action)
     {
@@ -60,7 +62,9 @@ class Controller extends \yii\web\Controller
             return false;
         }
 
-        $this->visitors->ip->check();
+        if (Yii::$app->user->isGuest || !Yii::$app->user->identity->isAdministrator()) {
+            $this->visitors->ip->check();
+        }
 
         return true; // or false to not run the action
     }
