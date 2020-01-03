@@ -65,7 +65,7 @@ class Visitor extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'ip' => 'Ip',
+            'ip' => 'IP',
             'country' => 'Country',
             'comment' => 'Comment',
             'count' => 'Count',

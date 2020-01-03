@@ -13,7 +13,8 @@ class FunctionController extends Controller
     {
         Member::updateAll(['country_code' => 'UK'], ['=', 'country_code', 'GB']);
         Member::updateAll(['country_code' => 'SRB'], ['=', 'country_code', 'RS']);
-        Member::updateAll(['country_code' => 'MNE'], ['=', 'country_code', 'ME']);
+        Member::updateAll(['country_code' => 'ME'], ['=', 'country_code', 'MNE']);
+        //UPDATE member SET country_code = ME WHERE country_code = MNE;
     }
 
     public function actionImage()
