@@ -209,19 +209,76 @@ ul.alert-dropdown {
 }
 
 .panel-yellow {
-    border-color: #f0ad4e;
+    border-color: #f0c752;
 }
 
 .panel-yellow > .panel-heading {
-    border-color: #f0ad4e;
+    border-color: #f0c752;
     color: #fff;
-    background-color: #f0ad4e;
+    background-color: #f0c752;
 }
 
 .panel-yellow > a {
-    color: #f0ad4e;
+    color: #FFA500;
 }
 
 .panel-yellow > a:hover {
-    color: #df8a13;
+    color: #f0c752;
+}
+
+.panel-orange {
+    border-color: #FFA500;
+}
+
+.panel-orange > .panel-heading {
+    border-color: #FFA500;
+    color: #fff;
+    background-color: #FFA500;
+}
+
+.panel-orange > a {
+    color: #f0ad4e;
+}
+
+.panel-orange > a:hover {
+    color: #FFA500;
+}
+
+.panel-purple {
+    border-color: #BF00FF;
+}
+
+.panel-purple > .panel-heading {
+    border-color: #BF00FF;
+    color: #fff;
+    background-color: #BF00FF;
+}
+
+.panel-purple > a {
+    color: #C720FF;
+}
+
+.panel-purple > a:hover {
+    color: #BF00FF;
+}
+
+
+
+
+.panel-indigo {
+    border-color: #330066;
+}
+
+.panel-indigo > .panel-heading {
+    border-color: #330066;
+    color: #fff;
+    background-color: #330066;
+}
+
+.panel-indigo > a {
+    color: #4D2079;
+}
+
+.panel-indigo > a:hover {
+    color: #330066;
 }
