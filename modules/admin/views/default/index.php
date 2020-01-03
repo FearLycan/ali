@@ -16,7 +16,7 @@ use yii\helpers\Url; ?>
                             <i class="fa fa-link fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?= $links ?></div>
+                            <div class="huge"><?= number_format($links, 0, ',', ' ') ?></div>
                             <div>New Urls</div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ use yii\helpers\Url; ?>
                             <i class="fa fa-user-secret fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?= $visitors ?></div>
+                            <div class="huge"><?= number_format($visitors, 0, ',', ' ') ?></div>
                             <div>New Visitors</div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ use yii\helpers\Url; ?>
                             <i class="fa fa-picture-o fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?= $images_new ?></div>
+                            <div class="huge"><?= number_format($images_new, 0, ',', ' ') ?></div>
                             <div>New Images</div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@ use yii\helpers\Url; ?>
                             <i class="fa fa-file-image-o fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?= $images_pending ?></div>
+                            <div class="huge"><?= number_format($images_pending, 0, ',', ' ') ?></div>
                             <div>Pending to download</div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ use yii\helpers\Url; ?>
                             <i class="fa fa-photo fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?= $images ?></div>
+                            <div class="huge"><?= number_format($images, 0, ',', ' ') ?></div>
                             <div>All images on page</div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ use yii\helpers\Url; ?>
                             <i class="fa fa-users fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?= $members ?></div>
+                            <div class="huge"><?= number_format($members, 0, ',', ' ') ?></div>
                             <div>All members</div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@ use yii\helpers\Url; ?>
                             <i class="fa fa-product-hunt fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><?= $products ?></div>
+                            <div class="huge"><?= number_format($products, 0, ',', ' ') ?></div>
                             <div>All products</div>
                         </div>
                     </div>
