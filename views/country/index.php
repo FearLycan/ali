@@ -57,14 +57,37 @@ $this->title = 'All Countries' . ' - ' . Yii::$app->name;
 </div>
 
 <?php
-    $isotope = Url::to('@web/lib/isotope/dist/isotope.pkgd.js', true);
-    $isotope_filter = Url::to('@web/js/isotope-filter.js', true);
-?>
+$this->registerJs("
+var qsRegex;
 
-<?php
-$this->registerJs(<<<JS
-    $.getScript('$isotope');
-    $.getScript('$isotope_filter');
-JS
+var grid = $('ul#filters').isotope({
+    itemSelector: 'li.country',
+    layoutMode: 'fitRows',
+    filter: function () {
+        return qsRegex ? $(this).data('name').match(qsRegex) : true;
+    }
+});
+
+var quicksearch = $('.quicksearch').keyup(debounce(function () {
+    qsRegex = new RegExp($(quicksearch).val(), 'gi');
+    $(grid).isotope();
+}, 200));
+
+function debounce(fn, threshold) {
+    var timeout;
+    threshold = threshold || 100;
+    return function debounced() {
+        clearTimeout(timeout);
+        var args = arguments;
+        var _this = this;
+
+        function delayed() {
+            fn.apply(_this, args);
+        }
+
+        timeout = setTimeout(delayed, threshold);
+    };
+}",
+    View::POS_END,
+    'yiiOptions'
 );
-?>

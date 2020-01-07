@@ -32,6 +32,8 @@ class AppAsset extends AssetBundle
         'lib/easy-autocomplete/jquery.easy-autocomplete.min.js',
         'js/main.js',
         'js/grid.js',
+        'lib/isotope/dist/isotope.pkgd.js',
+        //'js/isotope-filter.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
