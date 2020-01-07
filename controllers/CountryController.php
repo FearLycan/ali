@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Damian
- * Date: 03.01.2019
- * Time: 21:20
- */
 
 namespace app\controllers;
 
-
 use app\models\Country;
+use app\models\searches\CountrySearch;
 use app\models\searches\ImageSearch;
 use Yii;
 use yii\web\Controller;
@@ -17,6 +11,17 @@ use yii\web\NotFoundHttpException;
 
 class CountryController extends Controller
 {
+
+    public function actionIndex()
+    {
+        $searchModel = new CountrySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     public function actionView($slug)
     {

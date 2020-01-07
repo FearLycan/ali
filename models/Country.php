@@ -4,6 +4,7 @@ namespace app\models;
 
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -83,4 +84,13 @@ class Country extends \yii\db\ActiveRecord
 
         return $count;
     }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getMembers()
+    {
+        return $this->hasMany(Member::className(), ['country_code' => 'code']);
+    }
+
 }
