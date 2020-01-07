@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\admin\models\Image;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -47,7 +48,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'image',
                                 'format' => 'raw',
-                                'value' => Html::img($model->image)
+                                'value' => function($model){
+                                    $html = '';
+                                    /* @var $model Image */
+                                    foreach (json_decode($model->image) as $image){
+                                        $html.= '<div class="col-xs-3"><img src="'.$image.'" class="img-responsive"></div>';
+                                    }
+
+                                    return $html;
+                                }
                             ],
                             [
                                 'attribute' => 'status',
