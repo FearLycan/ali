@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\components\Controller;
 use app\models\Category;
 use app\models\Country;
-use app\models\forms\RegistrationForm;
 use app\models\Image;
 use app\models\searches\ImageSearch;
 use Yii;

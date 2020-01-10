@@ -2,11 +2,11 @@
 
 namespace app\controllers;
 
+use app\components\Controller;
 use app\models\Country;
 use app\models\searches\CountrySearch;
 use app\models\searches\ImageSearch;
 use Yii;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class CountryController extends Controller
