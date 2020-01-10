@@ -59,6 +59,7 @@ class MemberSearch extends Member
         $query = self::find()->where(['member.status' => self::STATUS_ACTIVE]);
         $query->joinWith(['images images']);
         $query->andWhere(['images.status' => Image::STATUS_ACCEPTED]);
+        $query->andWhere(['NOT' ,['member.id' => [self::MEMBER_ANONYMOUS]]]);
         $query->groupBy(['member.id']);
 
         // add conditions that should always apply here
