@@ -13,6 +13,8 @@ use Yii;
 class IP
 {
 
+    const ALL_COUNTRIES = 'Global';
+
     /** @var Visitors */
     private $visitors;
 
@@ -38,6 +40,19 @@ class IP
             $visitor->save();
         } else {
             $visitor->addVisit();
+        }
+    }
+
+    public function getCountry()
+    {
+        $ip = Yii::$app->request->userIP;
+
+        $visitor = Visitor::findOne(['ip' => $ip]);
+
+        if (empty($visitor->country)) {
+            return self::ALL_COUNTRIES;
+        } else {
+            return $visitor->country;
         }
     }
 }

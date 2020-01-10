@@ -5,6 +5,7 @@ namespace app\commands;
 use app\models\Visitor;
 use Yii;
 use yii\console\Controller;
+use yii\db\Expression;
 use yii\helpers\VarDumper;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
@@ -30,7 +31,7 @@ class GeoController extends Controller
         $link = 'http://api.ipinfodb.com/v3/ip-country';
 
         $visitors = Visitor::find()
-            ->where(['is', 'country', new \yii\db\Expression('null')])
+            ->where(['is', 'country', new Expression('null')])
             ->limit($limit)
             ->all();
 
@@ -51,6 +52,7 @@ class GeoController extends Controller
                 $data = explode(';', $response->content);
                 if ($data[0] == 'OK') {
                     $visitor->country = $data['4'];
+                    $visitor->country_code = $data['3'];
                     $visitor->save();
                 } else {
                     throw new Exception(
