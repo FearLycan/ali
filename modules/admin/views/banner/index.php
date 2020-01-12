@@ -65,6 +65,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'contentOptions' => ['style' => 'width: 120px;'],
                             ],
                             [
+                                'attribute' => 'image',
+                                'format' => 'raw',
+                                'value' => function ($data) {
+                                    /* @var Banner $data */
+                                    return '<img src="'.Url::to('@web'. Banner::LOCATION . $data->image).'" style="height: 35px;">';
+                                },
+                                'contentOptions' => ['style' => 'width: 60px;'],
+                            ],
+                            [
                                 'attribute' => 'created_at',
                                 'contentOptions' => ['style' => 'width: 150px;'],
                             ],
