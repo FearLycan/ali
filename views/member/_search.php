@@ -1,12 +1,12 @@
 <?php
-use app\models\Category;
+
 use app\models\Country;
-use app\models\Product;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use app\models\searches\ProductSearch;
 
-/* @var $model \app\models\searches\ProductSearch */
+/* @var $model ProductSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

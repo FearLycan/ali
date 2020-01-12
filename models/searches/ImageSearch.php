@@ -20,13 +20,10 @@ class ImageSearch extends Image
     /**
      * {@inheritdoc}
      */
-   /* public function rules()
+    public function rules()
     {
-        return [
-//            [['id', 'product_id', 'member_id', 'status'], 'integer'],
-//            [['url', 'created_at', 'updated_at'], 'safe'],
-        ];
-    }*/
+        return [];
+    }
 
     /**
      * {@inheritdoc}
@@ -42,6 +39,9 @@ class ImageSearch extends Image
      *
      * @param array $params
      *
+     * @param null $query
+     * @param null $category
+     * @param null $country
      * @return ActiveDataProvider
      */
     public function search($params, $query = null, $category = null, $country = null)
@@ -61,7 +61,7 @@ class ImageSearch extends Image
         } elseif (!empty($category)) {
             $query->joinWith(['product product']);
             $query->andFilterWhere(['in', 'product.category_id', json_decode($category->main_category)]);
-        } elseif ((!empty($country))){
+        } elseif ((!empty($country))) {
             $query->joinWith(['member m']);
             $query->andFilterWhere(['in', 'm.country_code', $country->code]);
         }
@@ -69,12 +69,11 @@ class ImageSearch extends Image
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            //'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
             'sort' => ['defaultOrder' => ['downloaded_at' => SORT_DESC, 'id' => SORT_ASC]],
             'pagination' => [
-                'pageSizeParam' => static::PER_PAGE_PARAM,
-                'defaultPageSize' => static::DEFAULT_ITEMS_PER_PAGE,
-                'pageSizeLimit' => [1, static::PAGE_SIZE_LIMIT],
+                'pageSizeParam' => self::PER_PAGE_PARAM,
+                'defaultPageSize' => self::DEFAULT_ITEMS_PER_PAGE,
+                'pageSizeLimit' => [1, self::PAGE_SIZE_LIMIT],
                 'validatePage' => false,
             ],
         ]);
@@ -87,18 +86,6 @@ class ImageSearch extends Image
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        //    $query->andFilterWhere([
-//            'id' => $this->id,
-//            'product_id' => $this->product_id,
-//            'member_id' => $this->member_id,
-//            'status' => $this->status,
-//            'created_at' => $this->created_at,
-//            'updated_at' => $this->updated_at,
-        //    ]);
-
-        //$query->andFilterWhere(['like', 'url', $this->url]);
-
         return $dataProvider;
     }
 
@@ -108,9 +95,9 @@ class ImageSearch extends Image
     public static function getPageSizesArray()
     {
         return [
-            static::DEFAULT_ITEMS_PER_PAGE => static::DEFAULT_ITEMS_PER_PAGE,
+            self::DEFAULT_ITEMS_PER_PAGE => self::DEFAULT_ITEMS_PER_PAGE,
             50 => 50,
-            static::PAGE_SIZE_LIMIT => static::PAGE_SIZE_LIMIT,
+            self::PAGE_SIZE_LIMIT => self::PAGE_SIZE_LIMIT,
         ];
     }
 

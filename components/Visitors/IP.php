@@ -13,7 +13,7 @@ use Yii;
 class IP
 {
 
-    const ALL_COUNTRIES = 'Global';
+    const GLOBAL_COUNTRY = 'GLOBAL';
 
     /** @var Visitors */
     private $visitors;
@@ -43,16 +43,16 @@ class IP
         }
     }
 
-    public function getCountry()
+    public function getCountryCode()
     {
         $ip = Yii::$app->request->userIP;
 
         $visitor = Visitor::findOne(['ip' => $ip]);
 
-        if (empty($visitor->country)) {
-            return self::ALL_COUNTRIES;
-        } else {
-            return $visitor->country;
+        if (!empty($visitor->country_code)) {
+            return $visitor->country_code;
         }
+
+        return null;
     }
 }

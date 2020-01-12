@@ -14,6 +14,7 @@ use yii\helpers\Url;
  * @property int $id
  * @property string $name
  * @property string $slug
+ * @property string $code
  * @property int $parent_id
  * @property int $type
  * @property int $main_category
@@ -89,7 +90,7 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'parent_id', 'type'], 'required'],
+            [['name', 'parent_id', 'type', 'code'], 'required'],
             [['parent_id', 'main_category', 'type'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
@@ -104,6 +105,7 @@ class Category extends ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'code' => 'Code',
             'parent_id' => 'Parent ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

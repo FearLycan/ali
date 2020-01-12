@@ -35,6 +35,7 @@ tests/_support/_generated
 /config/*-local.php
 /config/*-local.php
 
-/web/images/normal
-/web/images/original
-/web/images/thumbnail
+/web/images/normal/*
+/web/images/original/*
+/web/images/thumbnail/*
+/web/images/extra/*

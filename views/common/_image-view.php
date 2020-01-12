@@ -5,6 +5,9 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Modal;
+use app\models\searches\ImageSearch;
+use app\models\Banner;
+use yii\helpers\Url;
 
 ?>
 <?= ListView::widget([
@@ -12,6 +15,29 @@ use yii\bootstrap\Modal;
     'dataProvider' => $dataProvider,
     'summary' => false,
     'itemOptions' => ['class' => 'grid__item'],
+    'afterItem' => function ($model, $key, $index, $widget) use ($dataProvider) {
+        $n = floor(ImageSearch::DEFAULT_ITEMS_PER_PAGE / Yii::$app->params['banners_per_page']);
+
+        if ($index != 0 && ($index % $n) == 0) {
+            /** @var Banner $banner */
+            $banner = Yii::$app->banner->getByCountryCode(Yii::$app->visitors->ip->getCountryCode());
+            if (!empty($banner)) {
+                return '<div class="grid__item"><a href="' . $banner->url . '"><img src="' . Url::to('@web/' . Banner::LOCATION . $banner->image) . '"></a></div>';
+            }
+        }
+
+        $totalCount = $dataProvider->getTotalCount();
+
+        if (($index + 1) == $totalCount && ($totalCount < 10 && $totalCount >= 3)) {
+            /** @var Banner $banner */
+            $banner = Yii::$app->banner->getByCountryCode(Yii::$app->visitors->ip->getCountryCode());
+            if (!empty($banner)) {
+                return '<div class="grid__item"><a href="' . $banner->url . '"><img src="' . Url::to('@web/' . Banner::LOCATION . $banner->image) . '"></a></div>';
+            }
+        }
+
+        return null;
+    },
     'itemView' => $itemView,
     'pager' => [
         'maxButtonCount' => 0,

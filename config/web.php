@@ -17,6 +17,12 @@ $config = [
         'assetManager' => [
             'appendTimestamp' => true,
         ],
+        'visitors' => [
+            'class' => 'app\components\Visitors\Visitors',
+        ],
+        'banner' => [
+            'class' => 'app\components\Banner\Banner',
+        ],
     ],
     'params' => ArrayHelper::merge(
         require __DIR__ . '/params.php',

@@ -1,6 +1,8 @@
 <?php
 
 use app\components\WebUser;
+use app\components\Visitors\Visitors;
+use app\components\Banner\Banner;
 
 /**
  * Fake class to define code completion for IDE.
@@ -16,6 +18,13 @@ class Yii extends \yii\BaseYii
     public static $app;
 }
 
+/**
+ * Class BaseApplication
+ * Used for properties that are identical for both WebApplication and ConsoleApplication
+ *
+ * @property Visitors $visitors
+ * @property Banner $banner
+ */
 abstract class BaseApplication extends \yii\base\Application
 {
 }
