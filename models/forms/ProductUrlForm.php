@@ -5,6 +5,8 @@ namespace app\models\forms;
 use app\modules\admin\components\Helper;
 use app\modules\admin\models\ProductUrl;
 use yii\helpers\Html;
+use app\models\User;
+use Yii;
 
 
 class ProductUrlForm extends ProductUrl
@@ -60,6 +62,12 @@ class ProductUrlForm extends ProductUrl
         $product_id = Helper::getAliProductID($this->url);
 
         $this->url = 'https://www.aliexpress.com/item/' . $product_id . '.html';
+
+        if (Yii::$app->user->isGuest) {
+            $this->author_id = User::BOT_SPACE_BOB_ID;
+        } else {
+            $this->author_id = Yii::$app->user->identity->id;
+        }
 
         return parent::beforeSave($insert);
     }
