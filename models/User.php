@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 use yii\web\IdentityInterface;
 use yii\behaviors\SluggableBehavior;
 
@@ -23,6 +24,7 @@ use yii\behaviors\SluggableBehavior;
  * @property string $last_seen
  * @property string $auth_key
  * @property string $verification_code
+ * @property string $avatar
  *
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -34,8 +36,11 @@ class User extends ActiveRecord implements IdentityInterface
 
     //role
     const ROLE_USER = 1;
-    const ROLE_MODERSTOR = 2;
+    const ROLE_MODERATOR = 2;
+    const ROLE_BOT = 3;
     const ROLE_ADMIN = 10;
+
+    const BOT_SPACE_BOB_ID = 2;
 
 
     /**
@@ -54,7 +59,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['role', 'status'], 'integer'],
             [['registered_at', 'last_login_at', 'last_seen'], 'safe'],
-            [['name', 'email', 'password', 'auth_key', 'verification_code'], 'string', 'max' => 255],
+            [['name', 'email', 'password', 'auth_key', 'verification_code', 'avatar'], 'string', 'max' => 255],
             [['email'], 'unique'],
         ];
     }
@@ -81,7 +86,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param bool $insert
      * @return array
      */
     public function behaviors()
@@ -127,8 +131,9 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getRolesNames()
     {
         return [
-            self::ROLE_USER => 'Użytkownik',
-            self::ROLE_MODERSTOR => 'Moderator',
+            self::ROLE_USER => 'User',
+            self::ROLE_BOT => 'Bot',
+            self::ROLE_MODERATOR => 'Moderator',
             self::ROLE_ADMIN => 'Administrator',
         ];
     }
@@ -242,5 +247,13 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             return self::generateUniqueRandomString();
         }
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getProductUrls()
+    {
+        return $this->hasMany(ProductUrl::className(), ['author_id' => 'id']);
     }
 }

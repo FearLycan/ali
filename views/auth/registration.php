@@ -1,5 +1,5 @@
 <?php
-
+/** @var \app\models\User $model */
 $this->title = 'Registration' . ' - ' . Yii::$app->name;
 ?>
 
@@ -7,11 +7,14 @@ $this->title = 'Registration' . ' - ' . Yii::$app->name;
     <section class="slice--offset slice sct-color-1" id="register">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 ">
-                    <div class="heading-3 strong-300 line-height-1_8">
-                        <span class="c-base-1 strong-500"><?= $model->name ?>!</span> Na Twóją pocztę został wysłany
-                        link aktywacyjny.
-                    </div>
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h4 class="font-alt mb-0">Your account has been successfully created.</h4>
+                    <hr class="divider-w mt-10 mb-20">
+                    <p>
+                        <strong><?= $model->name ?>!</strong>
+                        An email with verification code has been sent to your email address
+                    </p>
+                    <p>Please confirm your account.</p>
                 </div>
             </div>
         </div>

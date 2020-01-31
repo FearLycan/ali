@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\components\Controller;
 use app\models\Category;
 use app\models\Country;
+use app\models\forms\RegistrationForm;
 use app\models\Image;
 use app\models\searches\ImageSearch;
 use Yii;
@@ -21,9 +22,6 @@ class ImageController extends Controller
      */
     public function actionIndex($category = null)
     {
-        /* $reg = new RegistrationForm();
-         $reg->email = 'damianek2326@gmail.com';
-         $reg->sendEmail();*/
         $cat = null;
         if ($category != null) {
             $cat = $this->findCategoryModel($category);
