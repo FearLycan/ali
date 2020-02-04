@@ -6,6 +6,8 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'AliGoneWild',
+    'defaultRoute' => 'image/index',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -14,6 +16,49 @@ $config = [
     ],
     'components' => [
         'db' => $db,
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
+        'user' => [
+            'class' => 'app\components\WebUser',
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true,
+            'loginUrl' => ['auth/login'],
+        ],
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+        ],
+        'request' => [
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => 'RandomStringTopSecret',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<alias:admin>' => 'admin/default/index',
+                '<alias:rules>' => 'site/rules',
+                '<alias:contact>' => 'site/contact',
+                '<alias:categories>' => 'site/categories',
+                '<alias:(country|countries)>' => 'country/index',
+                '<controller:(member|product)>s' => '<controller>/index',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                'redirect/product/<id>' => 'redirect/product',
+                'redirect/member/<slug>' => 'redirect/member',
+                '<category>' => 'image/index',
+                '<controller:country>/<slug>' => '<controller>/view',
+                '<controller:member>/<slug>' => '<controller>/view',
+                'view/<slug>' => 'image/view',
+                'ticket/create/<type>/<object_id>' => 'ticket/create',
+                'auth/activation/<code>' => 'auth/activation',
+            ],
+        ],
         'assetManager' => [
             'appendTimestamp' => true,
         ],
@@ -22,6 +67,17 @@ $config = [
         ],
         'banner' => [
             'class' => 'app\components\Banner\Banner',
+        ],
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
         ],
     ],
     'params' => ArrayHelper::merge(
