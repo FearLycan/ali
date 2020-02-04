@@ -21,11 +21,11 @@ class Banner extends Component
         $banner->andWhere(['banner.status' => BannerModel::STATUS_ACTIVE]);
 
         if (!empty($country_code)) {
-            $banner->andWhere(['or',
+            /*$banner->andWhere(['or',
                 ['c.code' => $country_code],
                 ['c.code' => IP::GLOBAL_COUNTRY]
-            ]);
-
+            ]);*/
+            $banner->andWhere(['c.code' => $country_code]);
         } else {
             $banner->andWhere(['c.code' => IP::GLOBAL_COUNTRY]);
         }
