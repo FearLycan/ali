@@ -33,6 +33,13 @@ class ProductController extends Controller
             ->where(['product_id' => $model->id, 'status' => Image::STATUS_ACCEPTED]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
+      /*  Yii::$app->view->registerMetaTag([
+            Yii::$app->params['og_type_product'],
+            'og_type'
+        ]);*/
+
+        //$this->registerMetaTag(Yii::$app->params['og_type'], 'og_type');
+
         return $this->render('view', [
             'model' => $model,
             'searchModel' => $searchModel,

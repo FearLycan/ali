@@ -17,14 +17,11 @@ class RegistrationForm extends User
     public function rules()
     {
         return [
-            ['name', 'unique'],
-            [['name'], 'required'],
-            ['email', 'unique'],
-            [['email'], 'required'],
+            [['name', 'email'], 'unique'],
+            [['name', 'email', 'password_first', 'password_second'], 'required'],
             ['email', 'email'],
-            [['password_first'], 'required'],
-            [['password_second'], 'required'],
-            [['password_first', 'password_second'], 'string', 'length' => [6, 30]],
+            [['password_first', 'password_second'], 'string', 'length' => [8, 40]],
+            [['name'], 'string', 'length' => [4, 16]],
             ['password_second', 'confirmPassword'],
         ];
     }

@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use yii\behaviors\SluggableBehavior;
 
@@ -16,6 +17,8 @@ use yii\behaviors\SluggableBehavior;
  * @property string $slug
  * @property string $email
  * @property string $password
+ * @property string $avatar
+ * @property string $description
  * @property integer $role
  * @property integer $status
  * @property string $registered_at
@@ -34,7 +37,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     //role
     const ROLE_USER = 1;
-    const ROLE_MODERSTOR = 2;
+    const ROLE_MODERATOR = 2;
+    const ROLE_BOT = 3;
     const ROLE_ADMIN = 10;
 
 
@@ -55,6 +59,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['role', 'status'], 'integer'],
             [['registered_at', 'last_login_at', 'last_seen'], 'safe'],
             [['name', 'email', 'password', 'auth_key', 'verification_code'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => 300],
             [['email'], 'unique'],
         ];
     }
@@ -66,10 +71,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Pseudonim',
+            'name' => 'Name',
             'slug' => 'Slug',
             'email' => 'E-mail',
-            'password' => 'Hasło',
+            'password' => 'Password',
             'role' => 'Role',
             'status' => 'Status',
             'registered_at' => 'Registered At',
@@ -81,7 +86,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param bool $insert
      * @return array
      */
     public function behaviors()
@@ -127,9 +131,10 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getRolesNames()
     {
         return [
-            self::ROLE_USER => 'Użytkownik',
-            self::ROLE_MODERSTOR => 'Moderator',
+            self::ROLE_USER => 'User',
+            self::ROLE_MODERATOR => 'Moderator',
             self::ROLE_ADMIN => 'Administrator',
+            self::ROLE_BOT => 'Boot',
         ];
     }
 
@@ -152,6 +157,18 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return int[]
+     */
+    public static function getModeratorRoles()
+    {
+        return [
+            static::ROLE_MODERATOR,
+            static::ROLE_ADMIN,
+        ];
+    }
+
+
+    /**
      * @return bool
      */
     public function isAdministrator()
@@ -162,9 +179,49 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return bool
      */
+    public function isUser()
+    {
+        return $this->role == static::ROLE_USER && $this->isActive();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBot()
+    {
+        return $this->role == static::ROLE_BOT && $this->isActive();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isModerator()
+    {
+        return in_array($this->role, static::getModeratorRoles()) && $this->isActive();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOnline()
+    {
+        return ((strtotime($this->last_seen) + 600) > time());
+    }
+
+    /**
+     * @return bool
+     */
     public function isActive()
     {
         return $this->status == self::STATUS_ACTIVE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBanned()
+    {
+        return $this->status == static::STATUS_BAN;
     }
 
     /**
@@ -242,5 +299,22 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             return self::generateUniqueRandomString();
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultAvatar()
+    {
+        if (empty($this->avatar)) {
+            return 'https://www.gravatar.com/avatar/' . md5($this->email) . '?s=250&d=identicon&r=PG';
+        }
+
+        return Url::to('@web/images/user/avatar/' . $this->avatar);
+    }
+
+    public function getBadge()
+    {
+
     }
 }

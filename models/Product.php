@@ -243,4 +243,14 @@ class Product extends ActiveRecord
     {
         return json_decode($this->image);
     }
+
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        //$description = explode('\n', $this->description);
+
+        return explode('\n', $this->description)[0];
+    }
 }
