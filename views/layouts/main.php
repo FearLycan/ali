@@ -99,20 +99,6 @@ AppAsset::register($this);
     }
     </script>
 
-    <!--<script>
-       if ('serviceWorker' in navigator) {
-           navigator.serviceWorker.register('<?/*= Url::to('@web/service-worker.js') */?>', {
-               scope: '.'
-           }).then(function(registration) {
-               // Registration was successful
-               console.log('ServiceWorker registration successful with scope: ', registration.scope);
-           }, function(err) {
-               // registration failed :(
-               console.log('ServiceWorker registration failed: ', err);
-           });
-       }
-    </script>-->
-
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <?= Helper::systemConfig('google-tag-manager-noscript') ?>
