@@ -127,11 +127,13 @@ class SiteController extends Controller
 
     public function actionCategories()
     {
-        $categories = Category::find()
-            ->select(['id', 'name', 'slug'])
-            ->orderBy(['name' => SORT_ASC])
-            ->asArray()
-            ->all();
+        $categories = Category::getDb()->cache(function ($db) {
+            return Category::find()
+                ->select(['id', 'name', 'slug'])
+                ->orderBy(['name' => SORT_ASC])
+                ->asArray()
+                ->all();
+        });
 
         return $this->render('categories', [
             'categories' => $categories

@@ -602,6 +602,34 @@ li.li-gallery-border {
     border-color: #005fd1;
 }
 
-input#contactform-website{
+input#contactform-website {
     display: none;
+}
+
+.btn-role {
+    width: 100%;
+    padding: 8px 0;
+}
+
+.btn-role:hover {
+    cursor: default;
+}
+
+.circle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+}
+
+.online {
+    width: 10px;
+    height: 10px;
+    background-color: #4cd137;
+    display: inline-block;
+}
+
+.off-online {
+    width: 10px;
+    height: 10px;
+    background: red;
+    display: inline-block;
 }

@@ -8,7 +8,7 @@ use yii\helpers\Url;
 
 /* @var $model Member */
 
-$this->title = 'Member ' . $model->name;
+$this->title = 'Aliexpress ' . $model->name . '\'s Profile - ' . Yii::$app->name;
 
 if ($model->avatar) {
     Yii::$app->params['og_image']['content'] = Url::to(['images/normal/' . $model->avatar], true);
@@ -19,81 +19,83 @@ Yii::$app->params['og_type']['content'] = 'article';
 
 ?>
 
-<div class="member-view">
-    <div class="row">
-        <div class="col-md-4 col-xs-6 col-sm-6">
-            <?php if (empty($model->avatar)): ?>
-                <?= Html::img(['/images/site/user.png'], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
-            <?php else: ?>
-                <?= Html::img(['/images/thumbnail/' . $model->avatar], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
-            <?php endif; ?>
-        </div>
-        <div class="col-md-4 col-xs-6 col-sm-6">
-            <h1 class="product-title font-alt" style="margin-top: 0;">
-                <?= Html::encode($model->name) ?>
-
-                <?php if ($model->id != Member::MEMBER_ANONYMOUS): ?>
-                    <a href="<?= Url::to(['country/view', 'slug' => $model->country->slug]) ?>">
-                        <?= Html::img(['/images/flags/' . strtolower($model->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->country->name, 'title' => $model->country->name]) ?>
-                    </a>
+    <div class="member-view">
+        <div class="row">
+            <div class="col-md-4 col-xs-6 col-sm-6">
+                <?php if (empty($model->avatar)): ?>
+                    <?= Html::img(['/images/site/user.png'], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
+                <?php else: ?>
+                    <?= Html::img(['/images/thumbnail/' . $model->avatar], ['class' => 'img-responsive img-center img-thumbnail', 'alt' => 'Avatar']) ?>
                 <?php endif; ?>
-            </h1>
+            </div>
+            <div class="col-md-4 col-xs-6 col-sm-6">
+                <h1 class="product-title font-alt" style="margin-top: 0;">
+                    <?= Html::encode($model->name) ?>
 
-            <div class="widget">
-                <ul class="list-group font-alt">
-                    <li class="list-group-item">
-                        <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>" target="_blank">
-                            Go to <strong><?= Html::encode($model->name) ?></strong> Aliexpress profile
+                    <?php if ($model->id != Member::MEMBER_ANONYMOUS): ?>
+                        <a href="<?= Url::to(['country/view', 'slug' => $model->country->slug]) ?>">
+                            <?= Html::img(['/images/flags/' . strtolower($model->country_code) . '.svg'], ['class' => 'flag', 'alt' => $model->country->name, 'title' => $model->country->name]) ?>
                         </a>
-                    </li>
-
-                    <?php if(isset(Yii::$app->params['smartlink']['aliexpress'] )): ?>
-                        <li class="list-group-item">
-                            <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">Go to Aliexpress</a>
-                        </li>
                     <?php endif; ?>
+                </h1>
 
-                    <li class="list-group-item">
-                        <?= Html::a('Report this member', ['ticket/create',
-                            'type' => Ticket::TYPE_MEMBER,
-                            'object_id' => $model->id
-                        ], ['class' => 'report-link']) ?>
-                    </li>
-
-                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
+                <div class="widget">
+                    <ul class="list-group font-alt">
                         <li class="list-group-item">
-                            <?= Html::a('Edit', ['/admin/member/update', 'id' => $model->id]) ?>
+                            <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->slug]) ?>"
+                               target="_blank">
+                                Go to <strong><?= Html::encode($model->name) ?></strong> Aliexpress profile
+                            </a>
                         </li>
-                    <?php endif; ?>
-                </ul>
+
+                        <?php if (isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+                            <li class="list-group-item">
+                                <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">Go to
+                                    Aliexpress</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <li class="list-group-item">
+                            <?= Html::a('Report this member', ['ticket/create',
+                                'type' => Ticket::TYPE_MEMBER,
+                                'object_id' => $model->id
+                            ], ['class' => 'report-link']) ?>
+                        </li>
+
+                        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
+                            <li class="list-group-item">
+                                <?= Html::a('Edit', ['/admin/member/update', 'id' => $model->id]) ?>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+
             </div>
 
+            <div class="col-md-4 col-xs-12 col-sm-6">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <h3 style="margin-top: 0;"><strong><?= Html::encode($model->name) ?></strong>
+                    has <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
+                </h3>
+            </div>
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <?= $this->render('../common/_image-view', [
+                    'dataProvider' => $dataProvider,
+                    'itemView' => '../image/_image',
+                ]) ?>
+            </div>
         </div>
 
-        <div  class="col-md-4 col-xs-12 col-sm-6">
-
-        </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <h3 style="margin-top: 0;"><strong><?= Html::encode($model->name) ?></strong>
-                has <?= $dataProvider->getTotalCount() ?> <?= \app\components\Helper::varietyOfWord('pic', $dataProvider->getTotalCount()) ?>
-            </h3>
-        </div>
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <?= $this->render('../common/_image-view', [
-                'dataProvider' => $dataProvider,
-                'itemView' => '../image/_image',
-            ]) ?>
-        </div>
-    </div>
-
-</div>
 
 <?php if ($members = $model->getSimilarByCountry(4)): ?>
     <section class="module-small">
@@ -122,7 +124,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                                 <?php else: ?>
 
                                     <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
-                                    data-src="<?= Url::to(['/images/normal/' . $model->avatar]) ?>"
+                                         data-src="<?= Url::to(['/images/normal/' . $model->avatar]) ?>"
                                          alt="<?= $model->name ?>">
                                 <?php endif; ?>
 
@@ -148,14 +150,14 @@ Yii::$app->params['og_type']['content'] = 'article';
     </section>
 <?php endif; ?>
 
-<?php if($block = Helper::systemConfig('native-ads-01')): ?>
-<div class="row">
-    <div class="col-xs-12">
-        <hr>
-        <h2 class="module-title font-alt text-center">
-            You May Also Like
-        </h2>
-        <?= $block ?>
+<?php if ($block = Helper::systemConfig('native-ads-01')): ?>
+    <div class="row">
+        <div class="col-xs-12">
+            <hr>
+            <h2 class="module-title font-alt text-center">
+                You May Also Like
+            </h2>
+            <?= $block ?>
+        </div>
     </div>
-</div>
 <?php endif; ?>

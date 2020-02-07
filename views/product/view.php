@@ -1,6 +1,5 @@
 <?php
 
-
 use app\components\Helper;
 use app\models\Product;
 use app\models\Ticket;
@@ -8,6 +7,14 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $model Product */
+
+Yii::$app->params['og_type']['content'] = 'product';
+Yii::$app->params['og_image']['content'] = $model->getProductsImages()[0];
+Yii::$app->params['twitter_image']['content'] = $model->getProductsImages()[0];
+
+if (!empty($model->description)) {
+    Yii::$app->params['meta-description'] = $model->getMetaDescription();
+}
 
 $this->title = $model->name . ' - ' . Yii::$app->name;;
 ?>
@@ -24,7 +31,8 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
                     <?php if ($key <= 6): ?>
                         <li>
                             <a class="gallery" href="#">
-                                <img itemprop="image" src="<?= $image ?>" alt="Single Product" data-original-size="<?= $image ?>">
+                                <img itemprop="image" src="<?= $image ?>" alt="Single Product"
+                                     data-original-size="<?= $image ?>">
                             </a>
                         </li>
                     <?php endif; ?>

@@ -8,13 +8,10 @@ use app\components\Helper;
 use app\models\Category;
 use app\widgets\AddNewURL;
 use app\widgets\AgeVerify;
-use kartik\select2\Select2;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\web\JsExpression;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 $home = Yii::$app->controller->id == 'image' && Yii::$app->controller->action->id == 'index' && count(Yii::$app->request->get()) == 0;
@@ -32,6 +29,11 @@ AppAsset::register($this);
     <meta name="google-site-verification" content="a_Ab___KznXBwMsE78rOjtTk2kMSZpW19GaRZtJtIQg"/>
     <link rel="manifest" href="<?= Url::to(['/manifest.json']) ?>">
 
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//www.gravatar.com">
+
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -40,29 +42,30 @@ AppAsset::register($this);
 
     <link rel="canonical" href="<?= Yii::$app->request->absoluteUrl ?>"/>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="<?= Url::to(['favicon/apple-icon-57x57.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="60x60" href="<?= Url::to(['favicon/apple-icon-60x60.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?= Url::to(['favicon/apple-icon-72x72.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?= Url::to(['favicon/apple-icon-76x76.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?= Url::to(['favicon/apple-icon-114x114.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="120x120" href="<?= Url::to(['favicon/apple-icon-120x120.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="144x144" href="<?= Url::to(['favicon/apple-icon-144x144.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<?= Url::to(['favicon/apple-icon-152x152.png'], true) ?>">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= Url::to(['favicon/apple-icon-180x180.png'], true) ?>">
-    <link rel="icon" type="image/png" sizes="192x192" href="<?= Url::to(['favicon/android-icon-192x192.png'], true) ?>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to(['favicon/favicon-32x32.png'], true) ?>">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?= Url::to(['favicon/favicon-96x96.png'], true) ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= Url::to(['favicon/favicon-16x16.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="57x57" href="<?= Url::to(['/favicon/apple-icon-57x57.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="60x60" href="<?= Url::to(['/favicon/apple-icon-60x60.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?= Url::to(['/favicon/apple-icon-72x72.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?= Url::to(['/favicon/apple-icon-76x76.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?= Url::to(['/favicon/apple-icon-114x114.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="120x120" href="<?= Url::to(['/favicon/apple-icon-120x120.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<?= Url::to(['/favicon/apple-icon-144x144.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="152x152" href="<?= Url::to(['/favicon/apple-icon-152x152.png'], true) ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= Url::to(['/favicon/apple-icon-180x180.png'], true) ?>">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<?= Url::to(['/favicon/android-icon-192x192.png'], true) ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to(['/favicon/favicon-32x32.png'], true) ?>">
+    <link rel="icon" type="image/png" sizes="96x96" href="<?= Url::to(['/favicon/favicon-96x96.png'], true) ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= Url::to(['/favicon/favicon-16x16.png'], true) ?>">
 
     <meta name="msapplication-TileColor" content="#0A0A0A">
-    <meta name="msapplication-TileImage" content="<?= Url::to(['favicon/ms-icon-144x144.png'], true) ?>">
+    <meta name="msapplication-TileImage" content="<?= Url::to(['/favicon/ms-icon-144x144.png'], true) ?>">
     <meta name="theme-color" content="#0A0A0A">
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
 
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:site" content="<?= Yii::$app->request->absoluteUrl ?>"/>
+    <?= $this->registerMetaTag(Yii::$app->params['twitter_site'], 'twitter_site'); ?>
     <meta name="twitter:title" content="<?= Html::encode($this->title) ?>"/>
     <meta name="twitter:description" content="<?= Yii::$app->params['meta-description']; ?>"/>
     <?= $this->registerMetaTag(Yii::$app->params['twitter_image'], 'twitter_image'); ?>
@@ -75,6 +78,8 @@ AppAsset::register($this);
 
     <meta property="fb:pages" content="766392393719178"/>
     <meta property="fb:app_id" content="2009025835858112"/>
+
+    <meta name="robots" content="follow,index"/>
 
     <?php $this->head() ?>
 
@@ -94,9 +99,24 @@ AppAsset::register($this);
     }
     </script>
 
+    <script>
+       if ('serviceWorker' in navigator) {
+           navigator.serviceWorker.register('<?= Url::to('@web/service-worker.js') ?>', {
+               scope: '.'
+           }).then(function(registration) {
+               // Registration was successful
+               console.log('ServiceWorker registration successful with scope: ', registration.scope);
+           }, function(err) {
+               // registration failed :(
+               console.log('ServiceWorker registration failed: ', err);
+           });
+       }
+    </script>
+
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
 <?= Helper::systemConfig('google-tag-manager-noscript') ?>
+
 <?php $this->beginBody() ?>
 
 <div class="page-loader">
@@ -153,7 +173,12 @@ AppAsset::register($this);
         $items[] = [
             'label' => Yii::$app->user->identity->name,
             'items' => [
-                ['label' => 'Logout',
+                [
+                    'label' => 'Profile',
+                    'url' => ['/user/profile/view', 'slug' => Yii::$app->user->identity->slug],
+                ],
+                [
+                    'label' => 'Logout',
                     'url' => ['/auth/logout'],
                     'linkOptions' => ['data-method' => 'post'],
                 ],
@@ -201,7 +226,6 @@ AppAsset::register($this);
 <?php echo AgeVerify::widget() ?>
 <?php echo AddNewURL::widget() ?>
 
-
 <footer class="footer bg-dark">
     <div class="container">
         <div class="row">
@@ -219,12 +243,15 @@ AppAsset::register($this);
                     <a href="<?= Url::to(['/products'], true) ?>">Products</a>
                     <a href="<?= Url::to(['/contact'], true) ?>">Contact</a>
                     <a href="https://www.facebook.com/aligonewild69" target="_blank"><i class="fa fa-facebook"></i></a>
-                    <a href="https://twitter.com/AliGoneWild69" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="https://twitter.com/AliGoneWild69" target="_blank"><i class="fa fa-twitter"
+                                                                                   aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+<div class="scroll-up" style="display: block;"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
 
 <div id="searchModal" class="modal fade bs-example-modal-lg" aria-labelledby="searchModal">
     <div class="modal-dialog modal-lg" role="document">
