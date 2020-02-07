@@ -99,9 +99,9 @@ AppAsset::register($this);
     }
     </script>
 
-    <script>
+    <!--<script>
        if ('serviceWorker' in navigator) {
-           navigator.serviceWorker.register('<?= Url::to('@web/service-worker.js') ?>', {
+           navigator.serviceWorker.register('<?/*= Url::to('@web/service-worker.js') */?>', {
                scope: '.'
            }).then(function(registration) {
                // Registration was successful
@@ -111,7 +111,7 @@ AppAsset::register($this);
                console.log('ServiceWorker registration failed: ', err);
            });
        }
-    </script>
+    </script>-->
 
 </head>
 <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
