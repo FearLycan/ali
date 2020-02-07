@@ -34,7 +34,7 @@ $this->title = $model->name . '\'s Profile - ' . Yii::$app->name;
             </h2>
 
             <div class="row" style="margin-bottom: 10px;">
-                <div class="col-xs-3">
+                <div class="col-xs-2">
                     <strong>123</strong> products
                 </div>
                 <div class="col-xs-2">

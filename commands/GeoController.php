@@ -65,5 +65,7 @@ class GeoController extends Controller
             //api restriction rate limit of 2 queries per second
             sleep(1);
         }
+
+        Visitor::updateAll(['country_code' => 'UK'], ['=', 'country_code', 'GB']);
     }
 }
