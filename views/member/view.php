@@ -125,7 +125,7 @@ Yii::$app->params['og_type']['content'] = 'article';
 
                                     <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
                                          data-src="<?= Url::to(['/images/normal/' . $model->avatar]) ?>"
-                                         alt="<?= $model->name ?>">
+                                         alt="<?= $model->name ?>'s pic">
                                 <?php endif; ?>
 
                                 <div class="shop-item-detail">

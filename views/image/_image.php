@@ -3,7 +3,6 @@
 /* @var $model Image */
 /* @var $index int */
 
-use app\components\Helper;
 use app\models\Image;
 use yii\helpers\Url;
 $style = '';
@@ -15,5 +14,5 @@ $style = '';
         data-member-url="<?= Url::to(['member/view', 'slug' => $model->member->slug]) ?>"
         class="show-modal button-clear"
 >
-    <img src="<?= $model->getNormalSizeImage() ?>" <?= $style ?> alt="Image <?= $model->id ?>"/>
+    <img src="<?= $model->getNormalSizeImage() ?>" <?= $style ?> alt="<?= $model->product->name ?>"/>
 </button>

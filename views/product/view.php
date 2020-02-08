@@ -31,7 +31,7 @@ $this->title = $model->name . ' - ' . Yii::$app->name;;
                     <?php if ($key <= 6): ?>
                         <li>
                             <a class="gallery" href="#">
-                                <img itemprop="image" src="<?= $image ?>" alt="Single Product"
+                                <img itemprop="image" src="<?= $image ?>" alt="<?= $image->product->name ?>"
                                      data-original-size="<?= $image ?>">
                             </a>
                         </li>

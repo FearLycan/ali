@@ -17,7 +17,7 @@ class GeoController extends Controller
      * @throws Exception
      * @throws \yii\base\InvalidConfigException
      */
-    public function actionSetIpLocations($limit = 10)
+    public function actionSetIpLocations($limit = 20)
     {
         if (isset(Yii::$app->params['ipinfodb_keyApi'])) {
             $apiKey = Yii::$app->params['ipinfodb_keyApi'];

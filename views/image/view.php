@@ -56,7 +56,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                 <img class="img-responsive img-center lazy" id="product"
                      src="<?= Url::to(['/images/site/wait.gif']) ?>"
                      data-src="<?= $model->getOriginalSizeImage() ?>"
-                    alt="<?= $model->member->name ?>">
+                    alt="<?= $model->product->name ?>">
 
                 <?php if ($images = $model->getMoreUserImages()): ?>
                     <div class="row">
@@ -69,7 +69,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                                                  data-src="<?= $image->getNormalSizeImage() ?>"
                                                  data-original-size="<?= $image->getOriginalSizeImage() ?>"
                                                  data-url="<?= Url::to(['image/view', 'slug' => $image->slug]) ?>"
-                                                 alt="Product Image <?= $key ?>"
+                                                 alt="<?= $image->product->name ?>"
                                                  class="lazy">
                                        </a>
                                     </li>
@@ -186,7 +186,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                 <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
                     <div class="widget">
                         <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">
-                            <img src="<?= Url::to('@web/images/site/aliexpress.webp') ?>" class="img-responsive">
+                            <img src="<?= Url::to('@web/images/site/aliexpress.webp') ?>" alt="Aliexpress" class="img-responsive">
                         </a>
                     </div>
                 <?php endif; ?>
@@ -223,7 +223,7 @@ Yii::$app->params['og_type']['content'] = 'article';
 
                                 <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
                                      data-src="<?= Url::to(['/images/normal/' . $model->file]) ?>"
-                                     alt="<?= $model->member->name ?>">
+                                     alt="<?= $model->product->name ?>">
 
                                 <div class="shop-item-detail">
                                     <a class="btn btn-round btn-b"
