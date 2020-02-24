@@ -29,77 +29,67 @@ class AliController extends Controller
     }
 
     /**
-     * @throws Exception
+     * @param int $limit
      * @throws InvalidConfigException
      * @throws \yii\httpclient\Exception
      */
-    public function actionProduct()
+    public function actionProduct($limit = 100)
     {
-        $limit = 10;
-        $offset = 0;
-
         $client = new Client();
 
-        do {
-            $products = ProductUrl::find()
-                ->where(['status' => ProductUrl::STATUS_NEW])
-                ->offset($offset)
-                ->all();
+        $products = ProductUrl::find()
+            ->where(['status' => ProductUrl::STATUS_NEW])
+            ->limit($limit)
+            ->all();
 
-            /* @var $product ProductUrl */
-            foreach ($products as $product) {
-                $request = $client->createRequest()
-                    ->setMethod('get')
-                    ->setUrl($product->url);
-                $data = $request->send();
+        /* @var $product ProductUrl */
+        foreach ($products as $product) {
+            $request = $client->createRequest()
+                ->setMethod('get')
+                ->setUrl($product->url);
+            $data = $request->send();
 
-                if ($data->isOk) {
-                    $crawler = new Crawler($data->content);
+            if ($data->isOk) {
+                $crawler = new Crawler($data->content);
 
-                    $breadcrumb = $crawler
-                        ->filterXpath("//div[contains(@class, 'breadcrumb')]");
+                $breadcrumb = $crawler
+                    ->filterXpath("//div[contains(@class, 'breadcrumb')]");
 
-                    $breadcrumb = $breadcrumb->filterXPath("//a");
+                $breadcrumb = $breadcrumb->filterXPath("//a");
 
-                    $category_id = Category::create($breadcrumb);
+                $category_id = Category::create($breadcrumb);
 
-                    if ($category_id) {
-                        $product_id = Product::create($crawler, $category_id);
+                if ($category_id) {
+                    $product_id = Product::create($crawler, $category_id);
 
-                        Image::extractImages($product_id);
-                    }
-
-                    $product->status = ProductUrl::STATUS_DONE;
-                    $product->save();
-
-                } else {
-
-                    $product->status = ProductUrl::STATUS_ERROR;
-                    $product->save();
-
-                    throw new Exception(
-                        "Request to $request->url failed with response: \n"
-                        . VarDumper::dumpAsString($data->content)
-                    );
+                    Image::extractImages($product_id);
                 }
+
+                $product->status = ProductUrl::STATUS_DONE;
+                $product->save();
+
+            } else {
+
+                $product->status = ProductUrl::STATUS_ERROR;
+                $product->save();
+
+                throw new Exception(
+                    "Request to $request->url failed with response: \n"
+                    . VarDumper::dumpAsString($data->content)
+                );
             }
-
-            $offset = $offset + $limit;
-
-
-        } while (!empty($urls));
-
+        }
 
     }
 
-    public function actionSynchronization()
+    public function actionSynchronization($limit = 100)
     {
         $today = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 31, date("Y")));
 
         $products = Product::find()
             ->where(['status' => Product::STATUS_ACTIVE])
             ->andWhere(['<=', 'synchronized_at', $today])
-            ->limit($this->limit)
+            ->limit($limit)
             ->all();
 
         foreach ($products as $product) {
@@ -109,9 +99,9 @@ class AliController extends Controller
 
     public function actionChangeProductImage()
     {
-        $products = Product::find()->all();
+        $products = Product::find();
 
-        foreach ($products as $product) {
+        foreach ($products->each(100) as $product) {
 
             $link = str_replace(['[', ']', '"'], '', $product->image);
 
@@ -122,10 +112,10 @@ class AliController extends Controller
 
     public function actionChangeProductReviewCount()
     {
-        $products = Product::find()->where(['review_count' => 0])->all();
+        $products = Product::find()->where(['review_count' => 0]);
 
         /* @var $product Product */
-        foreach ($products as $product) {
+        foreach ($products->each(100) as $product) {
 
             $product->review_count = 1;
             $product->rating_value = 5;
