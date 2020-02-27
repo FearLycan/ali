@@ -60,6 +60,7 @@ AppAsset::register($this);
     <meta name="msapplication-TileColor" content="#0A0A0A">
     <meta name="msapplication-TileImage" content="<?= Url::to(['/favicon/ms-icon-144x144.png'], true) ?>">
     <meta name="theme-color" content="#0A0A0A">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -95,7 +96,7 @@ AppAsset::register($this);
         "name": "Ali Gone Wild",
         "description": "<?= Yii::$app->params['meta-description']; ?>",
         "url": "https://aligonewild.com",
-        "logo": "https://aligonewild.com/images/site/og-image.png"
+        "logo": "<?= Yii::$app->params['og_image']['content'] ?>"
     }
     </script>
 
@@ -284,6 +285,16 @@ AppAsset::register($this);
             },
             "theme": "classic"
         })
+    });
+
+    let zooming = new Zooming({
+        'bgColor': 'rgb(10, 10, 10)',
+        'bgOpacity': 0.99,
+        'zIndex': 1000,
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        zooming.listen('img.img-zoomable');
     });
 </script>
 </body>
