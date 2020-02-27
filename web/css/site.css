@@ -633,3 +633,16 @@ input#contactform-website {
     background: red;
     display: inline-block;
 }
+
+tbody > tr > td, .table > tfoot > tr > td {
+    padding: 10px 8px;
+}
+
+/*
+.modal.fade {
+    z-index: 1000 !important;
+}
+
+.modal-backdrop{
+    z-index: 999 !important;
+}*/

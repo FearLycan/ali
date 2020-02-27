@@ -53,7 +53,7 @@ Yii::$app->params['og_type']['content'] = 'article';
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <img class="img-responsive img-center lazy" id="product"
+                <img class="img-responsive img-center lazy img-zoomable" id="product"
                      src="<?= Url::to(['/images/site/wait.gif']) ?>"
                      data-src="<?= $model->getOriginalSizeImage() ?>"
                     alt="<?= $model->product->name ?>">
