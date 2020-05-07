@@ -2,8 +2,6 @@
 
 use yii\helpers\ArrayHelper;
 
-$db = require __DIR__ . '/db.php';
-
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
@@ -35,7 +33,10 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => ArrayHelper::merge(
+            require __DIR__ . '/db.php',
+            require __DIR__ . '/db-local.php'
+        ),
     ],
     'params' => ArrayHelper::merge(
         require __DIR__ . '/params.php',

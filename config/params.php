@@ -7,4 +7,5 @@ return [
     'og_type' => ['property' => 'og:type', 'content' => 'website'],
     'twitter_image' => ['property' => 'twitter:image', 'content' => 'https://aligonewild.com/images/site/og-image.png'],
     'twitter_site' => ['property' => 'twitter:site', 'content' => '@AliGoneWild69'],
+    'keywords' => 'Hot Reviews, Sexy Feedback, Aliexpress Feedback, Sexy Reviews',
 ];

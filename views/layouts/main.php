@@ -4,15 +4,15 @@
 
 /* @var $content string */
 
+use app\assets\AppAsset;
 use app\components\Helper;
 use app\models\Category;
 use app\widgets\AddNewURL;
 use app\widgets\AgeVerify;
-use yii\helpers\Url;
-use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use app\assets\AppAsset;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 $home = Yii::$app->controller->id == 'image' && Yii::$app->controller->action->id == 'index' && count(Yii::$app->request->get()) == 0;
 
@@ -39,6 +39,7 @@ AppAsset::register($this);
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
     <meta name="description" content="<?= Yii::$app->params['meta-description']; ?>"/>
+    <meta name="keywords" content="<?= Yii::$app->params['keywords']; ?>" />
 
     <link rel="canonical" href="<?= Yii::$app->request->absoluteUrl ?>"/>
 
@@ -63,7 +64,7 @@ AppAsset::register($this);
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title) ?> - The Hottest Reviews from Aliexpress</title>
 
     <meta name="twitter:card" content="summary"/>
     <?= $this->registerMetaTag(Yii::$app->params['twitter_site'], 'twitter_site'); ?>
@@ -98,6 +99,7 @@ AppAsset::register($this);
         "url": "https://aligonewild.com",
         "logo": "<?= Yii::$app->params['og_image']['content'] ?>"
     }
+
     </script>
 
 </head>
@@ -221,9 +223,6 @@ AppAsset::register($this);
                             href="<?= Yii::$app->homeUrl ?>"><?= Yii::$app->name ?></a>, All Rights Reserved</p>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
-                <!--<div class="footer-social-links">
-                    <a href="https://www.facebook.com/AliGoneWild69" target="_blank"><i class="fa fa-facebook"></i></a>
-                </div>-->
                 <div class="footer-social-links">
                     <a href="<?= Url::to(['/categories'], true) ?>">Categories</a>
                     <a href="<?= Url::to(['/members'], true) ?>">Members</a>
@@ -233,6 +232,21 @@ AppAsset::register($this);
                     <a href="https://twitter.com/AliGoneWild69" target="_blank"><i class="fa fa-twitter"
                                                                                    aria-hidden="true"></i></a>
                 </div>
+            </div>
+
+            <div class="col-xs-12" id="description">
+
+                <h3>
+                    AliGoneWild - The biggest customer pics collection from Aliexpress feedback.
+                </h3>
+
+                <p>
+                    The biggest customer pics collection from Aliexpress feedback -
+                    Intimates Wear for Women, Bodysuits, Bra & Brief Sets, Dresses,
+                    Real Clothes and Much more
+
+                    The Hottest Reviews on Aliexpress
+                </p>
             </div>
         </div>
     </div>
@@ -295,6 +309,10 @@ AppAsset::register($this);
 
     document.addEventListener('DOMContentLoaded', function () {
         zooming.listen('img.img-zoomable');
+    });
+
+    $( document ).ready(function() {
+        $('div#description').hide();
     });
 </script>
 </body>

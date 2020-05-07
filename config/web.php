@@ -2,8 +2,6 @@
 
 use yii\helpers\ArrayHelper;
 
-$db = require __DIR__ . '/db.php';
-
 $config = [
     'id' => 'basic',
     'name' => 'AliGoneWild',
@@ -15,7 +13,10 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
-        'db' => $db,
+        'db' => ArrayHelper::merge(
+            require __DIR__ . '/db.php',
+            require __DIR__ . '/db-local.php'
+        ),
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -62,7 +63,9 @@ $config = [
                 'view/<slug>' => 'image/view',
                 'ticket/create/<type>/<object_id>' => 'ticket/create',
                 'auth/activation/<code>' => 'auth/activation',
-                'user/<slug>' => 'user/profile/view'
+                'user/products' => 'user/product/index',
+                'user/urls' => 'user/url/index',
+                'user/<slug>' => 'user/profile/view',
             ],
         ],
         'assetManager' => [
