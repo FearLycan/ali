@@ -26,6 +26,7 @@ use yii\db\Expression;
  * @property int $category_id
  * @property int $type
  * @property int $click
+ * @property int $url_id
  * @property string $created_at
  * @property string $updated_at
  * @property string $synchronized_at

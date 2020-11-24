@@ -1,15 +1,22 @@
 <?php
 
-/* @var $user \app\models\User */
+use yii\helpers\Url;
+use \app\models\User;
+
+/* @var $user User */
 ?>
 
 <section class="slice--offset slice sct-color-1">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 ">
-                <div class="heading-3 strong-300 line-height-1_8">
-                    <span class="c-base-1 strong-500">Witaj <?= $user->name ?>!</span> Twoje konto zostało aktywowane, teraz możesz się zalogować.
-                </div>
+            <div class="col-sm-6 col-sm-offset-3">
+                <h4 class="font-alt mb-0">Your account has been confirmed.</h4>
+                <hr class="divider-w mt-10 mb-20">
+                <p>
+                    <strong><?= $user->name ?></strong>
+                    Thank you for confirming your account.
+                </p>
+                <p>Just <a href="<?= Url::to(['auth/login']) ?>">log in</a> and have fun ;)</p>
             </div>
         </div>
     </div>

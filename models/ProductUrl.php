@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "{{%product_url}}".
@@ -10,7 +11,11 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $url
  * @property int $status
+ * @property int $author_id
  * @property string $created_at
+ *
+ * @property Product $product
+ * @property User $author
  */
 class ProductUrl extends ActiveRecord
 {
@@ -34,8 +39,8 @@ class ProductUrl extends ActiveRecord
     public function rules()
     {
         return [
-            [['url'], 'required'],
-            [['status'], 'integer'],
+            [['url', 'author_id'], 'required'],
+            [['status', 'author_id'], 'integer'],
             [['created_at'], 'safe'],
             [['url'], 'string', 'max' => 255],
         ];
@@ -73,5 +78,21 @@ class ProductUrl extends ActiveRecord
     public function getStatusName()
     {
         return self::getStatusNames()[$this->status];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['url_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author_id']);
     }
 }

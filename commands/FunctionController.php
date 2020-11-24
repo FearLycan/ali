@@ -5,6 +5,8 @@ namespace app\commands;
 
 use app\models\Image;
 use app\models\Member;
+use app\models\Product;
+use app\models\ProductUrl;
 use yii\console\Controller;
 
 class FunctionController extends Controller
@@ -35,6 +37,22 @@ class FunctionController extends Controller
         foreach ($members->each(100) as $member) {
             $member->view = $member->click;
             $member->save(false);
+        }
+    }
+
+    public function actionSetProductUrl()
+    {
+        $products = Product::find();
+
+        foreach ($products->each(100) as $product) {
+            /** @var ProductUrl $url */
+            $url = ProductUrl::find()->where(['like', 'url', $product->ali_product_id])->one();
+
+            if (!empty($url)) {
+                /** @var Product $product */
+                $product->url_id = $url->id;
+                $product->save();
+            }
         }
     }
 }

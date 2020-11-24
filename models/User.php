@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\helpers\Url;
 use yii\web\IdentityInterface;
 use yii\behaviors\SluggableBehavior;
 
@@ -26,6 +25,7 @@ use yii\behaviors\SluggableBehavior;
  * @property string $last_seen
  * @property string $auth_key
  * @property string $verification_code
+ * @property string $avatar
  *
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -40,6 +40,8 @@ class User extends ActiveRecord implements IdentityInterface
     const ROLE_MODERATOR = 2;
     const ROLE_BOT = 3;
     const ROLE_ADMIN = 10;
+
+    const BOT_SPACE_BOB_ID = 2;
 
 
     /**
@@ -60,6 +62,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['registered_at', 'last_login_at', 'last_seen'], 'safe'],
             [['name', 'email', 'password', 'auth_key', 'verification_code'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 300],
+            [['name', 'email', 'password', 'auth_key', 'verification_code', 'avatar'], 'string', 'max' => 255],
             [['email'], 'unique'],
         ];
     }
@@ -86,6 +89,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @param bool $insert
      * @return array
      */
     public function behaviors()
@@ -132,9 +136,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             self::ROLE_USER => 'User',
+            self::ROLE_BOT => 'Bot',
             self::ROLE_MODERATOR => 'Moderator',
             self::ROLE_ADMIN => 'Administrator',
-            self::ROLE_BOT => 'Boot',
         ];
     }
 
@@ -299,6 +303,14 @@ class User extends ActiveRecord implements IdentityInterface
         } else {
             return self::generateUniqueRandomString();
         }
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getProductUrls()
+    {
+        return $this->hasMany(ProductUrl::className(), ['author_id' => 'id']);
     }
 
     /**

@@ -200,14 +200,6 @@ AppAsset::register($this);
     <?php endif; ?>
 
     <div class="container">
-
-        <?php if (Yii::$app->user->isGuest): ?>
-            <!--<div id="nMOFPOKuop">
-                Our website is made possible by displaying online advertisements to our visitors.<br>
-                Please consider supporting us by disabling your ad blocker.
-            </div>-->
-        <?php endif; ?>
-
         <?= $content ?>
     </div>
 </div>
@@ -225,8 +217,9 @@ AppAsset::register($this);
             <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="footer-social-links">
                     <a href="<?= Url::to(['/categories'], true) ?>">Categories</a>
-                    <a href="<?= Url::to(['/members'], true) ?>">Members</a>
                     <a href="<?= Url::to(['/products'], true) ?>">Products</a>
+                    <a href="<?= Url::to(['/members'], true) ?>">Members</a>
+                    <a href="<?= Url::to(['/countries'], true) ?>">Countries</a>
                     <a href="<?= Url::to(['/contact'], true) ?>">Contact</a>
                     <a href="https://www.facebook.com/aligonewild69" target="_blank"><i class="fa fa-facebook"></i></a>
                     <a href="https://twitter.com/AliGoneWild69" target="_blank"><i class="fa fa-twitter"

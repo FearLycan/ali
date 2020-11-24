@@ -49,7 +49,7 @@ class RegistrationForm extends User
     public function sendEmail()
     {
         Yii::$app->mailer
-            ->compose("account-confirm", [
+            ->compose("registration-confirm", [
                 'user' => $this,
             ])
             ->setFrom([Yii::$app->params['admin-email'] => Yii::$app->name])

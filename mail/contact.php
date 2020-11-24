@@ -8,5 +8,3 @@ use yii\helpers\Html;
 <p>From: <?= Html::encode($email) ?></p>
 <p>Name: <?= Html::encode($name) ?></p>
 <p>Message: <?= Html::encode($message) ?></p>
-
-<?= $this->render('_message-footer', ['optional' => false]) ?>

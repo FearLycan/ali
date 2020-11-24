@@ -107,7 +107,7 @@ class AuthController extends Controller
             $model->auth_key = User::generateUniqueRandomString();
             $model->verification_code = User::generateUniqueRandomString();
             $model->save();
-            //$model->sendEmail();
+            $model->sendEmail();
             $status = true;
         }
 
@@ -133,8 +133,11 @@ class AuthController extends Controller
 
         if (!empty($user)) {
             $user->status = User::STATUS_ACTIVE;
+            $user->auth_key = null;
             $user->save();
             $confirm = true;
+        } else {
+            return $this->goHome();
         }
 
         return $this->render('activation', [
