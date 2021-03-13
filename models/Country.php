@@ -20,7 +20,6 @@ use yii\db\ActiveRecord;
 class Country extends \yii\db\ActiveRecord
 {
     /**
-     * @param bool $insert
      * @return array
      */
     public function behaviors()

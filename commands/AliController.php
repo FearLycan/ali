@@ -78,6 +78,8 @@ class AliController extends Controller
                     . VarDumper::dumpAsString($data->content)
                 );
             }
+
+            sleep(rand(5, 20));
         }
 
     }

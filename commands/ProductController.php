@@ -43,9 +43,10 @@ class ProductController extends Controller
                     $image->status = Image::STATUS_ACCEPTED;
                     $image->save();
                 }
+                sleep(rand(5, 20));
             }
         } else {
-            echo "No product with ID: " . $id ."\n";
+            echo "No product with ID: " . $id . "\n";
             return;
         }
     }

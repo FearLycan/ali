@@ -3,10 +3,11 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use yii\behaviors\SluggableBehavior;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -25,7 +26,6 @@ use yii\behaviors\SluggableBehavior;
  * @property string $last_seen
  * @property string $auth_key
  * @property string $verification_code
- * @property string $avatar
  *
  */
 class User extends ActiveRecord implements IdentityInterface

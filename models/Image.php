@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\VarDumper;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
+use Imagine\Image\Point;
 
 /**
  * This is the model class for table "{{%image}}".
@@ -243,7 +244,7 @@ class Image extends ActiveRecord
                 unset($images);
 
                 $page++;
-                sleep(2);
+                sleep(rand(5, 20));
             }
 
             $product->synchronized_at = date('Y-m-d H:i:s');
@@ -353,6 +354,29 @@ class Image extends ActiveRecord
     {
         $this->view++;
         $this->save(false);
+    }
+
+    public function addWatermark()
+    {
+        $urls = [
+            $this->getOriginalSizeImage(),
+            //$this->getThumbnailSizeImage(),
+            $this->getNormalSizeImage()
+        ];
+
+        foreach ($urls as $url) {
+            $watermark = Img::getImagine()->open(Yii::getAlias('@web') . '/images/site/watermark.png');
+            $image = Img::getImagine()->open($url);
+            $size = $image->getSize();
+            $wSize = $watermark->getSize();
+
+            $bottomRight = new Point($size->getWidth() - $wSize->getWidth(), $size->getHeight() - $wSize->getHeight());
+
+            $image->paste($watermark, $bottomRight);
+
+            $image->save($url, ['quality' => 90]);
+        }
+
     }
 
 }

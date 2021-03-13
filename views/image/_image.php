@@ -1,10 +1,12 @@
 <?php
 
 /* @var $model Image */
+
 /* @var $index int */
 
 use app\models\Image;
 use yii\helpers\Url;
+
 $style = '';
 ?>
 <button

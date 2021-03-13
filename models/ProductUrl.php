@@ -13,6 +13,10 @@ use yii\db\ActiveQuery;
  * @property int $status
  * @property int $author_id
  * @property string $created_at
+ * @property string $updated_at
+ *
+ * @property Product $product
+ * @property User $author
  *
  * @property Product $product
  * @property User $author
@@ -39,10 +43,14 @@ class ProductUrl extends ActiveRecord
     public function rules()
     {
         return [
+            [['url'], 'required'],
+            [['status', 'author_id'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
             [['url', 'author_id'], 'required'],
             [['status', 'author_id'], 'integer'],
             [['created_at'], 'safe'],
             [['url'], 'string', 'max' => 255],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
 
@@ -55,7 +63,9 @@ class ProductUrl extends ActiveRecord
             'id' => 'ID',
             'url' => 'Url',
             'status' => 'Status',
+            'author_id' => 'Author ID',
             'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 

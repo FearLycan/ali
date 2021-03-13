@@ -30,7 +30,7 @@ class m181202_142914_create_system_config_table extends Migration
 
         $this->addForeignKey('{{%system_config_author_id_fk}}', '{{%system_config}}', 'author_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
 
-        $this->insert('{{%system_config}}',
+        /*$this->insert('{{%system_config}}',
             [
                 'name' => 'google-analytics',
                 'value' => '<!-- config google-analytics -->',
@@ -44,7 +44,7 @@ class m181202_142914_create_system_config_table extends Migration
                 'value' => '<!-- config google-adsense -->',
                 'status' => SystemConfig::STATUS_ACTIVE
             ]
-        );
+        );*/
 
     }
 

@@ -111,7 +111,7 @@ class Product extends ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getURL()
+    public function getUrl()
     {
         return $this->hasOne(ProductUrl::className(), ['id' => 'url_id']);
     }
@@ -185,8 +185,8 @@ class Product extends ActiveRecord
     public static function getStatusNames()
     {
         return [
-            static::STATUS_ACTIVE => 'Active',
-            static::STATUS_PENDING => 'Pending',
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_PENDING => 'Pending',
         ];
     }
 
@@ -204,7 +204,7 @@ class Product extends ActiveRecord
     public static function getTypesNames()
     {
         return [
-            static::TYPE_PRODUCT => 'Product',
+            self::TYPE_PRODUCT => 'Product',
         ];
     }
 

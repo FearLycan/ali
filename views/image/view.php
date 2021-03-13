@@ -183,6 +183,14 @@ Yii::$app->params['og_type']['content'] = 'article';
                     </ul>
                 </div>
 
+                <hr>
+
+<!--                <div class="widget">-->
+<!--                    --><?php //foreach (json_decode($model->product->image, true) as $image): ?>
+<!--                    <img src="--><?//= $image ?><!--" class="img-responsive">-->
+<!--                    --><?php //endforeach; ?>
+<!--                </div>-->
+
                 <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
                     <div class="widget">
                         <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">
