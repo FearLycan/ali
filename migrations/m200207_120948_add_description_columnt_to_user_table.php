@@ -12,7 +12,6 @@ class m200207_120948_add_description_columnt_to_user_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('{{%user}}', 'avatar', $this->string()->null()->after('status'));
         $this->addColumn('{{%user}}', 'description', $this->text()->null()->after('avatar'));
     }
 
@@ -22,6 +21,5 @@ class m200207_120948_add_description_columnt_to_user_table extends Migration
     public function safeDown()
     {
         $this->dropColumn('{{%user}}', 'description');
-        $this->dropColumn('{{%avatar}}', 'description');
     }
 }
