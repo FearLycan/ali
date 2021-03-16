@@ -46,6 +46,9 @@ class ImageController extends Controller
 
         /* @var $image Image */
         foreach ($images as $image) {
+
+            echo $image->id . "\n";
+
             if ($image->download()) {
                 $image->createNormal();
                 $image->createThumbnail();
