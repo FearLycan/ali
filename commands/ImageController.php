@@ -23,6 +23,11 @@ class ImageController extends Controller
                     $image->createThumbnail();
                     $image->status = Image::STATUS_ACCEPTED;
                     $image->save();
+
+                    if (empty($image->member->avatar)) {
+                        $image->member->avatar = $image->file;
+                        $image->member->save();
+                    }
                 }
             }
 
@@ -43,9 +48,27 @@ class ImageController extends Controller
                 $image->createThumbnail();
                 $image->status = Image::STATUS_ACCEPTED;
                 $image->save();
+
+                if (empty($image->member->avatar)) {
+                    $image->member->avatar = $image->file;
+                    $image->member->save();
+                }
             }
 
             sleep(rand(5, 20));
+        }
+    }
+
+    public function actionSetActive($limit = 100)
+    {
+        $images = Image::find()
+            ->where(['status' => Image::STATUS_PENDING])
+            ->limit($limit)
+            ->all();
+
+        foreach ($images as $image) {
+            $image->status = Image::STATUS_ACCEPTED;
+            $image->save();
         }
     }
 
