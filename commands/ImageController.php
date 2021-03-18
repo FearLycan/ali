@@ -8,12 +8,12 @@ use yii\helpers\BaseConsole as Console;
 
 class ImageController extends Controller
 {
-    public function actionDownload()
+    public function actionDownload($limit = 100)
     {
         do {
             $images = Image::find()
                 ->where(['status' => Image::STATUS_PENDING])
-                ->limit(100)
+                ->limit($limit)
                 ->all();
 
             /* @var $image Image */
