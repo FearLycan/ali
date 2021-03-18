@@ -23,6 +23,7 @@ class ValuationImageForm extends \app\modules\admin\models\Image
     {
         $images = self::find()
             ->where(['status' => self::STATUS_NEW])
+            ->orderBy(['id' => SORT_DESC])
             ->select(['id', 'url'])->limit(20);
 
         if ($this->product_id) {

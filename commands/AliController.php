@@ -7,11 +7,11 @@ use app\models\Image;
 use app\models\Product;
 use app\models\ProductUrl;
 use Exception;
+use Symfony\Component\DomCrawler\Crawler;
 use yii\base\InvalidConfigException;
 use yii\console\Controller;
 use yii\helpers\VarDumper;
 use yii\httpclient\Client;
-use Symfony\Component\DomCrawler\Crawler;
 
 class AliController extends Controller
 {
@@ -39,6 +39,7 @@ class AliController extends Controller
 
         $products = ProductUrl::find()
             ->where(['status' => ProductUrl::STATUS_NEW])
+            ->orderBy(['id' => SORT_DESC])
             ->limit($limit)
             ->all();
 
