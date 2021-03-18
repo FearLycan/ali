@@ -10,31 +10,28 @@ class ImageController extends Controller
 {
     public function actionDownload($limit = 100)
     {
-        do {
-            $images = Image::find()
-                ->where(['status' => Image::STATUS_PENDING])
-                ->limit($limit)
-                ->all();
+        $images = Image::find()
+            ->where(['status' => Image::STATUS_PENDING])
+            ->limit($limit);
 
-            /* @var $image Image */
-            foreach ($images as $image) {
+        /* @var $image Image */
+        foreach ($images->each(100) as $image) {
 
-                echo $image->id . "\n";
+            echo $image->id . "\n";
 
-                if ($image->download()) {
-                    $image->createNormal();
-                    $image->createThumbnail();
-                    $image->status = Image::STATUS_ACCEPTED;
-                    $image->save();
+            if ($image->download()) {
+                $image->createNormal();
+                $image->createThumbnail();
+                $image->status = Image::STATUS_ACCEPTED;
+                $image->save();
 
-                    if (empty($image->member->avatar)) {
-                        $image->member->avatar = $image->file;
-                        $image->member->save();
-                    }
+                //if user do not have avatar
+                if (empty($image->member->avatar)) {
+                    $image->member->avatar = $image->file;
+                    $image->member->save();
                 }
             }
-
-        } while (!empty($images));
+        }
     }
 
     public function actionDownloadCron()
