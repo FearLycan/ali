@@ -298,3 +298,25 @@ $(document).on("click", "ul.product-gallery li a", function (e) {
 function openLink(url, target = '_blank') {
     window.open(url, target);
 }
+
+$(document).on('click', 'i.fa-heart.like', function(){
+    let url = $(this).data('url');
+    let like = this;
+    let tooltip = $(this).next('div.tooltip');
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        success: function (response) {
+            if (response.status === 'ok' && response.action === 'create') {
+                $(like).addClass('liked');
+                $(tooltip).find('.tooltip-inner').text(response.image.short_likes);
+            }
+
+            if (response.status === 'ok' && response.action === 'delete') {
+                $(like).removeClass('liked');
+                $(tooltip).find('.tooltip-inner').text(response.image.short_likes);
+            }
+        }
+    });
+});

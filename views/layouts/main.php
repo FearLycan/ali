@@ -39,7 +39,7 @@ AppAsset::register($this);
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
     <meta name="description" content="<?= Yii::$app->params['meta-description']; ?>"/>
-    <meta name="keywords" content="<?= Yii::$app->params['keywords']; ?>" />
+    <meta name="keywords" content="<?= Yii::$app->params['keywords']; ?>"/>
 
     <link rel="canonical" href="<?= Yii::$app->request->absoluteUrl ?>"/>
 
@@ -100,6 +100,7 @@ AppAsset::register($this);
         "logo": "<?= Yii::$app->params['og_image']['content'] ?>"
     }
 
+
     </script>
 
 </head>
@@ -144,7 +145,7 @@ AppAsset::register($this);
             ['label' => 'Categories', 'url' => ['/categories']],
             ['label' => 'Products', 'url' => ['/products']],
             ['label' => 'Members', 'url' => ['/members']],
-            ['label' => 'Countries', 'url' => ['/countries']],
+            //['label' => 'Countries', 'url' => ['/countries']],
             ['label' => 'Contact', 'url' => ['/contact']],
         ],
     ];
@@ -156,16 +157,16 @@ AppAsset::register($this);
     }
 
     if (Yii::$app->user->isGuest) {
-        //$items[] = ['label' => 'Registration', 'url' => ['/auth/registration']];
-        ///$items[] = ['label' => 'Login', 'url' => ['/auth/login']];
+        $items[] = ['label' => 'Registration', 'url' => ['/auth/registration']];
+        $items[] = ['label' => 'Login', 'url' => ['/auth/login']];
     } else {
         $items[] = [
             'label' => Yii::$app->user->identity->name,
             'items' => [
-                [
-                    'label' => 'Profile',
-                    'url' => ['/user/profile/view', 'slug' => Yii::$app->user->identity->slug],
-                ],
+//                [
+//                    'label' => 'Profile',
+//                    'url' => ['/user/profile/view', 'slug' => Yii::$app->user->identity->slug],
+//                ],
                 [
                     'label' => 'Logout',
                     'url' => ['/auth/logout'],
@@ -304,9 +305,12 @@ AppAsset::register($this);
         zooming.listen('img.img-zoomable');
     });
 
-    $( document ).ready(function() {
+    $(document).ready(function () {
         $('div#description').hide();
     });
+
+    $('i.fa-heart.like').tooltip({placement: 'bottom', trigger: 'manual'}).tooltip('show');
+
 </script>
 </body>
 </html>

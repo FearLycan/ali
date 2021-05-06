@@ -27,7 +27,7 @@ use kartik\form\ActiveForm;
     </div>
     <div class="clearfix">
         <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-        <a href="#" class="pull-right">Forgot Password?</a>
+<!--        <a href="#" class="pull-right">Forgot Password?</a>-->
     </div>
 
     <?php ActiveForm::end() ?>

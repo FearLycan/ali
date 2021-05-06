@@ -34,3 +34,7 @@ if ($('ul.pagination').length) {
         status: '.page-load-status',
     });
 }
+
+$grid.on( 'append.infiniteScroll', function( event, body, path, items, response ) {
+    $('i.fa-heart.like').tooltip({placement: 'bottom',trigger: 'manual'}).tooltip('show');
+});

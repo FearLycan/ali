@@ -78,7 +78,7 @@ Modal::end();
     var oldURL;
     var newURL;
 
-    $(document).on('click', 'button.show-modal', function () {
+    $(document).on('click', 'img.show-modal', function () {
         $('#modal')
             .modal('show')
             .find('#modalContent')

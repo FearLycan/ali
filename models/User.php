@@ -5,9 +5,10 @@ namespace app\models;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 use yii\helpers\Url;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -328,5 +329,36 @@ class User extends ActiveRecord implements IdentityInterface
     public function getBadge()
     {
 
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLikes()
+    {
+        return $this->hasMany(Like::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['id' => 'image_id'])->viaTable('{{%like}}', ['user_id' => 'id']);
+    }
+
+    /**
+     * @param $image_id
+     * @return Like|bool
+     */
+    public function likeThis($image_id)
+    {
+        $like = Like::findOne(['user_id' => $this->id, 'image_id' => $image_id]);
+
+        if ($like) {
+            return $like;
+        }
+
+        return false;
     }
 }

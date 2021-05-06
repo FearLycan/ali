@@ -2,20 +2,19 @@
 
 namespace app\models;
 
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 use Symfony\Component\DomCrawler\Crawler;
 use Yii;
 use yii\behaviors\SluggableBehavior;
-use yii\db\Expression;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\imagine\Image as Img;
-use Imagine\Image\Box;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\VarDumper;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
-use Imagine\Image\Point;
+use yii\imagine\Image as Img;
 
 /**
  * This is the model class for table "{{%image}}".
@@ -27,6 +26,7 @@ use Imagine\Image\Point;
  * @property int $status
  * @property int $view
  * @property int $fap_time
+ * @property int $likes
  * @property string $created_at
  * @property string $updated_at
  * @property string $downloaded_at
@@ -93,7 +93,7 @@ class Image extends ActiveRecord
     {
         return [
             [['product_id', 'member_id', 'status'], 'required'],
-            [['product_id', 'member_id', 'status', 'view', 'fap_time'], 'integer'],
+            [['product_id', 'member_id', 'status', 'view', 'fap_time', 'likes'], 'integer'],
             [['created_at', 'updated_at', 'downloaded_at'], 'safe'],
             [['url', 'slug', 'file'], 'string', 'max' => 255],
             [['member_id'], 'exist', 'skipOnError' => true, 'targetClass' => Member::className(), 'targetAttribute' => ['member_id' => 'id']],
@@ -377,6 +377,40 @@ class Image extends ActiveRecord
             $image->save($url, ['quality' => 90]);
         }
 
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getLikes()
+    {
+        return $this->hasMany(Like::className(), ['image_id' => 'id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['id' => 'user_id'])->viaTable('{{%like}}', ['image_id' => 'id']);
+    }
+
+    public function increaseLikes()
+    {
+        $this->likes++;
+        $this->save(false);
+
+        return $this->likes;
+    }
+
+    public function decreaseLikes()
+    {
+        if ($this->likes > 0) {
+            $this->likes--;
+            $this->save(false);
+        }
+
+        return $this->likes;
     }
 
 }

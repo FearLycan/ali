@@ -9,7 +9,7 @@ use \app\models\User;
 <section class="slice--offset slice sct-color-1">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
                 <h4 class="font-alt mb-0">Your account has been confirmed.</h4>
                 <hr class="divider-w mt-10 mb-20">
                 <p>
