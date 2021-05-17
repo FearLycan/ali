@@ -27,6 +27,7 @@ use yii\imagine\Image as Img;
  * @property int $view
  * @property int $fap_time
  * @property int $likes
+ * @property int $not_sexy
  * @property string $created_at
  * @property string $updated_at
  * @property string $downloaded_at
@@ -52,6 +53,8 @@ class Image extends ActiveRecord
     const URL_ORIGINAL = '/images/original/';
     const URL_NORMAL = '/images/normal/';
     const URL_THUMBNAIL = '/images/thumbnail/';
+
+    const MAX_NOT_SEXY_VALUE = 10;
 
     /**
      * @param bool $insert
@@ -93,7 +96,7 @@ class Image extends ActiveRecord
     {
         return [
             [['product_id', 'member_id', 'status'], 'required'],
-            [['product_id', 'member_id', 'status', 'view', 'fap_time', 'likes'], 'integer'],
+            [['product_id', 'member_id', 'status', 'view', 'fap_time', 'likes', 'not_sexy'], 'integer'],
             [['created_at', 'updated_at', 'downloaded_at'], 'safe'],
             [['url', 'slug', 'file'], 'string', 'max' => 255],
             [['member_id'], 'exist', 'skipOnError' => true, 'targetClass' => Member::className(), 'targetAttribute' => ['member_id' => 'id']],
@@ -411,6 +414,14 @@ class Image extends ActiveRecord
         }
 
         return $this->likes;
+    }
+
+    public function increaseNotSexy()
+    {
+        $this->not_sexy++;
+        $this->save(false);
+
+        return $this->not_sexy;
     }
 
 }

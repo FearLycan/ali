@@ -361,4 +361,19 @@ class User extends ActiveRecord implements IdentityInterface
 
         return false;
     }
+
+    /**
+     * @param $image_id
+     * @return NotSexy|bool
+     */
+    public function notSexyThis($image_id)
+    {
+        $not_sexy = NotSexy::findOne(['user_id' => $this->id, 'image_id' => $image_id]);
+
+        if ($not_sexy) {
+            return $not_sexy;
+        }
+
+        return false;
+    }
 }

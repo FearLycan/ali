@@ -58,12 +58,30 @@ Yii::$app->params['og_type']['content'] = 'article';
                      data-src="<?= $model->getOriginalSizeImage() ?>"
                     alt="<?= $model->product->name ?>">
 
+                <div class="options-1">
+                    <button type="button" class="btn btn-labeled btn-like">
+                        <span class="btn-label">
+                            <i class="fa fa-heart like <?= !Yii::$app->user->isGuest && Yii::$app->user->identity->likeThis($model->id) ? 'liked' : '' ?>"
+                               data-url="<?= Url::to(['/like/toggle', 'id' => $model->id]) ?>"></i>
+                        </span>
+                        <span class="full-likes" style="padding: 0 15px 0 10px;"><?= $model->likes ?></span>
+                    </button>
+                </div>
+
+                <?php if(!Yii::$app->user->isGuest && !Yii::$app->user->identity->notSexyThis($model->id)): ?>
+                    <div class="col-md-12 text-right">
+                        <span class="text-muted not-sexy-button" data-url="<?= Url::to(['/not-sexy/set', 'id' => $model->id]) ?>">
+                            <i class="fa fa-ban" aria-hidden="true"></i> This is not sexy
+                        </span>
+                    </div>
+                  <?php endif; ?>
+
                 <?php if ($images = $model->getMoreUserImages()): ?>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <ul class="product-gallery">
                                 <?php foreach ($images as $key => $image): ?>
-                                    <li class="li-gallery <?= $key != 0 ?: 'li-gallery-border' ?>" data-key="<?= $key ?>">
+                                    <li class="li-gallery <?= $image->id != $model->id ?: 'li-gallery-border' ?>" data-key="<?= $key ?>">
                                        <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $image->slug]) ?>">
                                             <img src="<?= Url::to(['/images/site/wait.gif']) ?>"
                                                  data-src="<?= $image->getNormalSizeImage() ?>"

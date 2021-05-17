@@ -692,3 +692,40 @@ tbody > tr > td, .table > tfoot > tr > td {
     top: 10px;
     right: 15px;
 }
+
+
+.btn-like {
+    color: #fff;
+    background-color: #e23b3b;
+    border-color: #cb3535;
+}
+
+
+.btn-label {
+    position: relative;
+    left: -12px;
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px 0 0 3px;
+}
+
+.btn-labeled {
+    padding: 0 6px 0 12px;
+}
+
+.options-1 {
+    position: absolute;
+    top: 0;
+    right: 50px;
+}
+
+.options-2 {
+    position: absolute;
+    bottom: 90px;
+    right: 50px;
+}
+
+span.not-sexy-button:hover {
+    cursor: pointer;
+}

@@ -3,10 +3,10 @@
 namespace app\models\searches;
 
 use app\models\Category;
+use app\models\Image;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Image;
 
 /**
  * ImageSearch represents the model behind the search form of `app\models\Image`.
@@ -48,7 +48,8 @@ class ImageSearch extends Image
     {
         if ($query == null) {
             $query = Image::find()
-                ->where(['image.status' => Image::STATUS_ACCEPTED]);
+                ->where(['image.status' => Image::STATUS_ACCEPTED])
+                ->andWhere(['<=', 'not_sexy', Image::MAX_NOT_SEXY_VALUE]);
         }
 
         /* @var $category Category */

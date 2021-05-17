@@ -220,11 +220,11 @@
             var text = $item.text();
             var href = $item.attr('href');
 
-            if (type == 0) {
+            if (type === 0) {
                 $("li#category_nav a").first().attr("href", href).text(text).parent('li').addClass('active');
             }
 
-            if (type == 1) {
+            if (type === 1) {
                 $("li#sport_nav a").first().attr("href", href).text(text).parent('li').addClass('active');
             }
 
@@ -276,30 +276,31 @@
 
     });
 })(jQuery);
-$(document).on("click", "ul.product-gallery li a", function (e) {
-    e.preventDefault();
-    var scr = $(this).find('img').data('original-size');
-    $('img#product').attr('src', scr);
 
-    $('ul.product-gallery li').removeClass('li-gallery-border');
-    $(this).parent().addClass('li-gallery-border');
-
-    var url = $(this).find('img').data('url');
-    if (url) {
-        if (typeof (history.pushState) != "undefined") {
-            window.history.pushState("object or string", "Title", url);
-        }
-    }
-
-
-    return false;
-});
+// $(document).on("click", "ul.product-gallery li a", function (e) {
+//     e.preventDefault();
+//     var scr = $(this).find('img').data('original-size');
+//     $('img#product').attr('src', scr);
+//
+//     $('ul.product-gallery li').removeClass('li-gallery-border');
+//     $(this).parent().addClass('li-gallery-border');
+//
+//     var url = $(this).find('img').data('url');
+//     if (url) {
+//         if (typeof (history.pushState) != "undefined") {
+//             window.history.pushState("object or string", "Title", url);
+//         }
+//     }
+//
+//
+//     return false;
+// });
 
 function openLink(url, target = '_blank') {
     window.open(url, target);
 }
 
-$(document).on('click', 'i.fa-heart.like', function(){
+$(document).on('click', 'i.fa-heart.like', function () {
     let url = $(this).data('url');
     let like = this;
     let tooltip = $(this).next('div.tooltip');
@@ -317,6 +318,26 @@ $(document).on('click', 'i.fa-heart.like', function(){
                 $(like).removeClass('liked');
                 $(tooltip).find('.tooltip-inner').text(response.image.short_likes);
             }
+
+            $('span.full-likes').text(response.image.likes);
         }
     });
 });
+
+$(document).on('click', 'span.not-sexy-button', function () {
+    let url = $(this).data('url');
+    let not_sexy = this;
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        success: function (response) {
+            if (response.status === 'ok') {
+                $(not_sexy).fadeOut("slow");
+            }
+        }
+    });
+
+});
+
+
