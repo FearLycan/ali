@@ -8,7 +8,6 @@ return [
     'twitter_image' => ['property' => 'twitter:image', 'content' => 'https://aligonewild.com/images/site/og-image.png'],
     'twitter_site' => ['property' => 'twitter:site', 'content' => '@AliGoneWild69'],
     'keywords' => 'Hot Reviews, Sexy Feedback, Aliexpress Feedback, Sexy Reviews',
-    'twitter_image' => ['property' => 'twitter:image', 'content' => 'https://aligonewild.com/images/site/og-image.png'],
     'ipinfodb_keyApi' => '', //https://ipinfodb.com/
     'banners_per_page' => 2,
     'social_facebook_url' => '',

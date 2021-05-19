@@ -1,8 +1,9 @@
 <?php
 
+use app\models\User;
 use yii\helpers\Url;
-use \app\models\User;
 
+$this->title = 'Account activation' . ' - ' . Yii::$app->name;
 /* @var $user User */
 ?>
 
@@ -12,11 +13,12 @@ use \app\models\User;
             <div class="col-sm-6 col-sm-offset-3 text-center">
                 <h4 class="font-alt mb-0">Your account has been confirmed.</h4>
                 <hr class="divider-w mt-10 mb-20">
-                <p>
+                <p class="module-subtitle font-serif">
                     <strong><?= $user->name ?></strong>
                     Thank you for confirming your account.
                 </p>
-                <p>Just <a href="<?= Url::to(['auth/login']) ?>">log in</a> and have fun ;)</p>
+                <p class="module-subtitle font-serif">Just <a href="<?= Url::to(['auth/login']) ?>"><strong>log
+                            in</strong></a> and have fun ;)</p>
             </div>
         </div>
     </div>

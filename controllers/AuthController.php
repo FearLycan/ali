@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use app\components\AccessControl;
+use app\components\Controller;
+use app\models\forms\LoginForm;
 use app\models\forms\RegistrationForm;
 use app\models\User;
 use Yii;
-use app\components\Controller;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
-use app\models\forms\LoginForm;
 
 class AuthController extends Controller
 {
@@ -65,7 +65,7 @@ class AuthController extends Controller
             Yii::$app->user->identity->last_login_at = date('Y-m-d H:i:s');
             Yii::$app->user->identity->save(false, ['last_login_at']);
 
-            return $this->goHome();
+            return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
         }
 
         return $this->render('login', [
@@ -84,7 +84,7 @@ class AuthController extends Controller
             Yii::$app->user->logout();
         }
 
-        return $this->goHome();
+        return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 
 

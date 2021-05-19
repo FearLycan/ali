@@ -8,6 +8,7 @@ use Yii;
 class LoginForm extends User
 {
     private $_user = false;
+    public $rememberMe = true;
 
     /**
      * {@inheritdoc}
@@ -16,7 +17,8 @@ class LoginForm extends User
     {
         return [
             [['email'], 'required'],
-            ['email', 'email', 'message' => 'Błędny adres e-mail.'],
+            ['email', 'email'],
+            ['rememberMe', 'boolean'],
             [['password'], 'required'],
             ['password', 'validatePasswordData']
         ];
@@ -29,7 +31,8 @@ class LoginForm extends User
     {
         return [
             'email' => 'E-mail',
-            'password' => 'Hasło',
+            'password' => 'Password',
+            'rememberMe' => 'Remember Me',
         ];
     }
 
@@ -47,12 +50,12 @@ class LoginForm extends User
             /* @var $user User */
             $user = $this->getUser();
 
-            if($user && $user->status == User::STATUS_INACTIVE){
-                $this->addError($attribute, 'Konto nie zostało aktywowane');
+            if ($user && $user->status == User::STATUS_INACTIVE) {
+                $this->addError($attribute, 'The account has not been activated.');
             }
 
             if (!$user || !Yii::$app->getSecurity()->validatePassword($this->password, $user->password)) {
-                $this->addError($attribute, 'Błędny adres e-mail lub hasło');
+                $this->addError($attribute, 'Incorrect e-mail address or password.');
             }
         }
     }
@@ -64,20 +67,21 @@ class LoginForm extends User
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
+            $duration = $this->rememberMe ? (30 * 24 * 3600) : 0;
+            return Yii::$app->user->login($this->getUser(), $duration);
         }
         return false;
     }
 
     /**
-     * Finds user by [[username]]
+     * Finds user by [[email]]
      *
      * @return array|bool|\yii\db\ActiveRecord
      */
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = static::find()->where(['email' => $this->email])->one();
+            $this->_user = User::find()->where(['email' => $this->email])->one();
         }
 
         return $this->_user;

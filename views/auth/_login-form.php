@@ -26,12 +26,12 @@ use kartik\form\ActiveForm;
         <button type="submit" class="btn btn-block btn-round btn-d">LOGIN</button>
     </div>
     <div class="clearfix">
-        <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-<!--        <a href="#" class="pull-right">Forgot Password?</a>-->
+        <?= $form->field($model, 'rememberMe')->checkbox() ?>
     </div>
 
     <?php ActiveForm::end() ?>
 
-    <p class="text-center text-muted small">Don't have an account? <a href="<?= Url::to(['auth/registration']) ?>">Create
-            it here!</a></p>
+    <p class="text-center text-muted small">Don't have an account?
+        <a href="<?= Url::to(['auth/registration']) ?>">Create it here!</a>
+    </p>
 </div>
