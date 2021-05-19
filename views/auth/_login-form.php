@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Url;
 use kartik\form\ActiveForm;
+use yii\helpers\Url;
 
 /* @var $model \app\models\forms\LoginForm */
 
@@ -13,6 +13,8 @@ use kartik\form\ActiveForm;
     ]) ?>
 
     <h1 class="text-center font-alt">LOGIN</h1>
+
+    <?= $form->field($model, 'referer')->hiddenInput(['value' => Yii::$app->request->referrer])->label(false) ?>
 
     <?= $form->field($model, 'email', [
         'addon' => ['prepend' => ['content' => '<i class="fa fa-user" aria-hidden="true"></i>']]

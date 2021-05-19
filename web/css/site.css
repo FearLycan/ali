@@ -703,11 +703,11 @@ tbody > tr > td, .table > tfoot > tr > td {
 
 .btn-label {
     position: relative;
-    left: -12px;
+    left: -13px;
     display: inline-block;
     padding: 6px 12px;
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 3px 0 0 3px;
+    background: rgba(0, 0, 0, 0.45);
+    /*border-radius: 3px 0 0 3px;*/
 }
 
 .btn-labeled {
@@ -728,4 +728,16 @@ tbody > tr > td, .table > tfoot > tr > td {
 
 span.not-sexy-button:hover {
     cursor: pointer;
+}
+
+.btn-country {
+    padding: 8px 10px;
+}
+
+.flag-in-button {
+    margin-right: 5px;
+}
+
+.filter > li {
+    margin: 10px;
 }

@@ -65,7 +65,7 @@ class AuthController extends Controller
             Yii::$app->user->identity->last_login_at = date('Y-m-d H:i:s');
             Yii::$app->user->identity->save(false, ['last_login_at']);
 
-            return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
+            return $this->redirect($model->referer ?: Yii::$app->homeUrl);
         }
 
         return $this->render('login', [

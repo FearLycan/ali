@@ -145,7 +145,7 @@ AppAsset::register($this);
             ['label' => 'Categories', 'url' => ['/categories']],
             ['label' => 'Products', 'url' => ['/products']],
             ['label' => 'Members', 'url' => ['/members']],
-            //['label' => 'Countries', 'url' => ['/countries']],
+            ['label' => 'Countries', 'url' => ['/countries']],
             ['label' => 'Contact', 'url' => ['/contact']],
         ],
     ];

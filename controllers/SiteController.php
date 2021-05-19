@@ -6,16 +6,16 @@ use app\components\Controller;
 use app\components\Helper;
 use app\models\Category;
 use app\models\Country;
+use app\models\forms\AgeVerifyForm;
 use app\models\forms\ContactForm;
 use app\models\forms\ProductUrlForm;
 use app\models\Product;
 use app\models\ProductUrl;
-use app\models\forms\AgeVerifyForm;
 use app\widgets\AgeVerify;
 use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Response;
-use yii\filters\VerbFilter;
 
 class SiteController extends Controller
 {
@@ -201,7 +201,10 @@ class SiteController extends Controller
 
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $results;
+    }
 
-
+    public function actionOffline()
+    {
+        return $this->render('offline');
     }
 }

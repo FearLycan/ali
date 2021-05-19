@@ -9,6 +9,7 @@ class LoginForm extends User
 {
     private $_user = false;
     public $rememberMe = true;
+    public $referer = true;
 
     /**
      * {@inheritdoc}
@@ -19,6 +20,10 @@ class LoginForm extends User
             [['email'], 'required'],
             ['email', 'email'],
             ['rememberMe', 'boolean'],
+
+            [['referer'], 'string', 'max' => 150],
+            [['referer'], 'checkRefererLink'],
+
             [['password'], 'required'],
             ['password', 'validatePasswordData']
         ];
@@ -34,6 +39,23 @@ class LoginForm extends User
             'password' => 'Password',
             'rememberMe' => 'Remember Me',
         ];
+    }
+
+    public function checkRefererLink($attribute)
+    {
+        $this->referer = strtolower($this->referer);
+
+        if (!YII_ENV_DEV) {
+            if (strpos($this->referer, 'aligonewild') !== false) {
+                //ok
+            } else {
+                $this->addError($attribute, 'Incorrect referer page.');
+            }
+
+            if (substr_count($this->referer, 'http') > 2) {
+                $this->addError($attribute, 'Incorrect referer page.');
+            }
+        }
     }
 
     /**

@@ -9,7 +9,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = $name;
+$this->title = 'Maintenance Mode' . ' - ' . Yii::$app->name;
 
 $this->registerCss(".wrap{padding: 0;}");
 ?>
@@ -19,14 +19,11 @@ $this->registerCss(".wrap{padding: 0;}");
          data-background="<?= Url::to('@web/images/site/404/' . rand(1, 35) . '.jpg') ?>">
     <div class="titan-caption">
         <div class="caption-content">
-            <div class="font-alt mb-30 titan-title-size-4"><?= $this->title ?></div>
-            <div class="font-alt"><?= nl2br(Html::encode($message)) ?><br/>That is all we know.
+            <div class="font-alt mb-30 titan-title-size-4">Maintenance Mode</div>
+            <div class="font-alt">
+                We are changing for you <i class="fa fa-heart" style="color: red" aria-hidden="true"></i>
             </div>
-            <div class="font-alt mt-30">
-                <a class="btn btn-border-w btn-round" href="<?= Yii::$app->homeUrl ?>">
-                    Back to home page
-                </a>
-            </div>
+
         </div>
     </div>
 </section>
