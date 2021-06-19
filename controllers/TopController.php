@@ -24,7 +24,7 @@ class TopController extends Controller
         $searchModel = new TopImageSearch();
         $dataProvider = $searchModel->searchTop(Yii::$app->request->queryParams, $top);
 
-        return $this->render('../image/index', [
+        return $this->render('/image/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'top' => $top

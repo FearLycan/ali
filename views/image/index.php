@@ -48,17 +48,14 @@ if (!empty($category)) {
 
         <div class="row">
             <div class="col-sm-12">
-                <ul class="filter font-alt" id="filters">
-
+                <div class=filter>
                     <?php foreach (TopImageSearch::getTopsNames() as $value => $name): ?>
-                        <li>
-                            <a class="wow fadeInUp btn btn-d btn-round <?= isset($top) && $value == $top ? 'active' : '' ?> "
-                               href="<?= Url::to(['/top/index', 'top' => $value]) ?>">
-                                <?= $name ?>
-                            </a>
-                        </li>
+                        <a class="wow fadeInUp btn btn-d btn-round <?= isset($top) && $value == $top ? 'active' : '' ?> "
+                           href="<?= Url::to(['/top/index', 'top' => $value]) ?>" style="margin-bottom: 5px;">
+                            <?= $name ?>
+                        </a>
                     <?php endforeach; ?>
-                </ul>
+                </div>
             </div>
         </div>
 
