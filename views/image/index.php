@@ -4,6 +4,7 @@
 
 use app\components\Helper;
 use app\models\Category;
+use app\models\searches\TopImageSearch;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -43,14 +44,28 @@ if (!empty($category)) {
             </div>
         <?php endif; ?>
 
+    <?php else: ?>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="filter font-alt" id="filters">
+
+                    <?php foreach (TopImageSearch::getTopsNames() as $value => $name): ?>
+                        <li>
+                            <a class="wow fadeInUp btn btn-d btn-round <?= isset($top) && $value == $top ? 'active' : '' ?> "
+                               href="<?= Url::to(['/top/index', 'top' => $value]) ?>">
+                                <?= $name ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+
     <?php endif; ?>
 
     <?= $this->render('../common/_image-view', [
         'dataProvider' => $dataProvider,
         'itemView' => '../image/_image',
     ]) ?>
-
-    <?php if (($g2a = Helper::systemConfig('g2a-reflink-uqmJT7b2DP')) && Yii::$app->user->isGuest): ?>
-        <?= $g2a ?>
-    <?php endif; ?>
 </div>

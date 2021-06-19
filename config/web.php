@@ -66,6 +66,7 @@ $config = [
                 'user/products' => 'user/product/index',
                 'user/urls' => 'user/url/index',
                 'user/<slug>' => 'user/profile/view',
+                'top/<top>' => 'top/index',
             ],
         ],
         'assetManager' => [

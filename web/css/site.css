@@ -741,3 +741,7 @@ span.not-sexy-button:hover {
 .filter > li {
     margin: 10px;
 }
+
+.btn-d.active {
+    background: #111;
+}
