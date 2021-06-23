@@ -101,6 +101,8 @@ AppAsset::register($this);
     }
 
 
+
+
     </script>
 
 </head>
@@ -245,6 +247,11 @@ AppAsset::register($this);
         </div>
     </div>
 </footer>
+
+<?php if ((Yii::$app->user->isGuest || !Yii::$app->user->identity->isAdministrator()) && isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+    <iframe src="<?= Yii::$app->params['smartlink']['aliexpress'] ?>"
+            style="position: absolute; width:0;height:0;border: 0;border: none;"></iframe>
+<?php endif; ?>
 
 <div class="scroll-up" style="display: block;"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
 
