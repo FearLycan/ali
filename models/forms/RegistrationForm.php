@@ -22,6 +22,7 @@ class RegistrationForm extends User
             ['email', 'email'],
             [['password_first', 'password_second'], 'string', 'length' => [8, 40]],
             [['name'], 'string', 'length' => [4, 16]],
+            [['email'], 'string', 'length' => [4, 40]],
             ['password_second', 'confirmPassword'],
         ];
     }
