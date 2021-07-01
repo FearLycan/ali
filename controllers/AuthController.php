@@ -102,13 +102,16 @@ class AuthController extends Controller
             return ActiveForm::validate($model);
         }
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->password = User::hashPassword($model->password_first);
             $model->auth_key = User::generateUniqueRandomString();
             $model->verification_code = User::generateUniqueRandomString();
-            $model->save();
-            $model->sendEmail();
-            $status = true;
+
+            if ($model->save()) {
+                $model->save();
+                $model->sendEmail();
+                $status = true;
+            }
         }
 
         return $this->render('registration', [
