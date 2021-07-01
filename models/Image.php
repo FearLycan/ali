@@ -43,6 +43,7 @@ class Image extends ActiveRecord
     const STATUS_PENDING = 2;
     const STATUS_ACCEPTED = 3;
     const STATUS_TO_DELETE = 4;
+    const STATUS_ERROR = 5;
 
     const THUMBNAIL_MAX_WIDTH = 200;
     const THUMBNAIL_MAX_HEIGHT = 200;
@@ -265,6 +266,7 @@ class Image extends ActiveRecord
             self::STATUS_PENDING => 'Pending to download',
             self::STATUS_ACCEPTED => 'Accepted',
             self::STATUS_TO_DELETE => 'To delete',
+            self::STATUS_ERROR => 'Error',
         ];
     }
 

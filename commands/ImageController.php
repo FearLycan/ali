@@ -19,18 +19,24 @@ class ImageController extends Controller
 
             echo $image->id . "\n";
 
-            if ($image->download()) {
-                $image->createNormal();
-                $image->createThumbnail();
-                $image->status = Image::STATUS_ACCEPTED;
-                $image->save();
+            try {
+                if ($image->download()) {
+                    $image->createNormal();
+                    $image->createThumbnail();
+                    $image->status = Image::STATUS_ACCEPTED;
+                    $image->save();
 
-                //if user do not have avatar
-                if (empty($image->member->avatar)) {
-                    $image->member->avatar = $image->file;
-                    $image->member->save();
+                    //if user doesn't have avatar
+                    if (empty($image->member->avatar)) {
+                        $image->member->avatar = $image->file;
+                        $image->member->save();
+                    }
                 }
+            } catch (\Exception $exception) {
+                $image->status = Image::STATUS_ERROR;
+                $image->save();
             }
+
         }
     }
 
