@@ -108,7 +108,6 @@ class AuthController extends Controller
             $model->verification_code = User::generateUniqueRandomString();
 
             if ($model->save()) {
-                $model->save();
                 $model->sendEmail();
                 $status = true;
             }
