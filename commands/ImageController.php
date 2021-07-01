@@ -17,8 +17,6 @@ class ImageController extends Controller
         /* @var $image Image */
         foreach ($images->each(100) as $image) {
 
-            echo $image->id . "\n";
-
             try {
                 if ($image->download()) {
                     $image->createNormal();
@@ -32,9 +30,14 @@ class ImageController extends Controller
                         $image->member->save();
                     }
                 }
+
+                echo $image->id . "\n";
+
             } catch (\Exception $exception) {
                 $image->status = Image::STATUS_ERROR;
                 $image->save();
+
+                echo $image->id . " - skipped \n";
             }
 
         }
