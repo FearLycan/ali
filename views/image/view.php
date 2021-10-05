@@ -334,7 +334,7 @@ $js = <<<JS
     });
     
     $(document).on('pjax:success', function () {
-        let url = serializeForm();
+        //let url = serializeForm();
         comments(url);
     });
 
