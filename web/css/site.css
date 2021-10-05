@@ -790,6 +790,10 @@ a.up-vote-a.active {
     margin: 0 6px;
 }
 
-.emoji-picker:hover{
+.emoji-picker:hover {
     cursor: pointer;
+}
+
+.fg-emoji-picker {
+    z-index: 1092 !important;
 }
