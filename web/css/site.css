@@ -745,3 +745,47 @@ span.not-sexy-button:hover {
 .btn-d.active {
     background: #111;
 }
+
+textarea {
+    resize: none;
+    transition: all .2s;
+    text-transform: none !important;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+img.media-object {
+    max-width: 64px;
+}
+
+.fa.up-vote {
+    position: relative;
+    top: -1px;
+    margin: 0 3px;
+}
+
+.fa.down-vote {
+    transform: rotate(180deg);
+
+    position: relative;
+    top: 1px;
+    margin: 0 3px;
+}
+
+a.down-vote-a.active {
+    color: #f05f70;
+}
+
+a.up-vote-a.active {
+    color: #46D160;
+}
+
+.post-votes__separator {
+    height: 15px;
+    display: inline;
+    top: 1px;
+    border-right: 2px solid #c2c6cc;
+    margin: 0 6px;
+}

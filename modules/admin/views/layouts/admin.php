@@ -206,7 +206,11 @@ $image = [
 </footer>
 
 <?php $this->endBody() ?>
-<?= $this->blocks['script'] ?>
+
+<?php if (isset($this->blocks['script'])): ?>
+    <?= $this->blocks['script'] ?>
+<?php endif; ?>
+
 </body>
 </html>
 <?php $this->endPage() ?>

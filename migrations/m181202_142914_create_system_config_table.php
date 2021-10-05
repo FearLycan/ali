@@ -18,7 +18,7 @@ class m181202_142914_create_system_config_table extends Migration
             'name' => $this->string()->notNull(),
             'value' => $this->text()->notNull(),
             'status' => $this->smallInteger()->defaultValue(0),
-            'author_id' => $this->integer()->notNull(),
+            'author_id' => $this->integer()->null(),
             'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->null()
         ]);

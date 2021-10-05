@@ -28,12 +28,13 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property string $verification_code
  *
+ * @property CommentVote[] $commentVotes
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     //statusy
-    const STATUS_INACTIVE = 0; //użytkownik zarejestrował się ale nie potwierdził danych z forum.
-    const STATUS_ACTIVE = 1;   //aktywny użytkownik
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
     const STATUS_BAN = 3;
 
     //role
@@ -43,6 +44,8 @@ class User extends ActiveRecord implements IdentityInterface
     const ROLE_ADMIN = 10;
 
     const BOT_SPACE_BOB_ID = 2;
+
+    private $_votes = [];
 
 
     /**
@@ -372,6 +375,39 @@ class User extends ActiveRecord implements IdentityInterface
 
         if ($not_sexy) {
             return $not_sexy;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCommentVotes()
+    {
+        return $this->hasMany(CommentVote::className(), ['user_id' => 'id']);
+    }
+
+    public function voteThis($comment_id, $type)
+    {
+        if (!isset($this->_votes[$comment_id])) {
+            $vote = CommentVote::findOne([
+                'comment_id' => $comment_id,
+                'user_id' => $this->id,
+                //'type' => $type
+            ]);
+
+            if ($vote) {
+                $this->_votes[$comment_id] = $vote->type;
+            } else {
+                $this->_votes[$comment_id] = null;
+            }
+
+
+        }
+
+        if ($this->_votes[$comment_id] == $type) {
+            return true;
         }
 
         return false;

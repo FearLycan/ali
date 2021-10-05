@@ -103,6 +103,7 @@ AppAsset::register($this);
 
 
 
+
     </script>
 
 </head>
@@ -283,7 +284,11 @@ AppAsset::register($this);
 </div>
 
 <?php $this->endBody() ?>
-<?= $this->blocks['script'] ?>
+
+<?php if (isset($this->blocks['script'])): ?>
+    <?= $this->blocks['script'] ?>
+<?php endif; ?>
+
 <link rel="stylesheet" type="text/css"
       href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>

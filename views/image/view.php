@@ -6,8 +6,11 @@ use app\models\Member;
 use app\models\Ticket;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
+use yii\widgets\Pjax;
 
 /* @var $model Image */
+/* @var $this View */
 
 $this->title = $model->member->name . ' pic' . ' - ' . Yii::$app->name;
 
@@ -15,7 +18,6 @@ Yii::$app->params['og_image']['content'] = Url::to(['images/thumbnail/' . $model
 Yii::$app->params['og_type']['content'] = 'article';
 
 ?>
-
 
     <div class="view-image">
         <div class="row">
@@ -56,7 +58,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                 <img class="img-responsive img-center lazy img-zoomable" id="product"
                      src="<?= Url::to(['/images/site/wait.gif']) ?>"
                      data-src="<?= $model->getOriginalSizeImage() ?>"
-                    alt="<?= $model->product->name ?>">
+                     alt="<?= $model->product->name ?>">
 
                 <div class="options-1">
                     <button type="button" class="btn btn-labeled btn-like">
@@ -68,28 +70,31 @@ Yii::$app->params['og_type']['content'] = 'article';
                     </button>
                 </div>
 
-                <?php if(!Yii::$app->user->isGuest && !Yii::$app->user->identity->notSexyThis($model->id)): ?>
+                <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->notSexyThis($model->id)): ?>
                     <div class="col-md-12 text-right">
-                        <span class="text-muted not-sexy-button" data-url="<?= Url::to(['/not-sexy/set', 'id' => $model->id]) ?>">
+                        <span class="text-muted not-sexy-button"
+                              data-url="<?= Url::to(['/not-sexy/set', 'id' => $model->id]) ?>">
                             <i class="fa fa-ban" aria-hidden="true"></i> This is not sexy
                         </span>
                     </div>
-                  <?php endif; ?>
+                <?php endif; ?>
 
                 <?php if ($images = $model->getMoreUserImages()): ?>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <ul class="product-gallery">
                                 <?php foreach ($images as $key => $image): ?>
-                                    <li class="li-gallery <?= $image->id != $model->id ?: 'li-gallery-border' ?>" data-key="<?= $key ?>">
-                                       <a class="gallery" href="<?= Url::to(['image/view', 'slug' => $image->slug]) ?>">
+                                    <li class="li-gallery <?= $image->id != $model->id ?: 'li-gallery-border' ?>"
+                                        data-key="<?= $key ?>">
+                                        <a class="gallery"
+                                           href="<?= Url::to(['image/view', 'slug' => $image->slug]) ?>">
                                             <img src="<?= Url::to(['/images/site/wait.gif']) ?>"
                                                  data-src="<?= $image->getNormalSizeImage() ?>"
                                                  data-original-size="<?= $image->getOriginalSizeImage() ?>"
                                                  data-url="<?= Url::to(['image/view', 'slug' => $image->slug]) ?>"
                                                  alt="<?= $image->product->name ?>"
                                                  class="lazy">
-                                       </a>
+                                        </a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -146,23 +151,29 @@ Yii::$app->params['og_type']['content'] = 'article';
                         </li>
                         <?php if ($model->member_id != Member::MEMBER_ANONYMOUS): ?>
                             <li class="list-group-item">
-                                <a id="member" href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>" target="_blank">
+                                <a id="member"
+                                   href="<?= Url::to(['redirect/member', 'slug' => $model->member->slug]) ?>"
+                                   target="_blank">
                                     Go to <strong><?= Html::encode($model->member->name) ?></strong> Aliexpress profile
                                 </a>
-                                <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
-                                    <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" style="display: none;" target="_blank">
+                                <?php if (isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+                                    <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" style="display: none;"
+                                       target="_blank">
                                         Go to Aliexpress
                                     </a>
                                 <?php endif; ?>
                             </li>
                         <?php endif; ?>
                         <li class="list-group-item">
-                            <a id="product" href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>" target="_blank">
+                            <a id="product"
+                               href="<?= Url::to(['redirect/product', 'id' => $model->product->ali_product_id]) ?>"
+                               target="_blank">
                                 Go to product page on Aliexpress
                             </a>
 
-                            <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
-                                <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" style="display: none;" target="_blank">
+                            <?php if (isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+                                <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" style="display: none;"
+                                   target="_blank">
                                     Go to Aliexpress
                                 </a>
                             <?php endif; ?>
@@ -180,9 +191,10 @@ Yii::$app->params['og_type']['content'] = 'article';
                                 </a>
                             </li>
                         <?php endif; ?>
-                        <?php if(isset(Yii::$app->params['smartlink']['aliexpress'] )): ?>
+                        <?php if (isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
                             <li class="list-group-item">
-                                <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">Go to Aliexpress</a>
+                                <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">Go to
+                                    Aliexpress</a>
                             </li>
                         <?php endif; ?>
                         <li class="list-group-item">
@@ -192,7 +204,7 @@ Yii::$app->params['og_type']['content'] = 'article';
                             ], ['class' => 'report-link']) ?>
                         </li>
 
-                        <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
+                        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdministrator()): ?>
                             <li class="list-group-item">
                                 <?= Html::a('Edit', ['/admin/member/update', 'id' => $model->member_id]) ?>
                             </li>
@@ -203,73 +215,152 @@ Yii::$app->params['og_type']['content'] = 'article';
 
                 <hr>
 
-<!--                <div class="widget">-->
-<!--                    --><?php //foreach (json_decode($model->product->image, true) as $image): ?>
-<!--                    <img src="--><?//= $image ?><!--" class="img-responsive">-->
-<!--                    --><?php //endforeach; ?>
-<!--                </div>-->
+                <!--                <div class="widget">-->
+                <!--                    --><?php //foreach (json_decode($model->product->image, true) as $image): ?>
+                <!--                    <img src="--><? //= $image ?><!--" class="img-responsive">-->
+                <!--                    --><?php //endforeach; ?>
+                <!--                </div>-->
 
-                <?php if(isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
+                <?php if (isset(Yii::$app->params['smartlink']['aliexpress'])): ?>
                     <div class="widget">
                         <a href="<?= Yii::$app->params['smartlink']['aliexpress'] ?>" target="_blank">
-                            <img src="<?= Url::to('@web/images/site/aliexpress.webp') ?>" alt="Aliexpress" class="img-responsive">
+                            <img src="<?= Url::to('@web/images/site/aliexpress.webp') ?>" alt="Aliexpress"
+                                 class="img-responsive">
                         </a>
                     </div>
                 <?php endif; ?>
 
-                <?php if($block = Helper::systemConfig('live-cam-01')): ?>
-                <hr>
-                <div class="widget">
-                    <?= $block ?>
-                </div>
+                <?php if ($block = Helper::systemConfig('live-cam-01')): ?>
+                    <hr>
+                    <div class="widget">
+                        <?= $block ?>
+                    </div>
                 <?php endif; ?>
 
             </div>
         </div>
-
     </div>
 
+    <div class="row">
+        <div class="col-xs-12" style="margin-bottom: 30px;">
+            <hr>
+        </div>
+    </div>
 
-<?php if ($images = $model->getSimilarFromCategory(4)): ?>
-    <section class="module-small">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <h2 class="module-title font-alt">
-                        Related pics of this product
-                    </h2>
+    <div class="comments-row">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                <h2 class="module-title font-alt" style="margin: 0;">
+                    Comments
+                </h2>
+
+                <div id="comments"
+                     data-href="<?= Url::to(['comment/list', 'image_id' => $model->id, 'sort' => Yii::$app->request->cookies->getValue('sort', 'created_at')]) ?>"></div>
+
+                <div class="row">
+                    <hr>
                 </div>
-            </div>
-            <div class="row multi-columns-row">
 
-                <?php foreach ($images as $model): ?>
-                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <div class="shop-item">
-                            <div class="shop-item-image">
-
-                                <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
-                                     data-src="<?= Url::to(['/images/normal/' . $model->file]) ?>"
-                                     alt="<?= $model->product->name ?>">
-
-                                <div class="shop-item-detail">
-                                    <a class="btn btn-round btn-b"
-                                       href="<?= Url::to(['member/view', 'slug' => $model->member->slug], true) ?>"
-                                       data-pjax="0">
-                                        <?= Html::encode($model->member->name) ?>
-                                    </a>
+                <?php if (Yii::$app->user->isGuest): ?>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    You
+                                    must <?= Html::a('Register', ['/auth/registration'], ['class' => 'font-bold', 'data-pjax' => 0]) ?>
+                                    or <?= Html::a('Login', ['/auth/login'], ['class' => 'font-bold', 'data-pjax' => 0]) ?>
+                                    to
+                                    post
+                                    a comment.
                                 </div>
                             </div>
-                            <h4 class="shop-item-title font-alt">
-                                <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug], true) ?>"
-                                   data-pjax="0">
-                                    <?= Helper::cutThis($model->member->name, 45) ?>
-                                </a>
-                            </h4>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                <?php else: ?>
+                    <?= $this->render('_form-comment', ['model' => $commentForm]) ?>
+                <?php endif; ?>
 
             </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <?php if ($images = $model->getSimilarFromCategory(4)): ?>
+                    <div class="widget">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h5 class="widget-title font-alt">Related pics of this product</h5>
+                        </div>
+
+                        <?php foreach ($images as $model): ?>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="shop-item" style="margin: 0;">
+                                    <div class="shop-item-image">
+
+                                        <img class="lazy" src="<?= Url::to(['/images/site/wait.gif']) ?>"
+                                             data-src="<?= Url::to(['/images/normal/' . $model->file]) ?>"
+                                             alt="<?= $model->product->name ?>">
+
+                                        <div class="shop-item-detail">
+                                            <a class="btn btn-round btn-b"
+                                               href="<?= Url::to(['member/view', 'slug' => $model->member->slug], true) ?>"
+                                               data-pjax="0">
+                                                <?= Html::encode($model->member->name) ?>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="shop-item-title font-alt">
+                                        <a href="<?= Url::to(['member/view', 'slug' => $model->member->slug], true) ?>"
+                                           data-pjax="0">
+                                            <?= Helper::cutThis($model->member->name, 45) ?>
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
-    </section>
-<?php endif; ?>
+    </div>
+
+<?php
+$js = <<<JS
+ let url = $('#comments').data('href');
+ 
+ $(document).ready(function () {
+    comments(url);
+ });
+
+    $(document).on('change', 'select#sort', function () {
+        let url = serializeForm();
+        comments(url);
+    });
+    
+    $(document).on('pjax:success', function () {
+        let url = serializeForm();
+        comments(url);
+    });
+
+    function comments(url) {
+      $.ajax({
+            type: "GET",
+            url: url,
+            success: function (response) {
+                $('#comments').fadeOut(300, function() {
+                    $(this).html(response).fadeIn(300);
+                    $("time").timeago();
+                });
+            }
+        });
+      
+      console.log(url);
+    }
+    
+    function serializeForm(){
+        let form = $(document).find('form#commentSearch');
+        let values = $(form).serialize();
+        let url = $(form).attr('action')
+        
+        return url + '?' + values;
+    }
+    
+JS;
+$this->registerJs($js, \yii\web\View::POS_READY);
+?>

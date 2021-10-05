@@ -36,6 +36,7 @@ use yii\imagine\Image as Img;
  *
  * @property Member $member
  * @property Product $product
+ * @property Comment[] $comments
  */
 class Image extends ActiveRecord
 {
@@ -138,6 +139,14 @@ class Image extends ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['image_id' => 'id']);
     }
 
     public static function extractImages($product_id)
@@ -335,7 +344,7 @@ class Image extends ActiveRecord
         $images = self::find()
             ->where(['product_id' => $this->product_id, 'status' => self::STATUS_ACCEPTED])
             ->andWhere(['!=', 'member_id', $this->member_id])
-            ->andWhere(['!=', 'id', 'id'])
+            ->andWhere(['!=', 'id', $this->id])
             ->orderBy(new Expression('rand()'))
             ->limit($limit)
             ->all();

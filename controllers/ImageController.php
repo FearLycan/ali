@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use app\components\Controller;
 use app\models\Category;
+use app\models\Comment;
 use app\models\Country;
+use app\models\forms\CommentForm;
 use app\models\Image;
 use app\models\searches\ImageSearch;
 use Yii;
@@ -41,18 +43,29 @@ class ImageController extends Controller
         $ajaxView = false;
         $model = $this->findSlugModel($slug);
         $model->addView();
+
+        $commentForm = new CommentForm();
+        if ($commentForm->load(Yii::$app->request->post()) && $commentForm->validate()) {
+            $commentForm->image_id = $model->id;
+            $commentForm->author_id = Yii::$app->user->identity->id;
+            $commentForm->save();
+            $commentForm = new CommentForm();
+        }
+
         if (Yii::$app->request->isAjax) {
             $ajaxView = true;
 
             return $this->renderAjax('view', [
                 'model' => $model,
                 'ajaxView' => $ajaxView,
+                'commentForm' => $commentForm,
             ]);
         }
 
         return $this->render('view', [
             'model' => $model,
             'ajaxView' => $ajaxView,
+            'commentForm' => $commentForm,
         ]);
     }
 

@@ -300,6 +300,10 @@ function openLink(url, target = '_blank') {
     window.open(url, target);
 }
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
 $(document).on('click', 'i.fa-heart.like', function () {
     let url = $(this).data('url');
     let like = this;
@@ -340,4 +344,37 @@ $(document).on('click', 'span.not-sexy-button', function () {
 
 });
 
+$(document).ready(function () {
+    $(document).on('click', 'a.vote', function (event) {
+        event.preventDefault();
 
+        let url = $(this).attr('href');
+        let element = this;
+        let comment_id = $(this).parent().data('model');
+        let voteUp = $('#voteUp' + comment_id);
+        let voteDown = $('#voteDown' + comment_id);
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: function (response) {
+                if (response.status === 'ok') {
+
+                    $(voteUp).removeClass('active');
+                    $(voteDown).removeClass('active');
+
+                    if (response.type !== 'delete') {
+                        $(element).addClass('active');
+                    }
+
+                    $(voteUp).find('span').text(response.votes.up)
+                    $(voteDown).find('span').text(response.votes.down)
+                }
+            }
+        });
+    });
+});
+
+jQuery(document).ready(function() {
+    jQuery("time.timeago").timeago();
+});

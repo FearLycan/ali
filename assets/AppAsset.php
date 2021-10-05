@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
         'js/masonry-docs.min.js',
         'js/infinite-scroll.pkgd.min.js',
         'lib/easy-autocomplete/jquery.easy-autocomplete.min.js',
+        'js/jquery.timeago.js',
         'js/main.js',
         'js/grid.js',
         'js/zooming.min.js',

@@ -16,14 +16,14 @@ class m181204_125917_add_menu_items_to_system_config extends Migration
             [
                 'name' => 'menu-clothing',
                 'value' => '[]',
-                'author_id' => 1,
+                //'author_id' => 1,
             ]);
 
         $this->insert('{{%system_config}}',
             [
                 'name' => 'menu-sport',
                 'value' => '[]',
-                'author_id' => 1,
+                //'author_id' => 1,
             ]);
     }
 
