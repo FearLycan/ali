@@ -132,6 +132,9 @@ $image = [
                 <li class="<?= Yii::$app->controller->id == 'member' ? 'active' : 'no' ?>">
                     <a href="<?= Url::to(['member/index']) ?>"><i class="fa fa-users"></i> Members</a>
                 </li>
+                <li class="<?= Yii::$app->controller->id == 'comment' ? 'active' : 'no' ?>">
+                    <a href="<?= Url::to(['comment/index']) ?>"><i class="fa fa-comment"></i> Comments</a>
+                </li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#image">
                         <i class="fa fa-picture-o" aria-hidden="true"></i> Images <i

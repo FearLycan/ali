@@ -334,7 +334,6 @@ $js = <<<JS
     });
     
     $(document).on('pjax:success', function () {
-        //let url = serializeForm();
         comments(url);
     });
 
@@ -349,8 +348,6 @@ $js = <<<JS
                 });
             }
         });
-      
-      console.log(url);
     }
     
     function serializeForm(){

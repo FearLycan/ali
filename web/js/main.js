@@ -378,3 +378,16 @@ $(document).ready(function () {
 jQuery(document).ready(function() {
     jQuery("time.timeago").timeago();
 });
+
+const emojiPicker = new FgEmojiPicker({
+    trigger: ['span.emoji-picker'],
+    removeOnSelection: false,
+    closeButton: true,
+    position: ['top', 'right'],
+    preFetch: true,
+    dir: '/lib/vanilla-javascript-emoji-picker/',
+    insertInto: document.querySelector('textarea'),
+    emit(obj, triggerElement) {
+        console.log(obj, triggerElement);
+    }
+});

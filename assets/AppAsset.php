@@ -31,11 +31,11 @@ class AppAsset extends AssetBundle
         'js/infinite-scroll.pkgd.min.js',
         'lib/easy-autocomplete/jquery.easy-autocomplete.min.js',
         'js/jquery.timeago.js',
+        'lib/vanilla-javascript-emoji-picker/fgEmojiPicker.js',
         'js/main.js',
         'js/grid.js',
         'js/zooming.min.js',
         'lib/isotope/dist/isotope.pkgd.js',
-        //'js/isotope-filter.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

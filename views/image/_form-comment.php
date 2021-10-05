@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use app\models\forms\CommentForm;
 use yii\widgets\Pjax;
@@ -23,6 +24,9 @@ use yii\widgets\Pjax;
                 'maxlength' => true,
                 'placeholder' => 'Tell me what you think about...'
             ])->label('Your comment') ?>
+            <span class="emoji-picker hidden-xs hidden-sm" style="float: right;">
+                <img src="<?= Url::to('@web/images/site/emoji.png') ?>" style="height: 30px;">
+            </span>
         </div>
 
         <div class="col-md-12">
@@ -38,12 +42,8 @@ use yii\widgets\Pjax;
 
 <?php $this->beginBlock('script') ?>
 <script>
-    $("#commentform-content").click(function () {
+    $(document).on('click', '#commentform-content', function () {
         $(this).attr('rows', 4);
-    });
-
-    $(document).on('pjax:success', function () {
-        //$.pjax.reload({container: '#pjaxComments'});
     });
 </script>
 <?php $this->endBlock(); ?>

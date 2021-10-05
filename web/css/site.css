@@ -789,3 +789,7 @@ a.up-vote-a.active {
     border-right: 2px solid #c2c6cc;
     margin: 0 6px;
 }
+
+.emoji-picker:hover{
+    cursor: pointer;
+}
