@@ -128,4 +128,23 @@ class Helper
 
         return $dt->format("Y-m-d H:i:s");
     }
+
+    public static function getStatusLabel($model)
+    {
+        switch ($model->status) {
+            case 0:
+            case 9:
+            case 10:
+                return '<span class="label label-table label-danger">' . $model->getStatusName() . '</span>';
+                break;
+            case 1:
+                return '<span class="label label-table label-success">' . $model->getStatusName() . '</span>';
+                break;
+            case 2:
+                return '<span class="label label-table label-warning">' . $model->getStatusName() . '</span>';
+                break;
+            default:
+                return '<span class="label label-table label-default">' . $model->getStatusName() . '</span>';
+        }
+    }
 }

@@ -12,10 +12,20 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="comment-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i> Comment Update</h3>
+                </div>
+                <div class="panel-body">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+                    <?= $this->render('_form', [
+                        'model' => $model,
+                    ]) ?>
 
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

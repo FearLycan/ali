@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\admin\models\Comment;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -11,29 +12,58 @@ use yii\widgets\ActiveForm;
 <div class="comment-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $form->field($model, 'author_id')->textInput()->hint($model->author->name) ?>
+                </div>
 
-    <?= $form->field($model, 'author_id')->textInput() ?>
+                <div class="col-md-12">
+                    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+                </div>
+            </div>
+        </div>
 
-    <?= $form->field($model, 'image_id')->textInput() ?>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="<?= $model->image->getOriginalSizeImage() ?>" class="img-responsive"
+                         style="max-height: 400px; margin: 0 auto; display: block;">
+                </div>
+            </div>
+        </div>
 
-    <?= $form->field($model, 'parent_id')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+        <div class="col-md-12">
+            <hr>
+        </div>
 
-    <?= $form->field($model, 'up_vote')->textInput() ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'up_vote')->textInput(['type' => 'number']) ?>
+        </div>
 
-    <?= $form->field($model, 'down_vote')->textInput() ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'down_vote')->textInput(['type' => 'number']) ?>
+        </div>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+        <div class="col-md-12">
+            <hr>
+        </div>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'status')
+                ->dropDownList(Comment::getStatusNames()); ?>
+        </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
     </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>
