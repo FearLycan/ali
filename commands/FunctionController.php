@@ -7,6 +7,7 @@ use app\models\Image;
 use app\models\Member;
 use app\models\Product;
 use app\models\ProductUrl;
+use app\modules\admin\components\Helper;
 use yii\console\Controller;
 
 class FunctionController extends Controller
@@ -52,6 +53,25 @@ class FunctionController extends Controller
                 /** @var Product $product */
                 $product->url_id = $url->id;
                 $product->save();
+            }
+        }
+    }
+
+    public function actionProducts()
+    {
+        $ursl = ProductUrl::find()->where(['status' => ProductUrl::STATUS_DONE]);
+
+        foreach ($ursl->each(10) as $url) {
+            $link = Helper::getBetween($url->url, 'item/', '.html');
+
+            $n = explode('/', $link);
+
+            $phrase = end($n);
+            $product = Product::find()->where(['ali_product_id' => $phrase])->one();
+
+            if (!$product) {
+                $url->status = ProductUrl::STATUS_NEW;
+                $url->save(false);
             }
         }
     }

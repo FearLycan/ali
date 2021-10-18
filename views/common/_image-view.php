@@ -22,7 +22,7 @@ use yii\helpers\Url;
             /** @var Banner $banner */
             $banner = Yii::$app->banner->getByCountryCode(Yii::$app->visitors->ip->getCountryCode());
             if (!empty($banner)) {
-                return '<div class="grid__item"><a href="' . $banner->url . '"><img src="' . Url::to('@web' . Banner::LOCATION . $banner->image) . '" alt="' . $banner->name . '"></a></div>';
+                return '<div class="grid__item"><a href="' . $banner->url . '"><img src="' . Url::to('@web' . Banner::LOCATION . $banner->image) . '" alt="' . $banner->name . '" rel="noopener nofollow external"></a></div>';
             }
         }
 
@@ -32,7 +32,7 @@ use yii\helpers\Url;
             /** @var Banner $banner */
             $banner = Yii::$app->banner->getByCountryCode(Yii::$app->visitors->ip->getCountryCode());
             if (!empty($banner)) {
-                return '<div class="grid__item"><a href="' . $banner->url . '"><img src="' . Url::to('@web' . Banner::LOCATION . $banner->image) . '" alt="' . $banner->name . '"></a></div>';
+                return '<div class="grid__item"><a href="' . $banner->url . '"><img src="' . Url::to('@web' . Banner::LOCATION . $banner->image) . '" alt="' . $banner->name . '" rel="noopener nofollow external"></a></div>';
             }
         }
 

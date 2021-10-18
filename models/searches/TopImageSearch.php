@@ -35,7 +35,7 @@ class TopImageSearch extends ImageSearch
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['likes' => SORT_DESC, 'id' => SORT_ASC]],
+            'sort' => ['defaultOrder' => ['likes' => SORT_DESC, 'downloaded_at' => SORT_ASC]],
             'pagination' => [
                 'pageSizeParam' => self::PER_PAGE_PARAM,
                 'defaultPageSize' => self::DEFAULT_ITEMS_PER_PAGE,

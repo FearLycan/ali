@@ -12,6 +12,7 @@ use yii\base\InvalidConfigException;
 use yii\console\Controller;
 use yii\helpers\VarDumper;
 use yii\httpclient\Client;
+use yii\web\Cookie;
 
 class AliController extends Controller
 {
@@ -46,7 +47,24 @@ class AliController extends Controller
         /* @var $product ProductUrl */
         foreach ($products as $product) {
             $request = $client->createRequest()
+                ->addHeaders([
+                    'Accept-Language' => 'en-US,en;q=0.5'
+                ])
                 ->setMethod('get')
+                ->setCookies([
+                    new Cookie([
+                        'name' => 'intl_locale',
+                        'value' => 'en_US',
+                    ]),
+                    new Cookie([
+                        'name' => 'xman_us_f',
+                        'value' => 'x_l=0&x_locale=en_US',
+                    ]),
+                    new Cookie([
+                        'name' => 'aep_usuc_f',
+                        'value' => 'region=AU&site=glo&b_locale=en_US&c_tp=USD',
+                    ]),
+                ])
                 ->setUrl($product->url);
             $data = $request->send();
 
