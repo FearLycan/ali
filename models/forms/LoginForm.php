@@ -20,6 +20,7 @@ class LoginForm extends User
             [['email'], 'required'],
             ['email', 'email'],
             ['rememberMe', 'boolean'],
+            [['email', 'password'], 'string', 'length' => [4, 40]],
 
             [['referer'], 'string', 'max' => 150],
             [['referer'], 'checkRefererLink'],

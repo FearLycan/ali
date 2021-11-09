@@ -118,6 +118,17 @@ class AliController extends Controller
         }
     }
 
+    public function actionSyncProduct($id)
+    {
+        $product = Product::findOne(['id' => $id]);
+
+        if ($product) {
+            Image::extractImages($product->id);
+        } else {
+
+        }
+    }
+
     public function actionChangeProductImage()
     {
         $products = Product::find();

@@ -19,7 +19,7 @@ if (!empty($model->description)) {
 $this->title = $model->name . ' - ' . Yii::$app->name;;
 ?>
 
-<div class="product-view">
+<div class="product-view" data-product-id="<?= $model->id ?>">
     <div class="row" itemtype="http://schema.org/Product" itemscope>
         <div class="col-sm-6 mb-sm-40">
             <img src="<?= Url::to(['/images/site/wait.gif']) ?>" data-src="<?= $model->getProductsImages()[0] ?>"

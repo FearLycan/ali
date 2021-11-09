@@ -389,11 +389,9 @@ function emojiPickerInit() {
         dir: '/lib/vanilla-javascript-emoji-picker/',
         insertInto: document.querySelector('textarea'),
         emit(obj, triggerElement) {
-            console.log(obj, triggerElement);
+            // console.log(obj, triggerElement);
         }
     });
-
-    console.log('init emoji');
 }
 
 emojiPickerInit();

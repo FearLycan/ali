@@ -25,7 +25,8 @@ class TopImageSearch extends ImageSearch
     {
         $query = Image::find()
             ->where(['status' => Image::STATUS_ACCEPTED])
-            ->andWhere(['<=', 'not_sexy', Image::MAX_NOT_SEXY_VALUE]);
+            ->andWhere(['<=', 'not_sexy', Image::MAX_NOT_SEXY_VALUE])
+            ->andWhere(['>=', 'likes', 1]);
 
         $date = $this->getTopDate($top);
         if ($date) {
